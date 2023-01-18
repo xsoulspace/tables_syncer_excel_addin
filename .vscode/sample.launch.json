@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "program": "lib/main.dart",
+      "request": "launch",
+      "type": "dart",
+      "toolArgs": [
+        "--dart-define",
+        "yandex-flexible-web=VALUE",
+        "--dart-define",
+        "is-debug-ads=false",
+        "--dart-define",
+        "is-marketing-mode=false",
+        "--web-port=3000"
+      ]
+    }
+  ]
+}

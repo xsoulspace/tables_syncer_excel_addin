@@ -21,6 +21,10 @@ dependencies:
   life_hooks: ^0.0.14
   sliver_tools: ^0.2.5
   tap_builder: ^0.3.4
+  fluent_ui:
+    git:
+      url: https://github.com/Arenukvern/fluent_ui.git
+      ref: side-pane
 
 dev_dependencies:
   build_runner: ^2.2.0

@@ -20,6 +20,8 @@ class AppSettingsModel with _$AppSettingsModel {
       toJson: localeToString,
     )
         final Locale? locale,
+    @Default(ThemeMode.system)
+        final ThemeMode themeMode,
   }) = _AppSettingsModel;
 
   const AppSettingsModel._();

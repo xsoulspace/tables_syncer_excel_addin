@@ -3,6 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../localization/localization.dart';
 
+export 'firebase/firebase.dart';
+
 part 'app_settings_model.dart';
 part 'models.freezed.dart';
 part 'models.g.dart';
