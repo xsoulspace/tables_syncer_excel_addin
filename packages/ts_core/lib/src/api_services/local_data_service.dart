@@ -7,7 +7,7 @@ import 'abstract/abstract.dart';
 /// This service purpose to manage shared preferences only
 class SharedPreferencesDataService implements ILocalDataService {
   // cached SharedPreferences instance
-  SharedPreferences? _sharedPreferences;
+  static SharedPreferences? _sharedPreferences;
   Future<SharedPreferences> get sharedPreferences async =>
       _sharedPreferences ??= await SharedPreferences.getInstance();
 

@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
+import 'package:tables_syncer_excel_addin/firebase_options.dart';
 import 'package:tables_syncer_excel_addin/pack_core/app/app_services_provider.dart';
 import 'package:tables_syncer_excel_addin/pack_core/app/navigation_screen.dart';
 import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
@@ -126,8 +127,10 @@ class AppScaffoldBuilder extends HookWidget {
           builder: (final context, final child) {
             return UiTheme(
               scheme: UiThemeScheme.m3(context),
-              child: StateLoader(
-                initializer: GlobalStateInitializer(),
+              child: AppStateLoader(
+                initializer: GlobalStateInitializer(
+                  firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+                ),
                 loader: const LoadingScreen(),
                 child: Directionality(
                   textDirection: TextDirection.ltr,

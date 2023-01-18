@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:life_hooks/life_hooks.dart';
-import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
 import '../api_services/api_services.dart';
@@ -10,8 +9,7 @@ import '../localization/localization.dart';
 import '../models/models.dart';
 
 class UserNotifier extends ChangeNotifier implements Loadable, Disposable {
-  UserNotifier.use(final Locator read)
-      : userLocalService = read<ApiServices>().localUser;
+  UserNotifier.use(this.userLocalService);
   final LocalUserService userLocalService;
   final excelAvailable = ValueNotifier<bool>(false);
   final devinfo = ValueNotifier<String>('');

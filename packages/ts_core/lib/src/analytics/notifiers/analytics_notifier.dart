@@ -5,8 +5,7 @@ import 'package:logger/logger.dart';
 import '../firebase/firebase.dart';
 
 enum AnalyticEvents {
-  usedInAndroid,
-  usedInIOS,
+  usedInExcel,
   usedInWeb,
 }
 

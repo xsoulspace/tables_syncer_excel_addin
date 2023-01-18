@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../../ts_core.dart';
+import '../../models/models.dart';
 import '../abstract/abstract.dart';
 
 class FirebaseTableApiService implements ITableApiService {
@@ -8,7 +8,7 @@ class FirebaseTableApiService implements ITableApiService {
     required this.userApiService,
   });
   final IUserApiService userApiService;
-  final _store = FirebaseFirestore.instance;
+  FirebaseFirestore get _store => FirebaseFirestore.instance;
   CollectionReference<Map<String, dynamic>> get _collection =>
       _store.collection('tables');
   CollectionReference<TableParamsModel> get _docCollection =>

@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../../ts_core.dart';
+import '../../models/models.dart';
 import '../abstract/abstract.dart';
 
 class FirebaseUserApiService implements IUserApiService {
-  final _store = FirebaseFirestore.instance;
+  FirebaseFirestore get _store => FirebaseFirestore.instance;
   CollectionReference<Map<String, dynamic>> get _collection =>
       _store.collection('users');
   CollectionReference<UserModel> get _docCollection =>
