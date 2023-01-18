@@ -21,6 +21,7 @@ class ApiServices {
     required this.tables,
     required this.authService,
     required this.localUser,
+    required this.tablesSync,
   });
 
   factory ApiServices.create(final BuildContext context) {
@@ -37,6 +38,9 @@ class ApiServices {
     final IUserApiService userApiService = FirebaseUserApiService();
     return ApiServices._(
       user: userApiService,
+      tablesSync: FirebaseTableSyncApiService(
+        userApiService: userApiService,
+      ),
       tables: FirebaseTableApiService(
         userApiService: userApiService,
       ),
@@ -48,5 +52,6 @@ class ApiServices {
   final IUserApiService user;
   final LocalUserService localUser;
   final ITableApiService tables;
+  final ITableSyncApiService tablesSync;
   final AuthService authService;
 }

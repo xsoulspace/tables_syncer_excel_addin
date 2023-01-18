@@ -3,37 +3,41 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../models/models.dart';
 import '../abstract/abstract.dart';
 
-class FirebaseTableApiService implements ITableApiService {
-  FirebaseTableApiService({
+class FirebaseTableSyncApiService implements ITableSyncApiService {
+  FirebaseTableSyncApiService({
     required this.userApiService,
   });
   final IUserApiService userApiService;
   FirebaseFirestore get _store => FirebaseFirestore.instance;
   CollectionReference<Map<String, dynamic>> get _collection =>
-      _store.collection('tables');
-  CollectionReference<TableParamsModel> get _docCollection =>
+      _store.collection('table_syncs');
+  CollectionReference<TablesSyncParamsModel> get _docCollection =>
       _collection.withConverter(
-        fromFirestore: TableParamsModel.fromFirestore,
-        toFirestore: TableParamsModel.toFirestore,
+        fromFirestore: TablesSyncParamsModel.fromFirestore,
+        toFirestore: TablesSyncParamsModel.toFirestore,
       );
 
   @override
-  Future<TableParamsModel?> getByTableId(final TableParamsModelId id) async {
+  Future<TablesSyncParamsModel?> getByTableSyncId(
+    final TableParamsModelId id,
+  ) async {
     final ref = _docCollection.doc(id);
     final snapshot = await ref.get();
     return snapshot.data();
   }
 
   @override
-  Query<TableParamsModel> get tableQuery {
+  Query<TablesSyncParamsModel> get tableSyncQuery {
     return _docCollection.orderBy('createdAt', descending: true);
   }
 
   @override
-  Future<TableParamsModel> upsertTable(final TableParamsModel model) async {
-    TableParamsModel? table;
+  Future<TablesSyncParamsModel> upsertTableSync(
+    final TablesSyncParamsModel model,
+  ) async {
+    TablesSyncParamsModel? table;
     if (model.id.isNotEmpty) {
-      table = await getByTableId(model.id);
+      table = await getByTableSyncId(model.id);
     }
     if (table != null) {
       // update
@@ -50,7 +54,7 @@ class FirebaseTableApiService implements ITableApiService {
   }
 
   @override
-  Future<void> deleteTable(final TableParamsModel model) async {
+  Future<void> deleteTableSync(final TablesSyncParamsModel model) async {
     await _docCollection.doc(model.id).delete();
   }
 }

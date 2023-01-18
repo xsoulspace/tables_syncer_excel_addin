@@ -2,6 +2,8 @@
 
 part of 'models.dart';
 
+typedef TablesSyncParamsModelId = String;
+
 @immutable
 @Freezed(
   fromJson: true,
@@ -15,9 +17,9 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
     explicitToJson: true,
   )
   const factory TablesSyncParamsModel({
-    required final String id,
-    required final TableParamsId sourceTableId,
-    required final List<TableParamsId> destinationTablesIds,
+    required final TablesSyncParamsModelId id,
+    required final TableParamsModelId sourceTableId,
+    required final List<TableParamsModelId> destinationTablesIds,
     required final List<String> columnNames,
     required final bool shouldUpdateValues,
     required final bool shouldAddNewValues,

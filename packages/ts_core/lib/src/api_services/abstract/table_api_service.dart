@@ -8,5 +8,5 @@ abstract class ITableApiService {
   Future<void> deleteTable(final TableParamsModel model);
   @useResult
   Query<TableParamsModel> get tableQuery;
-  Future<TableParamsModel?> getByTableId(final TableParamsId id);
+  Future<TableParamsModel?> getByTableId(final TableParamsModelId id);
 }

@@ -2,7 +2,7 @@
 
 part of 'models.dart';
 
-typedef TableParamsId = String;
+typedef TableParamsModelId = String;
 
 @immutable
 @Freezed(
@@ -17,7 +17,7 @@ class TableParamsModel with _$TableParamsModel {
     explicitToJson: true,
   )
   const factory TableParamsModel({
-    required final TableParamsId id,
+    required final TableParamsModelId id,
     required final String name,
     required final String workbookOriginName,
     @Default(0) final int topLeftColumnIndex,
