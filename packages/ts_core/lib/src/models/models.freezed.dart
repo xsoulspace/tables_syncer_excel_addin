@@ -827,12 +827,13 @@ TableParamsModel _$TableParamsModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TableParamsModel {
   String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String get workbookOriginName => throw _privateConstructorUsedError;
   int get topLeftColumnIndex => throw _privateConstructorUsedError;
   int get topLeftRowIndex => throw _privateConstructorUsedError;
-  List<String> get columnNames => throw _privateConstructorUsedError;
-  bool get shouldUpdateValues => throw _privateConstructorUsedError;
-  bool get shouldAddNewValues => throw _privateConstructorUsedError;
+  int get headerRowIndex => throw _privateConstructorUsedError;
+  int get firstRowIndex => throw _privateConstructorUsedError;
+  int get keyColumnIndex => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -848,12 +849,13 @@ abstract class $TableParamsModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String name,
       String workbookOriginName,
       int topLeftColumnIndex,
       int topLeftRowIndex,
-      List<String> columnNames,
-      bool shouldUpdateValues,
-      bool shouldAddNewValues});
+      int headerRowIndex,
+      int firstRowIndex,
+      int keyColumnIndex});
 }
 
 /// @nodoc
@@ -870,17 +872,22 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
   @override
   $Res call({
     Object? id = null,
+    Object? name = null,
     Object? workbookOriginName = null,
     Object? topLeftColumnIndex = null,
     Object? topLeftRowIndex = null,
-    Object? columnNames = null,
-    Object? shouldUpdateValues = null,
-    Object? shouldAddNewValues = null,
+    Object? headerRowIndex = null,
+    Object? firstRowIndex = null,
+    Object? keyColumnIndex = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       workbookOriginName: null == workbookOriginName
           ? _value.workbookOriginName
@@ -894,6 +901,297 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
           ? _value.topLeftRowIndex
           : topLeftRowIndex // ignore: cast_nullable_to_non_nullable
               as int,
+      headerRowIndex: null == headerRowIndex
+          ? _value.headerRowIndex
+          : headerRowIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      firstRowIndex: null == firstRowIndex
+          ? _value.firstRowIndex
+          : firstRowIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      keyColumnIndex: null == keyColumnIndex
+          ? _value.keyColumnIndex
+          : keyColumnIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_TableParamsModelCopyWith<$Res>
+    implements $TableParamsModelCopyWith<$Res> {
+  factory _$$_TableParamsModelCopyWith(
+          _$_TableParamsModel value, $Res Function(_$_TableParamsModel) then) =
+      __$$_TableParamsModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String workbookOriginName,
+      int topLeftColumnIndex,
+      int topLeftRowIndex,
+      int headerRowIndex,
+      int firstRowIndex,
+      int keyColumnIndex});
+}
+
+/// @nodoc
+class __$$_TableParamsModelCopyWithImpl<$Res>
+    extends _$TableParamsModelCopyWithImpl<$Res, _$_TableParamsModel>
+    implements _$$_TableParamsModelCopyWith<$Res> {
+  __$$_TableParamsModelCopyWithImpl(
+      _$_TableParamsModel _value, $Res Function(_$_TableParamsModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? workbookOriginName = null,
+    Object? topLeftColumnIndex = null,
+    Object? topLeftRowIndex = null,
+    Object? headerRowIndex = null,
+    Object? firstRowIndex = null,
+    Object? keyColumnIndex = null,
+  }) {
+    return _then(_$_TableParamsModel(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      workbookOriginName: null == workbookOriginName
+          ? _value.workbookOriginName
+          : workbookOriginName // ignore: cast_nullable_to_non_nullable
+              as String,
+      topLeftColumnIndex: null == topLeftColumnIndex
+          ? _value.topLeftColumnIndex
+          : topLeftColumnIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      topLeftRowIndex: null == topLeftRowIndex
+          ? _value.topLeftRowIndex
+          : topLeftRowIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      headerRowIndex: null == headerRowIndex
+          ? _value.headerRowIndex
+          : headerRowIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      firstRowIndex: null == firstRowIndex
+          ? _value.firstRowIndex
+          : firstRowIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      keyColumnIndex: null == keyColumnIndex
+          ? _value.keyColumnIndex
+          : keyColumnIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_TableParamsModel extends _TableParamsModel {
+  const _$_TableParamsModel(
+      {required this.id,
+      required this.name,
+      required this.workbookOriginName,
+      this.topLeftColumnIndex = 0,
+      this.topLeftRowIndex = 0,
+      this.headerRowIndex = 0,
+      this.firstRowIndex = 0,
+      this.keyColumnIndex = 0})
+      : super._();
+
+  factory _$_TableParamsModel.fromJson(Map<String, dynamic> json) =>
+      _$$_TableParamsModelFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String name;
+  @override
+  final String workbookOriginName;
+  @override
+  @JsonKey()
+  final int topLeftColumnIndex;
+  @override
+  @JsonKey()
+  final int topLeftRowIndex;
+  @override
+  @JsonKey()
+  final int headerRowIndex;
+  @override
+  @JsonKey()
+  final int firstRowIndex;
+  @override
+  @JsonKey()
+  final int keyColumnIndex;
+
+  @override
+  String toString() {
+    return 'TableParamsModel(id: $id, name: $name, workbookOriginName: $workbookOriginName, topLeftColumnIndex: $topLeftColumnIndex, topLeftRowIndex: $topLeftRowIndex, headerRowIndex: $headerRowIndex, firstRowIndex: $firstRowIndex, keyColumnIndex: $keyColumnIndex)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TableParamsModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.workbookOriginName, workbookOriginName) ||
+                other.workbookOriginName == workbookOriginName) &&
+            (identical(other.topLeftColumnIndex, topLeftColumnIndex) ||
+                other.topLeftColumnIndex == topLeftColumnIndex) &&
+            (identical(other.topLeftRowIndex, topLeftRowIndex) ||
+                other.topLeftRowIndex == topLeftRowIndex) &&
+            (identical(other.headerRowIndex, headerRowIndex) ||
+                other.headerRowIndex == headerRowIndex) &&
+            (identical(other.firstRowIndex, firstRowIndex) ||
+                other.firstRowIndex == firstRowIndex) &&
+            (identical(other.keyColumnIndex, keyColumnIndex) ||
+                other.keyColumnIndex == keyColumnIndex));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      workbookOriginName,
+      topLeftColumnIndex,
+      topLeftRowIndex,
+      headerRowIndex,
+      firstRowIndex,
+      keyColumnIndex);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TableParamsModelCopyWith<_$_TableParamsModel> get copyWith =>
+      __$$_TableParamsModelCopyWithImpl<_$_TableParamsModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TableParamsModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TableParamsModel extends TableParamsModel {
+  const factory _TableParamsModel(
+      {required final String id,
+      required final String name,
+      required final String workbookOriginName,
+      final int topLeftColumnIndex,
+      final int topLeftRowIndex,
+      final int headerRowIndex,
+      final int firstRowIndex,
+      final int keyColumnIndex}) = _$_TableParamsModel;
+  const _TableParamsModel._() : super._();
+
+  factory _TableParamsModel.fromJson(Map<String, dynamic> json) =
+      _$_TableParamsModel.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get name;
+  @override
+  String get workbookOriginName;
+  @override
+  int get topLeftColumnIndex;
+  @override
+  int get topLeftRowIndex;
+  @override
+  int get headerRowIndex;
+  @override
+  int get firstRowIndex;
+  @override
+  int get keyColumnIndex;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TableParamsModelCopyWith<_$_TableParamsModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+TablesSyncParamsModel _$TablesSyncParamsModelFromJson(
+    Map<String, dynamic> json) {
+  return _TablesSyncParamsModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TablesSyncParamsModel {
+  String get id => throw _privateConstructorUsedError;
+  String get sourceTableId => throw _privateConstructorUsedError;
+  List<String> get destinationTablesIds => throw _privateConstructorUsedError;
+  List<String> get columnNames => throw _privateConstructorUsedError;
+  bool get shouldUpdateValues => throw _privateConstructorUsedError;
+  bool get shouldAddNewValues => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TablesSyncParamsModelCopyWith<TablesSyncParamsModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TablesSyncParamsModelCopyWith<$Res> {
+  factory $TablesSyncParamsModelCopyWith(TablesSyncParamsModel value,
+          $Res Function(TablesSyncParamsModel) then) =
+      _$TablesSyncParamsModelCopyWithImpl<$Res, TablesSyncParamsModel>;
+  @useResult
+  $Res call(
+      {String id,
+      String sourceTableId,
+      List<String> destinationTablesIds,
+      List<String> columnNames,
+      bool shouldUpdateValues,
+      bool shouldAddNewValues});
+}
+
+/// @nodoc
+class _$TablesSyncParamsModelCopyWithImpl<$Res,
+        $Val extends TablesSyncParamsModel>
+    implements $TablesSyncParamsModelCopyWith<$Res> {
+  _$TablesSyncParamsModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? sourceTableId = null,
+    Object? destinationTablesIds = null,
+    Object? columnNames = null,
+    Object? shouldUpdateValues = null,
+    Object? shouldAddNewValues = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      sourceTableId: null == sourceTableId
+          ? _value.sourceTableId
+          : sourceTableId // ignore: cast_nullable_to_non_nullable
+              as String,
+      destinationTablesIds: null == destinationTablesIds
+          ? _value.destinationTablesIds
+          : destinationTablesIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       columnNames: null == columnNames
           ? _value.columnNames
           : columnNames // ignore: cast_nullable_to_non_nullable
@@ -911,59 +1209,53 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
 }
 
 /// @nodoc
-abstract class _$$_TableParamsModelCopyWith<$Res>
-    implements $TableParamsModelCopyWith<$Res> {
-  factory _$$_TableParamsModelCopyWith(
-          _$_TableParamsModel value, $Res Function(_$_TableParamsModel) then) =
-      __$$_TableParamsModelCopyWithImpl<$Res>;
+abstract class _$$_TablesSyncParamsModelCopyWith<$Res>
+    implements $TablesSyncParamsModelCopyWith<$Res> {
+  factory _$$_TablesSyncParamsModelCopyWith(_$_TablesSyncParamsModel value,
+          $Res Function(_$_TablesSyncParamsModel) then) =
+      __$$_TablesSyncParamsModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
-      String workbookOriginName,
-      int topLeftColumnIndex,
-      int topLeftRowIndex,
+      String sourceTableId,
+      List<String> destinationTablesIds,
       List<String> columnNames,
       bool shouldUpdateValues,
       bool shouldAddNewValues});
 }
 
 /// @nodoc
-class __$$_TableParamsModelCopyWithImpl<$Res>
-    extends _$TableParamsModelCopyWithImpl<$Res, _$_TableParamsModel>
-    implements _$$_TableParamsModelCopyWith<$Res> {
-  __$$_TableParamsModelCopyWithImpl(
-      _$_TableParamsModel _value, $Res Function(_$_TableParamsModel) _then)
+class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
+    extends _$TablesSyncParamsModelCopyWithImpl<$Res, _$_TablesSyncParamsModel>
+    implements _$$_TablesSyncParamsModelCopyWith<$Res> {
+  __$$_TablesSyncParamsModelCopyWithImpl(_$_TablesSyncParamsModel _value,
+      $Res Function(_$_TablesSyncParamsModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
-    Object? workbookOriginName = null,
-    Object? topLeftColumnIndex = null,
-    Object? topLeftRowIndex = null,
+    Object? sourceTableId = null,
+    Object? destinationTablesIds = null,
     Object? columnNames = null,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
   }) {
-    return _then(_$_TableParamsModel(
+    return _then(_$_TablesSyncParamsModel(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      workbookOriginName: null == workbookOriginName
-          ? _value.workbookOriginName
-          : workbookOriginName // ignore: cast_nullable_to_non_nullable
+      sourceTableId: null == sourceTableId
+          ? _value.sourceTableId
+          : sourceTableId // ignore: cast_nullable_to_non_nullable
               as String,
-      topLeftColumnIndex: null == topLeftColumnIndex
-          ? _value.topLeftColumnIndex
-          : topLeftColumnIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      topLeftRowIndex: null == topLeftRowIndex
-          ? _value.topLeftRowIndex
-          : topLeftRowIndex // ignore: cast_nullable_to_non_nullable
-              as int,
+      destinationTablesIds: null == destinationTablesIds
+          ? _value._destinationTablesIds
+          : destinationTablesIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       columnNames: null == columnNames
           ? _value._columnNames
           : columnNames // ignore: cast_nullable_to_non_nullable
@@ -983,29 +1275,34 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_TableParamsModel extends _TableParamsModel {
-  const _$_TableParamsModel(
+class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
+  const _$_TablesSyncParamsModel(
       {required this.id,
-      required this.workbookOriginName,
-      required this.topLeftColumnIndex,
-      required this.topLeftRowIndex,
+      required this.sourceTableId,
+      required final List<String> destinationTablesIds,
       required final List<String> columnNames,
       required this.shouldUpdateValues,
       required this.shouldAddNewValues})
-      : _columnNames = columnNames,
+      : _destinationTablesIds = destinationTablesIds,
+        _columnNames = columnNames,
         super._();
 
-  factory _$_TableParamsModel.fromJson(Map<String, dynamic> json) =>
-      _$$_TableParamsModelFromJson(json);
+  factory _$_TablesSyncParamsModel.fromJson(Map<String, dynamic> json) =>
+      _$$_TablesSyncParamsModelFromJson(json);
 
   @override
   final String id;
   @override
-  final String workbookOriginName;
+  final String sourceTableId;
+  final List<String> _destinationTablesIds;
   @override
-  final int topLeftColumnIndex;
-  @override
-  final int topLeftRowIndex;
+  List<String> get destinationTablesIds {
+    if (_destinationTablesIds is EqualUnmodifiableListView)
+      return _destinationTablesIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_destinationTablesIds);
+  }
+
   final List<String> _columnNames;
   @override
   List<String> get columnNames {
@@ -1021,21 +1318,19 @@ class _$_TableParamsModel extends _TableParamsModel {
 
   @override
   String toString() {
-    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, topLeftColumnIndex: $topLeftColumnIndex, topLeftRowIndex: $topLeftRowIndex, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues)';
+    return 'TablesSyncParamsModel(id: $id, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TableParamsModel &&
+            other is _$_TablesSyncParamsModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.workbookOriginName, workbookOriginName) ||
-                other.workbookOriginName == workbookOriginName) &&
-            (identical(other.topLeftColumnIndex, topLeftColumnIndex) ||
-                other.topLeftColumnIndex == topLeftColumnIndex) &&
-            (identical(other.topLeftRowIndex, topLeftRowIndex) ||
-                other.topLeftRowIndex == topLeftRowIndex) &&
+            (identical(other.sourceTableId, sourceTableId) ||
+                other.sourceTableId == sourceTableId) &&
+            const DeepCollectionEquality()
+                .equals(other._destinationTablesIds, _destinationTablesIds) &&
             const DeepCollectionEquality()
                 .equals(other._columnNames, _columnNames) &&
             (identical(other.shouldUpdateValues, shouldUpdateValues) ||
@@ -1049,198 +1344,11 @@ class _$_TableParamsModel extends _TableParamsModel {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      workbookOriginName,
-      topLeftColumnIndex,
-      topLeftRowIndex,
+      sourceTableId,
+      const DeepCollectionEquality().hash(_destinationTablesIds),
       const DeepCollectionEquality().hash(_columnNames),
       shouldUpdateValues,
       shouldAddNewValues);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_TableParamsModelCopyWith<_$_TableParamsModel> get copyWith =>
-      __$$_TableParamsModelCopyWithImpl<_$_TableParamsModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_TableParamsModelToJson(
-      this,
-    );
-  }
-}
-
-abstract class _TableParamsModel extends TableParamsModel {
-  const factory _TableParamsModel(
-      {required final String id,
-      required final String workbookOriginName,
-      required final int topLeftColumnIndex,
-      required final int topLeftRowIndex,
-      required final List<String> columnNames,
-      required final bool shouldUpdateValues,
-      required final bool shouldAddNewValues}) = _$_TableParamsModel;
-  const _TableParamsModel._() : super._();
-
-  factory _TableParamsModel.fromJson(Map<String, dynamic> json) =
-      _$_TableParamsModel.fromJson;
-
-  @override
-  String get id;
-  @override
-  String get workbookOriginName;
-  @override
-  int get topLeftColumnIndex;
-  @override
-  int get topLeftRowIndex;
-  @override
-  List<String> get columnNames;
-  @override
-  bool get shouldUpdateValues;
-  @override
-  bool get shouldAddNewValues;
-  @override
-  @JsonKey(ignore: true)
-  _$$_TableParamsModelCopyWith<_$_TableParamsModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-TablesSyncParamsModel _$TablesSyncParamsModelFromJson(
-    Map<String, dynamic> json) {
-  return _TablesSyncParamsModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$TablesSyncParamsModel {
-  String get sourceTableId => throw _privateConstructorUsedError;
-  List<String> get destinationTablesIds => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $TablesSyncParamsModelCopyWith<TablesSyncParamsModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TablesSyncParamsModelCopyWith<$Res> {
-  factory $TablesSyncParamsModelCopyWith(TablesSyncParamsModel value,
-          $Res Function(TablesSyncParamsModel) then) =
-      _$TablesSyncParamsModelCopyWithImpl<$Res, TablesSyncParamsModel>;
-  @useResult
-  $Res call({String sourceTableId, List<String> destinationTablesIds});
-}
-
-/// @nodoc
-class _$TablesSyncParamsModelCopyWithImpl<$Res,
-        $Val extends TablesSyncParamsModel>
-    implements $TablesSyncParamsModelCopyWith<$Res> {
-  _$TablesSyncParamsModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? sourceTableId = null,
-    Object? destinationTablesIds = null,
-  }) {
-    return _then(_value.copyWith(
-      sourceTableId: null == sourceTableId
-          ? _value.sourceTableId
-          : sourceTableId // ignore: cast_nullable_to_non_nullable
-              as String,
-      destinationTablesIds: null == destinationTablesIds
-          ? _value.destinationTablesIds
-          : destinationTablesIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_TablesSyncParamsModelCopyWith<$Res>
-    implements $TablesSyncParamsModelCopyWith<$Res> {
-  factory _$$_TablesSyncParamsModelCopyWith(_$_TablesSyncParamsModel value,
-          $Res Function(_$_TablesSyncParamsModel) then) =
-      __$$_TablesSyncParamsModelCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String sourceTableId, List<String> destinationTablesIds});
-}
-
-/// @nodoc
-class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
-    extends _$TablesSyncParamsModelCopyWithImpl<$Res, _$_TablesSyncParamsModel>
-    implements _$$_TablesSyncParamsModelCopyWith<$Res> {
-  __$$_TablesSyncParamsModelCopyWithImpl(_$_TablesSyncParamsModel _value,
-      $Res Function(_$_TablesSyncParamsModel) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? sourceTableId = null,
-    Object? destinationTablesIds = null,
-  }) {
-    return _then(_$_TablesSyncParamsModel(
-      sourceTableId: null == sourceTableId
-          ? _value.sourceTableId
-          : sourceTableId // ignore: cast_nullable_to_non_nullable
-              as String,
-      destinationTablesIds: null == destinationTablesIds
-          ? _value._destinationTablesIds
-          : destinationTablesIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
-  }
-}
-
-/// @nodoc
-
-@JsonSerializable(explicitToJson: true)
-class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
-  const _$_TablesSyncParamsModel(
-      {required this.sourceTableId,
-      required final List<String> destinationTablesIds})
-      : _destinationTablesIds = destinationTablesIds,
-        super._();
-
-  factory _$_TablesSyncParamsModel.fromJson(Map<String, dynamic> json) =>
-      _$$_TablesSyncParamsModelFromJson(json);
-
-  @override
-  final String sourceTableId;
-  final List<String> _destinationTablesIds;
-  @override
-  List<String> get destinationTablesIds {
-    if (_destinationTablesIds is EqualUnmodifiableListView)
-      return _destinationTablesIds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_destinationTablesIds);
-  }
-
-  @override
-  String toString() {
-    return 'TablesSyncParamsModel(sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_TablesSyncParamsModel &&
-            (identical(other.sourceTableId, sourceTableId) ||
-                other.sourceTableId == sourceTableId) &&
-            const DeepCollectionEquality()
-                .equals(other._destinationTablesIds, _destinationTablesIds));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, sourceTableId,
-      const DeepCollectionEquality().hash(_destinationTablesIds));
 
   @JsonKey(ignore: true)
   @override
@@ -1259,18 +1367,29 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
 
 abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
   const factory _TablesSyncParamsModel(
-          {required final String sourceTableId,
-          required final List<String> destinationTablesIds}) =
-      _$_TablesSyncParamsModel;
+      {required final String id,
+      required final String sourceTableId,
+      required final List<String> destinationTablesIds,
+      required final List<String> columnNames,
+      required final bool shouldUpdateValues,
+      required final bool shouldAddNewValues}) = _$_TablesSyncParamsModel;
   const _TablesSyncParamsModel._() : super._();
 
   factory _TablesSyncParamsModel.fromJson(Map<String, dynamic> json) =
       _$_TablesSyncParamsModel.fromJson;
 
   @override
+  String get id;
+  @override
   String get sourceTableId;
   @override
   List<String> get destinationTablesIds;
+  @override
+  List<String> get columnNames;
+  @override
+  bool get shouldUpdateValues;
+  @override
+  bool get shouldAddNewValues;
   @override
   @JsonKey(ignore: true)
   _$$_TablesSyncParamsModelCopyWith<_$_TablesSyncParamsModel> get copyWith =>

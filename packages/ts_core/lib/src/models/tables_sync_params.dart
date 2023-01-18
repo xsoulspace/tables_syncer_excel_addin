@@ -15,8 +15,12 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
     explicitToJson: true,
   )
   const factory TablesSyncParamsModel({
+    required final String id,
     required final TableParamsId sourceTableId,
     required final List<TableParamsId> destinationTablesIds,
+    required final List<String> columnNames,
+    required final bool shouldUpdateValues,
+    required final bool shouldAddNewValues,
   }) = _TablesSyncParamsModel;
 
   const TablesSyncParamsModel._();

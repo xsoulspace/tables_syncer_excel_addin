@@ -18,12 +18,13 @@ class TableParamsModel with _$TableParamsModel {
   )
   const factory TableParamsModel({
     required final TableParamsId id,
+    required final String name,
     required final String workbookOriginName,
-    required final int topLeftColumnIndex,
-    required final int topLeftRowIndex,
-    required final List<String> columnNames,
-    required final bool shouldUpdateValues,
-    required final bool shouldAddNewValues,
+    @Default(0) final int topLeftColumnIndex,
+    @Default(0) final int topLeftRowIndex,
+    @Default(0) final int headerRowIndex,
+    @Default(0) final int firstRowIndex,
+    @Default(0) final int keyColumnIndex,
   }) = _TableParamsModel;
 
   const TableParamsModel._();

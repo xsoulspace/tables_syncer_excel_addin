@@ -101,9 +101,35 @@ Map<String, dynamic> _$$_ResponseErrorDescriptionToJson(
 _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
     _$_TableParamsModel(
       id: json['id'] as String,
+      name: json['name'] as String,
       workbookOriginName: json['workbookOriginName'] as String,
-      topLeftColumnIndex: json['topLeftColumnIndex'] as int,
-      topLeftRowIndex: json['topLeftRowIndex'] as int,
+      topLeftColumnIndex: json['topLeftColumnIndex'] as int? ?? 0,
+      topLeftRowIndex: json['topLeftRowIndex'] as int? ?? 0,
+      headerRowIndex: json['headerRowIndex'] as int? ?? 0,
+      firstRowIndex: json['firstRowIndex'] as int? ?? 0,
+      keyColumnIndex: json['keyColumnIndex'] as int? ?? 0,
+    );
+
+Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'workbookOriginName': instance.workbookOriginName,
+      'topLeftColumnIndex': instance.topLeftColumnIndex,
+      'topLeftRowIndex': instance.topLeftRowIndex,
+      'headerRowIndex': instance.headerRowIndex,
+      'firstRowIndex': instance.firstRowIndex,
+      'keyColumnIndex': instance.keyColumnIndex,
+    };
+
+_$_TablesSyncParamsModel _$$_TablesSyncParamsModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_TablesSyncParamsModel(
+      id: json['id'] as String,
+      sourceTableId: json['sourceTableId'] as String,
+      destinationTablesIds: (json['destinationTablesIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       columnNames: (json['columnNames'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -111,31 +137,15 @@ _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
       shouldAddNewValues: json['shouldAddNewValues'] as bool,
     );
 
-Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'workbookOriginName': instance.workbookOriginName,
-      'topLeftColumnIndex': instance.topLeftColumnIndex,
-      'topLeftRowIndex': instance.topLeftRowIndex,
-      'columnNames': instance.columnNames,
-      'shouldUpdateValues': instance.shouldUpdateValues,
-      'shouldAddNewValues': instance.shouldAddNewValues,
-    };
-
-_$_TablesSyncParamsModel _$$_TablesSyncParamsModelFromJson(
-        Map<String, dynamic> json) =>
-    _$_TablesSyncParamsModel(
-      sourceTableId: json['sourceTableId'] as String,
-      destinationTablesIds: (json['destinationTablesIds'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-    );
-
 Map<String, dynamic> _$$_TablesSyncParamsModelToJson(
         _$_TablesSyncParamsModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'sourceTableId': instance.sourceTableId,
       'destinationTablesIds': instance.destinationTablesIds,
+      'columnNames': instance.columnNames,
+      'shouldUpdateValues': instance.shouldUpdateValues,
+      'shouldAddNewValues': instance.shouldAddNewValues,
     };
 
 _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
