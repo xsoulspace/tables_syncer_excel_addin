@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
 import 'package:tables_syncer_excel_addin/pack_core/app/app_services_provider.dart';
+import 'package:tables_syncer_excel_addin/pack_core/app/navigation_screen.dart';
 import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
 import 'package:tables_syncer_excel_addin/pack_core/pack_core.dart';
 import 'package:ts_core/ts_core.dart';
@@ -73,19 +72,19 @@ class AppScaffoldBuilder extends HookWidget {
     return AnimatedBuilder(
       animation: settingsNotifier,
       builder: (final context, final child) {
-        return MaterialApp.router(
+        return FluentApp(
           debugShowCheckedModeBanner: false,
-          theme: AppThemeData.brandLight,
-          darkTheme: AppThemeData.brandDark,
-          themeMode: ThemeMode.light,
-          routeInformationParser: routeParser,
-          routerDelegate: state.routerDelegate,
           localizationsDelegates: const [
             S.delegate,
+            FluentLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
+          // routeInformationParser: routeParser,
+          // routerDelegate: state.routerDelegate,
+
+          supportedLocales: Locales.values,
           localeListResolutionCallback:
               (final locales, final supportedLocales) {
             final defaultLocale = () {
@@ -105,135 +104,43 @@ class AppScaffoldBuilder extends HookWidget {
 
             return defaultLocale;
           },
-          supportedLocales: Locales.values,
+          locale: settingsNotifier.locale,
+          theme: ThemeData.light().copyWith(
+            visualDensity: VisualDensity.standard,
+            focusTheme: FocusThemeData(
+              glowFactor: is10footScreen() ? 2.0 : 0.0,
+            ),
+          ),
+          darkTheme: ThemeData.dark().copyWith(
+            resources: const ResourceDictionary.dark(
+              cardStrokeColorDefault: Color(0x15ffffff),
+            ),
+            visualDensity: VisualDensity.standard,
+            focusTheme: FocusThemeData(
+              glowFactor: is10footScreen() ? 2.0 : 0.0,
+            ),
+          ),
+          themeMode: settingsNotifier.theme,
+          home: const NavigationScreen(),
+          initialRoute: '/',
           builder: (final context, final child) {
             return UiTheme(
               scheme: UiThemeScheme.m3(context),
               child: StateLoader(
                 initializer: GlobalStateInitializer(),
                 loader: const LoadingScreen(),
-                child: child!,
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: NavigationPaneTheme(
+                    data: const NavigationPaneThemeData(),
+                    child: child!,
+                  ),
+                ),
               ),
             );
           },
         );
       },
-    );
-  }
-}
-
-/// Used to create toolbar instead of native, but resizing
-/// doesn't work on ubuntu.
-class WindowControlsScaffold extends HookWidget {
-  const WindowControlsScaffold({
-    required this.child,
-    super.key,
-  });
-  final Widget child;
-  @override
-  Widget build(final BuildContext context) {
-    if (kIsWeb || DeviceRuntimeType.isMobile || DeviceRuntimeType.isApple) {
-      return child;
-    }
-
-    final isHoveredNotifier = useIsBool();
-    const dimension = 13.5;
-    return Stack(
-      children: [
-        child,
-        Positioned(
-          top: 0,
-          right: 0,
-          left: 0,
-          child: FocusableActionDetector(
-            onShowHoverHighlight: (final value) {
-              isHoveredNotifier.value = value;
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 7, right: 7, bottom: 7),
-              child: ValueListenableBuilder(
-                valueListenable: isHoveredNotifier,
-                builder: (final context, final isHovered, final child) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        icon: isHovered
-                            ? const Icon(CupertinoIcons.clear_circled_solid)
-                            : const Icon(CupertinoIcons.circle_filled),
-                        constraints: const BoxConstraints(
-                          maxWidth: dimension,
-                          maxHeight: dimension,
-                        ),
-                        color: Colors.red,
-                        iconSize: dimension,
-                      ),
-                      const SizedBox(width: 7),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () async {
-                          // final bool isMinimized =
-                          //     await windowManager.isMinimized();
-                          // if (isMinimized) {
-                          //   await windowManager.restore();
-                          // } else {
-                          //   await windowManager.minimize();
-                          // }
-                        },
-                        color: Colors.amber,
-                        icon: isHovered
-                            ? const Icon(CupertinoIcons.circle_filled)
-                            : const Icon(CupertinoIcons.circle_filled),
-                        constraints: const BoxConstraints(
-                          maxWidth: dimension,
-                          maxHeight: dimension,
-                        ),
-                        iconSize: dimension,
-                      ),
-                      const SizedBox(width: 7),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        color: Colors.green,
-                        constraints: const BoxConstraints(
-                          maxWidth: dimension,
-                          maxHeight: dimension,
-                        ),
-                        onPressed: () async {
-                          // final isFullScreen = await windowManager.isFullScreen();
-                          // await windowManager.setFullScreen(!isFullScreen);
-                          // if (await windowManager.isMaximized()) {
-                          //   await windowManager.unmaximize();
-                          // } else {
-                          //   await windowManager.maximize();
-                          // }
-                        },
-                        icon: Stack(
-                          children: [
-                            const Icon(
-                              CupertinoIcons.circle_filled,
-                            ),
-                            if (isHovered)
-                              const Center(
-                                child: Icon(
-                                  CupertinoIcons.arrow_up_left_arrow_down_right,
-                                  color: Colors.white,
-                                  size: 9,
-                                ),
-                              ),
-                          ],
-                        ),
-                        iconSize: dimension,
-                      )
-                    ],
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

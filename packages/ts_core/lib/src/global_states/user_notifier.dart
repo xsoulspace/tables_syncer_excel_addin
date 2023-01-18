@@ -9,10 +9,15 @@ import '../api_services/api_services.dart';
 import '../localization/localization.dart';
 import '../models/models.dart';
 
-class UserNotifier extends ChangeNotifier implements Loadable {
+class UserNotifier extends ChangeNotifier implements Loadable, Disposable {
   UserNotifier.use(final Locator read)
       : userLocalService = read<ApiServices>().localUser;
   final LocalUserService userLocalService;
+  final excelAvailable = ValueNotifier<bool>(false);
+  final devinfo = ValueNotifier<String>('');
+  final debugPaneEnabled = ValueNotifier(false);
+  final useMockData = ValueNotifier<bool>(true);
+
   UserModel _user = UserModel.empty;
 
   UserModel get user => _user;
@@ -22,10 +27,8 @@ class UserNotifier extends ChangeNotifier implements Loadable {
     userLocalService.saveUser(user: value);
   }
 
-  ThemeMode _theme = ThemeMode.system;
-  ThemeMode get theme => _theme;
+  ThemeMode get theme => user.themeMode;
   set theme(final ThemeMode value) {
-    _theme = value;
     user = user.copyWith(
       themeMode: value,
     );
@@ -50,6 +53,7 @@ class UserNotifier extends ChangeNotifier implements Loadable {
   @override
   Future<void> onLoad() async {
     _user = await userLocalService.loadUser();
+    excelAvailable.addListener(_onExcelAvailableChanged);
     notify();
   }
 
@@ -58,5 +62,24 @@ class UserNotifier extends ChangeNotifier implements Loadable {
   Future<bool> checkIsAuthorized() async {
     // TODO(arenukvern): description
     throw UnimplementedError();
+  }
+
+  void _onExcelAvailableChanged() {
+    if (excelAvailable.value) {
+      useMockData.value = false;
+    } else {
+      useMockData.value = true;
+    }
+  }
+
+  @override
+  void dispose() {
+    excelAvailable
+      ..removeListener(_onExcelAvailableChanged)
+      ..dispose();
+    devinfo.dispose();
+    debugPaneEnabled.dispose();
+    useMockData.dispose();
+    super.dispose();
   }
 }

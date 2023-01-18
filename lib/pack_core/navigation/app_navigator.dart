@@ -1,6 +1,7 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
 import 'package:tables_syncer_excel_addin/pack_core/navigation/app_router.dart';
+import 'package:tables_syncer_excel_addin/pack_settings/pack_settings.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
