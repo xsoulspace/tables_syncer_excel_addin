@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:logger/logger.dart';
-import 'package:tables_syncer_excel_addin/pack_core/analytics/firebase/firebase.dart';
+
+import '../firebase/firebase.dart';
 
 enum AnalyticEvents {
   usedInAndroid,

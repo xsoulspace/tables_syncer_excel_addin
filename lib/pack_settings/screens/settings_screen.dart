@@ -2,8 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
-import 'package:tables_syncer_excel_addin/generated/l10n.dart';
-import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
@@ -14,7 +12,7 @@ class SettingsScreen extends HookWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final settingsNotifier = context.watch<AppSettingsNotifier>();
+    final settingsNotifier = context.watch<UserNotifier>();
     final state = useSettingsScreenState();
     final appThemeData = UiTheme.of(context);
     return ScaffoldPage.scrollable(

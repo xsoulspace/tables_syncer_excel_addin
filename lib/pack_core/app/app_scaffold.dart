@@ -5,7 +5,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
-import 'package:tables_syncer_excel_addin/generated/l10n.dart';
 import 'package:tables_syncer_excel_addin/pack_core/app/app_services_provider.dart';
 import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
 import 'package:tables_syncer_excel_addin/pack_core/pack_core.dart';
@@ -70,7 +69,7 @@ class AppScaffoldBuilder extends HookWidget {
   @override
   Widget build(final BuildContext context) {
     final state = useAppScaffoldBodyState(context.read);
-    final settingsNotifier = context.watch<AppSettingsNotifier>();
+    final settingsNotifier = context.watch<UserNotifier>();
     return AnimatedBuilder(
       animation: settingsNotifier,
       builder: (final context, final child) {

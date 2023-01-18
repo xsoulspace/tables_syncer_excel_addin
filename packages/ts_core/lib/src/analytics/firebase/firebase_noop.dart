@@ -1,13 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:tables_syncer_excel_addin/pack_core/analytics/firebase/abstract_firebase.dart';
-import 'package:tables_syncer_excel_addin/pack_core/analytics/notifiers/analytics_notifier.dart';
+
+import '../notifiers/analytics_notifier.dart';
+import 'abstract_firebase.dart';
 
 class FirebaseInitializer implements AbstractFirebaseInitializer {
   @override
-  Future<void> onLoad() async {}
+  Future<void> onLoad(final FirebaseOptions options) async {}
 
   @override
-  Future<void> onDelayedLoad() async {
+  Future<void> onDelayedLoad(final FirebaseOptions options) async {
     return;
   }
 }

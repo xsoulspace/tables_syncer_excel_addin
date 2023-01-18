@@ -4,22 +4,21 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
-import 'package:tables_syncer_excel_addin/firebase_options.dart';
-import 'package:tables_syncer_excel_addin/pack_core/analytics/firebase/abstract_firebase.dart';
-import 'package:tables_syncer_excel_addin/pack_core/analytics/notifiers/analytics_notifier.dart';
-import 'package:ts_core/ts_core.dart';
 import 'package:universal_io/io.dart';
+
+import '../../../ts_core.dart';
+import 'abstract_firebase.dart';
 
 class FirebaseInitializer implements AbstractFirebaseInitializer {
   @override
-  Future<void> onLoad() async {
+  Future<void> onLoad(final FirebaseOptions options) async {
     await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
+      options: options,
     );
   }
 
   @override
-  Future<void> onDelayedLoad() async {
+  Future<void> onDelayedLoad(final FirebaseOptions options) async {
     return;
   }
 }
