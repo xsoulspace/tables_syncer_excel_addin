@@ -6,7 +6,9 @@ import 'abstract_firebase.dart';
 
 class FirebaseInitializer implements AbstractFirebaseInitializer {
   @override
-  Future<void> onLoad(final FirebaseOptions options) async {}
+  Future<void> onLoad(final FirebaseOptions options) async {
+    return;
+  }
 
   @override
   Future<void> onDelayedLoad(final FirebaseOptions options) async {

@@ -53,6 +53,7 @@ class AppServicesProvider extends StatelessWidget {
             ChangeNotifierProvider(
               create: (final context) => GlobalStateNotifiers.getUser(),
             ),
+            ChangeNotifierProvider(create: SyncParamsNotifier.create)
           ],
           builder: (final context, final child) => builder(context),
         );

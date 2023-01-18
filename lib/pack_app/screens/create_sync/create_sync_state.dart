@@ -20,30 +20,64 @@ class CreateTablesSyncState extends LifeState {
 
   final CreateTablesSyncDiDto diDto;
   final isFilledNotifier = ValueNotifier<bool>(false);
-  TableParamsModel? _sourceTable;
-  TableParamsModel? get sourceTable => _sourceTable;
-  set sourceTable(final TableParamsModel? sourceTable) {
-    _sourceTable = sourceTable;
-    setState();
+  final newColumnController = TextEditingController();
+  final syncColumnsSetNotifier = ValueNotifier<Set<String>>({});
+
+  void onAddSyncColumn([final String? column]) {
+    final text = newColumnController.text;
+    if (text.isEmpty) return;
+    syncColumnsSetNotifier.value = {...syncColumnsSetNotifier.value, text};
   }
 
+  void onDeleteSyncColumn(final String column) {
+    syncColumnsSetNotifier.value = {...syncColumnsSetNotifier.value}
+      ..remove(column);
+  }
+
+  final sourceTableNotifier = ValueNotifier<TableParamsModel?>(null);
+
   void onDeleteDestination(final int index) {
-    destinationSheets.removeAt(index);
-    setState();
+    destinationTablesNotifier.value = [...destinationTablesNotifier.value]
+      ..removeAt(index);
   }
 
   void onAddDestination(final TableParamsModel table) {
-    destinationSheets.add(table);
-    setState();
+    destinationTablesNotifier.value = [
+      ...destinationTablesNotifier.value,
+      table
+    ];
   }
 
-  final destinationSheets = <TableParamsModel>[];
-  void onAddNewTable() {}
-  void onSubmit() {}
+  final destinationTablesNotifier = ValueNotifier<List<TableParamsModel>>([]);
+  void onAddNewTable() {
+    //
+  }
+  void _validate() {
+    if (destinationTablesNotifier.value.isEmpty) {
+      isFilledNotifier.value = false;
+      return;
+    }
+    if (sourceTableNotifier.value == null) {
+      isFilledNotifier.value = false;
+      return;
+    }
+
+    if (syncColumnsSetNotifier.value.isEmpty) {
+      isFilledNotifier.value = false;
+      return;
+    }
+  }
+
+  void onSubmit() {
+    _validate();
+    if (!isFilledNotifier.value) return;
+    //
+  }
 
   @override
   void dispose() {
-    isFilledNotifier.value = false;
+    newColumnController.dispose();
+    isFilledNotifier.dispose();
     super.dispose();
   }
 }

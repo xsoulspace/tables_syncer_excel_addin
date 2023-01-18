@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_hooks/life_hooks.dart';
 
-import '../api_services/api_services.dart';
-import '../models/models.dart';
+import '../../ts_core.dart';
 
 class SyncParamsNotifier extends ChangeNotifier
     implements Loadable, Disposable {

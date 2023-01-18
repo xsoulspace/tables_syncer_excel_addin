@@ -21,19 +21,21 @@ class CreateTablesSyncScreen extends HookWidget {
       create: (final context) => state,
       builder: (final context, final child) {
         return ScaffoldPage(
-          content: Padding(
+          content: Container(
+            constraints: BoxConstraints(
+              maxWidth: WidthFormFactor.mobile.max * 0.8,
+            ),
             padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            child: ListView(
               children: [
                 Text(
                   'Create Sync',
                   textAlign: TextAlign.center,
                   style: theme.typography.title,
                 ),
-                uiTheme.verticalBoxes.large,
+                uiTheme.verticalBoxes.extraLarge,
                 Text(
-                  'Select Source Sheet',
+                  'Source Table',
                   textAlign: TextAlign.center,
                   style: theme.typography.bodyLarge,
                 ),
@@ -41,17 +43,21 @@ class CreateTablesSyncScreen extends HookWidget {
                 const SelectSourceTableButton(),
                 uiTheme.verticalBoxes.large,
                 Text(
-                  'Select Source Columns',
+                  'Source Columns',
                   textAlign: TextAlign.center,
                   style: theme.typography.bodyLarge,
                 ),
+                uiTheme.verticalBoxes.small,
+                const SyncColumnsSelector(),
                 uiTheme.verticalBoxes.large,
                 Text(
-                  'Select Destination Sheets',
+                  'Destination Tables',
                   textAlign: TextAlign.center,
                   style: theme.typography.bodyLarge,
                 ),
-                uiTheme.verticalBoxes.large,
+                uiTheme.verticalBoxes.small,
+                const DestinationTablesSelector(),
+                uiTheme.verticalBoxes.extraLarge,
                 ValueListenableBuilder(
                   valueListenable: state.isFilledNotifier,
                   builder: (final context, final isFilled, final child) {
@@ -76,64 +82,138 @@ class SelectSourceTableButton extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     final state = context.read<CreateTablesSyncState>();
+    final uiTheme = UiTheme.of(context);
 
-    return AutoSuggestBox<TableParamsModel>(
-      sorter: (final text, final items) {
-        return items.where((final item) => item.label.contains(text)).toList();
-      },
-      items: state.diDto.syncParamsNotifier.tableParams.map((final item) {
-        return AutoSuggestBoxItem<TableParamsModel>(
-          value: item,
-          label: item.name,
-        );
-      }).toList(),
-      onSelected: (final item) {
-        state.sourceTable = item.value;
-      },
-      trailingIcon: const AddNewTableIconButton(),
+    return Row(
+      children: [
+        Expanded(
+          child: AutoSuggestBox<TableParamsModel>(
+            sorter: (final text, final items) {
+              return items
+                  .where((final item) => item.label.contains(text))
+                  .toList();
+            },
+            items: state.diDto.syncParamsNotifier.tableParams.map((final item) {
+              return AutoSuggestBoxItem<TableParamsModel>(
+                value: item,
+                label: item.name,
+              );
+            }).toList(),
+            onSelected: (final item) {
+              state.sourceTableNotifier.value = item.value;
+            },
+          ),
+        ),
+        uiTheme.horizontalBoxes.medium,
+        const AddNewTableIconButton(),
+      ],
     );
   }
 }
 
-class SelectDestinationTablesButton extends StatelessWidget {
-  const SelectDestinationTablesButton({super.key});
+class SyncColumnsSelector extends StatelessWidget {
+  const SyncColumnsSelector({super.key});
 
   @override
   Widget build(final BuildContext context) {
     final state = context.read<CreateTablesSyncState>();
+    final uiTheme = UiTheme.of(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Wrap(
-          children: state.destinationSheets
-              .mapIndexed(
-                (final index, final table) => material.InputChip(
-                  key: ValueKey(table),
-                  label: Text(table.name),
-                  onDeleted: () => state.onDeleteDestination(index),
-                ),
-              )
-              .toList(),
+        Row(
+          children: [
+            Expanded(
+              child: TextBox(
+                onEditingComplete: state.onAddSyncColumn,
+                controller: state.newColumnController,
+                onSubmitted: state.onAddSyncColumn,
+              ),
+            ),
+            uiTheme.horizontalBoxes.medium,
+            IconButton(
+              icon: const Icon(FluentIcons.add),
+              onPressed: state.onAddSyncColumn,
+            ),
+          ],
         ),
-        AutoSuggestBox<TableParamsModel>(
-          sorter: (final text, final items) {
-            return items
-                .where((final item) => item.label.contains(text))
-                .toList();
-          },
-          items: state.diDto.syncParamsNotifier.tableParams.map((final item) {
-            return AutoSuggestBoxItem<TableParamsModel>(
-              value: item,
-              label: item.name,
+        ValueListenableBuilder(
+          valueListenable: state.syncColumnsSetNotifier,
+          builder: (final context, final syncColumnsSet, final child) {
+            return material.Material(
+              child: Wrap(
+                children: syncColumnsSet
+                    .map(
+                      (final columnName) => material.InputChip(
+                        key: ValueKey(columnName),
+                        label: Text(columnName),
+                        onDeleted: () => state.onDeleteSyncColumn(columnName),
+                      ),
+                    )
+                    .toList(),
+              ),
             );
-          }).toList(),
-          onSelected: (final tableCheckox) {
-            final table = tableCheckox.value;
-            if (table == null) return;
-            state.onAddDestination(table);
           },
-          trailingIcon: const AddNewTableIconButton(),
+        ),
+      ],
+    );
+  }
+}
+
+class DestinationTablesSelector extends StatelessWidget {
+  const DestinationTablesSelector({super.key});
+
+  @override
+  Widget build(final BuildContext context) {
+    final state = context.read<CreateTablesSyncState>();
+    final uiTheme = UiTheme.of(context);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ValueListenableBuilder(
+          valueListenable: state.destinationTablesNotifier,
+          builder: (final context, final destinationTables, final child) {
+            return Wrap(
+              children: destinationTables
+                  .mapIndexed(
+                    (final index, final table) => material.InputChip(
+                      key: ValueKey(table),
+                      label: Text(table.name),
+                      onDeleted: () => state.onDeleteDestination(index),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: AutoSuggestBox<TableParamsModel>(
+                sorter: (final text, final items) {
+                  return items
+                      .where((final item) => item.label.contains(text))
+                      .toList();
+                },
+                items: state.diDto.syncParamsNotifier.tableParams
+                    .map((final item) {
+                  return AutoSuggestBoxItem<TableParamsModel>(
+                    value: item,
+                    label: item.name,
+                  );
+                }).toList(),
+                onSelected: (final tableCheckox) {
+                  final table = tableCheckox.value;
+                  if (table == null) return;
+                  state.onAddDestination(table);
+                },
+              ),
+            ),
+            uiTheme.horizontalBoxes.medium,
+            const AddNewTableIconButton()
+          ],
         ),
       ],
     );

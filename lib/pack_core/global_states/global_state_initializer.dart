@@ -28,6 +28,7 @@ class GlobalStateInitializer extends AppStateInitializer {
     final adManager = read<AdManager>();
     final AnalyticsNotifier analyticsNotifier = read();
     final services = read<ApiServices>();
+    final syncParamsNotifier = read<SyncParamsNotifier>();
     final appRouterController = AppRouterController.use(read);
     await FirebaseInitializer()
         .onDelayedLoad(DefaultFirebaseOptions.currentPlatform);
@@ -52,6 +53,7 @@ class GlobalStateInitializer extends AppStateInitializer {
         await excelApi.onLoad();
         await FirebaseInitializer().onDelayedLoad(firebaseOptions);
         await analyticsNotifier.onDelayedLoad();
+        await syncParamsNotifier.onLoad();
         if (settings.excelAvailable.value) {
           unawaited(
             analyticsNotifier.logAnalyticEvent(AnalyticEvents.usedInExcel),
