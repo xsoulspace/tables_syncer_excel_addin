@@ -101,8 +101,8 @@ Map<String, dynamic> _$$_ResponseErrorDescriptionToJson(
 _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
     _$_TableParamsModel(
       id: json['id'] as String,
-      name: json['name'] as String,
       workbookOriginName: json['workbookOriginName'] as String,
+      name: json['name'] as String? ?? '',
       topLeftColumnIndex: json['topLeftColumnIndex'] as int? ?? 0,
       topLeftRowIndex: json['topLeftRowIndex'] as int? ?? 0,
       headerRowIndex: json['headerRowIndex'] as int? ?? 0,
@@ -113,8 +113,8 @@ _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
       'workbookOriginName': instance.workbookOriginName,
+      'name': instance.name,
       'topLeftColumnIndex': instance.topLeftColumnIndex,
       'topLeftRowIndex': instance.topLeftRowIndex,
       'headerRowIndex': instance.headerRowIndex,

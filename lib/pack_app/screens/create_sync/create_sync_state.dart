@@ -7,13 +7,13 @@ class CreateTablesSyncDiDto {
 
 CreateTablesSyncState useCreateTablesSyncState({required final Locator read}) =>
     use(
-      LifeHook(
+      ContextfulLifeHook(
         debugLabel: 'CreateTablesSyncState',
         state: CreateTablesSyncState(diDto: CreateTablesSyncDiDto.use(read)),
       ),
     );
 
-class CreateTablesSyncState extends LifeState {
+class CreateTablesSyncState extends ContextfulLifeState {
   CreateTablesSyncState({
     required this.diDto,
   });
@@ -27,6 +27,7 @@ class CreateTablesSyncState extends LifeState {
     final text = newColumnController.text;
     if (text.isEmpty) return;
     syncColumnsSetNotifier.value = {...syncColumnsSetNotifier.value, text};
+    newColumnController.clear();
   }
 
   void onDeleteSyncColumn(final String column) {
@@ -50,8 +51,9 @@ class CreateTablesSyncState extends LifeState {
 
   final destinationTablesNotifier = ValueNotifier<List<TableParamsModel>>([]);
   void onAddNewTable() {
-    //
+    showCreateTableDialog(getContext());
   }
+
   void _validate() {
     if (destinationTablesNotifier.value.isEmpty) {
       isFilledNotifier.value = false;

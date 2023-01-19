@@ -827,8 +827,8 @@ TableParamsModel _$TableParamsModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TableParamsModel {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
   String get workbookOriginName => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   int get topLeftColumnIndex => throw _privateConstructorUsedError;
   int get topLeftRowIndex => throw _privateConstructorUsedError;
   int get headerRowIndex => throw _privateConstructorUsedError;
@@ -849,8 +849,8 @@ abstract class $TableParamsModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String name,
       String workbookOriginName,
+      String name,
       int topLeftColumnIndex,
       int topLeftRowIndex,
       int headerRowIndex,
@@ -872,8 +872,8 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
     Object? workbookOriginName = null,
+    Object? name = null,
     Object? topLeftColumnIndex = null,
     Object? topLeftRowIndex = null,
     Object? headerRowIndex = null,
@@ -885,13 +885,13 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
       workbookOriginName: null == workbookOriginName
           ? _value.workbookOriginName
           : workbookOriginName // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       topLeftColumnIndex: null == topLeftColumnIndex
           ? _value.topLeftColumnIndex
@@ -927,8 +927,8 @@ abstract class _$$_TableParamsModelCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String name,
       String workbookOriginName,
+      String name,
       int topLeftColumnIndex,
       int topLeftRowIndex,
       int headerRowIndex,
@@ -948,8 +948,8 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
     Object? workbookOriginName = null,
+    Object? name = null,
     Object? topLeftColumnIndex = null,
     Object? topLeftRowIndex = null,
     Object? headerRowIndex = null,
@@ -961,13 +961,13 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
       workbookOriginName: null == workbookOriginName
           ? _value.workbookOriginName
           : workbookOriginName // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       topLeftColumnIndex: null == topLeftColumnIndex
           ? _value.topLeftColumnIndex
@@ -999,8 +999,8 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
 class _$_TableParamsModel extends _TableParamsModel {
   const _$_TableParamsModel(
       {required this.id,
-      required this.name,
       required this.workbookOriginName,
+      this.name = '',
       this.topLeftColumnIndex = 0,
       this.topLeftRowIndex = 0,
       this.headerRowIndex = 0,
@@ -1014,9 +1014,10 @@ class _$_TableParamsModel extends _TableParamsModel {
   @override
   final String id;
   @override
-  final String name;
-  @override
   final String workbookOriginName;
+  @override
+  @JsonKey()
+  final String name;
   @override
   @JsonKey()
   final int topLeftColumnIndex;
@@ -1035,7 +1036,7 @@ class _$_TableParamsModel extends _TableParamsModel {
 
   @override
   String toString() {
-    return 'TableParamsModel(id: $id, name: $name, workbookOriginName: $workbookOriginName, topLeftColumnIndex: $topLeftColumnIndex, topLeftRowIndex: $topLeftRowIndex, headerRowIndex: $headerRowIndex, firstRowIndex: $firstRowIndex, keyColumnIndex: $keyColumnIndex)';
+    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, name: $name, topLeftColumnIndex: $topLeftColumnIndex, topLeftRowIndex: $topLeftRowIndex, headerRowIndex: $headerRowIndex, firstRowIndex: $firstRowIndex, keyColumnIndex: $keyColumnIndex)';
   }
 
   @override
@@ -1044,9 +1045,9 @@ class _$_TableParamsModel extends _TableParamsModel {
         (other.runtimeType == runtimeType &&
             other is _$_TableParamsModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
             (identical(other.workbookOriginName, workbookOriginName) ||
                 other.workbookOriginName == workbookOriginName) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.topLeftColumnIndex, topLeftColumnIndex) ||
                 other.topLeftColumnIndex == topLeftColumnIndex) &&
             (identical(other.topLeftRowIndex, topLeftRowIndex) ||
@@ -1064,8 +1065,8 @@ class _$_TableParamsModel extends _TableParamsModel {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      name,
       workbookOriginName,
+      name,
       topLeftColumnIndex,
       topLeftRowIndex,
       headerRowIndex,
@@ -1089,8 +1090,8 @@ class _$_TableParamsModel extends _TableParamsModel {
 abstract class _TableParamsModel extends TableParamsModel {
   const factory _TableParamsModel(
       {required final String id,
-      required final String name,
       required final String workbookOriginName,
+      final String name,
       final int topLeftColumnIndex,
       final int topLeftRowIndex,
       final int headerRowIndex,
@@ -1104,9 +1105,9 @@ abstract class _TableParamsModel extends TableParamsModel {
   @override
   String get id;
   @override
-  String get name;
-  @override
   String get workbookOriginName;
+  @override
+  String get name;
   @override
   int get topLeftColumnIndex;
   @override

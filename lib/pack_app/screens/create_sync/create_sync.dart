@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' as material;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
+import 'package:tables_syncer_excel_addin/pack_app/screens/create_sync/create_table.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
@@ -121,6 +122,7 @@ class SyncColumnsSelector extends StatelessWidget {
 
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Row(
           children: [
@@ -138,11 +140,14 @@ class SyncColumnsSelector extends StatelessWidget {
             ),
           ],
         ),
+        uiTheme.verticalBoxes.medium,
         ValueListenableBuilder(
           valueListenable: state.syncColumnsSetNotifier,
           builder: (final context, final syncColumnsSet, final child) {
             return material.Material(
               child: Wrap(
+                spacing: 12,
+                runSpacing: 6,
                 children: syncColumnsSet
                     .map(
                       (final columnName) => material.InputChip(
@@ -176,6 +181,8 @@ class DestinationTablesSelector extends StatelessWidget {
           valueListenable: state.destinationTablesNotifier,
           builder: (final context, final destinationTables, final child) {
             return Wrap(
+              spacing: 12,
+              runSpacing: 6,
               children: destinationTables
                   .mapIndexed(
                     (final index, final table) => material.InputChip(
