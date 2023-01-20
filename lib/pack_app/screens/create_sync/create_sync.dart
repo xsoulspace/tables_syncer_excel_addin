@@ -37,7 +37,6 @@ class CreateTablesSyncScreen extends HookWidget {
                 uiTheme.verticalBoxes.extraLarge,
                 Text(
                   'Source Table',
-                  textAlign: TextAlign.center,
                   style: theme.typography.bodyLarge,
                 ),
                 uiTheme.verticalBoxes.small,
@@ -45,7 +44,6 @@ class CreateTablesSyncScreen extends HookWidget {
                 uiTheme.verticalBoxes.large,
                 Text(
                   'Source Columns',
-                  textAlign: TextAlign.center,
                   style: theme.typography.bodyLarge,
                 ),
                 uiTheme.verticalBoxes.small,
@@ -53,7 +51,6 @@ class CreateTablesSyncScreen extends HookWidget {
                 uiTheme.verticalBoxes.large,
                 Text(
                   'Destination Tables',
-                  textAlign: TextAlign.center,
                   style: theme.typography.bodyLarge,
                 ),
                 uiTheme.verticalBoxes.small,
