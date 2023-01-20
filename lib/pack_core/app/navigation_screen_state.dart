@@ -2,6 +2,7 @@ part of 'navigation_screen.dart';
 
 enum NavigationScreens {
   home,
+  createSync,
   settings,
   info,
 }
