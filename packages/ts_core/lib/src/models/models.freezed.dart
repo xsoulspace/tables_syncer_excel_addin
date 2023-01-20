@@ -829,10 +829,10 @@ mixin _$TableParamsModel {
   String get id => throw _privateConstructorUsedError;
   String get workbookOriginName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get topLeftColumnIndex => throw _privateConstructorUsedError;
-  int get topLeftRowIndex => throw _privateConstructorUsedError;
-  int get headerRowIndex => throw _privateConstructorUsedError;
-  int get firstRowIndex => throw _privateConstructorUsedError;
+  int get headerTopLeftColumnIndex => throw _privateConstructorUsedError;
+  int get headerTopLeftRowIndex => throw _privateConstructorUsedError;
+  int get dataTopLeftColumnIndex => throw _privateConstructorUsedError;
+  int get dataTopLeftRowIndex => throw _privateConstructorUsedError;
   int get keyColumnIndex => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -851,10 +851,10 @@ abstract class $TableParamsModelCopyWith<$Res> {
       {String id,
       String workbookOriginName,
       String name,
-      int topLeftColumnIndex,
-      int topLeftRowIndex,
-      int headerRowIndex,
-      int firstRowIndex,
+      int headerTopLeftColumnIndex,
+      int headerTopLeftRowIndex,
+      int dataTopLeftColumnIndex,
+      int dataTopLeftRowIndex,
       int keyColumnIndex});
 }
 
@@ -874,10 +874,10 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
     Object? id = null,
     Object? workbookOriginName = null,
     Object? name = null,
-    Object? topLeftColumnIndex = null,
-    Object? topLeftRowIndex = null,
-    Object? headerRowIndex = null,
-    Object? firstRowIndex = null,
+    Object? headerTopLeftColumnIndex = null,
+    Object? headerTopLeftRowIndex = null,
+    Object? dataTopLeftColumnIndex = null,
+    Object? dataTopLeftRowIndex = null,
     Object? keyColumnIndex = null,
   }) {
     return _then(_value.copyWith(
@@ -893,21 +893,21 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      topLeftColumnIndex: null == topLeftColumnIndex
-          ? _value.topLeftColumnIndex
-          : topLeftColumnIndex // ignore: cast_nullable_to_non_nullable
+      headerTopLeftColumnIndex: null == headerTopLeftColumnIndex
+          ? _value.headerTopLeftColumnIndex
+          : headerTopLeftColumnIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      topLeftRowIndex: null == topLeftRowIndex
-          ? _value.topLeftRowIndex
-          : topLeftRowIndex // ignore: cast_nullable_to_non_nullable
+      headerTopLeftRowIndex: null == headerTopLeftRowIndex
+          ? _value.headerTopLeftRowIndex
+          : headerTopLeftRowIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      headerRowIndex: null == headerRowIndex
-          ? _value.headerRowIndex
-          : headerRowIndex // ignore: cast_nullable_to_non_nullable
+      dataTopLeftColumnIndex: null == dataTopLeftColumnIndex
+          ? _value.dataTopLeftColumnIndex
+          : dataTopLeftColumnIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      firstRowIndex: null == firstRowIndex
-          ? _value.firstRowIndex
-          : firstRowIndex // ignore: cast_nullable_to_non_nullable
+      dataTopLeftRowIndex: null == dataTopLeftRowIndex
+          ? _value.dataTopLeftRowIndex
+          : dataTopLeftRowIndex // ignore: cast_nullable_to_non_nullable
               as int,
       keyColumnIndex: null == keyColumnIndex
           ? _value.keyColumnIndex
@@ -929,10 +929,10 @@ abstract class _$$_TableParamsModelCopyWith<$Res>
       {String id,
       String workbookOriginName,
       String name,
-      int topLeftColumnIndex,
-      int topLeftRowIndex,
-      int headerRowIndex,
-      int firstRowIndex,
+      int headerTopLeftColumnIndex,
+      int headerTopLeftRowIndex,
+      int dataTopLeftColumnIndex,
+      int dataTopLeftRowIndex,
       int keyColumnIndex});
 }
 
@@ -950,10 +950,10 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
     Object? id = null,
     Object? workbookOriginName = null,
     Object? name = null,
-    Object? topLeftColumnIndex = null,
-    Object? topLeftRowIndex = null,
-    Object? headerRowIndex = null,
-    Object? firstRowIndex = null,
+    Object? headerTopLeftColumnIndex = null,
+    Object? headerTopLeftRowIndex = null,
+    Object? dataTopLeftColumnIndex = null,
+    Object? dataTopLeftRowIndex = null,
     Object? keyColumnIndex = null,
   }) {
     return _then(_$_TableParamsModel(
@@ -969,21 +969,21 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      topLeftColumnIndex: null == topLeftColumnIndex
-          ? _value.topLeftColumnIndex
-          : topLeftColumnIndex // ignore: cast_nullable_to_non_nullable
+      headerTopLeftColumnIndex: null == headerTopLeftColumnIndex
+          ? _value.headerTopLeftColumnIndex
+          : headerTopLeftColumnIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      topLeftRowIndex: null == topLeftRowIndex
-          ? _value.topLeftRowIndex
-          : topLeftRowIndex // ignore: cast_nullable_to_non_nullable
+      headerTopLeftRowIndex: null == headerTopLeftRowIndex
+          ? _value.headerTopLeftRowIndex
+          : headerTopLeftRowIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      headerRowIndex: null == headerRowIndex
-          ? _value.headerRowIndex
-          : headerRowIndex // ignore: cast_nullable_to_non_nullable
+      dataTopLeftColumnIndex: null == dataTopLeftColumnIndex
+          ? _value.dataTopLeftColumnIndex
+          : dataTopLeftColumnIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      firstRowIndex: null == firstRowIndex
-          ? _value.firstRowIndex
-          : firstRowIndex // ignore: cast_nullable_to_non_nullable
+      dataTopLeftRowIndex: null == dataTopLeftRowIndex
+          ? _value.dataTopLeftRowIndex
+          : dataTopLeftRowIndex // ignore: cast_nullable_to_non_nullable
               as int,
       keyColumnIndex: null == keyColumnIndex
           ? _value.keyColumnIndex
@@ -1001,10 +1001,10 @@ class _$_TableParamsModel extends _TableParamsModel {
       {required this.id,
       required this.workbookOriginName,
       this.name = '',
-      this.topLeftColumnIndex = 0,
-      this.topLeftRowIndex = 0,
-      this.headerRowIndex = 0,
-      this.firstRowIndex = 0,
+      this.headerTopLeftColumnIndex = 0,
+      this.headerTopLeftRowIndex = 0,
+      this.dataTopLeftColumnIndex = 0,
+      this.dataTopLeftRowIndex = 0,
       this.keyColumnIndex = 0})
       : super._();
 
@@ -1020,23 +1020,23 @@ class _$_TableParamsModel extends _TableParamsModel {
   final String name;
   @override
   @JsonKey()
-  final int topLeftColumnIndex;
+  final int headerTopLeftColumnIndex;
   @override
   @JsonKey()
-  final int topLeftRowIndex;
+  final int headerTopLeftRowIndex;
   @override
   @JsonKey()
-  final int headerRowIndex;
+  final int dataTopLeftColumnIndex;
   @override
   @JsonKey()
-  final int firstRowIndex;
+  final int dataTopLeftRowIndex;
   @override
   @JsonKey()
   final int keyColumnIndex;
 
   @override
   String toString() {
-    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, name: $name, topLeftColumnIndex: $topLeftColumnIndex, topLeftRowIndex: $topLeftRowIndex, headerRowIndex: $headerRowIndex, firstRowIndex: $firstRowIndex, keyColumnIndex: $keyColumnIndex)';
+    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, name: $name, headerTopLeftColumnIndex: $headerTopLeftColumnIndex, headerTopLeftRowIndex: $headerTopLeftRowIndex, dataTopLeftColumnIndex: $dataTopLeftColumnIndex, dataTopLeftRowIndex: $dataTopLeftRowIndex, keyColumnIndex: $keyColumnIndex)';
   }
 
   @override
@@ -1048,14 +1048,15 @@ class _$_TableParamsModel extends _TableParamsModel {
             (identical(other.workbookOriginName, workbookOriginName) ||
                 other.workbookOriginName == workbookOriginName) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.topLeftColumnIndex, topLeftColumnIndex) ||
-                other.topLeftColumnIndex == topLeftColumnIndex) &&
-            (identical(other.topLeftRowIndex, topLeftRowIndex) ||
-                other.topLeftRowIndex == topLeftRowIndex) &&
-            (identical(other.headerRowIndex, headerRowIndex) ||
-                other.headerRowIndex == headerRowIndex) &&
-            (identical(other.firstRowIndex, firstRowIndex) ||
-                other.firstRowIndex == firstRowIndex) &&
+            (identical(
+                    other.headerTopLeftColumnIndex, headerTopLeftColumnIndex) ||
+                other.headerTopLeftColumnIndex == headerTopLeftColumnIndex) &&
+            (identical(other.headerTopLeftRowIndex, headerTopLeftRowIndex) ||
+                other.headerTopLeftRowIndex == headerTopLeftRowIndex) &&
+            (identical(other.dataTopLeftColumnIndex, dataTopLeftColumnIndex) ||
+                other.dataTopLeftColumnIndex == dataTopLeftColumnIndex) &&
+            (identical(other.dataTopLeftRowIndex, dataTopLeftRowIndex) ||
+                other.dataTopLeftRowIndex == dataTopLeftRowIndex) &&
             (identical(other.keyColumnIndex, keyColumnIndex) ||
                 other.keyColumnIndex == keyColumnIndex));
   }
@@ -1067,10 +1068,10 @@ class _$_TableParamsModel extends _TableParamsModel {
       id,
       workbookOriginName,
       name,
-      topLeftColumnIndex,
-      topLeftRowIndex,
-      headerRowIndex,
-      firstRowIndex,
+      headerTopLeftColumnIndex,
+      headerTopLeftRowIndex,
+      dataTopLeftColumnIndex,
+      dataTopLeftRowIndex,
       keyColumnIndex);
 
   @JsonKey(ignore: true)
@@ -1092,10 +1093,10 @@ abstract class _TableParamsModel extends TableParamsModel {
       {required final String id,
       required final String workbookOriginName,
       final String name,
-      final int topLeftColumnIndex,
-      final int topLeftRowIndex,
-      final int headerRowIndex,
-      final int firstRowIndex,
+      final int headerTopLeftColumnIndex,
+      final int headerTopLeftRowIndex,
+      final int dataTopLeftColumnIndex,
+      final int dataTopLeftRowIndex,
       final int keyColumnIndex}) = _$_TableParamsModel;
   const _TableParamsModel._() : super._();
 
@@ -1109,13 +1110,13 @@ abstract class _TableParamsModel extends TableParamsModel {
   @override
   String get name;
   @override
-  int get topLeftColumnIndex;
+  int get headerTopLeftColumnIndex;
   @override
-  int get topLeftRowIndex;
+  int get headerTopLeftRowIndex;
   @override
-  int get headerRowIndex;
+  int get dataTopLeftColumnIndex;
   @override
-  int get firstRowIndex;
+  int get dataTopLeftRowIndex;
   @override
   int get keyColumnIndex;
   @override

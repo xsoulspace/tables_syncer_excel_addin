@@ -20,10 +20,10 @@ class TableParamsModel with _$TableParamsModel {
     required final TableParamsModelId id,
     required final String workbookOriginName,
     @Default('') final String name,
-    @Default(0) final int topLeftColumnIndex,
-    @Default(0) final int topLeftRowIndex,
-    @Default(0) final int headerRowIndex,
-    @Default(0) final int firstRowIndex,
+    @Default(0) final int headerTopLeftColumnIndex,
+    @Default(0) final int headerTopLeftRowIndex,
+    @Default(0) final int dataTopLeftColumnIndex,
+    @Default(0) final int dataTopLeftRowIndex,
     @Default(0) final int keyColumnIndex,
   }) = _TableParamsModel;
 

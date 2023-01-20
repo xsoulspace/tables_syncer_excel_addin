@@ -9,13 +9,13 @@ CreateTableState useCreateTableState({
   required final Locator read,
 }) =>
     use(
-      LifeHook(
+      ContextfulLifeHook(
         debugLabel: 'CreateTableState',
         state: CreateTableState(diDto: CreateTableDiDto.use(read)),
       ),
     );
 
-class CreateTableState extends LifeState {
+class CreateTableState extends ContextfulLifeState {
   CreateTableState({
     required this.diDto,
   });
@@ -29,6 +29,27 @@ class CreateTableState extends LifeState {
   final dataTopLeftColumnIndexController = TextEditingController();
   final keysColumnIndexController = TextEditingController();
   final nameController = TextEditingController();
+
+  Future<void> onCreate() async {
+    await formHelper.submit(
+      onValide: () async {
+        final table = TableParamsModel(
+          id: IdCreator.create(),
+          // TODO(arenukvern): get workbook name
+          workbookOriginName: '',
+          keyColumnIndex: keysColumnIndexController.text.toInt(),
+          dataTopLeftColumnIndex: dataTopLeftColumnIndexController.text.toInt(),
+          dataTopLeftRowIndex: dataTopLeftRowIndexController.text.toInt(),
+          headerTopLeftColumnIndex:
+              headerTopLeftColumnIndexController.text.toInt(),
+          headerTopLeftRowIndex: headerTopLeftRowIndexController.text.toInt(),
+          name: nameController.text,
+        );
+        await diDto.apiServices.tables.upsertTable(table);
+        if (mounted) Navigator.pop(getContext());
+      },
+    );
+  }
 
   @override
   void dispose() {

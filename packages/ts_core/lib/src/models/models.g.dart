@@ -103,10 +103,10 @@ _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       workbookOriginName: json['workbookOriginName'] as String,
       name: json['name'] as String? ?? '',
-      topLeftColumnIndex: json['topLeftColumnIndex'] as int? ?? 0,
-      topLeftRowIndex: json['topLeftRowIndex'] as int? ?? 0,
-      headerRowIndex: json['headerRowIndex'] as int? ?? 0,
-      firstRowIndex: json['firstRowIndex'] as int? ?? 0,
+      headerTopLeftColumnIndex: json['headerTopLeftColumnIndex'] as int? ?? 0,
+      headerTopLeftRowIndex: json['headerTopLeftRowIndex'] as int? ?? 0,
+      dataTopLeftColumnIndex: json['dataTopLeftColumnIndex'] as int? ?? 0,
+      dataTopLeftRowIndex: json['dataTopLeftRowIndex'] as int? ?? 0,
       keyColumnIndex: json['keyColumnIndex'] as int? ?? 0,
     );
 
@@ -115,10 +115,10 @@ Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
       'id': instance.id,
       'workbookOriginName': instance.workbookOriginName,
       'name': instance.name,
-      'topLeftColumnIndex': instance.topLeftColumnIndex,
-      'topLeftRowIndex': instance.topLeftRowIndex,
-      'headerRowIndex': instance.headerRowIndex,
-      'firstRowIndex': instance.firstRowIndex,
+      'headerTopLeftColumnIndex': instance.headerTopLeftColumnIndex,
+      'headerTopLeftRowIndex': instance.headerTopLeftRowIndex,
+      'dataTopLeftColumnIndex': instance.dataTopLeftColumnIndex,
+      'dataTopLeftRowIndex': instance.dataTopLeftRowIndex,
       'keyColumnIndex': instance.keyColumnIndex,
     };
 
