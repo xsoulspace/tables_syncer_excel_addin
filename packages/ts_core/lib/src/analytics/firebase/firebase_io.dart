@@ -1,19 +1,35 @@
 import 'dart:isolate';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fire_auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:universal_io/io.dart';
 
-import '../../../ts_core.dart';
+import '../../utils/utils.dart';
+import '../analytics.dart';
 import 'abstract_firebase.dart';
 
 class FirebaseInitializer implements AbstractFirebaseInitializer {
   @override
   Future<void> onLoad(final FirebaseOptions options) async {
-    await Firebase.initializeApp(
+    final app = await Firebase.initializeApp(
       options: options,
+    );
+    if (kIsWeb) {
+      fire_auth.FirebaseAuth.instanceFor(
+        app: app,
+        persistence: fire_auth.Persistence.INDEXED_DB,
+      );
+    }
+    FirebaseUIAuth.configureProviders(
+      [
+        EmailAuthProvider(),
+        // ... other providers
+      ],
+      app: app,
     );
   }
 
