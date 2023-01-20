@@ -88,15 +88,27 @@ class _DialogWindow extends HookWidget {
           ],
         ),
         actions: [
-          Button(
-            child: const Text('Cancel'),
-            onPressed: () {
-              Navigator.pop(context);
+          ValueListenableBuilder(
+            valueListenable: state.formHelper.loading,
+            builder: (final context, final loading, final child) {
+              return Button(
+                onPressed: loading
+                    ? null
+                    : () {
+                        Navigator.pop(context);
+                      },
+                child: const Text('Cancel'),
+              );
             },
           ),
-          FilledButton(
-            child: const Text('Create'),
-            onPressed: () {},
+          ValueListenableBuilder(
+            valueListenable: state.formHelper.loading,
+            builder: (final context, final loading, final child) {
+              return FilledButton(
+                onPressed: loading ? null : () {},
+                child: loading ? const ProgressRing() : const Text('Create'),
+              );
+            },
           ),
         ],
       ),
