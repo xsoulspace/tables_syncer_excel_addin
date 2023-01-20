@@ -31,7 +31,7 @@ class _DialogWindow extends HookWidget {
           shrinkWrap: true,
           children: [
             uiTheme.verticalBoxes.extraLarge,
-            const Text('Top Left cell position for Headers'),
+            const Text('Top Left Cell Index for Headers'),
             uiTheme.verticalBoxes.large,
             Row(
               children: [
@@ -53,7 +53,7 @@ class _DialogWindow extends HookWidget {
               ],
             ),
             uiTheme.verticalBoxes.extraLarge,
-            const Text('Top Left cell position for Data'),
+            const Text('Top Left Cell Index for Data'),
             uiTheme.verticalBoxes.medium,
             Row(
               children: [
