@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
 import 'package:ts_core/ts_core.dart';
+import 'package:ts_design_core/ts_design_core.dart';
 
 part 'create_table_state.dart';
 
@@ -21,6 +22,7 @@ class _DialogWindow extends HookWidget {
   @override
   Widget build(final BuildContext context) {
     final state = useCreateTableState(read: context.read);
+    final uiTheme = UiTheme.of(context);
     return Form(
       key: state.formHelper.formKey,
       child: ContentDialog(
@@ -28,44 +30,61 @@ class _DialogWindow extends HookWidget {
         content: ListView(
           shrinkWrap: true,
           children: [
-            const Text('Top Left cell indexes for Headers'),
+            uiTheme.verticalBoxes.extraLarge,
+            const Text('Top Left cell position for Headers'),
+            uiTheme.verticalBoxes.large,
             Row(
               children: [
                 const Text('Row'),
-                TextBox(
-                  header: 'Row',
-                  controller: state.headerTopLeftRowIndexController,
+                uiTheme.horizontalBoxes.medium,
+                Expanded(
+                  child: TextBox(
+                    controller: state.headerTopLeftRowIndexController,
+                  ),
                 ),
+                const Spacer(),
                 const Text('Column'),
-                TextBox(
-                  header: 'Column',
-                  controller: state.headerTopLeftColumnIndexController,
+                uiTheme.horizontalBoxes.medium,
+                Expanded(
+                  child: TextBox(
+                    controller: state.headerTopLeftColumnIndexController,
+                  ),
                 ),
               ],
             ),
-            const Text('Top Left cell indexes for Headers'),
+            uiTheme.verticalBoxes.extraLarge,
+            const Text('Top Left cell position for Data'),
+            uiTheme.verticalBoxes.medium,
             Row(
               children: [
                 const Text('Row'),
-                TextBox(
-                  header: 'Row',
-                  controller: state.dataTopLeftRowIndexController,
+                uiTheme.horizontalBoxes.medium,
+                Expanded(
+                  child: TextBox(
+                    controller: state.dataTopLeftRowIndexController,
+                  ),
                 ),
+                const Spacer(),
                 const Text('Column'),
-                TextBox(
-                  header: 'Column',
-                  controller: state.dataTopLeftColumnIndexController,
+                uiTheme.horizontalBoxes.medium,
+                Expanded(
+                  child: TextBox(
+                    controller: state.dataTopLeftColumnIndexController,
+                  ),
                 ),
               ],
             ),
+            uiTheme.verticalBoxes.extraLarge,
             TextBox(
               header: 'Keys Column Index',
               controller: state.keysColumnIndexController,
             ),
+            uiTheme.verticalBoxes.large,
             TextBox(
               header: 'Name (optional)',
               controller: state.nameController,
             ),
+            uiTheme.verticalBoxes.extraLarge,
           ],
         ),
         actions: [
