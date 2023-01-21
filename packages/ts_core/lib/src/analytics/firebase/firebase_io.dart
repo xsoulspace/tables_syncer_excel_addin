@@ -25,10 +25,7 @@ class FirebaseInitializer implements AbstractFirebaseInitializer {
       );
     }
     FirebaseUIAuth.configureProviders(
-      [
-        EmailAuthProvider(),
-        // ... other providers
-      ],
+      providers,
       app: app,
     );
   }
@@ -37,6 +34,12 @@ class FirebaseInitializer implements AbstractFirebaseInitializer {
   Future<void> onDelayedLoad(final FirebaseOptions options) async {
     return;
   }
+
+  @override
+  List<AuthProvider<AuthListener, fire_auth.AuthCredential>> get providers => [
+        EmailAuthProvider(),
+        // ... other providers
+      ];
 }
 
 class FirebaseAnalyticsPlugin implements AbstractAnalytics {

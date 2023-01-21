@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -5,7 +6,6 @@ import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
 import 'package:tables_syncer_excel_addin/firebase_options.dart';
 import 'package:tables_syncer_excel_addin/pack_core/app/app_services_provider.dart';
-import 'package:tables_syncer_excel_addin/pack_core/app/navigation_screen.dart';
 import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
 import 'package:tables_syncer_excel_addin/pack_core/pack_core.dart';
 import 'package:ts_core/ts_core.dart';
@@ -70,10 +70,12 @@ class AppScaffoldBuilder extends HookWidget {
   Widget build(final BuildContext context) {
     final state = useAppScaffoldBodyState(context.read);
     final settingsNotifier = context.watch<UserNotifier>();
+
     return AnimatedBuilder(
       animation: settingsNotifier,
       builder: (final context, final child) {
-        return FluentApp(
+        return FluentApp.router(
+          color: Colors.blue,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
             S.delegate,
@@ -82,9 +84,8 @@ class AppScaffoldBuilder extends HookWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          // routeInformationParser: routeParser,
-          // routerDelegate: state.routerDelegate,
-
+          routeInformationParser: routeParser,
+          routerDelegate: state.routerDelegate,
           supportedLocales: Locales.values,
           localeListResolutionCallback:
               (final locales, final supportedLocales) {
@@ -122,8 +123,6 @@ class AppScaffoldBuilder extends HookWidget {
             ),
           ),
           themeMode: settingsNotifier.theme,
-          home: const NavigationScreen(),
-          initialRoute: '/',
           builder: (final context, final child) {
             return UiTheme(
               scheme: UiThemeScheme.m3(context),

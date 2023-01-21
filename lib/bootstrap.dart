@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:tables_syncer_excel_addin/firebase_options.dart';
 import 'package:tables_syncer_excel_addin/pack_core/app/app_services_provider.dart';
 import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
-import 'package:ts_core/ts_core.dart';
 
 Future<void> bootstrap(
   final Widget Function({
@@ -13,7 +12,7 @@ Future<void> bootstrap(
       builder,
 ) async {
   WidgetsFlutterBinding.ensureInitialized();
-  final firebaseIntializer = FirebaseInitializer();
+  final firebaseIntializer = GlobalStateNotifiers.getFirebaseIntializer();
   await firebaseIntializer.onLoad(DefaultFirebaseOptions.currentPlatform);
 
   // await Flame.device.fullScreen();

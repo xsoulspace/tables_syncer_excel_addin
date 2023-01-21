@@ -1,16 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../models/models.dart';
 import '../abstract/abstract.dart';
 
 class FirebaseTableSyncApiService implements ITableSyncApiService {
-  FirebaseTableSyncApiService({
-    required this.userApiService,
-  });
-  final IUserApiService userApiService;
+  FirebaseTableSyncApiService();
   FirebaseFirestore get _store => FirebaseFirestore.instance;
-  CollectionReference<Map<String, dynamic>> get _collection =>
-      _store.collection('table_syncs');
+  CollectionReference<Map<String, dynamic>> get _collection {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) throw ArgumentError.notNull();
+    return _store.collection('table_syncs/${user.uid}');
+  }
+
   CollectionReference<TablesSyncParamsModel> get _docCollection =>
       _collection.withConverter(
         fromFirestore: TablesSyncParamsModel.fromFirestore,

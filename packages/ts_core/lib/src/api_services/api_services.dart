@@ -38,12 +38,8 @@ class ApiServices {
     final IUserApiService userApiService = FirebaseUserApiService();
     return ApiServices._(
       user: userApiService,
-      tablesSync: FirebaseTableSyncApiService(
-        userApiService: userApiService,
-      ),
-      tables: FirebaseTableApiService(
-        userApiService: userApiService,
-      ),
+      tablesSync: FirebaseTableSyncApiService(),
+      tables: FirebaseTableApiService(),
       localUser: LocalUserService(localDataService: localDataService),
       authService: authService,
     );

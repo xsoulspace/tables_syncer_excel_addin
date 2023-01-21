@@ -15,10 +15,30 @@ class AppScaffoldState extends ContextfulLifeState {
   void initState() {
     routeParser = TemplateRouteParser(
       allowedPaths: NavigationRoutes.routes,
-      guards: [],
+      guards: guards,
     );
     routeState = RouteState(routeParser);
     super.initState();
+  }
+
+  List<RouteGuard<ParsedRoute>> get guards => [AuthRouteGuard()];
+}
+
+class AuthRouteGuard implements RouteGuard<ParsedRoute> {
+  AuthRouteGuard();
+
+  @override
+  Future<ParsedRoute> redirect(final ParsedRoute from) async {
+    if (FirebaseAuth.instance.currentUser == null) {
+      final pathTemplate = from.pathTemplate;
+      if (pathTemplate.startsWith('/auth')) {
+        return from;
+      } else {
+        return ParsedRoute.fromPathTemplate(NavigationRoutes.signIn);
+      }
+    } else {
+      return from;
+    }
   }
 }
 

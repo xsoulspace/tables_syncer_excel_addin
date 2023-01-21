@@ -1,6 +1,8 @@
 import 'package:firebase_analytics_web/firebase_analytics_web.dart';
+import 'package:firebase_auth_platform_interface/src/auth_credential.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_web/firebase_core_web.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../notifiers/analytics_notifier.dart';
@@ -15,6 +17,12 @@ class FirebaseInitializer implements AbstractFirebaseInitializer {
       options: options,
     );
   }
+
+  @override
+  List<AuthProvider<AuthListener, AuthCredential>> get providers => [
+        EmailAuthProvider(),
+        // ... other providers
+      ];
 }
 
 class FirebaseAnalyticsPlugin implements AbstractAnalytics {

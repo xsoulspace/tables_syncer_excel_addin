@@ -1,7 +1,9 @@
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
+import 'package:tables_syncer_excel_addin/pack_core/app/navigation_screen.dart';
+import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
 import 'package:tables_syncer_excel_addin/pack_core/navigation/app_router.dart';
-import 'package:tables_syncer_excel_addin/pack_settings/pack_settings.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
@@ -30,10 +32,10 @@ class AppNavigator extends HookWidget {
 }
 
 class AppPageBuilderKeys {
-  final pause = const ValueKey('mainMenu');
-  final game = const ValueKey('game');
-  final highscore = const ValueKey('highscore');
-  final settings = const ValueKey('settings');
+  final home = const ValueKey('home');
+  final signIn = const ValueKey('signIn');
+  final profile = const ValueKey('profile');
+  final forgotPassword = const ValueKey('forgotPassword');
   final levelOptions = const ValueKey('levelOptions');
 }
 
@@ -50,10 +52,50 @@ class AppPageBuilder extends RouterPageBuilder<AppRouterController> {
 
   final AppPageBuilderKeys keys;
 
-  Page settings() {
+  Page home() {
     return NavigatorPage(
-      child: const SettingsScreen(),
-      key: keys.settings,
+      child: const NavigationScreen(),
+      key: keys.home,
+    );
+  }
+
+  Page signIn() {
+    final firebaseIntializer = GlobalStateNotifiers.getFirebaseIntializer();
+    return NavigatorPage(
+      child: SignInScreen(
+        actions: [
+          AuthStateChangeAction<SignedIn>((final context, final _) {
+            routerController.toRoot();
+          }),
+          ForgotPasswordAction((final context, final email) {
+            routerController.toForgotPassword(email);
+          }),
+        ],
+        providers: firebaseIntializer.providers,
+      ),
+      key: keys.signIn,
+    );
+  }
+
+  Page profile() {
+    final firebaseIntializer = GlobalStateNotifiers.getFirebaseIntializer();
+    return NavigatorPage(
+      child: ProfileScreen(
+        actions: [
+          SignedOutAction((final context) {
+            routerController.toSignIn();
+          }),
+        ],
+        providers: firebaseIntializer.providers,
+      ),
+      key: keys.profile,
+    );
+  }
+
+  Page forgotPassword() {
+    return NavigatorPage(
+      child: const ForgotPasswordScreen(),
+      key: keys.forgotPassword,
     );
   }
 }
@@ -64,10 +106,14 @@ class AppLayoutBuilder
   @override
   List<Page> buildPages() {
     final pages = <Page>[];
-
-    /// should be at the end of the layout layers
-    if (pathTemplate == NavigationRoutes.root) {
-      pages.add(pageBuilder.settings());
+    if (pathTemplate == NavigationRoutes.signIn) {
+      pages.add(pageBuilder.signIn());
+    } else if (pathTemplate == NavigationRoutes.profile) {
+      pages.add(pageBuilder.profile());
+    } else if (pathTemplate.startsWith(NavigationRoutes.forgotPassword)) {
+      pages.add(pageBuilder.forgotPassword());
+    } else if (pathTemplate == NavigationRoutes.root) {
+      pages.add(pageBuilder.home());
     }
     return pages;
   }

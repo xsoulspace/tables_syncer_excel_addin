@@ -9,4 +9,7 @@ class GlobalStateNotifiers {
         LocalUserService(localDataService: SharedPreferencesDataService()),
       );
   static AnalyticsNotifier getAnalytics() => AnalyticsNotifier();
+  static FirebaseInitializer? _firebaseIntializer;
+  static FirebaseInitializer getFirebaseIntializer() =>
+      _firebaseIntializer ??= FirebaseInitializer();
 }
