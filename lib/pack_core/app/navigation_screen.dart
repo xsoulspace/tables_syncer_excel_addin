@@ -6,6 +6,7 @@ import 'package:life_hooks/life_hooks.dart';
 import 'package:tables_syncer_excel_addin/pack_app/screens/screens.dart';
 import 'package:tables_syncer_excel_addin/pack_app/widgets/widgets.dart';
 import 'package:tables_syncer_excel_addin/pack_core/app/info_screen.dart';
+import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
 import 'package:tables_syncer_excel_addin/pack_settings/pack_settings.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
@@ -21,50 +22,54 @@ class NavigationScreen extends HookWidget {
     final themeData = FluentTheme.of(context);
     final screenSize = MediaQuery.of(context).size;
 
-    return ValueListenableBuilder<NavigationScreens>(
-      valueListenable: state.currentScreen,
-      builder: (final context, final currentScreen, final child) {
-        final isHomeScreen = currentScreen == NavigationScreens.home;
-        return Stack(
-          children: [
-            NavigationView(
-              pane: AppNavigationPane(
-                state: state,
-                panePaddingRequired: !isHomeScreen,
-                themeData: themeData,
-                selected: currentScreen.index,
-              ),
-              appBar: isHomeScreen
-                  ? const NavigationAppBar(
-                      automaticallyImplyLeading: false,
-                    )
-                  : null,
-            ),
-            if (isHomeScreen)
-              Positioned(
-                top: 10,
-                left: 0,
-                child: Row(
-                  children: [
-                    uiTheme.horizontalBoxes.small,
-                    Builder(
-                      builder: (final context) {
-                        final screenWidth = screenSize.width;
-
-                        final width = math.min(screenWidth - 58, 328 + 58.0);
-                        return ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: width),
-                          child: const AppTopBar(),
-                        );
-                      },
-                    ),
-                    const SizedBox(width: 58),
-                  ],
+    return AppStateLoader(
+      initializer: AuthStateInitializer(),
+      loader: const LoadingScreen(),
+      child: ValueListenableBuilder<NavigationScreens>(
+        valueListenable: state.currentScreen,
+        builder: (final context, final currentScreen, final child) {
+          final isHomeScreen = currentScreen == NavigationScreens.home;
+          return Stack(
+            children: [
+              NavigationView(
+                pane: AppNavigationPane(
+                  state: state,
+                  panePaddingRequired: !isHomeScreen,
+                  themeData: themeData,
+                  selected: currentScreen.index,
                 ),
+                appBar: isHomeScreen
+                    ? const NavigationAppBar(
+                        automaticallyImplyLeading: false,
+                      )
+                    : null,
               ),
-          ],
-        );
-      },
+              if (isHomeScreen)
+                Positioned(
+                  top: 10,
+                  left: 0,
+                  child: Row(
+                    children: [
+                      uiTheme.horizontalBoxes.small,
+                      Builder(
+                        builder: (final context) {
+                          final screenWidth = screenSize.width;
+
+                          final width = math.min(screenWidth - 58, 328 + 58.0);
+                          return ConstrainedBox(
+                            constraints: BoxConstraints(maxWidth: width),
+                            child: const AppTopBar(),
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 58),
+                    ],
+                  ),
+                ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

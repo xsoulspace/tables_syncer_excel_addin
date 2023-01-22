@@ -19,20 +19,49 @@ class AppNavigator extends HookWidget {
     context.watch<RouteState>();
 
     final keys = useState(AppPageBuilderKeys());
+    final routerController = AppRouterController.use(context.read);
+    final popper = useState(
+      AppRouterPopper(
+        routerController: routerController,
+        keys: keys.value,
+      ),
+    );
     final pageBuilder =
         AppPageBuilder.use(keys: keys.value, read: context.read);
     final layoutBuilder = AppLayoutBuilder(pageBuilder: pageBuilder);
-
     return Navigator(
       key: navigatorKey,
-      onPopPage: const RouterPopper().onPopPage,
+      onPopPage: popper.value.onPopPage,
       pages: layoutBuilder.buildPages(),
     );
   }
 }
 
+class AppRouterPopper extends RouterPopper {
+  const AppRouterPopper({
+    required this.routerController,
+    required this.keys,
+  });
+  final AppRouterController routerController;
+  final AppPageBuilderKeys keys;
+  @override
+  bool onPopPage(final Route route, final dynamic result) {
+    final settings = route.settings;
+    if (settings is NavigatorPage) {
+      final key = settings.key;
+      if (key == keys.forgotPassword) {
+        routerController.toSignIn();
+        return false;
+      }
+    }
+
+    return super.onPopPage(route, result);
+  }
+}
+
 class AppPageBuilderKeys {
   final home = const ValueKey('home');
+  final loading = const ValueKey('loading');
   final signIn = const ValueKey('signIn');
   final profile = const ValueKey('profile');
   final forgotPassword = const ValueKey('forgotPassword');
@@ -52,7 +81,14 @@ class AppPageBuilder extends RouterPageBuilder<AppRouterController> {
 
   final AppPageBuilderKeys keys;
 
-  Page home() {
+  Page loader() {
+    return NavigatorPage(
+      child: const LoadingScreen(),
+      key: keys.loading,
+    );
+  }
+
+  Page appNavigator() {
     return NavigatorPage(
       child: const NavigationScreen(),
       key: keys.home,
@@ -65,7 +101,7 @@ class AppPageBuilder extends RouterPageBuilder<AppRouterController> {
       child: SignInScreen(
         actions: [
           AuthStateChangeAction<SignedIn>((final context, final _) {
-            routerController.toRoot();
+            routerController.toHome();
           }),
           ForgotPasswordAction((final context, final email) {
             routerController.toForgotPassword(email);
@@ -105,15 +141,18 @@ class AppLayoutBuilder
   AppLayoutBuilder({required super.pageBuilder});
   @override
   List<Page> buildPages() {
-    final pages = <Page>[];
+    final pages = <Page>[
+      pageBuilder.loader(),
+    ];
     if (pathTemplate == NavigationRoutes.signIn) {
       pages.add(pageBuilder.signIn());
-    } else if (pathTemplate == NavigationRoutes.profile) {
-      pages.add(pageBuilder.profile());
     } else if (pathTemplate.startsWith(NavigationRoutes.forgotPassword)) {
       pages.add(pageBuilder.forgotPassword());
-    } else if (pathTemplate == NavigationRoutes.root) {
-      pages.add(pageBuilder.home());
+    } else if (pathTemplate.startsWith('/app')) {
+      pages.add(pageBuilder.appNavigator());
+      if (pathTemplate == NavigationRoutes.profile) {
+        pages.add(pageBuilder.profile());
+      }
     }
     return pages;
   }
