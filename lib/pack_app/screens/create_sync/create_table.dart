@@ -8,8 +8,8 @@ import 'package:ts_design_core/ts_design_core.dart';
 
 part 'create_table_state.dart';
 
-Future<void> showCreateTableDialog(final BuildContext context) {
-  return showDialog<String>(
+Future<TableParamsModel?> showCreateTableDialog(final BuildContext context) {
+  return showDialog<TableParamsModel>(
     context: context,
     builder: (final context) {
       return const _DialogWindow();

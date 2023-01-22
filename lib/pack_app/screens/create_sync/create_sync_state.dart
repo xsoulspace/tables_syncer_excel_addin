@@ -51,7 +51,7 @@ class CreateTablesSyncState extends ContextfulLifeState {
 
   final destinationTablesNotifier = ValueNotifier<Set<TableParamsModel>>({});
   void onAddNewTable() {
-    showCreateTableDialog(getContext());
+    final newTable = showCreateTableDialog(getContext());
   }
 
   void _validate() {

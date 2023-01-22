@@ -48,7 +48,7 @@ class CreateTableState extends ContextfulLifeState {
           name: nameController.text,
         );
         await diDto.apiServices.tables.upsertTable(table);
-        if (mounted) Navigator.pop(getContext());
+        if (mounted) Navigator.pop(getContext(), table);
       },
     );
   }

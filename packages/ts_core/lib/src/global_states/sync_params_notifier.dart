@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_hooks/life_hooks.dart';
 
-import '../../ts_core.dart';
+import '../api_services/api_services.dart';
+import '../models/models.dart';
 
 class SyncParamsNotifier extends ChangeNotifier
     implements Loadable, Disposable {
@@ -17,6 +18,8 @@ class SyncParamsNotifier extends ChangeNotifier
   }
   final ApiServices apiServices;
   final tableParams = <TableParamsModel>[];
+  Map<TableParamsModelId, TableParamsModel> get tablesParamsMap =>
+      Map.fromEntries(tableParams.map((final e) => MapEntry(e.id, e)));
   final syncParams = <TablesSyncParamsModel>[];
 
   Future<void> loadTablesParams() async {
@@ -53,22 +56,26 @@ class SyncParamsNotifier extends ChangeNotifier
   void onTableSyncSnapshot(
     final QuerySnapshot<TablesSyncParamsModel> snapshot,
   ) {
-    if (snapshot.docChanges.isEmpty) return;
-    for (final change in snapshot.docChanges) {
-      final tableSync = change.doc.data()!;
-      switch (change.type) {
-        case DocumentChangeType.added:
-          syncParams.insert(change.newIndex, tableSync);
-          break;
-        case DocumentChangeType.modified:
-          syncParams.removeAt(change.oldIndex);
-          syncParams.insert(change.newIndex, tableSync);
-          break;
-        case DocumentChangeType.removed:
-          syncParams.removeAt(change.oldIndex);
-          break;
-      }
-    }
+    syncParams
+      ..clear()
+      ..addAll(snapshot.docs.map((final e) => e.data()));
+
+    // if (snapshot.docChanges.isEmpty) return;
+    // for (final change in snapshot.docChanges) {
+    //   final tableSync = change.doc.data()!;
+    //   switch (change.type) {
+    //     case DocumentChangeType.added:
+    //       syncParams.insert(change.newIndex, tableSync);
+    //       break;
+    //     case DocumentChangeType.modified:
+    //       syncParams.removeAt(change.oldIndex);
+    //       syncParams.insert(change.newIndex, tableSync);
+    //       break;
+    //     case DocumentChangeType.removed:
+    //       syncParams.removeAt(change.oldIndex);
+    //       break;
+    //   }
+    // }
     notifyListeners();
   }
 
