@@ -24,8 +24,10 @@ class SyncParamsNotifier extends ChangeNotifier
 
   @override
   Future<void> onLoad() async {
+    await tablesSubscription?.cancel();
     final tablesStream = apiServices.tables.tableQuery.snapshots();
     tablesSubscription = tablesStream.listen(onTableSnapshot);
+    await tablesSyncsSubscription?.cancel();
     final syncStream = apiServices.tablesSync.tableSyncQuery.snapshots();
     tablesSyncsSubscription = syncStream.listen(onTableSyncSnapshot);
   }
