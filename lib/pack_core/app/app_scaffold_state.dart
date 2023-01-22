@@ -9,23 +9,55 @@ AppScaffoldState useAppScaffoldState() => use(
 
 class AppScaffoldState extends ContextfulLifeState {
   AppScaffoldState();
+
   late final RouteState routeState;
   late final TemplateRouteParser routeParser;
+  late final AppRouterController routerController;
+
   @override
   void initState() {
     routeParser = TemplateRouteParser(
       allowedPaths: NavigationRoutes.routes,
-      guards: guards,
+      guards: [],
     );
     routeState = RouteState(routeParser);
+    routerController = AppRouterController.local(routeState);
+    guard.onLoad();
+    routeParser.guards?.add(guard);
     super.initState();
   }
 
-  List<RouteGuard<ParsedRoute>> get guards => [AuthRouteGuard()];
+  late final guard = AuthRouteGuard(routerController: routerController);
+  @override
+  void dispose() {
+    guard.dispose();
+    super.dispose();
+  }
 }
 
-class AuthRouteGuard implements RouteGuard<ParsedRoute> {
-  AuthRouteGuard();
+class AuthRouteGuard implements RouteGuard<ParsedRoute>, Disposable {
+  AuthRouteGuard({
+    required this.routerController,
+  });
+  StreamSubscription<User?>? _authSubscription;
+  final AppRouterController routerController;
+  void onLoad() {
+    _authSubscription =
+        FirebaseAuth.instance.authStateChanges().listen(_onAuthChange);
+  }
+
+  void _onAuthChange(final User? user) {
+    if (user != null) {
+      if (routerController.routeState.route.pathTemplate.startsWith('/auth')) {
+        routerController.toHome();
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _authSubscription?.cancel();
+  }
 
   @override
   Future<ParsedRoute> redirect(final ParsedRoute from) async {

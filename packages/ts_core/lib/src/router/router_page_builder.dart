@@ -2,6 +2,7 @@ part of 'router.dart';
 
 class RouterController {
   RouterController.use(final Locator read) : routeState = read<RouteState>();
+  RouterController.local(this.routeState);
   final RouteState routeState;
 
   void to(final String routeName) {

@@ -100,9 +100,6 @@ class AppPageBuilder extends RouterPageBuilder<AppRouterController> {
     return NavigatorPage(
       child: SignInScreen(
         actions: [
-          AuthStateChangeAction<SigningUp>((final context, final _) {
-            routerController.toHome();
-          }),
           AuthStateChangeAction<SignedIn>((final context, final _) {
             routerController.toHome();
           }),
