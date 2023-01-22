@@ -106,7 +106,7 @@ class _DialogWindow extends HookWidget {
             valueListenable: state.formHelper.loading,
             builder: (final context, final loading, final child) {
               return FilledButton(
-                onPressed: loading ? null : () {},
+                onPressed: loading ? null : state.onCreate,
                 child: loading ? const ProgressRing() : const Text('Create'),
               );
             },

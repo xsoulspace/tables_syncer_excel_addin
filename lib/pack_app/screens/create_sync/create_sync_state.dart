@@ -37,19 +37,19 @@ class CreateTablesSyncState extends ContextfulLifeState {
 
   final sourceTableNotifier = ValueNotifier<TableParamsModel?>(null);
 
-  void onDeleteDestination(final int index) {
-    destinationTablesNotifier.value = [...destinationTablesNotifier.value]
-      ..removeAt(index);
+  void onDeleteDestination(final TableParamsModel table) {
+    destinationTablesNotifier.value = {...destinationTablesNotifier.value}
+      ..remove(table);
   }
 
   void onAddDestination(final TableParamsModel table) {
-    destinationTablesNotifier.value = [
+    destinationTablesNotifier.value = {
       ...destinationTablesNotifier.value,
       table
-    ];
+    };
   }
 
-  final destinationTablesNotifier = ValueNotifier<List<TableParamsModel>>([]);
+  final destinationTablesNotifier = ValueNotifier<Set<TableParamsModel>>({});
   void onAddNewTable() {
     showCreateTableDialog(getContext());
   }

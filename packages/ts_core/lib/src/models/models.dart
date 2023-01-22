@@ -12,3 +12,4 @@ part 'table_params.dart';
 part 'tables_sync_params.dart';
 part 'typedefs.dart';
 part 'user.dart';
+part 'utils.dart';

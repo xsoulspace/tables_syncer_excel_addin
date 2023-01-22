@@ -138,11 +138,12 @@ class SyncColumnsSelector extends StatelessWidget {
           ],
         ),
         uiTheme.verticalBoxes.medium,
-        ValueListenableBuilder(
-          valueListenable: state.syncColumnsSetNotifier,
-          builder: (final context, final syncColumnsSet, final child) {
-            return material.Material(
-              child: Wrap(
+        material.Material(
+          color: Colors.transparent,
+          child: ValueListenableBuilder(
+            valueListenable: state.syncColumnsSetNotifier,
+            builder: (final context, final syncColumnsSet, final child) {
+              return Wrap(
                 spacing: 12,
                 runSpacing: 6,
                 children: syncColumnsSet
@@ -154,9 +155,9 @@ class SyncColumnsSelector extends StatelessWidget {
                       ),
                     )
                     .toList(),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ],
     );
@@ -173,25 +174,8 @@ class DestinationTablesSelector extends StatelessWidget {
 
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ValueListenableBuilder(
-          valueListenable: state.destinationTablesNotifier,
-          builder: (final context, final destinationTables, final child) {
-            return Wrap(
-              spacing: 12,
-              runSpacing: 6,
-              children: destinationTables
-                  .mapIndexed(
-                    (final index, final table) => material.InputChip(
-                      key: ValueKey(table),
-                      label: Text(table.name),
-                      onDeleted: () => state.onDeleteDestination(index),
-                    ),
-                  )
-                  .toList(),
-            );
-          },
-        ),
         Row(
           children: [
             Expanded(
@@ -218,6 +202,28 @@ class DestinationTablesSelector extends StatelessWidget {
             uiTheme.horizontalBoxes.medium,
             const AddNewTableIconButton()
           ],
+        ),
+        uiTheme.verticalBoxes.medium,
+        material.Material(
+          color: Colors.transparent,
+          child: ValueListenableBuilder(
+            valueListenable: state.destinationTablesNotifier,
+            builder: (final context, final destinationTables, final child) {
+              return Wrap(
+                spacing: 12,
+                runSpacing: 6,
+                children: destinationTables
+                    .map(
+                      (final table) => material.InputChip(
+                        key: ValueKey(table),
+                        label: Text(table.name),
+                        onDeleted: () => state.onDeleteDestination(table),
+                      ),
+                    )
+                    .toList(),
+              );
+            },
+          ),
         ),
       ],
     );

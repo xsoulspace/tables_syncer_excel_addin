@@ -103,6 +103,7 @@ _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       workbookOriginName: json['workbookOriginName'] as String,
       userId: json['userId'] as String,
+      createdAt: fromTimestamp(json['createdAt'] as Timestamp),
       name: json['name'] as String? ?? '',
       headerTopLeftColumnIndex: json['headerTopLeftColumnIndex'] as int? ?? 0,
       headerTopLeftRowIndex: json['headerTopLeftRowIndex'] as int? ?? 0,
@@ -116,6 +117,7 @@ Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
       'id': instance.id,
       'workbookOriginName': instance.workbookOriginName,
       'userId': instance.userId,
+      'createdAt': toTimestamp(instance.createdAt),
       'name': instance.name,
       'headerTopLeftColumnIndex': instance.headerTopLeftColumnIndex,
       'headerTopLeftRowIndex': instance.headerTopLeftRowIndex,
@@ -129,6 +131,7 @@ _$_TablesSyncParamsModel _$$_TablesSyncParamsModelFromJson(
     _$_TablesSyncParamsModel(
       id: json['id'] as String,
       userId: json['userId'] as String,
+      createdAt: fromTimestamp(json['createdAt'] as Timestamp),
       sourceTableId: json['sourceTableId'] as String,
       destinationTablesIds: (json['destinationTablesIds'] as List<dynamic>)
           .map((e) => e as String)
@@ -145,6 +148,7 @@ Map<String, dynamic> _$$_TablesSyncParamsModelToJson(
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
+      'createdAt': toTimestamp(instance.createdAt),
       'sourceTableId': instance.sourceTableId,
       'destinationTablesIds': instance.destinationTablesIds,
       'columnNames': instance.columnNames,

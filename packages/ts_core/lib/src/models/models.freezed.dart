@@ -829,6 +829,8 @@ mixin _$TableParamsModel {
   String get id => throw _privateConstructorUsedError;
   String get workbookOriginName => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+  DateTime get createdAt => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get headerTopLeftColumnIndex => throw _privateConstructorUsedError;
   int get headerTopLeftRowIndex => throw _privateConstructorUsedError;
@@ -852,6 +854,7 @@ abstract class $TableParamsModelCopyWith<$Res> {
       {String id,
       String workbookOriginName,
       String userId,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
       String name,
       int headerTopLeftColumnIndex,
       int headerTopLeftRowIndex,
@@ -876,6 +879,7 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
     Object? id = null,
     Object? workbookOriginName = null,
     Object? userId = null,
+    Object? createdAt = null,
     Object? name = null,
     Object? headerTopLeftColumnIndex = null,
     Object? headerTopLeftRowIndex = null,
@@ -896,6 +900,10 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -936,6 +944,7 @@ abstract class _$$_TableParamsModelCopyWith<$Res>
       {String id,
       String workbookOriginName,
       String userId,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
       String name,
       int headerTopLeftColumnIndex,
       int headerTopLeftRowIndex,
@@ -958,6 +967,7 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
     Object? id = null,
     Object? workbookOriginName = null,
     Object? userId = null,
+    Object? createdAt = null,
     Object? name = null,
     Object? headerTopLeftColumnIndex = null,
     Object? headerTopLeftRowIndex = null,
@@ -978,6 +988,10 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1014,6 +1028,8 @@ class _$_TableParamsModel extends _TableParamsModel {
       {required this.id,
       required this.workbookOriginName,
       required this.userId,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+          required this.createdAt,
       this.name = '',
       this.headerTopLeftColumnIndex = 0,
       this.headerTopLeftRowIndex = 0,
@@ -1031,6 +1047,9 @@ class _$_TableParamsModel extends _TableParamsModel {
   final String workbookOriginName;
   @override
   final String userId;
+  @override
+  @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+  final DateTime createdAt;
   @override
   @JsonKey()
   final String name;
@@ -1052,7 +1071,7 @@ class _$_TableParamsModel extends _TableParamsModel {
 
   @override
   String toString() {
-    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, name: $name, headerTopLeftColumnIndex: $headerTopLeftColumnIndex, headerTopLeftRowIndex: $headerTopLeftRowIndex, dataTopLeftColumnIndex: $dataTopLeftColumnIndex, dataTopLeftRowIndex: $dataTopLeftRowIndex, keyColumnIndex: $keyColumnIndex)';
+    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, createdAt: $createdAt, name: $name, headerTopLeftColumnIndex: $headerTopLeftColumnIndex, headerTopLeftRowIndex: $headerTopLeftRowIndex, dataTopLeftColumnIndex: $dataTopLeftColumnIndex, dataTopLeftRowIndex: $dataTopLeftRowIndex, keyColumnIndex: $keyColumnIndex)';
   }
 
   @override
@@ -1064,6 +1083,8 @@ class _$_TableParamsModel extends _TableParamsModel {
             (identical(other.workbookOriginName, workbookOriginName) ||
                 other.workbookOriginName == workbookOriginName) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(
                     other.headerTopLeftColumnIndex, headerTopLeftColumnIndex) ||
@@ -1085,6 +1106,7 @@ class _$_TableParamsModel extends _TableParamsModel {
       id,
       workbookOriginName,
       userId,
+      createdAt,
       name,
       headerTopLeftColumnIndex,
       headerTopLeftRowIndex,
@@ -1111,6 +1133,8 @@ abstract class _TableParamsModel extends TableParamsModel {
       {required final String id,
       required final String workbookOriginName,
       required final String userId,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+          required final DateTime createdAt,
       final String name,
       final int headerTopLeftColumnIndex,
       final int headerTopLeftRowIndex,
@@ -1128,6 +1152,9 @@ abstract class _TableParamsModel extends TableParamsModel {
   String get workbookOriginName;
   @override
   String get userId;
+  @override
+  @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+  DateTime get createdAt;
   @override
   String get name;
   @override
@@ -1155,6 +1182,8 @@ TablesSyncParamsModel _$TablesSyncParamsModelFromJson(
 mixin _$TablesSyncParamsModel {
   String get id => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+  DateTime get createdAt => throw _privateConstructorUsedError;
   String get sourceTableId => throw _privateConstructorUsedError;
   List<String> get destinationTablesIds => throw _privateConstructorUsedError;
   List<String> get columnNames => throw _privateConstructorUsedError;
@@ -1176,6 +1205,7 @@ abstract class $TablesSyncParamsModelCopyWith<$Res> {
   $Res call(
       {String id,
       String userId,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
       String sourceTableId,
       List<String> destinationTablesIds,
       List<String> columnNames,
@@ -1199,6 +1229,7 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? userId = null,
+    Object? createdAt = null,
     Object? sourceTableId = null,
     Object? destinationTablesIds = null,
     Object? columnNames = null,
@@ -1214,6 +1245,10 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       sourceTableId: null == sourceTableId
           ? _value.sourceTableId
           : sourceTableId // ignore: cast_nullable_to_non_nullable
@@ -1249,6 +1284,7 @@ abstract class _$$_TablesSyncParamsModelCopyWith<$Res>
   $Res call(
       {String id,
       String userId,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
       String sourceTableId,
       List<String> destinationTablesIds,
       List<String> columnNames,
@@ -1269,6 +1305,7 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? userId = null,
+    Object? createdAt = null,
     Object? sourceTableId = null,
     Object? destinationTablesIds = null,
     Object? columnNames = null,
@@ -1284,6 +1321,10 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       sourceTableId: null == sourceTableId
           ? _value.sourceTableId
           : sourceTableId // ignore: cast_nullable_to_non_nullable
@@ -1315,6 +1356,8 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
   const _$_TablesSyncParamsModel(
       {required this.id,
       required this.userId,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+          required this.createdAt,
       required this.sourceTableId,
       required final List<String> destinationTablesIds,
       required final List<String> columnNames,
@@ -1331,6 +1374,9 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
   final String id;
   @override
   final String userId;
+  @override
+  @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+  final DateTime createdAt;
   @override
   final String sourceTableId;
   final List<String> _destinationTablesIds;
@@ -1357,7 +1403,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
 
   @override
   String toString() {
-    return 'TablesSyncParamsModel(id: $id, userId: $userId, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues)';
+    return 'TablesSyncParamsModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues)';
   }
 
   @override
@@ -1367,6 +1413,8 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
             other is _$_TablesSyncParamsModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             (identical(other.sourceTableId, sourceTableId) ||
                 other.sourceTableId == sourceTableId) &&
             const DeepCollectionEquality()
@@ -1385,6 +1433,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
       runtimeType,
       id,
       userId,
+      createdAt,
       sourceTableId,
       const DeepCollectionEquality().hash(_destinationTablesIds),
       const DeepCollectionEquality().hash(_columnNames),
@@ -1410,6 +1459,8 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
   const factory _TablesSyncParamsModel(
       {required final String id,
       required final String userId,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+          required final DateTime createdAt,
       required final String sourceTableId,
       required final List<String> destinationTablesIds,
       required final List<String> columnNames,
@@ -1424,6 +1475,9 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
   String get id;
   @override
   String get userId;
+  @override
+  @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+  DateTime get createdAt;
   @override
   String get sourceTableId;
   @override

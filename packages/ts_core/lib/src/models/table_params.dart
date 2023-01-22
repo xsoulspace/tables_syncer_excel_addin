@@ -20,6 +20,8 @@ class TableParamsModel with _$TableParamsModel {
     required final TableParamsModelId id,
     required final String workbookOriginName,
     required final String userId,
+    @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+        required final DateTime createdAt,
     @Default('') final String name,
     @Default(0) final int headerTopLeftColumnIndex,
     @Default(0) final int headerTopLeftRowIndex,

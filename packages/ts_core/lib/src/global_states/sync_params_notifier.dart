@@ -43,22 +43,10 @@ class SyncParamsNotifier extends ChangeNotifier
   }
 
   void onTableSnapshot(final QuerySnapshot<TableParamsModel> snapshot) {
-    if (snapshot.docChanges.isEmpty) return;
-    for (final change in snapshot.docChanges) {
-      final table = change.doc.data()!;
-      switch (change.type) {
-        case DocumentChangeType.added:
-          tableParams.insert(change.newIndex, table);
-          break;
-        case DocumentChangeType.modified:
-          tableParams.removeAt(change.oldIndex);
-          tableParams.insert(change.newIndex, table);
-          break;
-        case DocumentChangeType.removed:
-          tableParams.removeAt(change.oldIndex);
-          break;
-      }
-    }
+    tableParams
+      ..clear()
+      ..addAll(snapshot.docs.map((final e) => e.data()));
+
     notifyListeners();
   }
 

@@ -19,6 +19,8 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
   const factory TablesSyncParamsModel({
     required final TablesSyncParamsModelId id,
     required final String userId,
+    @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+        required final DateTime createdAt,
     required final TableParamsModelId sourceTableId,
     required final List<TableParamsModelId> destinationTablesIds,
     required final List<String> columnNames,
