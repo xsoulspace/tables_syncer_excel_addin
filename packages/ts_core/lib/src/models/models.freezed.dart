@@ -828,6 +828,7 @@ TableParamsModel _$TableParamsModelFromJson(Map<String, dynamic> json) {
 mixin _$TableParamsModel {
   String get id => throw _privateConstructorUsedError;
   String get workbookOriginName => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get headerTopLeftColumnIndex => throw _privateConstructorUsedError;
   int get headerTopLeftRowIndex => throw _privateConstructorUsedError;
@@ -850,6 +851,7 @@ abstract class $TableParamsModelCopyWith<$Res> {
   $Res call(
       {String id,
       String workbookOriginName,
+      String userId,
       String name,
       int headerTopLeftColumnIndex,
       int headerTopLeftRowIndex,
@@ -873,6 +875,7 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
   $Res call({
     Object? id = null,
     Object? workbookOriginName = null,
+    Object? userId = null,
     Object? name = null,
     Object? headerTopLeftColumnIndex = null,
     Object? headerTopLeftRowIndex = null,
@@ -888,6 +891,10 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
       workbookOriginName: null == workbookOriginName
           ? _value.workbookOriginName
           : workbookOriginName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -928,6 +935,7 @@ abstract class _$$_TableParamsModelCopyWith<$Res>
   $Res call(
       {String id,
       String workbookOriginName,
+      String userId,
       String name,
       int headerTopLeftColumnIndex,
       int headerTopLeftRowIndex,
@@ -949,6 +957,7 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? workbookOriginName = null,
+    Object? userId = null,
     Object? name = null,
     Object? headerTopLeftColumnIndex = null,
     Object? headerTopLeftRowIndex = null,
@@ -964,6 +973,10 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
       workbookOriginName: null == workbookOriginName
           ? _value.workbookOriginName
           : workbookOriginName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -1000,6 +1013,7 @@ class _$_TableParamsModel extends _TableParamsModel {
   const _$_TableParamsModel(
       {required this.id,
       required this.workbookOriginName,
+      required this.userId,
       this.name = '',
       this.headerTopLeftColumnIndex = 0,
       this.headerTopLeftRowIndex = 0,
@@ -1015,6 +1029,8 @@ class _$_TableParamsModel extends _TableParamsModel {
   final String id;
   @override
   final String workbookOriginName;
+  @override
+  final String userId;
   @override
   @JsonKey()
   final String name;
@@ -1036,7 +1052,7 @@ class _$_TableParamsModel extends _TableParamsModel {
 
   @override
   String toString() {
-    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, name: $name, headerTopLeftColumnIndex: $headerTopLeftColumnIndex, headerTopLeftRowIndex: $headerTopLeftRowIndex, dataTopLeftColumnIndex: $dataTopLeftColumnIndex, dataTopLeftRowIndex: $dataTopLeftRowIndex, keyColumnIndex: $keyColumnIndex)';
+    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, name: $name, headerTopLeftColumnIndex: $headerTopLeftColumnIndex, headerTopLeftRowIndex: $headerTopLeftRowIndex, dataTopLeftColumnIndex: $dataTopLeftColumnIndex, dataTopLeftRowIndex: $dataTopLeftRowIndex, keyColumnIndex: $keyColumnIndex)';
   }
 
   @override
@@ -1047,6 +1063,7 @@ class _$_TableParamsModel extends _TableParamsModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.workbookOriginName, workbookOriginName) ||
                 other.workbookOriginName == workbookOriginName) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(
                     other.headerTopLeftColumnIndex, headerTopLeftColumnIndex) ||
@@ -1067,6 +1084,7 @@ class _$_TableParamsModel extends _TableParamsModel {
       runtimeType,
       id,
       workbookOriginName,
+      userId,
       name,
       headerTopLeftColumnIndex,
       headerTopLeftRowIndex,
@@ -1092,6 +1110,7 @@ abstract class _TableParamsModel extends TableParamsModel {
   const factory _TableParamsModel(
       {required final String id,
       required final String workbookOriginName,
+      required final String userId,
       final String name,
       final int headerTopLeftColumnIndex,
       final int headerTopLeftRowIndex,
@@ -1107,6 +1126,8 @@ abstract class _TableParamsModel extends TableParamsModel {
   String get id;
   @override
   String get workbookOriginName;
+  @override
+  String get userId;
   @override
   String get name;
   @override
@@ -1133,6 +1154,7 @@ TablesSyncParamsModel _$TablesSyncParamsModelFromJson(
 /// @nodoc
 mixin _$TablesSyncParamsModel {
   String get id => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   String get sourceTableId => throw _privateConstructorUsedError;
   List<String> get destinationTablesIds => throw _privateConstructorUsedError;
   List<String> get columnNames => throw _privateConstructorUsedError;
@@ -1153,6 +1175,7 @@ abstract class $TablesSyncParamsModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String userId,
       String sourceTableId,
       List<String> destinationTablesIds,
       List<String> columnNames,
@@ -1175,6 +1198,7 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
     Object? sourceTableId = null,
     Object? destinationTablesIds = null,
     Object? columnNames = null,
@@ -1185,6 +1209,10 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       sourceTableId: null == sourceTableId
           ? _value.sourceTableId
@@ -1220,6 +1248,7 @@ abstract class _$$_TablesSyncParamsModelCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
+      String userId,
       String sourceTableId,
       List<String> destinationTablesIds,
       List<String> columnNames,
@@ -1239,6 +1268,7 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
     Object? sourceTableId = null,
     Object? destinationTablesIds = null,
     Object? columnNames = null,
@@ -1249,6 +1279,10 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       sourceTableId: null == sourceTableId
           ? _value.sourceTableId
@@ -1280,6 +1314,7 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
 class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
   const _$_TablesSyncParamsModel(
       {required this.id,
+      required this.userId,
       required this.sourceTableId,
       required final List<String> destinationTablesIds,
       required final List<String> columnNames,
@@ -1294,6 +1329,8 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
 
   @override
   final String id;
+  @override
+  final String userId;
   @override
   final String sourceTableId;
   final List<String> _destinationTablesIds;
@@ -1320,7 +1357,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
 
   @override
   String toString() {
-    return 'TablesSyncParamsModel(id: $id, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues)';
+    return 'TablesSyncParamsModel(id: $id, userId: $userId, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues)';
   }
 
   @override
@@ -1329,6 +1366,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
         (other.runtimeType == runtimeType &&
             other is _$_TablesSyncParamsModel &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.sourceTableId, sourceTableId) ||
                 other.sourceTableId == sourceTableId) &&
             const DeepCollectionEquality()
@@ -1346,6 +1384,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      userId,
       sourceTableId,
       const DeepCollectionEquality().hash(_destinationTablesIds),
       const DeepCollectionEquality().hash(_columnNames),
@@ -1370,6 +1409,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
 abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
   const factory _TablesSyncParamsModel(
       {required final String id,
+      required final String userId,
       required final String sourceTableId,
       required final List<String> destinationTablesIds,
       required final List<String> columnNames,
@@ -1382,6 +1422,8 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
 
   @override
   String get id;
+  @override
+  String get userId;
   @override
   String get sourceTableId;
   @override

@@ -100,6 +100,9 @@ class AppPageBuilder extends RouterPageBuilder<AppRouterController> {
     return NavigatorPage(
       child: SignInScreen(
         actions: [
+          AuthStateChangeAction<SigningUp>((final context, final _) {
+            routerController.toHome();
+          }),
           AuthStateChangeAction<SignedIn>((final context, final _) {
             routerController.toHome();
           }),
@@ -110,21 +113,6 @@ class AppPageBuilder extends RouterPageBuilder<AppRouterController> {
         providers: firebaseIntializer.providers,
       ),
       key: keys.signIn,
-    );
-  }
-
-  Page profile() {
-    final firebaseIntializer = GlobalStateNotifiers.getFirebaseIntializer();
-    return NavigatorPage(
-      child: ProfileScreen(
-        actions: [
-          SignedOutAction((final context) {
-            routerController.toSignIn();
-          }),
-        ],
-        providers: firebaseIntializer.providers,
-      ),
-      key: keys.profile,
     );
   }
 
@@ -150,9 +138,6 @@ class AppLayoutBuilder
       pages.add(pageBuilder.forgotPassword());
     } else if (pathTemplate.startsWith('/app')) {
       pages.add(pageBuilder.appNavigator());
-      if (pathTemplate == NavigationRoutes.profile) {
-        pages.add(pageBuilder.profile());
-      }
     }
     return pages;
   }

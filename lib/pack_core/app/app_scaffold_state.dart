@@ -29,14 +29,17 @@ class AuthRouteGuard implements RouteGuard<ParsedRoute> {
 
   @override
   Future<ParsedRoute> redirect(final ParsedRoute from) async {
+    final pathTemplate = from.pathTemplate;
     if (FirebaseAuth.instance.currentUser == null) {
-      final pathTemplate = from.pathTemplate;
       if (pathTemplate.startsWith('/auth')) {
         return from;
       } else {
         return ParsedRoute.fromPathTemplate(NavigationRoutes.signIn);
       }
     } else {
+      if (pathTemplate == NavigationRoutes.loader) {
+        return ParsedRoute.fromPathTemplate(NavigationRoutes.home);
+      }
       return from;
     }
   }

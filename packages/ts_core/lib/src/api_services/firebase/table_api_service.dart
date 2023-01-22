@@ -7,10 +7,9 @@ import '../abstract/abstract.dart';
 class FirebaseTableApiService implements ITableApiService {
   FirebaseTableApiService();
   FirebaseFirestore get _store => FirebaseFirestore.instance;
+  User get _user => FirebaseAuth.instance.currentUser!;
   CollectionReference<Map<String, dynamic>> get _collection {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) throw ArgumentError.notNull();
-    return _store.collection('tables/${user.uid}');
+    return _store.collection('tables').doc(_user.uid).collection('root');
   }
 
   CollectionReference<TableParamsModel> get _docCollection =>

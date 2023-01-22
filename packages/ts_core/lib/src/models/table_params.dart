@@ -19,6 +19,7 @@ class TableParamsModel with _$TableParamsModel {
   const factory TableParamsModel({
     required final TableParamsModelId id,
     required final String workbookOriginName,
+    required final String userId,
     @Default('') final String name,
     @Default(0) final int headerTopLeftColumnIndex,
     @Default(0) final int headerTopLeftRowIndex,

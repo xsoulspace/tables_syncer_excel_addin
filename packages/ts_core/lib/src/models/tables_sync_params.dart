@@ -18,6 +18,7 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
   )
   const factory TablesSyncParamsModel({
     required final TablesSyncParamsModelId id,
+    required final String userId,
     required final TableParamsModelId sourceTableId,
     required final List<TableParamsModelId> destinationTablesIds,
     required final List<String> columnNames,

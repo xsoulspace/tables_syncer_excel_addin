@@ -1,12 +1,15 @@
 import 'dart:math' as math;
 
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
+import 'package:provider/provider.dart';
 import 'package:tables_syncer_excel_addin/pack_app/screens/screens.dart';
 import 'package:tables_syncer_excel_addin/pack_app/widgets/widgets.dart';
 import 'package:tables_syncer_excel_addin/pack_core/app/info_screen.dart';
 import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
+import 'package:tables_syncer_excel_addin/pack_core/pack_core.dart';
 import 'package:tables_syncer_excel_addin/pack_settings/pack_settings.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
@@ -17,7 +20,7 @@ class NavigationScreen extends HookWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final state = useNavigationScreenState();
+    final state = useNavigationScreenState(read: context.read);
     final uiTheme = UiTheme.of(context);
     final themeData = FluentTheme.of(context);
     final screenSize = MediaQuery.of(context).size;
@@ -111,6 +114,19 @@ class AppNavigationPane extends NavigationPane {
               icon: const Icon(FluentIcons.settings),
               title: const Text('Settings'),
               body: const SettingsScreen(),
+            ),
+            PaneItem(
+              icon: const Icon(FluentIcons.signin),
+              title: const Text('Profile'),
+              body: ProfileScreen(
+                actions: [
+                  SignedOutAction((final context) {
+                    state.diDto.routerController.toSignIn();
+                  }),
+                ],
+                providers:
+                    GlobalStateNotifiers.getFirebaseIntializer().providers,
+              ),
             ),
             PaneItem(
               icon: const Icon(FluentIcons.info),

@@ -7,11 +7,9 @@ import '../abstract/abstract.dart';
 class FirebaseTableSyncApiService implements ITableSyncApiService {
   FirebaseTableSyncApiService();
   FirebaseFirestore get _store => FirebaseFirestore.instance;
-  CollectionReference<Map<String, dynamic>> get _collection {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) throw ArgumentError.notNull();
-    return _store.collection('table_syncs/${user.uid}');
-  }
+  User get _user => FirebaseAuth.instance.currentUser!;
+  CollectionReference<Map<String, dynamic>> get _collection =>
+      _store.collection('table_syncs').doc(_user.uid).collection('root');
 
   CollectionReference<TablesSyncParamsModel> get _docCollection =>
       _collection.withConverter(

@@ -34,6 +34,7 @@ class CreateTableState extends ContextfulLifeState {
     await formHelper.submit(
       onValide: () async {
         final table = TableParamsModel(
+          userId: FirebaseAuth.instance.currentUser!.uid,
           id: IdCreator.create(),
           // TODO(arenukvern): get workbook name
           workbookOriginName: '',
