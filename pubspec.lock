@@ -142,21 +142,21 @@ packages:
     source: hosted
     version: "1.1.1"
   cloud_firestore:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.3.1"
   cloud_firestore_platform_interface:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: cloud_firestore_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.10.1"
   cloud_firestore_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: cloud_firestore_web
       url: "https://pub.dartlang.org"
@@ -239,13 +239,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.17"
-  english_words:
-    dependency: transitive
-    description:
-      name: english_words
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.0"
   equatable:
     dependency: "direct main"
     description:
@@ -303,21 +296,21 @@ packages:
     source: hosted
     version: "4.2.5"
   firebase_auth_platform_interface:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_auth_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.11.7"
   firebase_auth_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.2.4"
   firebase_core:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
@@ -331,7 +324,7 @@ packages:
     source: hosted
     version: "4.5.2"
   firebase_core_web:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
@@ -393,13 +386,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  flame:
-    dependency: transitive
-    description:
-      name: flame
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.6.0"
   fluent_ui:
     dependency: "direct main"
     description:
@@ -739,13 +725,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.0"
-  ordered_set:
-    dependency: transitive
-    description:
-      name: ordered_set
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.0"
   package_config:
     dependency: transitive
     description:
