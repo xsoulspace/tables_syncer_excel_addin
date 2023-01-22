@@ -19,15 +19,25 @@ class SyncParamsNotifier extends ChangeNotifier
   final tableParams = <TableParamsModel>[];
   final syncParams = <TablesSyncParamsModel>[];
 
-  void loadTablesParams() {}
-  void loadTablesSyncParams() {}
+  Future<void> loadTablesParams() async {
+    final snapshot = await apiServices.tables.tableQuery.get();
+    final tables = snapshot.docs.map((final e) => e.data());
+    tableParams.addAll(tables);
+  }
+
+  Future<void> loadTablesSyncParams() async {
+    final snapshot = await apiServices.tablesSync.tableSyncQuery.get();
+    final syncs = snapshot.docs.map((final e) => e.data());
+    syncParams.addAll(syncs);
+  }
 
   @override
   Future<void> onLoad() async {
-    await tablesSubscription?.cancel();
+    await _clearData();
+    await loadTablesParams();
+    await loadTablesSyncParams();
     final tablesStream = apiServices.tables.tableQuery.snapshots();
     tablesSubscription = tablesStream.listen(onTableSnapshot);
-    await tablesSyncsSubscription?.cancel();
     final syncStream = apiServices.tablesSync.tableSyncQuery.snapshots();
     tablesSyncsSubscription = syncStream.listen(onTableSyncSnapshot);
   }
@@ -78,10 +88,16 @@ class SyncParamsNotifier extends ChangeNotifier
   StreamSubscription<QuerySnapshot<TablesSyncParamsModel>>?
       tablesSyncsSubscription;
 
+  Future<void> _clearData() async {
+    await tablesSubscription?.cancel();
+    await tablesSyncsSubscription?.cancel();
+    tableParams.clear();
+    syncParams.clear();
+  }
+
   @override
   void dispose() {
-    tablesSubscription?.cancel();
-    tablesSyncsSubscription?.cancel();
+    _clearData();
     super.dispose();
   }
 }
