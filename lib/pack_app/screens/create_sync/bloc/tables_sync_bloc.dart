@@ -5,7 +5,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
-import 'package:tables_syncer_excel_addin/pack_app/screens/create_sync/create_table.dart';
+import 'package:tables_syncer_excel_addin/pack_app/screens/create_sync/upsert_table.dart';
 import 'package:tables_syncer_excel_addin/pack_core/pack_core.dart';
 import 'package:ts_core/ts_core.dart';
 
@@ -158,7 +158,7 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
   }
 
   Future<void> onCreateTable(final BuildContext context) async {
-    final table = await showCreateTableDialog(context);
+    final table = await showUpsertTableDialog(context);
     if (table == null) return;
     add(TablesSyncDeleteDestinationTableEvent(table: table));
   }

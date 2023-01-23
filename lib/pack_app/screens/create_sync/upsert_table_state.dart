@@ -1,4 +1,4 @@
-part of 'create_table.dart';
+part of 'upsert_table.dart';
 
 class CreateTableDiDto {
   CreateTableDiDto.use(final Locator read) : apiServices = read();
@@ -7,19 +7,24 @@ class CreateTableDiDto {
 
 CreateTableState useTableParamsState({
   required final Locator read,
+  required final TableParamsModel? initialTableParams,
 }) =>
     use(
       ContextfulLifeHook(
         debugLabel: 'CreateTableState',
-        state: CreateTableState(diDto: CreateTableDiDto.use(read)),
+        state: CreateTableState(
+          diDto: CreateTableDiDto.use(read),
+          initialTableParams: initialTableParams,
+        ),
       ),
     );
 
 class CreateTableState extends ContextfulLifeState {
   CreateTableState({
     required this.diDto,
+    required this.initialTableParams,
   });
-
+  final TableParamsModel? initialTableParams;
   final CreateTableDiDto diDto;
   final formHelper = FormHelper();
 

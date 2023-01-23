@@ -6,23 +6,34 @@ import 'package:provider/provider.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
-part 'create_table_state.dart';
+part 'upsert_table_state.dart';
 
-Future<TableParamsModel?> showCreateTableDialog(final BuildContext context) {
+Future<TableParamsModel?> showUpsertTableDialog(
+  final BuildContext context, {
+  final TableParamsModel? initialTableParams,
+}) {
   return showDialog<TableParamsModel>(
     context: context,
     builder: (final context) {
-      return const _DialogWindow();
+      return _DialogWindow(
+        initialTableParams: initialTableParams,
+      );
     },
   );
 }
 
 class _DialogWindow extends HookWidget {
-  const _DialogWindow({final Key? key}) : super(key: key);
-
+  const _DialogWindow({
+    required this.initialTableParams,
+    final Key? key,
+  }) : super(key: key);
+  final TableParamsModel? initialTableParams;
   @override
   Widget build(final BuildContext context) {
-    final state = useTableParamsState(read: context.read);
+    final state = useTableParamsState(
+      read: context.read,
+      initialTableParams: initialTableParams,
+    );
     final uiTheme = UiTheme.of(context);
     return Form(
       key: state.formHelper.formKey,
