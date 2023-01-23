@@ -21,6 +21,8 @@ class SyncParamsNotifier extends ChangeNotifier
   Map<TableParamsModelId, TableParamsModel> get tablesParamsMap =>
       Map.fromEntries(tableParams.map((final e) => MapEntry(e.id, e)));
   final syncParams = <TablesSyncParamsModel>[];
+  Map<TablesSyncParamsModelId, TablesSyncParamsModel> get syncParamsMap =>
+      Map.fromEntries(syncParams.map((final e) => MapEntry(e.id, e)));
 
   Future<void> loadTablesParams() async {
     final snapshot = await apiServices.tables.tableQuery.get();

@@ -22,7 +22,7 @@ class _DialogWindow extends HookWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final state = useCreateTableState(read: context.read);
+    final state = useTableParamsState(read: context.read);
     final uiTheme = UiTheme.of(context);
     return Form(
       key: state.formHelper.formKey,
@@ -107,7 +107,12 @@ class _DialogWindow extends HookWidget {
             builder: (final context, final loading, final child) {
               return FilledButton(
                 onPressed: loading ? null : state.onCreate,
-                child: loading ? const ProgressRing() : const Text('Create'),
+                child: loading
+                    ? const SizedBox.square(
+                        dimension: 24,
+                        child: ProgressRing(),
+                      )
+                    : const Text('Create'),
               );
             },
           ),

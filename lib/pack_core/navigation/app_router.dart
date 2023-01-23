@@ -5,7 +5,9 @@ class NavigationRoutes {
   NavigationRoutes._();
   static const loader = '/';
   static const signIn = '/auth/signIn';
-  static const home = '/app/';
+  static const home = '/app';
+  static const tablesSyncs = '/app/syncs';
+  static const createSync = '/app/syncs/create';
   static const profile = '/app/profile';
   static const forgotPasswordWithEmail = '/auth/forgotPassword/:email';
   static const forgotPassword = '/auth/forgotPassword';
@@ -26,6 +28,7 @@ class AppRouterController extends RouterController {
 
   void toLoader() => to(NavigationRoutes.loader);
   void toHome() => to(NavigationRoutes.home);
+  void toTablesSyncs() => to(NavigationRoutes.tablesSyncs);
   void toSignIn() => to(NavigationRoutes.signIn);
   void toForgotPassword(final String? email) =>
       email != null && email.isNotEmpty

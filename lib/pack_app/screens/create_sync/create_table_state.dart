@@ -5,7 +5,7 @@ class CreateTableDiDto {
   final ApiServices apiServices;
 }
 
-CreateTableState useCreateTableState({
+CreateTableState useTableParamsState({
   required final Locator read,
 }) =>
     use(
