@@ -106,6 +106,16 @@ class AppNavigationPane extends NavigationPane {
               title: const Text('Create sync'),
               body: const TablesSyncScreen(),
             ),
+            PaneItem(
+              icon: const Icon(FluentIcons.sync),
+              title: const Text('Syncs'),
+              body: const TablesSyncsListScreen(),
+            ),
+            PaneItem(
+              icon: const Icon(FluentIcons.table),
+              title: const Text('Tables'),
+              body: const TablesListScreen(),
+            ),
           ],
           position: PanePosition.right,
           footerItems: [

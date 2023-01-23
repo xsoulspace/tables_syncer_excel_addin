@@ -72,6 +72,7 @@ class _TablesSyncBody extends StatelessWidget {
     final uiTheme = UiTheme.of(context);
     final theme = FluentTheme.of(context);
     final widgetState = context.read<TablesSyncWidgetState>();
+    final controllers = context.read<TablesSyncBloc>().controllers;
 
     return ScaffoldPage(
       content: Container(
@@ -111,16 +112,67 @@ class _TablesSyncBody extends StatelessWidget {
             BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
               selector: (final state) {
                 if (state is LiveTablesSyncParamsState) {
-                  return state.validate();
+                  return state.shouldAddNewValues;
                 }
                 return false;
               },
-              builder: (final context, final isValide) {
-                return FilledButton(
-                  onPressed: isValide ? widgetState.onSubmit : null,
-                  child: const Text('Create'),
+              builder: (final context, final shouldAddNewValues) {
+                return ListTile.selectable(
+                  title: const Text('Should add new values'),
+                  selectionMode: ListTileSelectionMode.multiple,
+                  onSelectionChange: widgetState.onChangeShouldAddNewValues,
+                  selected: shouldAddNewValues,
                 );
               },
+            ),
+            BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
+              selector: (final state) {
+                if (state is LiveTablesSyncParamsState) {
+                  return state.shouldUpdateValues;
+                }
+                return false;
+              },
+              builder: (final context, final shouldUpdateValues) {
+                return ListTile.selectable(
+                  title: const Text('Should update values'),
+                  selectionMode: ListTileSelectionMode.multiple,
+                  onSelectionChange: widgetState.onChangeShouldUpdateValues,
+                  selected: shouldUpdateValues,
+                );
+              },
+            ),
+            uiTheme.verticalBoxes.extraLarge,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
+                  selector: (final state) {
+                    if (state is LiveTablesSyncParamsState) {
+                      return state.validate();
+                    }
+                    return false;
+                  },
+                  builder: (final context, final isValide) {
+                    return FilledButton(
+                      onPressed: isValide ? widgetState.onSubmit : null,
+                      child: ValueListenableBuilder(
+                        valueListenable: controllers.isSaving,
+                        child:
+                            Text(widgetState.isCreateSync ? 'Create' : 'Save'),
+                        builder: (final context, final isSaving, final child) {
+                          if (isSaving) {
+                            return const SizedBox.square(
+                              dimension: 24,
+                              child: ProgressRing(),
+                            );
+                          }
+                          return child!;
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),

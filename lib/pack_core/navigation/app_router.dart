@@ -7,6 +7,7 @@ class NavigationRoutes {
   static const signIn = '/auth/signIn';
   static const home = '/app';
   static const tablesSyncs = '/app/syncs';
+  static const tables = '/app/tables';
   static const createSync = '/app/syncs/create';
   static const profile = '/app/profile';
   static const forgotPasswordWithEmail = '/auth/forgotPassword/:email';

@@ -56,3 +56,19 @@ class TablesSyncSelectSourceTableEvent extends TablesSyncEvent {
   });
   final TableParamsModel? table;
 }
+
+@immutable
+class TablesSyncShouldUpdateValuesTableEvent extends TablesSyncEvent {
+  const TablesSyncShouldUpdateValuesTableEvent({
+    required this.shouldUpdate,
+  });
+  final bool shouldUpdate;
+}
+
+@immutable
+class TablesSyncShouldAddNewValuesTableEvent extends TablesSyncEvent {
+  const TablesSyncShouldAddNewValuesTableEvent({
+    required this.shouldAdd,
+  });
+  final bool shouldAdd;
+}

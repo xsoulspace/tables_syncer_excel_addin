@@ -3,6 +3,8 @@ part of 'navigation_screen.dart';
 enum NavigationScreens {
   home,
   createSync,
+  syncs,
+  tables,
   settings,
   profile,
   info,
@@ -37,6 +39,8 @@ class NavigationScreenState extends LifeState {
   void initState() {
     super.initState();
     diDto.routerController.routeState.addListener(onRouteChanged);
+    // activate listener
+    diDto.routerController.routeState.route;
   }
 
   @override
@@ -53,8 +57,9 @@ class NavigationScreenState extends LifeState {
       } else if (pathTemplate == NavigationRoutes.createSync) {
         currentScreen.value = NavigationScreens.createSync;
       } else if (pathTemplate == NavigationRoutes.tablesSyncs) {
-        // TODO(arenukvern): change to syncs screen
-        currentScreen.value = NavigationScreens.home;
+        currentScreen.value = NavigationScreens.syncs;
+      } else if (pathTemplate == NavigationRoutes.tables) {
+        currentScreen.value = NavigationScreens.tables;
       }
     }
   }

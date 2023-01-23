@@ -26,6 +26,10 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
     required final List<String> columnNames,
     required final bool shouldUpdateValues,
     required final bool shouldAddNewValues,
+    @Default('') final String workbookName,
+    @Default('') final String name,
+    @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+        final DateTime? lastSyncAt,
   }) = _TablesSyncParamsModel;
 
   const TablesSyncParamsModel._();

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../ts_core.dart';
 import '../localization/localization.dart';
 
 part 'db_models/api_response.dart';

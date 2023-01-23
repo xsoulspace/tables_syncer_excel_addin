@@ -16,6 +16,7 @@ class TablesSyncWidgetState extends ContextfulLifeState {
   });
   TablesSyncBloc get bloc => getContext().read<TablesSyncBloc>();
   final TablesSyncParamsModelId? syncId;
+  bool get isCreateSync => syncId == null || syncId?.isEmpty == true;
   void onSelectSourceTable(final AutoSuggestBoxItem<TableParamsModel> item) {
     bloc.add(TablesSyncSelectSourceTableEvent(table: item.value));
   }
@@ -44,6 +45,18 @@ class TablesSyncWidgetState extends ContextfulLifeState {
 
   void onDeleteColumn(final String columnName) {
     bloc.add(TablesSyncDeleteColumnNameEvent(columnName: columnName));
+  }
+
+  // ignore: avoid_positional_boolean_parameters
+  void onChangeShouldAddNewValues(final bool shouldAdd) {
+    bloc.add(TablesSyncShouldAddNewValuesTableEvent(shouldAdd: shouldAdd));
+  }
+
+  // ignore: avoid_positional_boolean_parameters
+  void onChangeShouldUpdateValues(final bool shouldUpdate) {
+    bloc.add(
+      TablesSyncShouldUpdateValuesTableEvent(shouldUpdate: shouldUpdate),
+    );
   }
 
   void onSubmit() {

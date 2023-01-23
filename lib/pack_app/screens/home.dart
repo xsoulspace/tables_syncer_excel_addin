@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:tables_syncer_excel_addin/pack_app/screens/debug_pane.dart';
+import 'package:tables_syncer_excel_addin/pack_app/screens/tables_syncs.dart';
 import 'package:tables_syncer_excel_addin/pack_app/widgets/widgets.dart';
 
 class HomeScreen extends HookWidget {
@@ -8,12 +9,12 @@ class HomeScreen extends HookWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final scrollController = useScrollController();
     return ScaffoldPage(
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: const [
           DebugPane(),
+          Expanded(child: TablesSyncsListView()),
           AdsBanner(),
         ],
       ),

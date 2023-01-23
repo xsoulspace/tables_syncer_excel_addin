@@ -1189,6 +1189,10 @@ mixin _$TablesSyncParamsModel {
   List<String> get columnNames => throw _privateConstructorUsedError;
   bool get shouldUpdateValues => throw _privateConstructorUsedError;
   bool get shouldAddNewValues => throw _privateConstructorUsedError;
+  String get workbookName => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+  DateTime? get lastSyncAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1205,12 +1209,17 @@ abstract class $TablesSyncParamsModelCopyWith<$Res> {
   $Res call(
       {String id,
       String userId,
-      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+          DateTime createdAt,
       String sourceTableId,
       List<String> destinationTablesIds,
       List<String> columnNames,
       bool shouldUpdateValues,
-      bool shouldAddNewValues});
+      bool shouldAddNewValues,
+      String workbookName,
+      String name,
+      @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+          DateTime? lastSyncAt});
 }
 
 /// @nodoc
@@ -1235,6 +1244,9 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
     Object? columnNames = null,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
+    Object? workbookName = null,
+    Object? name = null,
+    Object? lastSyncAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -1269,6 +1281,18 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
           ? _value.shouldAddNewValues
           : shouldAddNewValues // ignore: cast_nullable_to_non_nullable
               as bool,
+      workbookName: null == workbookName
+          ? _value.workbookName
+          : workbookName // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastSyncAt: freezed == lastSyncAt
+          ? _value.lastSyncAt
+          : lastSyncAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -1284,12 +1308,17 @@ abstract class _$$_TablesSyncParamsModelCopyWith<$Res>
   $Res call(
       {String id,
       String userId,
-      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+          DateTime createdAt,
       String sourceTableId,
       List<String> destinationTablesIds,
       List<String> columnNames,
       bool shouldUpdateValues,
-      bool shouldAddNewValues});
+      bool shouldAddNewValues,
+      String workbookName,
+      String name,
+      @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+          DateTime? lastSyncAt});
 }
 
 /// @nodoc
@@ -1311,6 +1340,9 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
     Object? columnNames = null,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
+    Object? workbookName = null,
+    Object? name = null,
+    Object? lastSyncAt = freezed,
   }) {
     return _then(_$_TablesSyncParamsModel(
       id: null == id
@@ -1345,6 +1377,18 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
           ? _value.shouldAddNewValues
           : shouldAddNewValues // ignore: cast_nullable_to_non_nullable
               as bool,
+      workbookName: null == workbookName
+          ? _value.workbookName
+          : workbookName // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastSyncAt: freezed == lastSyncAt
+          ? _value.lastSyncAt
+          : lastSyncAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -1362,7 +1406,11 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
       required final List<String> destinationTablesIds,
       required final List<String> columnNames,
       required this.shouldUpdateValues,
-      required this.shouldAddNewValues})
+      required this.shouldAddNewValues,
+      this.workbookName = '',
+      this.name = '',
+      @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+          this.lastSyncAt})
       : _destinationTablesIds = destinationTablesIds,
         _columnNames = columnNames,
         super._();
@@ -1400,10 +1448,19 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
   final bool shouldUpdateValues;
   @override
   final bool shouldAddNewValues;
+  @override
+  @JsonKey()
+  final String workbookName;
+  @override
+  @JsonKey()
+  final String name;
+  @override
+  @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+  final DateTime? lastSyncAt;
 
   @override
   String toString() {
-    return 'TablesSyncParamsModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues)';
+    return 'TablesSyncParamsModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
   }
 
   @override
@@ -1424,7 +1481,12 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
             (identical(other.shouldUpdateValues, shouldUpdateValues) ||
                 other.shouldUpdateValues == shouldUpdateValues) &&
             (identical(other.shouldAddNewValues, shouldAddNewValues) ||
-                other.shouldAddNewValues == shouldAddNewValues));
+                other.shouldAddNewValues == shouldAddNewValues) &&
+            (identical(other.workbookName, workbookName) ||
+                other.workbookName == workbookName) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.lastSyncAt, lastSyncAt) ||
+                other.lastSyncAt == lastSyncAt));
   }
 
   @JsonKey(ignore: true)
@@ -1438,7 +1500,10 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
       const DeepCollectionEquality().hash(_destinationTablesIds),
       const DeepCollectionEquality().hash(_columnNames),
       shouldUpdateValues,
-      shouldAddNewValues);
+      shouldAddNewValues,
+      workbookName,
+      name,
+      lastSyncAt);
 
   @JsonKey(ignore: true)
   @override
@@ -1465,7 +1530,11 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
       required final List<String> destinationTablesIds,
       required final List<String> columnNames,
       required final bool shouldUpdateValues,
-      required final bool shouldAddNewValues}) = _$_TablesSyncParamsModel;
+      required final bool shouldAddNewValues,
+      final String workbookName,
+      final String name,
+      @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+          final DateTime? lastSyncAt}) = _$_TablesSyncParamsModel;
   const _TablesSyncParamsModel._() : super._();
 
   factory _TablesSyncParamsModel.fromJson(Map<String, dynamic> json) =
@@ -1488,6 +1557,13 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
   bool get shouldUpdateValues;
   @override
   bool get shouldAddNewValues;
+  @override
+  String get workbookName;
+  @override
+  String get name;
+  @override
+  @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+  DateTime? get lastSyncAt;
   @override
   @JsonKey(ignore: true)
   _$$_TablesSyncParamsModelCopyWith<_$_TablesSyncParamsModel> get copyWith =>

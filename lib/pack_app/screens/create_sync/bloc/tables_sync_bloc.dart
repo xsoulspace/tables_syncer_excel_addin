@@ -25,9 +25,11 @@ class TablesSyncBlocDiDto {
 
 class TablesSyncBlocControllers implements Disposable {
   final newColumn = TextEditingController();
+  final isSaving = ValueNotifier(false);
 
   @override
   void dispose() {
+    isSaving.dispose();
     newColumn.dispose();
   }
 }
@@ -43,6 +45,8 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     on<TablesSyncAddDestinationTableEvent>(_onAddDestinationTable);
     on<TablesSyncDeleteDestinationTableEvent>(_onDeleteDestinationTable);
     on<TablesSyncSelectSourceTableEvent>(_onSelectSourceTable);
+    on<TablesSyncShouldUpdateValuesTableEvent>(_onShouldUpdateValues);
+    on<TablesSyncShouldAddNewValuesTableEvent>(_onShouldAddNewValues);
   }
   final controllers = TablesSyncBlocControllers();
   final TablesSyncBlocDiDto diDto;
@@ -63,10 +67,12 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     final TablesSyncSaveEvent event,
     final Emitter<TablesSyncState> emit,
   ) async {
+    controllers.isSaving.value = true;
     final liveState = getLiveState();
     final tablesSync = liveState.toTablesSync();
 
     await diDto.apiServices.tablesSync.upsertTableSync(tablesSync);
+    controllers.isSaving.value = false;
     diDto.appRouterController.toTablesSyncs();
   }
 
@@ -155,6 +161,30 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     final table = await showCreateTableDialog(context);
     if (table == null) return;
     add(TablesSyncDeleteDestinationTableEvent(table: table));
+  }
+
+  void _onShouldUpdateValues(
+    final TablesSyncShouldUpdateValuesTableEvent event,
+    final Emitter<TablesSyncState> emit,
+  ) {
+    LiveTablesSyncParamsState liveState = getLiveState();
+
+    liveState = liveState.copyWith(
+      shouldUpdateValues: event.shouldUpdate,
+    );
+    emit(liveState);
+  }
+
+  void _onShouldAddNewValues(
+    final TablesSyncShouldAddNewValuesTableEvent event,
+    final Emitter<TablesSyncState> emit,
+  ) {
+    LiveTablesSyncParamsState liveState = getLiveState();
+
+    liveState = liveState.copyWith(
+      shouldAddNewValues: event.shouldAdd,
+    );
+    emit(liveState);
   }
 
   LiveTablesSyncParamsState getLiveState() {
