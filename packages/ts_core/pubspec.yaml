@@ -4,7 +4,7 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
+  sdk: ">=2.19.0 <3.0.0"
 
 dependencies:
   bloc: ^8.1.0
@@ -36,7 +36,7 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.7.0
   jwt_decoder: ^2.0.1
-  life_hooks: ^0.0.14
+  life_hooks: ^0.0.16
   logger: ^1.1.0
   path_to_regexp: ^0.4.0
   provider: ^6.0.4
@@ -57,7 +57,7 @@ dev_dependencies:
   freezed: ^2.3.2
   json_serializable: ^6.5.4
   retrofit_generator: ^4.2.0
-  xsoulspace_lints: ^0.0.1
+  xsoulspace_lints: ^0.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

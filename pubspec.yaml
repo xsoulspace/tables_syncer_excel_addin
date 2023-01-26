@@ -18,7 +18,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
+  sdk: ">=2.19.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -58,7 +58,7 @@ dependencies:
     sdk: flutter
   freezed_annotation: ^2.0.3
   intl: ^0.17.0
-  life_hooks: ^0.0.7
+  life_hooks: ^0.0.16
   logger: ^1.1.0
   office_addin_helper: ^0.2.0
   officejs: ^0.1.0
@@ -95,7 +95,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.3.2
   json_serializable: ^6.2.0
-  xsoulspace_lints: ^0.0.1
+  xsoulspace_lints: ^0.0.3
 
 # flutter pub run flutter_launcher_icons:main
 # generate for macos https://appicon.co
