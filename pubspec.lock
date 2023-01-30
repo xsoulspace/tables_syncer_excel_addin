@@ -37,10 +37,10 @@ packages:
     dependency: transitive
     description:
       name: archive
-      sha256: ed7cc591a948744994714375caf9a2ce89e1d82e8243997c8a2994d57181c212
+      sha256: d6347d54a2d8028e0437e3c099f66fdb8ae02c4720c1e7534c9f24c10351f85d
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.5"
+    version: "3.3.6"
   args:
     dependency: transitive
     description:
@@ -109,10 +109,10 @@ packages:
     dependency: "direct dev"
     description:
       name: build_runner
-      sha256: b0a8a7b8a76c493e85f1b84bffa0588859a06197863dba8c9036b15581fd9727
+      sha256: a3335cae313ea41f193e5637f98185e5cb37b3fde2c5c4654ac546b8164e59ac
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.3"
+    version: "2.4.0"
   build_runner_core:
     dependency: transitive
     description:
@@ -197,10 +197,10 @@ packages:
     dependency: "direct main"
     description:
       name: collection
-      sha256: cfc915e6923fe5ce6e153b0723c753045de46de1b4d63771530504004a45fae0
+      sha256: "4a07be6cb69c84d677a6c3096fcf960cc3285a8330b4603e0d463d15d9bd934c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.0"
+    version: "1.17.1"
   color:
     dependency: transitive
     description:
@@ -707,10 +707,10 @@ packages:
     dependency: transitive
     description:
       name: js
-      sha256: "5528c2f391ededb7775ec1daa69e65a2d61276f7552de2b5f7b8d34ee9fd4ab7"
+      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.7"
   json_annotation:
     dependency: transitive
     description:
@@ -739,10 +739,10 @@ packages:
     dependency: "direct main"
     description:
       name: life_hooks
-      sha256: ac9393cf45c5baa0c2a0931ae528a6c9ba35ea33c612f4365b7e8b4a3fb0f01a
+      sha256: "3b796ae467e128b2e3c8409caf043692ee79a7b382e9cdfbca430b3459398136"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.16"
+    version: "0.0.18"
   lints:
     dependency: transitive
     description:
@@ -771,10 +771,10 @@ packages:
     dependency: transitive
     description:
       name: matcher
-      sha256: "16db949ceee371e9b99d22f88fa3a73c4e59fd0afed0bd25fc336eb76c198b72"
+      sha256: c94db23593b89766cda57aab9ac311e3616cf87c6fa4e9749df032f66f30dcb8
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.13"
+    version: "0.12.14"
   material_color_utilities:
     dependency: transitive
     description:
@@ -819,10 +819,10 @@ packages:
     dependency: "direct main"
     description:
       name: officejs
-      sha256: fb71255d4db1fb985feeb0ff98e0d28a6618f90904e977454f4d7d75c7e137e8
+      sha256: "3df0c0a3bd920e9ca4d3548d1006ee7b995cec81baf78af7e7e1af10bb9b3dac"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0"
+    version: "0.3.1"
   package_config:
     dependency: transitive
     description:
@@ -835,10 +835,10 @@ packages:
     dependency: transitive
     description:
       name: path
-      sha256: db9d4f58c908a4ba5953fcee2ae317c94889433e5024c27ce74a37f94267945b
+      sha256: "8829d8a55c13fc0e37127c29fedf290c102f4e40ae94ada574091fe0ff96c917"
       url: "https://pub.dev"
     source: hosted
-    version: "1.8.2"
+    version: "1.8.3"
   path_drawing:
     dependency: transitive
     description:
@@ -1200,10 +1200,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: ad540f65f92caa91bf21dfc8ffb8c589d6e4dc0c2267818b4cc2792857706206
+      sha256: "6182294da5abf431177fccc1ee02401f6df30f766bc6130a0852c6b6d7ee6b2d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.16"
+    version: "0.4.18"
   time:
     dependency: transitive
     description:
@@ -1374,10 +1374,10 @@ packages:
     dependency: "direct dev"
     description:
       name: xsoulspace_lints
-      sha256: "87c7769e6a0ec42d3f9a055a39df802c2448b8e8884a19920dec50e219d210b9"
+      sha256: "760f3c48b18896ba993bbcbac8168a42503fbad22dc3310016eedcfcb4e7eaaa"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.5"
   yaml:
     dependency: transitive
     description:
@@ -1391,7 +1391,7 @@ packages:
     description:
       path: "packages/yandex_ads_sdk"
       ref: develop
-      resolved-ref: "932cdd5770e4ddfb9c3ad7f9b92b6dcdcd67358e"
+      resolved-ref: "8f7c2fe32c0a60b541673c2cf9679875528c0cc7"
       url: "git@github.com:xsoulspace/word_by_word_game.git"
     source: git
     version: "0.0.1"
@@ -1404,5 +1404,5 @@ packages:
     source: hosted
     version: "1.1.0"
 sdks:
-  dart: ">=2.19.0 <4.0.0"
-  flutter: ">=3.7.0"
+  dart: ">=3.0.0-151.0.dev <4.0.0"
+  flutter: ">=3.3.0"

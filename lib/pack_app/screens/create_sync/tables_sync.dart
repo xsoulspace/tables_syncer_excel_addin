@@ -13,8 +13,8 @@ part 'tables_sync_state.dart';
 class TablesSyncScreen extends StatelessWidget {
   const TablesSyncScreen({
     this.syncId,
-    final Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final TablesSyncParamsModelId? syncId;
   @override
   Widget build(final BuildContext context) {
@@ -34,8 +34,7 @@ class TablesSyncScreen extends StatelessWidget {
 class _TablesSyncWidgetStateProvider extends HookWidget {
   const _TablesSyncWidgetStateProvider({
     required this.syncId,
-    final Key? key,
-  }) : super(key: key);
+  });
   final TablesSyncParamsModelId? syncId;
 
   @override

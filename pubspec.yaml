@@ -18,7 +18,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.19.0 <3.0.0"
+  sdk: ">=3.0.0-151.0.dev <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -31,7 +31,7 @@ dependencies:
   cloud_firestore: ^4.3.1
   cloud_firestore_platform_interface: ^5.10.1
   cloud_firestore_web: ^3.2.1
-  collection: ^1.16.0
+  collection: ^1.17.0
   cupertino_icons: ^1.0.2
   equatable: ^2.0.3
   firebase_analytics: ^10.0.6
@@ -58,10 +58,10 @@ dependencies:
     sdk: flutter
   freezed_annotation: ^2.0.3
   intl: ^0.17.0
-  life_hooks: ^0.0.16
+  life_hooks: ^0.0.18
   logger: ^1.1.0
   office_addin_helper: ^0.2.0
-  officejs: ^0.1.0
+  officejs: ^0.3.1
   provider: ^6.0.3
   rxdart: ^0.27.3
   shared_preferences: ^2.0.15
@@ -77,8 +77,11 @@ dependencies:
       path: packages/yandex_ads_sdk
       ref: develop
 
+dependency_overrides:
+  officejs: ^0.3.1
+
 dev_dependencies:
-  build_runner: ^2.1.11
+  build_runner: ^2.4.0
   # flutter_gen: ^5.1.0+1
   flutter_gen_runner: ^5.1.0+1
   flutter_launcher_icons:
@@ -90,12 +93,12 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
   freezed: ^2.3.2
   json_serializable: ^6.2.0
-  xsoulspace_lints: ^0.0.3
+  xsoulspace_lints: ^0.0.5
 
 # flutter pub run flutter_launcher_icons:main
 # generate for macos https://appicon.co
