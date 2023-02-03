@@ -26,6 +26,7 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
     required final List<String> columnNames,
     required final bool shouldUpdateValues,
     required final bool shouldAddNewValues,
+    required final bool shouldClearValueBeforeUpdate,
     @Default('') final String workbookName,
     @Default('') final String name,
     @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -50,5 +51,52 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
     final SetOptions? options,
   ) {
     return value.toJson();
+  }
+}
+
+/// This model is used only for runtime and should not be used for
+/// server-side api calls.
+@immutable
+@Freezed(
+  fromJson: true,
+  toJson: true,
+  equal: true,
+  addImplicitFinal: true,
+  copyWith: true,
+)
+class TablesSyncParamsRuntimeModel with _$TablesSyncParamsRuntimeModel {
+  @JsonSerializable(
+    explicitToJson: true,
+  )
+  const factory TablesSyncParamsRuntimeModel({
+    required final TablesSyncParamsModelId id,
+    required final String userId,
+    required final DateTime createdAt,
+    required final TableParamsModel sourceTable,
+    required final List<String> columnNames,
+    required final bool shouldUpdateValues,
+    required final bool shouldAddNewValues,
+    required final bool shouldClearValueBeforeUpdate,
+    @Default([]) final List<TableParamsModel> destinationTables,
+    @Default('') final String workbookName,
+    @Default('') final String name,
+    final DateTime? lastSyncAt,
+  }) = _TablesSyncParamsRuntimeModel;
+
+  const TablesSyncParamsRuntimeModel._();
+  factory TablesSyncParamsRuntimeModel.fromJson(final dynamic json) =>
+      _$TablesSyncParamsRuntimeModelFromJson(json as Map<String, dynamic>);
+
+  factory TablesSyncParamsRuntimeModel.fromModel({
+    required final TablesSyncParamsModel syncParams,
+    required final Map<TableParamsModelId, TableParamsModel> tablesParams,
+  }) {
+    final json = syncParams.toJson()
+      ..['sourceTable'] = tablesParams[syncParams.sourceTableId];
+    return TablesSyncParamsRuntimeModel.fromJson(json).copyWith(
+      destinationTables: syncParams.destinationTablesIds
+          .map((final tableId) => tablesParams[tableId]!)
+          .toList(),
+    );
   }
 }

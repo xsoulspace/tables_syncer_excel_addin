@@ -25,11 +25,9 @@ class TableParamsModel with _$TableParamsModel {
     @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
         required final DateTime createdAt,
     @Default('') final String name,
-    @Default(0) final int headerTopLeftColumnIndex,
-    @Default(0) final int headerTopLeftRowIndex,
-    @Default(0) final int dataTopLeftColumnIndex,
-    @Default(0) final int dataTopLeftRowIndex,
-    @Default(0) final int keyColumnIndex,
+    @Default(CellModel.zero) final CellModel headerTopLeftCell,
+    @Default(CellModel.zero) final CellModel dataTopLeftCell,
+    @Default('') final String keyColumnName,
   }) = _TableParamsModel;
 
   const TableParamsModel._();
@@ -51,6 +49,13 @@ class TableParamsModel with _$TableParamsModel {
   ) {
     return value.toJson();
   }
+
+  static final empty = TableParamsModel(
+    createdAt: DateTime.now(),
+    id: '',
+    userId: '',
+    workbookOriginName: '',
+  );
 }
 
 @immutable
@@ -75,17 +80,26 @@ class TableHeadersModel with _$TableHeadersModel {
 
 @immutable
 @Freezed(
-  fromJson: false,
-  toJson: false,
+  fromJson: true,
+  toJson: true,
   equal: true,
   addImplicitFinal: true,
   copyWith: true,
 )
 class CellModel with _$CellModel {
+  @JsonSerializable(
+    explicitToJson: true,
+  )
   const factory CellModel({
     required final int rowIndex,
     required final int columnIndex,
   }) = _CellModel;
+  const CellModel._();
+
+  factory CellModel.fromJson(final dynamic json) =>
+      _$CellModelFromJson(json as Map<String, dynamic>);
+
+  static const zero = CellModel(columnIndex: 0, rowIndex: 0);
 }
 
 @immutable

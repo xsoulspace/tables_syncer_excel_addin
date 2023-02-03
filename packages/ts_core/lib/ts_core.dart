@@ -6,6 +6,7 @@ export 'src/api/api.dart';
 export 'src/api_interceptors/api_interceptors.dart';
 export 'src/api_services/api_services.dart';
 export 'src/data_processors/data_processors.dart';
+export 'src/data_services/data_services.dart';
 export 'src/extensions/extensions.dart';
 export 'src/global_states/global_states.dart';
 export 'src/hooks/hooks.dart';

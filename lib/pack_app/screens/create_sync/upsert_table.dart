@@ -25,8 +25,7 @@ Future<TableParamsModel?> showUpsertTableDialog(
 class _DialogWindow extends HookWidget {
   const _DialogWindow({
     required this.initialTableParams,
-    final Key? key,
-  }) : super(key: key);
+  });
   final TableParamsModel? initialTableParams;
   @override
   Widget build(final BuildContext context) {
@@ -88,8 +87,8 @@ class _DialogWindow extends HookWidget {
             ),
             uiTheme.verticalBoxes.extraLarge,
             TextBox(
-              header: 'Keys Column Index',
-              controller: state.keysColumnIndexController,
+              header: 'Keys Column Name',
+              controller: state.keysColumnNameController,
             ),
             uiTheme.verticalBoxes.large,
             TextBox(

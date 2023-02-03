@@ -1,38 +1,38 @@
 part of 'upsert_table.dart';
 
-class CreateTableDiDto {
-  CreateTableDiDto.use(final Locator read) : apiServices = read();
+class UpsertTableDiDto {
+  UpsertTableDiDto.use(final Locator read) : apiServices = read();
   final ApiServices apiServices;
 }
 
-CreateTableState useTableParamsState({
+UpsertTableState useTableParamsState({
   required final Locator read,
   required final TableParamsModel? initialTableParams,
 }) =>
     use(
       ContextfulLifeHook(
-        debugLabel: 'CreateTableState',
-        state: CreateTableState(
-          diDto: CreateTableDiDto.use(read),
+        debugLabel: 'UpsertTableState',
+        state: UpsertTableState(
+          diDto: UpsertTableDiDto.use(read),
           initialTableParams: initialTableParams,
         ),
       ),
     );
 
-class CreateTableState extends ContextfulLifeState {
-  CreateTableState({
+class UpsertTableState extends ContextfulLifeState {
+  UpsertTableState({
     required this.diDto,
     required this.initialTableParams,
   });
   final TableParamsModel? initialTableParams;
-  final CreateTableDiDto diDto;
+  final UpsertTableDiDto diDto;
   final formHelper = FormHelper();
 
   final headerTopLeftRowIndexController = TextEditingController();
   final headerTopLeftColumnIndexController = TextEditingController();
   final dataTopLeftRowIndexController = TextEditingController();
   final dataTopLeftColumnIndexController = TextEditingController();
-  final keysColumnIndexController = TextEditingController();
+  final keysColumnNameController = TextEditingController();
   final nameController = TextEditingController();
 
   Future<void> onCreate() async {
@@ -44,12 +44,15 @@ class CreateTableState extends ContextfulLifeState {
           id: IdCreator.create(),
           // TODO(arenukvern): get workbook name
           workbookOriginName: '',
-          keyColumnIndex: keysColumnIndexController.text.toInt(),
-          dataTopLeftColumnIndex: dataTopLeftColumnIndexController.text.toInt(),
-          dataTopLeftRowIndex: dataTopLeftRowIndexController.text.toInt(),
-          headerTopLeftColumnIndex:
-              headerTopLeftColumnIndexController.text.toInt(),
-          headerTopLeftRowIndex: headerTopLeftRowIndexController.text.toInt(),
+          keyColumnName: keysColumnNameController.text,
+          dataTopLeftCell: CellModel(
+            columnIndex: dataTopLeftColumnIndexController.text.toInt(),
+            rowIndex: dataTopLeftRowIndexController.text.toInt(),
+          ),
+          headerTopLeftCell: CellModel(
+            columnIndex: headerTopLeftColumnIndexController.text.toInt(),
+            rowIndex: headerTopLeftRowIndexController.text.toInt(),
+          ),
           name: nameController.text,
         );
         await diDto.apiServices.tables.upsertTable(table);
@@ -64,7 +67,7 @@ class CreateTableState extends ContextfulLifeState {
     headerTopLeftColumnIndexController.dispose();
     dataTopLeftRowIndexController.dispose();
     dataTopLeftColumnIndexController.dispose();
-    keysColumnIndexController.dispose();
+    keysColumnNameController.dispose();
     nameController.dispose();
     formHelper.dispose();
     super.dispose();

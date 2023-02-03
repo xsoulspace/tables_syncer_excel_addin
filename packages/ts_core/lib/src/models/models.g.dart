@@ -105,11 +105,13 @@ _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String,
       createdAt: fromTimestamp(json['createdAt'] as Timestamp),
       name: json['name'] as String? ?? '',
-      headerTopLeftColumnIndex: json['headerTopLeftColumnIndex'] as int? ?? 0,
-      headerTopLeftRowIndex: json['headerTopLeftRowIndex'] as int? ?? 0,
-      dataTopLeftColumnIndex: json['dataTopLeftColumnIndex'] as int? ?? 0,
-      dataTopLeftRowIndex: json['dataTopLeftRowIndex'] as int? ?? 0,
-      keyColumnIndex: json['keyColumnIndex'] as int? ?? 0,
+      headerTopLeftCell: json['headerTopLeftCell'] == null
+          ? CellModel.zero
+          : CellModel.fromJson(json['headerTopLeftCell']),
+      dataTopLeftCell: json['dataTopLeftCell'] == null
+          ? CellModel.zero
+          : CellModel.fromJson(json['dataTopLeftCell']),
+      keyColumnName: json['keyColumnName'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
@@ -119,11 +121,20 @@ Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
       'userId': instance.userId,
       'createdAt': toTimestamp(instance.createdAt),
       'name': instance.name,
-      'headerTopLeftColumnIndex': instance.headerTopLeftColumnIndex,
-      'headerTopLeftRowIndex': instance.headerTopLeftRowIndex,
-      'dataTopLeftColumnIndex': instance.dataTopLeftColumnIndex,
-      'dataTopLeftRowIndex': instance.dataTopLeftRowIndex,
-      'keyColumnIndex': instance.keyColumnIndex,
+      'headerTopLeftCell': instance.headerTopLeftCell.toJson(),
+      'dataTopLeftCell': instance.dataTopLeftCell.toJson(),
+      'keyColumnName': instance.keyColumnName,
+    };
+
+_$_CellModel _$$_CellModelFromJson(Map<String, dynamic> json) => _$_CellModel(
+      rowIndex: json['rowIndex'] as int,
+      columnIndex: json['columnIndex'] as int,
+    );
+
+Map<String, dynamic> _$$_CellModelToJson(_$_CellModel instance) =>
+    <String, dynamic>{
+      'rowIndex': instance.rowIndex,
+      'columnIndex': instance.columnIndex,
     };
 
 _$_TablesSyncParamsModel _$$_TablesSyncParamsModelFromJson(
@@ -141,6 +152,8 @@ _$_TablesSyncParamsModel _$$_TablesSyncParamsModelFromJson(
           .toList(),
       shouldUpdateValues: json['shouldUpdateValues'] as bool,
       shouldAddNewValues: json['shouldAddNewValues'] as bool,
+      shouldClearValueBeforeUpdate:
+          json['shouldClearValueBeforeUpdate'] as bool,
       workbookName: json['workbookName'] as String? ?? '',
       name: json['name'] as String? ?? '',
       lastSyncAt: fromMaybeTimestamp(json['lastSyncAt'] as Timestamp?),
@@ -157,9 +170,53 @@ Map<String, dynamic> _$$_TablesSyncParamsModelToJson(
       'columnNames': instance.columnNames,
       'shouldUpdateValues': instance.shouldUpdateValues,
       'shouldAddNewValues': instance.shouldAddNewValues,
+      'shouldClearValueBeforeUpdate': instance.shouldClearValueBeforeUpdate,
       'workbookName': instance.workbookName,
       'name': instance.name,
       'lastSyncAt': toMaybeTimestamp(instance.lastSyncAt),
+    };
+
+_$_TablesSyncParamsRuntimeModel _$$_TablesSyncParamsRuntimeModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_TablesSyncParamsRuntimeModel(
+      id: json['id'] as String,
+      userId: json['userId'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      sourceTable: TableParamsModel.fromJson(json['sourceTable']),
+      columnNames: (json['columnNames'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      shouldUpdateValues: json['shouldUpdateValues'] as bool,
+      shouldAddNewValues: json['shouldAddNewValues'] as bool,
+      shouldClearValueBeforeUpdate:
+          json['shouldClearValueBeforeUpdate'] as bool,
+      destinationTables: (json['destinationTables'] as List<dynamic>?)
+              ?.map((e) => TableParamsModel.fromJson(e))
+              .toList() ??
+          const [],
+      workbookName: json['workbookName'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      lastSyncAt: json['lastSyncAt'] == null
+          ? null
+          : DateTime.parse(json['lastSyncAt'] as String),
+    );
+
+Map<String, dynamic> _$$_TablesSyncParamsRuntimeModelToJson(
+        _$_TablesSyncParamsRuntimeModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'sourceTable': instance.sourceTable.toJson(),
+      'columnNames': instance.columnNames,
+      'shouldUpdateValues': instance.shouldUpdateValues,
+      'shouldAddNewValues': instance.shouldAddNewValues,
+      'shouldClearValueBeforeUpdate': instance.shouldClearValueBeforeUpdate,
+      'destinationTables':
+          instance.destinationTables.map((e) => e.toJson()).toList(),
+      'workbookName': instance.workbookName,
+      'name': instance.name,
+      'lastSyncAt': instance.lastSyncAt?.toIso8601String(),
     };
 
 _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(

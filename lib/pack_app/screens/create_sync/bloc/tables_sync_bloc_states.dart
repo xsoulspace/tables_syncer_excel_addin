@@ -30,6 +30,7 @@ class LiveTablesSyncParamsState
     @Default({}) final Set<TableParamsModel> selectedDestinationTables,
     @Default(true) final bool shouldUpdateValues,
     @Default(true) final bool shouldAddNewValues,
+    @Default(false) final bool shouldClearValuesBeforeUpdate,
     final TableParamsModel? selectedSourceTable,
     final TablesSyncParamsModel? syncParams,
   }) = _LiveTablesSyncParamsState;
@@ -77,6 +78,7 @@ class LiveTablesSyncParamsState
       shouldAddNewValues: shouldAddNewValues,
       shouldUpdateValues: shouldUpdateValues,
       sourceTableId: selectedSourceTable!.id,
+      shouldClearValueBeforeUpdate: shouldClearValuesBeforeUpdate,
     );
   }
 

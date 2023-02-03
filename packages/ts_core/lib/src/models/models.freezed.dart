@@ -832,11 +832,9 @@ mixin _$TableParamsModel {
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get headerTopLeftColumnIndex => throw _privateConstructorUsedError;
-  int get headerTopLeftRowIndex => throw _privateConstructorUsedError;
-  int get dataTopLeftColumnIndex => throw _privateConstructorUsedError;
-  int get dataTopLeftRowIndex => throw _privateConstructorUsedError;
-  int get keyColumnIndex => throw _privateConstructorUsedError;
+  CellModel get headerTopLeftCell => throw _privateConstructorUsedError;
+  CellModel get dataTopLeftCell => throw _privateConstructorUsedError;
+  String get keyColumnName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -856,11 +854,12 @@ abstract class $TableParamsModelCopyWith<$Res> {
       String userId,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
       String name,
-      int headerTopLeftColumnIndex,
-      int headerTopLeftRowIndex,
-      int dataTopLeftColumnIndex,
-      int dataTopLeftRowIndex,
-      int keyColumnIndex});
+      CellModel headerTopLeftCell,
+      CellModel dataTopLeftCell,
+      String keyColumnName});
+
+  $CellModelCopyWith<$Res> get headerTopLeftCell;
+  $CellModelCopyWith<$Res> get dataTopLeftCell;
 }
 
 /// @nodoc
@@ -881,11 +880,9 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
     Object? userId = null,
     Object? createdAt = null,
     Object? name = null,
-    Object? headerTopLeftColumnIndex = null,
-    Object? headerTopLeftRowIndex = null,
-    Object? dataTopLeftColumnIndex = null,
-    Object? dataTopLeftRowIndex = null,
-    Object? keyColumnIndex = null,
+    Object? headerTopLeftCell = null,
+    Object? dataTopLeftCell = null,
+    Object? keyColumnName = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -908,27 +905,35 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      headerTopLeftColumnIndex: null == headerTopLeftColumnIndex
-          ? _value.headerTopLeftColumnIndex
-          : headerTopLeftColumnIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      headerTopLeftRowIndex: null == headerTopLeftRowIndex
-          ? _value.headerTopLeftRowIndex
-          : headerTopLeftRowIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      dataTopLeftColumnIndex: null == dataTopLeftColumnIndex
-          ? _value.dataTopLeftColumnIndex
-          : dataTopLeftColumnIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      dataTopLeftRowIndex: null == dataTopLeftRowIndex
-          ? _value.dataTopLeftRowIndex
-          : dataTopLeftRowIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      keyColumnIndex: null == keyColumnIndex
-          ? _value.keyColumnIndex
-          : keyColumnIndex // ignore: cast_nullable_to_non_nullable
-              as int,
+      headerTopLeftCell: null == headerTopLeftCell
+          ? _value.headerTopLeftCell
+          : headerTopLeftCell // ignore: cast_nullable_to_non_nullable
+              as CellModel,
+      dataTopLeftCell: null == dataTopLeftCell
+          ? _value.dataTopLeftCell
+          : dataTopLeftCell // ignore: cast_nullable_to_non_nullable
+              as CellModel,
+      keyColumnName: null == keyColumnName
+          ? _value.keyColumnName
+          : keyColumnName // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CellModelCopyWith<$Res> get headerTopLeftCell {
+    return $CellModelCopyWith<$Res>(_value.headerTopLeftCell, (value) {
+      return _then(_value.copyWith(headerTopLeftCell: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CellModelCopyWith<$Res> get dataTopLeftCell {
+    return $CellModelCopyWith<$Res>(_value.dataTopLeftCell, (value) {
+      return _then(_value.copyWith(dataTopLeftCell: value) as $Val);
+    });
   }
 }
 
@@ -946,11 +951,14 @@ abstract class _$$_TableParamsModelCopyWith<$Res>
       String userId,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
       String name,
-      int headerTopLeftColumnIndex,
-      int headerTopLeftRowIndex,
-      int dataTopLeftColumnIndex,
-      int dataTopLeftRowIndex,
-      int keyColumnIndex});
+      CellModel headerTopLeftCell,
+      CellModel dataTopLeftCell,
+      String keyColumnName});
+
+  @override
+  $CellModelCopyWith<$Res> get headerTopLeftCell;
+  @override
+  $CellModelCopyWith<$Res> get dataTopLeftCell;
 }
 
 /// @nodoc
@@ -969,11 +977,9 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
     Object? userId = null,
     Object? createdAt = null,
     Object? name = null,
-    Object? headerTopLeftColumnIndex = null,
-    Object? headerTopLeftRowIndex = null,
-    Object? dataTopLeftColumnIndex = null,
-    Object? dataTopLeftRowIndex = null,
-    Object? keyColumnIndex = null,
+    Object? headerTopLeftCell = null,
+    Object? dataTopLeftCell = null,
+    Object? keyColumnName = null,
   }) {
     return _then(_$_TableParamsModel(
       id: null == id
@@ -996,26 +1002,18 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      headerTopLeftColumnIndex: null == headerTopLeftColumnIndex
-          ? _value.headerTopLeftColumnIndex
-          : headerTopLeftColumnIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      headerTopLeftRowIndex: null == headerTopLeftRowIndex
-          ? _value.headerTopLeftRowIndex
-          : headerTopLeftRowIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      dataTopLeftColumnIndex: null == dataTopLeftColumnIndex
-          ? _value.dataTopLeftColumnIndex
-          : dataTopLeftColumnIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      dataTopLeftRowIndex: null == dataTopLeftRowIndex
-          ? _value.dataTopLeftRowIndex
-          : dataTopLeftRowIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      keyColumnIndex: null == keyColumnIndex
-          ? _value.keyColumnIndex
-          : keyColumnIndex // ignore: cast_nullable_to_non_nullable
-              as int,
+      headerTopLeftCell: null == headerTopLeftCell
+          ? _value.headerTopLeftCell
+          : headerTopLeftCell // ignore: cast_nullable_to_non_nullable
+              as CellModel,
+      dataTopLeftCell: null == dataTopLeftCell
+          ? _value.dataTopLeftCell
+          : dataTopLeftCell // ignore: cast_nullable_to_non_nullable
+              as CellModel,
+      keyColumnName: null == keyColumnName
+          ? _value.keyColumnName
+          : keyColumnName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -1031,11 +1029,9 @@ class _$_TableParamsModel extends _TableParamsModel {
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           required this.createdAt,
       this.name = '',
-      this.headerTopLeftColumnIndex = 0,
-      this.headerTopLeftRowIndex = 0,
-      this.dataTopLeftColumnIndex = 0,
-      this.dataTopLeftRowIndex = 0,
-      this.keyColumnIndex = 0})
+      this.headerTopLeftCell = CellModel.zero,
+      this.dataTopLeftCell = CellModel.zero,
+      this.keyColumnName = ''})
       : super._();
 
   factory _$_TableParamsModel.fromJson(Map<String, dynamic> json) =>
@@ -1055,23 +1051,17 @@ class _$_TableParamsModel extends _TableParamsModel {
   final String name;
   @override
   @JsonKey()
-  final int headerTopLeftColumnIndex;
+  final CellModel headerTopLeftCell;
   @override
   @JsonKey()
-  final int headerTopLeftRowIndex;
+  final CellModel dataTopLeftCell;
   @override
   @JsonKey()
-  final int dataTopLeftColumnIndex;
-  @override
-  @JsonKey()
-  final int dataTopLeftRowIndex;
-  @override
-  @JsonKey()
-  final int keyColumnIndex;
+  final String keyColumnName;
 
   @override
   String toString() {
-    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, createdAt: $createdAt, name: $name, headerTopLeftColumnIndex: $headerTopLeftColumnIndex, headerTopLeftRowIndex: $headerTopLeftRowIndex, dataTopLeftColumnIndex: $dataTopLeftColumnIndex, dataTopLeftRowIndex: $dataTopLeftRowIndex, keyColumnIndex: $keyColumnIndex)';
+    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, createdAt: $createdAt, name: $name, headerTopLeftCell: $headerTopLeftCell, dataTopLeftCell: $dataTopLeftCell, keyColumnName: $keyColumnName)';
   }
 
   @override
@@ -1086,33 +1076,18 @@ class _$_TableParamsModel extends _TableParamsModel {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(
-                    other.headerTopLeftColumnIndex, headerTopLeftColumnIndex) ||
-                other.headerTopLeftColumnIndex == headerTopLeftColumnIndex) &&
-            (identical(other.headerTopLeftRowIndex, headerTopLeftRowIndex) ||
-                other.headerTopLeftRowIndex == headerTopLeftRowIndex) &&
-            (identical(other.dataTopLeftColumnIndex, dataTopLeftColumnIndex) ||
-                other.dataTopLeftColumnIndex == dataTopLeftColumnIndex) &&
-            (identical(other.dataTopLeftRowIndex, dataTopLeftRowIndex) ||
-                other.dataTopLeftRowIndex == dataTopLeftRowIndex) &&
-            (identical(other.keyColumnIndex, keyColumnIndex) ||
-                other.keyColumnIndex == keyColumnIndex));
+            (identical(other.headerTopLeftCell, headerTopLeftCell) ||
+                other.headerTopLeftCell == headerTopLeftCell) &&
+            (identical(other.dataTopLeftCell, dataTopLeftCell) ||
+                other.dataTopLeftCell == dataTopLeftCell) &&
+            (identical(other.keyColumnName, keyColumnName) ||
+                other.keyColumnName == keyColumnName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      workbookOriginName,
-      userId,
-      createdAt,
-      name,
-      headerTopLeftColumnIndex,
-      headerTopLeftRowIndex,
-      dataTopLeftColumnIndex,
-      dataTopLeftRowIndex,
-      keyColumnIndex);
+  int get hashCode => Object.hash(runtimeType, id, workbookOriginName, userId,
+      createdAt, name, headerTopLeftCell, dataTopLeftCell, keyColumnName);
 
   @JsonKey(ignore: true)
   @override
@@ -1136,11 +1111,9 @@ abstract class _TableParamsModel extends TableParamsModel {
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           required final DateTime createdAt,
       final String name,
-      final int headerTopLeftColumnIndex,
-      final int headerTopLeftRowIndex,
-      final int dataTopLeftColumnIndex,
-      final int dataTopLeftRowIndex,
-      final int keyColumnIndex}) = _$_TableParamsModel;
+      final CellModel headerTopLeftCell,
+      final CellModel dataTopLeftCell,
+      final String keyColumnName}) = _$_TableParamsModel;
   const _TableParamsModel._() : super._();
 
   factory _TableParamsModel.fromJson(Map<String, dynamic> json) =
@@ -1158,15 +1131,11 @@ abstract class _TableParamsModel extends TableParamsModel {
   @override
   String get name;
   @override
-  int get headerTopLeftColumnIndex;
+  CellModel get headerTopLeftCell;
   @override
-  int get headerTopLeftRowIndex;
+  CellModel get dataTopLeftCell;
   @override
-  int get dataTopLeftColumnIndex;
-  @override
-  int get dataTopLeftRowIndex;
-  @override
-  int get keyColumnIndex;
+  String get keyColumnName;
   @override
   @JsonKey(ignore: true)
   _$$_TableParamsModelCopyWith<_$_TableParamsModel> get copyWith =>
@@ -1385,11 +1354,16 @@ abstract class _TableHeadersModel implements TableHeadersModel {
       throw _privateConstructorUsedError;
 }
 
+CellModel _$CellModelFromJson(Map<String, dynamic> json) {
+  return _CellModel.fromJson(json);
+}
+
 /// @nodoc
 mixin _$CellModel {
   int get rowIndex => throw _privateConstructorUsedError;
   int get columnIndex => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $CellModelCopyWith<CellModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1471,8 +1445,13 @@ class __$$_CellModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CellModel implements _CellModel {
-  const _$_CellModel({required this.rowIndex, required this.columnIndex});
+@JsonSerializable(explicitToJson: true)
+class _$_CellModel extends _CellModel {
+  const _$_CellModel({required this.rowIndex, required this.columnIndex})
+      : super._();
+
+  factory _$_CellModel.fromJson(Map<String, dynamic> json) =>
+      _$$_CellModelFromJson(json);
 
   @override
   final int rowIndex;
@@ -1495,6 +1474,7 @@ class _$_CellModel implements _CellModel {
                 other.columnIndex == columnIndex));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, rowIndex, columnIndex);
 
@@ -1503,12 +1483,23 @@ class _$_CellModel implements _CellModel {
   @pragma('vm:prefer-inline')
   _$$_CellModelCopyWith<_$_CellModel> get copyWith =>
       __$$_CellModelCopyWithImpl<_$_CellModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CellModelToJson(
+      this,
+    );
+  }
 }
 
-abstract class _CellModel implements CellModel {
+abstract class _CellModel extends CellModel {
   const factory _CellModel(
       {required final int rowIndex,
       required final int columnIndex}) = _$_CellModel;
+  const _CellModel._() : super._();
+
+  factory _CellModel.fromJson(Map<String, dynamic> json) =
+      _$_CellModel.fromJson;
 
   @override
   int get rowIndex;
@@ -1669,8 +1660,9 @@ abstract class _IndexedValueModel implements IndexedValueModel {
 
 /// @nodoc
 mixin _$IndexedKeysChangesModel {
-  IndexedKeysWithOriginMap get newValues => throw _privateConstructorUsedError;
-  IndexedKeysWithOriginMap get updatableValues =>
+  Map<String, IndexedValueModel> get newValues =>
+      throw _privateConstructorUsedError;
+  Map<String, IndexedValueModel> get updatableValues =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1685,8 +1677,8 @@ abstract class $IndexedKeysChangesModelCopyWith<$Res> {
       _$IndexedKeysChangesModelCopyWithImpl<$Res, IndexedKeysChangesModel>;
   @useResult
   $Res call(
-      {IndexedKeysWithOriginMap newValues,
-      IndexedKeysWithOriginMap updatableValues});
+      {Map<String, IndexedValueModel> newValues,
+      Map<String, IndexedValueModel> updatableValues});
 }
 
 /// @nodoc
@@ -1703,18 +1695,18 @@ class _$IndexedKeysChangesModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newValues = freezed,
-    Object? updatableValues = freezed,
+    Object? newValues = null,
+    Object? updatableValues = null,
   }) {
     return _then(_value.copyWith(
-      newValues: freezed == newValues
+      newValues: null == newValues
           ? _value.newValues
           : newValues // ignore: cast_nullable_to_non_nullable
-              as IndexedKeysWithOriginMap,
-      updatableValues: freezed == updatableValues
+              as Map<String, IndexedValueModel>,
+      updatableValues: null == updatableValues
           ? _value.updatableValues
           : updatableValues // ignore: cast_nullable_to_non_nullable
-              as IndexedKeysWithOriginMap,
+              as Map<String, IndexedValueModel>,
     ) as $Val);
   }
 }
@@ -1728,8 +1720,8 @@ abstract class _$$_IndexedKeysChangesModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {IndexedKeysWithOriginMap newValues,
-      IndexedKeysWithOriginMap updatableValues});
+      {Map<String, IndexedValueModel> newValues,
+      Map<String, IndexedValueModel> updatableValues});
 }
 
 /// @nodoc
@@ -1744,18 +1736,18 @@ class __$$_IndexedKeysChangesModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newValues = freezed,
-    Object? updatableValues = freezed,
+    Object? newValues = null,
+    Object? updatableValues = null,
   }) {
     return _then(_$_IndexedKeysChangesModel(
-      newValues: freezed == newValues
-          ? _value.newValues
+      newValues: null == newValues
+          ? _value._newValues
           : newValues // ignore: cast_nullable_to_non_nullable
-              as IndexedKeysWithOriginMap,
-      updatableValues: freezed == updatableValues
-          ? _value.updatableValues
+              as Map<String, IndexedValueModel>,
+      updatableValues: null == updatableValues
+          ? _value._updatableValues
           : updatableValues // ignore: cast_nullable_to_non_nullable
-              as IndexedKeysWithOriginMap,
+              as Map<String, IndexedValueModel>,
     ));
   }
 }
@@ -1764,12 +1756,26 @@ class __$$_IndexedKeysChangesModelCopyWithImpl<$Res>
 
 class _$_IndexedKeysChangesModel implements _IndexedKeysChangesModel {
   const _$_IndexedKeysChangesModel(
-      {required this.newValues, required this.updatableValues});
+      {required final Map<String, IndexedValueModel> newValues,
+      required final Map<String, IndexedValueModel> updatableValues})
+      : _newValues = newValues,
+        _updatableValues = updatableValues;
 
+  final Map<String, IndexedValueModel> _newValues;
   @override
-  final IndexedKeysWithOriginMap newValues;
+  Map<String, IndexedValueModel> get newValues {
+    if (_newValues is EqualUnmodifiableMapView) return _newValues;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_newValues);
+  }
+
+  final Map<String, IndexedValueModel> _updatableValues;
   @override
-  final IndexedKeysWithOriginMap updatableValues;
+  Map<String, IndexedValueModel> get updatableValues {
+    if (_updatableValues is EqualUnmodifiableMapView) return _updatableValues;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_updatableValues);
+  }
 
   @override
   String toString() {
@@ -1781,16 +1787,17 @@ class _$_IndexedKeysChangesModel implements _IndexedKeysChangesModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_IndexedKeysChangesModel &&
-            const DeepCollectionEquality().equals(other.newValues, newValues) &&
             const DeepCollectionEquality()
-                .equals(other.updatableValues, updatableValues));
+                .equals(other._newValues, _newValues) &&
+            const DeepCollectionEquality()
+                .equals(other._updatableValues, _updatableValues));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(newValues),
-      const DeepCollectionEquality().hash(updatableValues));
+      const DeepCollectionEquality().hash(_newValues),
+      const DeepCollectionEquality().hash(_updatableValues));
 
   @JsonKey(ignore: true)
   @override
@@ -1803,14 +1810,14 @@ class _$_IndexedKeysChangesModel implements _IndexedKeysChangesModel {
 
 abstract class _IndexedKeysChangesModel implements IndexedKeysChangesModel {
   const factory _IndexedKeysChangesModel(
-          {required final IndexedKeysWithOriginMap newValues,
-          required final IndexedKeysWithOriginMap updatableValues}) =
+          {required final Map<String, IndexedValueModel> newValues,
+          required final Map<String, IndexedValueModel> updatableValues}) =
       _$_IndexedKeysChangesModel;
 
   @override
-  IndexedKeysWithOriginMap get newValues;
+  Map<String, IndexedValueModel> get newValues;
   @override
-  IndexedKeysWithOriginMap get updatableValues;
+  Map<String, IndexedValueModel> get updatableValues;
   @override
   @JsonKey(ignore: true)
   _$$_IndexedKeysChangesModelCopyWith<_$_IndexedKeysChangesModel>
@@ -1833,6 +1840,7 @@ mixin _$TablesSyncParamsModel {
   List<String> get columnNames => throw _privateConstructorUsedError;
   bool get shouldUpdateValues => throw _privateConstructorUsedError;
   bool get shouldAddNewValues => throw _privateConstructorUsedError;
+  bool get shouldClearValueBeforeUpdate => throw _privateConstructorUsedError;
   String get workbookName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -1860,6 +1868,7 @@ abstract class $TablesSyncParamsModelCopyWith<$Res> {
       List<String> columnNames,
       bool shouldUpdateValues,
       bool shouldAddNewValues,
+      bool shouldClearValueBeforeUpdate,
       String workbookName,
       String name,
       @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -1888,6 +1897,7 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
     Object? columnNames = null,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
+    Object? shouldClearValueBeforeUpdate = null,
     Object? workbookName = null,
     Object? name = null,
     Object? lastSyncAt = freezed,
@@ -1925,6 +1935,10 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
           ? _value.shouldAddNewValues
           : shouldAddNewValues // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldClearValueBeforeUpdate: null == shouldClearValueBeforeUpdate
+          ? _value.shouldClearValueBeforeUpdate
+          : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
       workbookName: null == workbookName
           ? _value.workbookName
           : workbookName // ignore: cast_nullable_to_non_nullable
@@ -1959,6 +1973,7 @@ abstract class _$$_TablesSyncParamsModelCopyWith<$Res>
       List<String> columnNames,
       bool shouldUpdateValues,
       bool shouldAddNewValues,
+      bool shouldClearValueBeforeUpdate,
       String workbookName,
       String name,
       @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -1984,6 +1999,7 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
     Object? columnNames = null,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
+    Object? shouldClearValueBeforeUpdate = null,
     Object? workbookName = null,
     Object? name = null,
     Object? lastSyncAt = freezed,
@@ -2021,6 +2037,10 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
           ? _value.shouldAddNewValues
           : shouldAddNewValues // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldClearValueBeforeUpdate: null == shouldClearValueBeforeUpdate
+          ? _value.shouldClearValueBeforeUpdate
+          : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
       workbookName: null == workbookName
           ? _value.workbookName
           : workbookName // ignore: cast_nullable_to_non_nullable
@@ -2051,6 +2071,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
       required final List<String> columnNames,
       required this.shouldUpdateValues,
       required this.shouldAddNewValues,
+      required this.shouldClearValueBeforeUpdate,
       this.workbookName = '',
       this.name = '',
       @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -2093,6 +2114,8 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
   @override
   final bool shouldAddNewValues;
   @override
+  final bool shouldClearValueBeforeUpdate;
+  @override
   @JsonKey()
   final String workbookName;
   @override
@@ -2104,7 +2127,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
 
   @override
   String toString() {
-    return 'TablesSyncParamsModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
+    return 'TablesSyncParamsModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValueBeforeUpdate: $shouldClearValueBeforeUpdate, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
   }
 
   @override
@@ -2126,6 +2149,10 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
                 other.shouldUpdateValues == shouldUpdateValues) &&
             (identical(other.shouldAddNewValues, shouldAddNewValues) ||
                 other.shouldAddNewValues == shouldAddNewValues) &&
+            (identical(other.shouldClearValueBeforeUpdate,
+                    shouldClearValueBeforeUpdate) ||
+                other.shouldClearValueBeforeUpdate ==
+                    shouldClearValueBeforeUpdate) &&
             (identical(other.workbookName, workbookName) ||
                 other.workbookName == workbookName) &&
             (identical(other.name, name) || other.name == name) &&
@@ -2145,6 +2172,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
       const DeepCollectionEquality().hash(_columnNames),
       shouldUpdateValues,
       shouldAddNewValues,
+      shouldClearValueBeforeUpdate,
       workbookName,
       name,
       lastSyncAt);
@@ -2175,6 +2203,7 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
       required final List<String> columnNames,
       required final bool shouldUpdateValues,
       required final bool shouldAddNewValues,
+      required final bool shouldClearValueBeforeUpdate,
       final String workbookName,
       final String name,
       @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -2202,6 +2231,8 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
   @override
   bool get shouldAddNewValues;
   @override
+  bool get shouldClearValueBeforeUpdate;
+  @override
   String get workbookName;
   @override
   String get name;
@@ -2212,6 +2243,434 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
   @JsonKey(ignore: true)
   _$$_TablesSyncParamsModelCopyWith<_$_TablesSyncParamsModel> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+TablesSyncParamsRuntimeModel _$TablesSyncParamsRuntimeModelFromJson(
+    Map<String, dynamic> json) {
+  return _TablesSyncParamsRuntimeModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TablesSyncParamsRuntimeModel {
+  String get id => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  TableParamsModel get sourceTable => throw _privateConstructorUsedError;
+  List<String> get columnNames => throw _privateConstructorUsedError;
+  bool get shouldUpdateValues => throw _privateConstructorUsedError;
+  bool get shouldAddNewValues => throw _privateConstructorUsedError;
+  bool get shouldClearValueBeforeUpdate => throw _privateConstructorUsedError;
+  List<TableParamsModel> get destinationTables =>
+      throw _privateConstructorUsedError;
+  String get workbookName => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  DateTime? get lastSyncAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TablesSyncParamsRuntimeModelCopyWith<TablesSyncParamsRuntimeModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TablesSyncParamsRuntimeModelCopyWith<$Res> {
+  factory $TablesSyncParamsRuntimeModelCopyWith(
+          TablesSyncParamsRuntimeModel value,
+          $Res Function(TablesSyncParamsRuntimeModel) then) =
+      _$TablesSyncParamsRuntimeModelCopyWithImpl<$Res,
+          TablesSyncParamsRuntimeModel>;
+  @useResult
+  $Res call(
+      {String id,
+      String userId,
+      DateTime createdAt,
+      TableParamsModel sourceTable,
+      List<String> columnNames,
+      bool shouldUpdateValues,
+      bool shouldAddNewValues,
+      bool shouldClearValueBeforeUpdate,
+      List<TableParamsModel> destinationTables,
+      String workbookName,
+      String name,
+      DateTime? lastSyncAt});
+
+  $TableParamsModelCopyWith<$Res> get sourceTable;
+}
+
+/// @nodoc
+class _$TablesSyncParamsRuntimeModelCopyWithImpl<$Res,
+        $Val extends TablesSyncParamsRuntimeModel>
+    implements $TablesSyncParamsRuntimeModelCopyWith<$Res> {
+  _$TablesSyncParamsRuntimeModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? userId = null,
+    Object? createdAt = null,
+    Object? sourceTable = null,
+    Object? columnNames = null,
+    Object? shouldUpdateValues = null,
+    Object? shouldAddNewValues = null,
+    Object? shouldClearValueBeforeUpdate = null,
+    Object? destinationTables = null,
+    Object? workbookName = null,
+    Object? name = null,
+    Object? lastSyncAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      sourceTable: null == sourceTable
+          ? _value.sourceTable
+          : sourceTable // ignore: cast_nullable_to_non_nullable
+              as TableParamsModel,
+      columnNames: null == columnNames
+          ? _value.columnNames
+          : columnNames // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      shouldUpdateValues: null == shouldUpdateValues
+          ? _value.shouldUpdateValues
+          : shouldUpdateValues // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shouldAddNewValues: null == shouldAddNewValues
+          ? _value.shouldAddNewValues
+          : shouldAddNewValues // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shouldClearValueBeforeUpdate: null == shouldClearValueBeforeUpdate
+          ? _value.shouldClearValueBeforeUpdate
+          : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      destinationTables: null == destinationTables
+          ? _value.destinationTables
+          : destinationTables // ignore: cast_nullable_to_non_nullable
+              as List<TableParamsModel>,
+      workbookName: null == workbookName
+          ? _value.workbookName
+          : workbookName // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastSyncAt: freezed == lastSyncAt
+          ? _value.lastSyncAt
+          : lastSyncAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TableParamsModelCopyWith<$Res> get sourceTable {
+    return $TableParamsModelCopyWith<$Res>(_value.sourceTable, (value) {
+      return _then(_value.copyWith(sourceTable: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_TablesSyncParamsRuntimeModelCopyWith<$Res>
+    implements $TablesSyncParamsRuntimeModelCopyWith<$Res> {
+  factory _$$_TablesSyncParamsRuntimeModelCopyWith(
+          _$_TablesSyncParamsRuntimeModel value,
+          $Res Function(_$_TablesSyncParamsRuntimeModel) then) =
+      __$$_TablesSyncParamsRuntimeModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String userId,
+      DateTime createdAt,
+      TableParamsModel sourceTable,
+      List<String> columnNames,
+      bool shouldUpdateValues,
+      bool shouldAddNewValues,
+      bool shouldClearValueBeforeUpdate,
+      List<TableParamsModel> destinationTables,
+      String workbookName,
+      String name,
+      DateTime? lastSyncAt});
+
+  @override
+  $TableParamsModelCopyWith<$Res> get sourceTable;
+}
+
+/// @nodoc
+class __$$_TablesSyncParamsRuntimeModelCopyWithImpl<$Res>
+    extends _$TablesSyncParamsRuntimeModelCopyWithImpl<$Res,
+        _$_TablesSyncParamsRuntimeModel>
+    implements _$$_TablesSyncParamsRuntimeModelCopyWith<$Res> {
+  __$$_TablesSyncParamsRuntimeModelCopyWithImpl(
+      _$_TablesSyncParamsRuntimeModel _value,
+      $Res Function(_$_TablesSyncParamsRuntimeModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? userId = null,
+    Object? createdAt = null,
+    Object? sourceTable = null,
+    Object? columnNames = null,
+    Object? shouldUpdateValues = null,
+    Object? shouldAddNewValues = null,
+    Object? shouldClearValueBeforeUpdate = null,
+    Object? destinationTables = null,
+    Object? workbookName = null,
+    Object? name = null,
+    Object? lastSyncAt = freezed,
+  }) {
+    return _then(_$_TablesSyncParamsRuntimeModel(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      sourceTable: null == sourceTable
+          ? _value.sourceTable
+          : sourceTable // ignore: cast_nullable_to_non_nullable
+              as TableParamsModel,
+      columnNames: null == columnNames
+          ? _value._columnNames
+          : columnNames // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      shouldUpdateValues: null == shouldUpdateValues
+          ? _value.shouldUpdateValues
+          : shouldUpdateValues // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shouldAddNewValues: null == shouldAddNewValues
+          ? _value.shouldAddNewValues
+          : shouldAddNewValues // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shouldClearValueBeforeUpdate: null == shouldClearValueBeforeUpdate
+          ? _value.shouldClearValueBeforeUpdate
+          : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      destinationTables: null == destinationTables
+          ? _value._destinationTables
+          : destinationTables // ignore: cast_nullable_to_non_nullable
+              as List<TableParamsModel>,
+      workbookName: null == workbookName
+          ? _value.workbookName
+          : workbookName // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastSyncAt: freezed == lastSyncAt
+          ? _value.lastSyncAt
+          : lastSyncAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
+  const _$_TablesSyncParamsRuntimeModel(
+      {required this.id,
+      required this.userId,
+      required this.createdAt,
+      required this.sourceTable,
+      required final List<String> columnNames,
+      required this.shouldUpdateValues,
+      required this.shouldAddNewValues,
+      required this.shouldClearValueBeforeUpdate,
+      final List<TableParamsModel> destinationTables = const [],
+      this.workbookName = '',
+      this.name = '',
+      this.lastSyncAt})
+      : _columnNames = columnNames,
+        _destinationTables = destinationTables,
+        super._();
+
+  factory _$_TablesSyncParamsRuntimeModel.fromJson(Map<String, dynamic> json) =>
+      _$$_TablesSyncParamsRuntimeModelFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String userId;
+  @override
+  final DateTime createdAt;
+  @override
+  final TableParamsModel sourceTable;
+  final List<String> _columnNames;
+  @override
+  List<String> get columnNames {
+    if (_columnNames is EqualUnmodifiableListView) return _columnNames;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_columnNames);
+  }
+
+  @override
+  final bool shouldUpdateValues;
+  @override
+  final bool shouldAddNewValues;
+  @override
+  final bool shouldClearValueBeforeUpdate;
+  final List<TableParamsModel> _destinationTables;
+  @override
+  @JsonKey()
+  List<TableParamsModel> get destinationTables {
+    if (_destinationTables is EqualUnmodifiableListView)
+      return _destinationTables;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_destinationTables);
+  }
+
+  @override
+  @JsonKey()
+  final String workbookName;
+  @override
+  @JsonKey()
+  final String name;
+  @override
+  final DateTime? lastSyncAt;
+
+  @override
+  String toString() {
+    return 'TablesSyncParamsRuntimeModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTable: $sourceTable, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValueBeforeUpdate: $shouldClearValueBeforeUpdate, destinationTables: $destinationTables, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TablesSyncParamsRuntimeModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.sourceTable, sourceTable) ||
+                other.sourceTable == sourceTable) &&
+            const DeepCollectionEquality()
+                .equals(other._columnNames, _columnNames) &&
+            (identical(other.shouldUpdateValues, shouldUpdateValues) ||
+                other.shouldUpdateValues == shouldUpdateValues) &&
+            (identical(other.shouldAddNewValues, shouldAddNewValues) ||
+                other.shouldAddNewValues == shouldAddNewValues) &&
+            (identical(other.shouldClearValueBeforeUpdate,
+                    shouldClearValueBeforeUpdate) ||
+                other.shouldClearValueBeforeUpdate ==
+                    shouldClearValueBeforeUpdate) &&
+            const DeepCollectionEquality()
+                .equals(other._destinationTables, _destinationTables) &&
+            (identical(other.workbookName, workbookName) ||
+                other.workbookName == workbookName) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.lastSyncAt, lastSyncAt) ||
+                other.lastSyncAt == lastSyncAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      userId,
+      createdAt,
+      sourceTable,
+      const DeepCollectionEquality().hash(_columnNames),
+      shouldUpdateValues,
+      shouldAddNewValues,
+      shouldClearValueBeforeUpdate,
+      const DeepCollectionEquality().hash(_destinationTables),
+      workbookName,
+      name,
+      lastSyncAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TablesSyncParamsRuntimeModelCopyWith<_$_TablesSyncParamsRuntimeModel>
+      get copyWith => __$$_TablesSyncParamsRuntimeModelCopyWithImpl<
+          _$_TablesSyncParamsRuntimeModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TablesSyncParamsRuntimeModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TablesSyncParamsRuntimeModel
+    extends TablesSyncParamsRuntimeModel {
+  const factory _TablesSyncParamsRuntimeModel(
+      {required final String id,
+      required final String userId,
+      required final DateTime createdAt,
+      required final TableParamsModel sourceTable,
+      required final List<String> columnNames,
+      required final bool shouldUpdateValues,
+      required final bool shouldAddNewValues,
+      required final bool shouldClearValueBeforeUpdate,
+      final List<TableParamsModel> destinationTables,
+      final String workbookName,
+      final String name,
+      final DateTime? lastSyncAt}) = _$_TablesSyncParamsRuntimeModel;
+  const _TablesSyncParamsRuntimeModel._() : super._();
+
+  factory _TablesSyncParamsRuntimeModel.fromJson(Map<String, dynamic> json) =
+      _$_TablesSyncParamsRuntimeModel.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get userId;
+  @override
+  DateTime get createdAt;
+  @override
+  TableParamsModel get sourceTable;
+  @override
+  List<String> get columnNames;
+  @override
+  bool get shouldUpdateValues;
+  @override
+  bool get shouldAddNewValues;
+  @override
+  bool get shouldClearValueBeforeUpdate;
+  @override
+  List<TableParamsModel> get destinationTables;
+  @override
+  String get workbookName;
+  @override
+  String get name;
+  @override
+  DateTime? get lastSyncAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TablesSyncParamsRuntimeModelCopyWith<_$_TablesSyncParamsRuntimeModel>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) {

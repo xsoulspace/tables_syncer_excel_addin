@@ -11,12 +11,11 @@ class ColumnDataProcessor {
     required this.updatableSecondaryIndexedKeys,
     required this.indexedKeys,
   });
-  factory ColumnDataProcessor.loadKeys({
-    required final ExcelTableStringData columnValues,
+
+  factory ColumnDataProcessor.fromIndexedKeys({
+    required final UnquieIndexedKeysMap columnIndexedKeys,
     required final ExcelTableStringData secondaryColumnValues,
   }) {
-    final columnIndexedKeys =
-        DataIndexer.getColumnUniqueKeyBasedIndexes(data: columnValues);
     final secondaryColumnIndexedKeys =
         DataIndexer.getColumnKeyBasedIndexes(data: secondaryColumnValues);
     final comparationResult = DataComparer.compareKeys(
@@ -30,6 +29,19 @@ class ColumnDataProcessor {
       updatableSecondaryIndexedKeys: comparationResult.updatableValues,
     );
   }
+  factory ColumnDataProcessor.fromKeys({
+    required final ExcelTableStringData columnValues,
+    required final ExcelTableStringData secondaryColumnValues,
+  }) {
+    final columnIndexedKeys =
+        DataIndexer.getColumnUniqueKeyBasedIndexes(data: columnValues);
+
+    return ColumnDataProcessor.fromIndexedKeys(
+      columnIndexedKeys: columnIndexedKeys,
+      secondaryColumnValues: secondaryColumnValues,
+    );
+  }
+
   final UnquieIndexedKeysMap indexedKeys;
   final IndexedKeysWithOriginMap newSecondaryIndexedKeys;
   final IndexedKeysWithOriginMap updatableSecondaryIndexedKeys;
