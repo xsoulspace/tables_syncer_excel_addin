@@ -48,4 +48,9 @@ class HeaderDataProcessor {
   }
   final TableHeadersModel headers;
   final TableHeadersModel secondaryHeaders;
+
+  bool isSecondaryHeaderExists({
+    required final String name,
+  }) =>
+      secondaryHeaders.indexesMap.containsKey(name);
 }

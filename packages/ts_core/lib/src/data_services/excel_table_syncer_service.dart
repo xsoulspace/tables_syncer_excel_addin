@@ -11,7 +11,7 @@ class ExcelTableSyncerService {
   Future<void> syncTables({
     required final TablesSyncParamsRuntimeModel runtimeSyncParams,
   }) async {
-    final sourceRuntimeTable = ExcelRuntimeTable.fromParams(
+    final sourceRuntimeTable = ExcelRuntimeTable(
       params: runtimeSyncParams.sourceTable,
       excelTableApi: excelTableApi,
     );
@@ -22,7 +22,7 @@ class ExcelTableSyncerService {
     final sourceColumnsCache = <String, ExcelTableData>{};
 
     for (final destinationTableParams in runtimeSyncParams.destinationTables) {
-      final secondaryRuntimeTable = ExcelRuntimeTable.fromParams(
+      final secondaryRuntimeTable = ExcelRuntimeTable(
         params: destinationTableParams,
         excelTableApi: excelTableApi,
       );
@@ -46,14 +46,15 @@ class ExcelTableSyncerService {
       // }
       for (final columnName in runtimeSyncParams.columnNames) {
         if (headersProcessor.isSecondaryHeaderExists(name: columnName)) {
-          final secondaryColumnValues = secondaryRuntimeTable.loadColumnValues(
+          final secondaryColumnValues =
+              await secondaryRuntimeTable.loadColumnValues(
             name: columnName,
             keepRangeAlive: true,
           );
 
           /// test it that it will work with the massive amount of data
           final columnValues = sourceColumnsCache[columnName] ??=
-              sourceRuntimeTable.loadColumnValues(name: columnName);
+              await sourceRuntimeTable.loadColumnValues(name: columnName);
 
           final updatedSecondaryData = columnDataProcessor.updateColumnData(
             shouldUpdateValues: runtimeSyncParams.shouldUpdateValues,
