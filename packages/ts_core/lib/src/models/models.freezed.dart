@@ -1173,6 +1173,650 @@ abstract class _TableParamsModel extends TableParamsModel {
       throw _privateConstructorUsedError;
 }
 
+/// @nodoc
+mixin _$TableHeadersModel {
+  /// For example:
+  /// [
+  ///   ['ids', 'color', 'quantity'],
+  /// ]
+  List<List<String>> get data => throw _privateConstructorUsedError;
+  CellModel get topLeftCell => throw _privateConstructorUsedError;
+  Map<String, int> get indexesMap => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $TableHeadersModelCopyWith<TableHeadersModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TableHeadersModelCopyWith<$Res> {
+  factory $TableHeadersModelCopyWith(
+          TableHeadersModel value, $Res Function(TableHeadersModel) then) =
+      _$TableHeadersModelCopyWithImpl<$Res, TableHeadersModel>;
+  @useResult
+  $Res call(
+      {List<List<String>> data,
+      CellModel topLeftCell,
+      Map<String, int> indexesMap});
+
+  $CellModelCopyWith<$Res> get topLeftCell;
+}
+
+/// @nodoc
+class _$TableHeadersModelCopyWithImpl<$Res, $Val extends TableHeadersModel>
+    implements $TableHeadersModelCopyWith<$Res> {
+  _$TableHeadersModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+    Object? topLeftCell = null,
+    Object? indexesMap = null,
+  }) {
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<List<String>>,
+      topLeftCell: null == topLeftCell
+          ? _value.topLeftCell
+          : topLeftCell // ignore: cast_nullable_to_non_nullable
+              as CellModel,
+      indexesMap: null == indexesMap
+          ? _value.indexesMap
+          : indexesMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CellModelCopyWith<$Res> get topLeftCell {
+    return $CellModelCopyWith<$Res>(_value.topLeftCell, (value) {
+      return _then(_value.copyWith(topLeftCell: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_TableHeadersModelCopyWith<$Res>
+    implements $TableHeadersModelCopyWith<$Res> {
+  factory _$$_TableHeadersModelCopyWith(_$_TableHeadersModel value,
+          $Res Function(_$_TableHeadersModel) then) =
+      __$$_TableHeadersModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<List<String>> data,
+      CellModel topLeftCell,
+      Map<String, int> indexesMap});
+
+  @override
+  $CellModelCopyWith<$Res> get topLeftCell;
+}
+
+/// @nodoc
+class __$$_TableHeadersModelCopyWithImpl<$Res>
+    extends _$TableHeadersModelCopyWithImpl<$Res, _$_TableHeadersModel>
+    implements _$$_TableHeadersModelCopyWith<$Res> {
+  __$$_TableHeadersModelCopyWithImpl(
+      _$_TableHeadersModel _value, $Res Function(_$_TableHeadersModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+    Object? topLeftCell = null,
+    Object? indexesMap = null,
+  }) {
+    return _then(_$_TableHeadersModel(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<List<String>>,
+      topLeftCell: null == topLeftCell
+          ? _value.topLeftCell
+          : topLeftCell // ignore: cast_nullable_to_non_nullable
+              as CellModel,
+      indexesMap: null == indexesMap
+          ? _value._indexesMap
+          : indexesMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_TableHeadersModel implements _TableHeadersModel {
+  const _$_TableHeadersModel(
+      {required final List<List<String>> data,
+      required this.topLeftCell,
+      required final Map<String, int> indexesMap})
+      : _data = data,
+        _indexesMap = indexesMap;
+
+  /// For example:
+  /// [
+  ///   ['ids', 'color', 'quantity'],
+  /// ]
+  final List<List<String>> _data;
+
+  /// For example:
+  /// [
+  ///   ['ids', 'color', 'quantity'],
+  /// ]
+  @override
+  List<List<String>> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  final CellModel topLeftCell;
+  final Map<String, int> _indexesMap;
+  @override
+  Map<String, int> get indexesMap {
+    if (_indexesMap is EqualUnmodifiableMapView) return _indexesMap;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_indexesMap);
+  }
+
+  @override
+  String toString() {
+    return 'TableHeadersModel(data: $data, topLeftCell: $topLeftCell, indexesMap: $indexesMap)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TableHeadersModel &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.topLeftCell, topLeftCell) ||
+                other.topLeftCell == topLeftCell) &&
+            const DeepCollectionEquality()
+                .equals(other._indexesMap, _indexesMap));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_data),
+      topLeftCell,
+      const DeepCollectionEquality().hash(_indexesMap));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TableHeadersModelCopyWith<_$_TableHeadersModel> get copyWith =>
+      __$$_TableHeadersModelCopyWithImpl<_$_TableHeadersModel>(
+          this, _$identity);
+}
+
+abstract class _TableHeadersModel implements TableHeadersModel {
+  const factory _TableHeadersModel(
+      {required final List<List<String>> data,
+      required final CellModel topLeftCell,
+      required final Map<String, int> indexesMap}) = _$_TableHeadersModel;
+
+  @override
+
+  /// For example:
+  /// [
+  ///   ['ids', 'color', 'quantity'],
+  /// ]
+  List<List<String>> get data;
+  @override
+  CellModel get topLeftCell;
+  @override
+  Map<String, int> get indexesMap;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TableHeadersModelCopyWith<_$_TableHeadersModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$CellModel {
+  int get rowIndex => throw _privateConstructorUsedError;
+  int get columnIndex => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $CellModelCopyWith<CellModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CellModelCopyWith<$Res> {
+  factory $CellModelCopyWith(CellModel value, $Res Function(CellModel) then) =
+      _$CellModelCopyWithImpl<$Res, CellModel>;
+  @useResult
+  $Res call({int rowIndex, int columnIndex});
+}
+
+/// @nodoc
+class _$CellModelCopyWithImpl<$Res, $Val extends CellModel>
+    implements $CellModelCopyWith<$Res> {
+  _$CellModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rowIndex = null,
+    Object? columnIndex = null,
+  }) {
+    return _then(_value.copyWith(
+      rowIndex: null == rowIndex
+          ? _value.rowIndex
+          : rowIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      columnIndex: null == columnIndex
+          ? _value.columnIndex
+          : columnIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_CellModelCopyWith<$Res> implements $CellModelCopyWith<$Res> {
+  factory _$$_CellModelCopyWith(
+          _$_CellModel value, $Res Function(_$_CellModel) then) =
+      __$$_CellModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int rowIndex, int columnIndex});
+}
+
+/// @nodoc
+class __$$_CellModelCopyWithImpl<$Res>
+    extends _$CellModelCopyWithImpl<$Res, _$_CellModel>
+    implements _$$_CellModelCopyWith<$Res> {
+  __$$_CellModelCopyWithImpl(
+      _$_CellModel _value, $Res Function(_$_CellModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rowIndex = null,
+    Object? columnIndex = null,
+  }) {
+    return _then(_$_CellModel(
+      rowIndex: null == rowIndex
+          ? _value.rowIndex
+          : rowIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      columnIndex: null == columnIndex
+          ? _value.columnIndex
+          : columnIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_CellModel implements _CellModel {
+  const _$_CellModel({required this.rowIndex, required this.columnIndex});
+
+  @override
+  final int rowIndex;
+  @override
+  final int columnIndex;
+
+  @override
+  String toString() {
+    return 'CellModel(rowIndex: $rowIndex, columnIndex: $columnIndex)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CellModel &&
+            (identical(other.rowIndex, rowIndex) ||
+                other.rowIndex == rowIndex) &&
+            (identical(other.columnIndex, columnIndex) ||
+                other.columnIndex == columnIndex));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, rowIndex, columnIndex);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CellModelCopyWith<_$_CellModel> get copyWith =>
+      __$$_CellModelCopyWithImpl<_$_CellModel>(this, _$identity);
+}
+
+abstract class _CellModel implements CellModel {
+  const factory _CellModel(
+      {required final int rowIndex,
+      required final int columnIndex}) = _$_CellModel;
+
+  @override
+  int get rowIndex;
+  @override
+  int get columnIndex;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CellModelCopyWith<_$_CellModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$IndexedValueModel {
+  List<int> get rowIndexes => throw _privateConstructorUsedError;
+  int get originRowIndex => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $IndexedValueModelCopyWith<IndexedValueModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $IndexedValueModelCopyWith<$Res> {
+  factory $IndexedValueModelCopyWith(
+          IndexedValueModel value, $Res Function(IndexedValueModel) then) =
+      _$IndexedValueModelCopyWithImpl<$Res, IndexedValueModel>;
+  @useResult
+  $Res call({List<int> rowIndexes, int originRowIndex});
+}
+
+/// @nodoc
+class _$IndexedValueModelCopyWithImpl<$Res, $Val extends IndexedValueModel>
+    implements $IndexedValueModelCopyWith<$Res> {
+  _$IndexedValueModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rowIndexes = null,
+    Object? originRowIndex = null,
+  }) {
+    return _then(_value.copyWith(
+      rowIndexes: null == rowIndexes
+          ? _value.rowIndexes
+          : rowIndexes // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      originRowIndex: null == originRowIndex
+          ? _value.originRowIndex
+          : originRowIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_IndexedValueModelCopyWith<$Res>
+    implements $IndexedValueModelCopyWith<$Res> {
+  factory _$$_IndexedValueModelCopyWith(_$_IndexedValueModel value,
+          $Res Function(_$_IndexedValueModel) then) =
+      __$$_IndexedValueModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<int> rowIndexes, int originRowIndex});
+}
+
+/// @nodoc
+class __$$_IndexedValueModelCopyWithImpl<$Res>
+    extends _$IndexedValueModelCopyWithImpl<$Res, _$_IndexedValueModel>
+    implements _$$_IndexedValueModelCopyWith<$Res> {
+  __$$_IndexedValueModelCopyWithImpl(
+      _$_IndexedValueModel _value, $Res Function(_$_IndexedValueModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rowIndexes = null,
+    Object? originRowIndex = null,
+  }) {
+    return _then(_$_IndexedValueModel(
+      rowIndexes: null == rowIndexes
+          ? _value._rowIndexes
+          : rowIndexes // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      originRowIndex: null == originRowIndex
+          ? _value.originRowIndex
+          : originRowIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_IndexedValueModel implements _IndexedValueModel {
+  const _$_IndexedValueModel(
+      {required final List<int> rowIndexes, required this.originRowIndex})
+      : _rowIndexes = rowIndexes;
+
+  final List<int> _rowIndexes;
+  @override
+  List<int> get rowIndexes {
+    if (_rowIndexes is EqualUnmodifiableListView) return _rowIndexes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_rowIndexes);
+  }
+
+  @override
+  final int originRowIndex;
+
+  @override
+  String toString() {
+    return 'IndexedValueModel(rowIndexes: $rowIndexes, originRowIndex: $originRowIndex)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IndexedValueModel &&
+            const DeepCollectionEquality()
+                .equals(other._rowIndexes, _rowIndexes) &&
+            (identical(other.originRowIndex, originRowIndex) ||
+                other.originRowIndex == originRowIndex));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_rowIndexes), originRowIndex);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_IndexedValueModelCopyWith<_$_IndexedValueModel> get copyWith =>
+      __$$_IndexedValueModelCopyWithImpl<_$_IndexedValueModel>(
+          this, _$identity);
+}
+
+abstract class _IndexedValueModel implements IndexedValueModel {
+  const factory _IndexedValueModel(
+      {required final List<int> rowIndexes,
+      required final int originRowIndex}) = _$_IndexedValueModel;
+
+  @override
+  List<int> get rowIndexes;
+  @override
+  int get originRowIndex;
+  @override
+  @JsonKey(ignore: true)
+  _$$_IndexedValueModelCopyWith<_$_IndexedValueModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$IndexedKeysChangesModel {
+  IndexedKeysWithOriginMap get newValues => throw _privateConstructorUsedError;
+  IndexedKeysWithOriginMap get updatableValues =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $IndexedKeysChangesModelCopyWith<IndexedKeysChangesModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $IndexedKeysChangesModelCopyWith<$Res> {
+  factory $IndexedKeysChangesModelCopyWith(IndexedKeysChangesModel value,
+          $Res Function(IndexedKeysChangesModel) then) =
+      _$IndexedKeysChangesModelCopyWithImpl<$Res, IndexedKeysChangesModel>;
+  @useResult
+  $Res call(
+      {IndexedKeysWithOriginMap newValues,
+      IndexedKeysWithOriginMap updatableValues});
+}
+
+/// @nodoc
+class _$IndexedKeysChangesModelCopyWithImpl<$Res,
+        $Val extends IndexedKeysChangesModel>
+    implements $IndexedKeysChangesModelCopyWith<$Res> {
+  _$IndexedKeysChangesModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? newValues = freezed,
+    Object? updatableValues = freezed,
+  }) {
+    return _then(_value.copyWith(
+      newValues: freezed == newValues
+          ? _value.newValues
+          : newValues // ignore: cast_nullable_to_non_nullable
+              as IndexedKeysWithOriginMap,
+      updatableValues: freezed == updatableValues
+          ? _value.updatableValues
+          : updatableValues // ignore: cast_nullable_to_non_nullable
+              as IndexedKeysWithOriginMap,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_IndexedKeysChangesModelCopyWith<$Res>
+    implements $IndexedKeysChangesModelCopyWith<$Res> {
+  factory _$$_IndexedKeysChangesModelCopyWith(_$_IndexedKeysChangesModel value,
+          $Res Function(_$_IndexedKeysChangesModel) then) =
+      __$$_IndexedKeysChangesModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {IndexedKeysWithOriginMap newValues,
+      IndexedKeysWithOriginMap updatableValues});
+}
+
+/// @nodoc
+class __$$_IndexedKeysChangesModelCopyWithImpl<$Res>
+    extends _$IndexedKeysChangesModelCopyWithImpl<$Res,
+        _$_IndexedKeysChangesModel>
+    implements _$$_IndexedKeysChangesModelCopyWith<$Res> {
+  __$$_IndexedKeysChangesModelCopyWithImpl(_$_IndexedKeysChangesModel _value,
+      $Res Function(_$_IndexedKeysChangesModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? newValues = freezed,
+    Object? updatableValues = freezed,
+  }) {
+    return _then(_$_IndexedKeysChangesModel(
+      newValues: freezed == newValues
+          ? _value.newValues
+          : newValues // ignore: cast_nullable_to_non_nullable
+              as IndexedKeysWithOriginMap,
+      updatableValues: freezed == updatableValues
+          ? _value.updatableValues
+          : updatableValues // ignore: cast_nullable_to_non_nullable
+              as IndexedKeysWithOriginMap,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_IndexedKeysChangesModel implements _IndexedKeysChangesModel {
+  const _$_IndexedKeysChangesModel(
+      {required this.newValues, required this.updatableValues});
+
+  @override
+  final IndexedKeysWithOriginMap newValues;
+  @override
+  final IndexedKeysWithOriginMap updatableValues;
+
+  @override
+  String toString() {
+    return 'IndexedKeysChangesModel(newValues: $newValues, updatableValues: $updatableValues)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IndexedKeysChangesModel &&
+            const DeepCollectionEquality().equals(other.newValues, newValues) &&
+            const DeepCollectionEquality()
+                .equals(other.updatableValues, updatableValues));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(newValues),
+      const DeepCollectionEquality().hash(updatableValues));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_IndexedKeysChangesModelCopyWith<_$_IndexedKeysChangesModel>
+      get copyWith =>
+          __$$_IndexedKeysChangesModelCopyWithImpl<_$_IndexedKeysChangesModel>(
+              this, _$identity);
+}
+
+abstract class _IndexedKeysChangesModel implements IndexedKeysChangesModel {
+  const factory _IndexedKeysChangesModel(
+          {required final IndexedKeysWithOriginMap newValues,
+          required final IndexedKeysWithOriginMap updatableValues}) =
+      _$_IndexedKeysChangesModel;
+
+  @override
+  IndexedKeysWithOriginMap get newValues;
+  @override
+  IndexedKeysWithOriginMap get updatableValues;
+  @override
+  @JsonKey(ignore: true)
+  _$$_IndexedKeysChangesModelCopyWith<_$_IndexedKeysChangesModel>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 TablesSyncParamsModel _$TablesSyncParamsModelFromJson(
     Map<String, dynamic> json) {
   return _TablesSyncParamsModel.fromJson(json);
@@ -1713,15 +2357,14 @@ class _$_UserModel extends _UserModel {
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
             (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality().equals(other.locale, locale) &&
+            (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.themeMode, themeMode) ||
                 other.themeMode == themeMode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, const DeepCollectionEquality().hash(locale), themeMode);
+  int get hashCode => Object.hash(runtimeType, id, locale, themeMode);
 
   @JsonKey(ignore: true)
   @override

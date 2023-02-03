@@ -3,6 +3,8 @@
 part of 'models.dart';
 
 typedef TableParamsModelId = String;
+typedef ExcelTableData = List<List<dynamic>>;
+typedef ExcelTableStringData = List<List<String>>;
 
 @immutable
 @Freezed(
@@ -49,4 +51,69 @@ class TableParamsModel with _$TableParamsModel {
   ) {
     return value.toJson();
   }
+}
+
+@immutable
+@Freezed(
+  fromJson: false,
+  toJson: false,
+  equal: true,
+  addImplicitFinal: true,
+  copyWith: true,
+)
+class TableHeadersModel with _$TableHeadersModel {
+  const factory TableHeadersModel({
+    /// For example:
+    /// [
+    ///   ['ids', 'color', 'quantity'],
+    /// ]
+    required final List<List<String>> data,
+    required final CellModel topLeftCell,
+    required final Map<String, int> indexesMap,
+  }) = _TableHeadersModel;
+}
+
+@immutable
+@Freezed(
+  fromJson: false,
+  toJson: false,
+  equal: true,
+  addImplicitFinal: true,
+  copyWith: true,
+)
+class CellModel with _$CellModel {
+  const factory CellModel({
+    required final int rowIndex,
+    required final int columnIndex,
+  }) = _CellModel;
+}
+
+@immutable
+@Freezed(
+  fromJson: false,
+  toJson: false,
+  equal: true,
+  addImplicitFinal: true,
+  copyWith: true,
+)
+class IndexedValueModel with _$IndexedValueModel {
+  const factory IndexedValueModel({
+    required final List<int> rowIndexes,
+    required final int originRowIndex,
+  }) = _IndexedValueModel;
+}
+
+@immutable
+@Freezed(
+  fromJson: false,
+  toJson: false,
+  equal: true,
+  addImplicitFinal: true,
+  copyWith: true,
+)
+class IndexedKeysChangesModel with _$IndexedKeysChangesModel {
+  const factory IndexedKeysChangesModel({
+    required final IndexedKeysWithOriginMap newValues,
+    required final IndexedKeysWithOriginMap updatableValues,
+  }) = _IndexedKeysChangesModel;
 }
