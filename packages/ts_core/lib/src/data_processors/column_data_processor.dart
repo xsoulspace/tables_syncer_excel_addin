@@ -14,10 +14,8 @@ class ColumnDataProcessor {
 
   factory ColumnDataProcessor.fromIndexedKeys({
     required final UnquieIndexedKeysMap columnIndexedKeys,
-    required final ExcelTableStringData secondaryColumnValues,
+    required final IndexedKeysMap secondaryColumnIndexedKeys,
   }) {
-    final secondaryColumnIndexedKeys =
-        DataIndexer.getColumnKeyBasedIndexes(data: secondaryColumnValues);
     final comparationResult = DataComparer.compareKeys(
       indexedKeys: columnIndexedKeys,
       secondaryIndexedKeys: secondaryColumnIndexedKeys,
@@ -35,10 +33,12 @@ class ColumnDataProcessor {
   }) {
     final columnIndexedKeys =
         DataIndexer.getColumnUniqueKeyBasedIndexes(data: columnValues);
+    final secondaryColumnIndexedKeys =
+        DataIndexer.getColumnKeyBasedIndexes(data: secondaryColumnValues);
 
     return ColumnDataProcessor.fromIndexedKeys(
       columnIndexedKeys: columnIndexedKeys,
-      secondaryColumnValues: secondaryColumnValues,
+      secondaryColumnIndexedKeys: secondaryColumnIndexedKeys,
     );
   }
 

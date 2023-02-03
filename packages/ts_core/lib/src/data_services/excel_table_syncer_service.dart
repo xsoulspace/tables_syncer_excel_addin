@@ -11,32 +11,30 @@ class ExcelTableSyncerService {
   Future<void> syncTables({
     required final TablesSyncParamsRuntimeModel runtimeSyncParams,
   }) async {
-    final sourceRuntimeTable = ExcelRuntimeTable(
+    final sourceRuntimeTable = await ExcelRuntimeTable.load(
       params: runtimeSyncParams.sourceTable,
       excelTableApi: excelTableApi,
     );
-    final headers = await sourceRuntimeTable.loadHeaders();
     final sourceColumnIndexedKeys =
-        await sourceRuntimeTable.loadKeysColumnIndexedValues();
+        await sourceRuntimeTable.loadKeysColumnIndexedUniqueValues();
 
     final sourceColumnsCache = <String, ExcelTableData>{};
 
     for (final destinationTableParams in runtimeSyncParams.destinationTables) {
-      final secondaryRuntimeTable = ExcelRuntimeTable(
+      final secondaryRuntimeTable = await ExcelRuntimeTable.load(
         params: destinationTableParams,
         excelTableApi: excelTableApi,
       );
-      final secondaryHeaders = await secondaryRuntimeTable.loadHeaders();
       final headersProcessor = HeaderDataProcessor.loadWithIndexedHeaders(
-        headers: headers,
-        secondaryHeaders: secondaryHeaders,
+        headers: sourceRuntimeTable.headers,
+        secondaryHeaders: secondaryRuntimeTable.headers,
       );
 
-      final secondaryKeysColumnValues =
-          await secondaryRuntimeTable.loadKeysColumnValues();
+      final secondaryColumnIndexedKeys =
+          await secondaryRuntimeTable.loadKeysColumnIndexedValues();
       final columnDataProcessor = ColumnDataProcessor.fromIndexedKeys(
         columnIndexedKeys: sourceColumnIndexedKeys,
-        secondaryColumnValues: secondaryKeysColumnValues,
+        secondaryColumnIndexedKeys: secondaryColumnIndexedKeys,
       );
 
       // in this place can be implemented logic to insert non-existing headers.

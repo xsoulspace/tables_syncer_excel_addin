@@ -36,14 +36,20 @@ class HeaderDataProcessor {
         return headers;
       }
     }();
-    final secondaryHeadersIndexes =
-        DataIndexer.getRowKeyBasedIndexes(data: secondaryHeaders.data);
-
+    final updatedSecondaryHeadersIndexes = () {
+      if (shouldUpdateHeadersIndexes) {
+        final secondaryHeadersIndexes =
+            DataIndexer.getRowKeyBasedIndexes(data: secondaryHeaders.data);
+        return secondaryHeaders.copyWith(
+          indexesMap: secondaryHeadersIndexes,
+        );
+      } else {
+        return secondaryHeaders;
+      }
+    }();
     return HeaderDataProcessor._(
       headers: updatedHeaders,
-      secondaryHeaders: secondaryHeaders.copyWith(
-        indexesMap: secondaryHeadersIndexes,
-      ),
+      secondaryHeaders: updatedSecondaryHeadersIndexes,
     );
   }
   final TableHeadersModel headers;

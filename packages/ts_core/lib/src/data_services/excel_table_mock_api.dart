@@ -2,7 +2,7 @@ import '../models/models.dart';
 
 abstract class ExcelTableApi {}
 
-class ExcelTablesMockApi extends ExcelTableApi {
+class ExcelTablesMockApi implements ExcelTableApi {
   ExcelTablesMockApi({
     required this.tables,
     required this.tablesHeaders,
