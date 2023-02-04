@@ -16,17 +16,11 @@ class ExcelRuntimeTable {
     required final ExcelTableApi excelTableApi,
     final bool indexateHeaders = true,
   }) async {
-    TableHeadersModel headers = await loadHeaders(
+    final headers = await loadHeaders(
       excelTableApi: excelTableApi,
       params: params,
     );
-    if (indexateHeaders) {
-      headers = headers.copyWith(
-        indexesMap: DataIndexer.getColumnUniqueKeyBasedIndexes(
-          data: headers.data,
-        ),
-      );
-    }
+
     return ExcelRuntimeTable._(
       excelTableApi: excelTableApi,
       headers: headers,
@@ -37,11 +31,28 @@ class ExcelRuntimeTable {
   static Future<TableHeadersModel> loadHeaders({
     required final ExcelTableApi excelTableApi,
     required final TableParamsModel params,
+    final bool indexateHeaders = true,
   }) async {
     final rowRange = await excelTableApi.getRowRange(
       topLeftCell: params.headerTopLeftCell,
+      keepRangeAlive: false,
     );
-    excelTableApi.loadRangeValues(range: rowRange);
+    final values = await excelTableApi.loadRangeValues(range: rowRange);
+
+    final headers = TableHeadersModel(
+      data: List.castFrom(values),
+      indexesMap: const {},
+      topLeftCell: params.headerTopLeftCell,
+    );
+    if (indexateHeaders) {
+      return headers.copyWith(
+        indexesMap: DataIndexer.getColumnUniqueKeyBasedIndexes(
+          data: headers.data,
+        ),
+      );
+    } else {
+      return headers;
+    }
   }
 
   // key - columnName
@@ -65,10 +76,11 @@ class ExcelRuntimeTable {
     required final String name,
     final bool keepRangeAlive = false,
   }) async {
-    final columnIndex = headers.indexesMap[name];
+    final columnIndex = headers.indexesMap[name]!;
     final liveRange = await excelTableApi.getColumnRange(
-      topLeftDataCell: params.dataTopLeftCell,
+      topLeftCell: params.dataTopLeftCell,
       relativeIndex: columnIndex,
+      keepRangeAlive: keepRangeAlive,
     );
     if (keepRangeAlive) {
       await closeLiveRange(name: name);
@@ -86,10 +98,11 @@ class ExcelRuntimeTable {
   }) async {
     ExcelLiveRange? range = _aliveRanges[name];
     if (range == null || range.rowsCount != columnValues.length) {
-      final columnIndex = headers.indexesMap[name];
-      range = excelTableApi.getColumnRange(
-        topLeftDataCell: params.dataTopLeftCell,
+      final columnIndex = headers.indexesMap[name]!;
+      range = await excelTableApi.getColumnRange(
+        topLeftCell: params.dataTopLeftCell,
         relativeIndex: columnIndex,
+        keepRangeAlive: false,
       );
     }
     await excelTableApi.updateRangeValues(
@@ -106,14 +119,4 @@ class ExcelRuntimeTable {
       oldRange.close();
     }
   }
-}
-
-abstract class ExcelLiveRange {
-  ExcelLiveRange({
-    required this.rowsCount,
-    required this.columnsCount,
-  });
-  final int rowsCount;
-  final int columnsCount;
-  void close();
 }

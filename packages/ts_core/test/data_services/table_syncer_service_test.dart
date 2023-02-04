@@ -75,7 +75,7 @@ void main() {
         [null, null, 'small', 'red', '7'],
       ];
 
-      final excelTableApi = ExcelTablesMockApi(
+      final excelTableApi = ExcelTableMockApi(
         tables: mockTables,
         tablesHeaders: mockTablesHeaders,
       );
@@ -86,7 +86,7 @@ void main() {
         runtimeSyncParams: runtimeSyncParams,
       );
       final updatedDestinationTable =
-          await excelTableApi.getTable(params: destinationTableParam);
+          excelTableApi.tables[destinationTableParam.dataTopLeftCell];
 
       expect(updatedDestinationTable, equals(expectedUpdatedTable));
     });
