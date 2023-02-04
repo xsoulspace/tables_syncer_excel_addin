@@ -71,7 +71,8 @@ class TablesSyncParamsRuntimeModel with _$TablesSyncParamsRuntimeModel {
   const factory TablesSyncParamsRuntimeModel({
     required final TablesSyncParamsModelId id,
     required final String userId,
-    required final DateTime createdAt,
+    @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+        required final DateTime createdAt,
     required final TableParamsModel sourceTable,
     required final List<String> columnNames,
     required final bool shouldUpdateValues,
@@ -80,7 +81,8 @@ class TablesSyncParamsRuntimeModel with _$TablesSyncParamsRuntimeModel {
     @Default([]) final List<TableParamsModel> destinationTables,
     @Default('') final String workbookName,
     @Default('') final String name,
-    final DateTime? lastSyncAt,
+    @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+        final DateTime? lastSyncAt,
   }) = _TablesSyncParamsRuntimeModel;
 
   const TablesSyncParamsRuntimeModel._();
@@ -92,7 +94,7 @@ class TablesSyncParamsRuntimeModel with _$TablesSyncParamsRuntimeModel {
     required final Map<TableParamsModelId, TableParamsModel> tablesParams,
   }) {
     final json = syncParams.toJson()
-      ..['sourceTable'] = tablesParams[syncParams.sourceTableId];
+      ..['sourceTable'] = tablesParams[syncParams.sourceTableId]?.toJson();
     return TablesSyncParamsRuntimeModel.fromJson(json).copyWith(
       destinationTables: syncParams.destinationTablesIds
           .map((final tableId) => tablesParams[tableId]!)

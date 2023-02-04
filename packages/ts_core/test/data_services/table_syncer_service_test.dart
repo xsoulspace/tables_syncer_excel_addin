@@ -13,7 +13,8 @@ void main() {
         userId: '',
         createdAt: DateTime.now(),
         dataTopLeftCell: const CellModel(columnIndex: 20, rowIndex: 2),
-        headerTopLeftCell: const CellModel(columnIndex: 20, rowIndex: 2),
+        headerTopLeftCell: const CellModel(columnIndex: 20, rowIndex: 3),
+        keyColumnName: 'id',
       );
       final destinationTableParam = TableParamsModel(
         id: '2',
@@ -21,7 +22,8 @@ void main() {
         userId: '',
         createdAt: DateTime.now(),
         dataTopLeftCell: const CellModel(columnIndex: 1, rowIndex: 1),
-        headerTopLeftCell: const CellModel(columnIndex: 1, rowIndex: 1),
+        headerTopLeftCell: const CellModel(columnIndex: 1, rowIndex: 2),
+        keyColumnName: 'id',
       );
       final tablesMap = {
         sourceTableParam.id: sourceTableParam,
@@ -76,8 +78,7 @@ void main() {
       ];
 
       final excelTableApi = ExcelTableMockApi(
-        tables: mockTables,
-        tablesHeaders: mockTablesHeaders,
+        tables: {...mockTables, ...mockTablesHeaders},
       );
       final excelTableSyncerService = ExcelTableSyncerService(
         excelTableApi: excelTableApi,

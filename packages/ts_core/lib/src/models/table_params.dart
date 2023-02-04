@@ -22,12 +22,12 @@ class TableParamsModel with _$TableParamsModel {
     required final TableParamsModelId id,
     required final String workbookOriginName,
     required final String userId,
+    required final String keyColumnName,
     @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
         required final DateTime createdAt,
     @Default('') final String name,
     @Default(CellModel.zero) final CellModel headerTopLeftCell,
     @Default(CellModel.zero) final CellModel dataTopLeftCell,
-    @Default('') final String keyColumnName,
   }) = _TableParamsModel;
 
   const TableParamsModel._();
@@ -55,6 +55,7 @@ class TableParamsModel with _$TableParamsModel {
     id: '',
     userId: '',
     workbookOriginName: '',
+    keyColumnName: '',
   );
 }
 

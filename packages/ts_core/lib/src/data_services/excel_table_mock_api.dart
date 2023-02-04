@@ -63,7 +63,7 @@ class ExcelTableMockApi implements ExcelTableApi {
   ExcelTableMockApi({
     required this.tables,
   });
-  final Map<CellModel, ExcelTableStringData> tables;
+  final Map<CellModel, ExcelTableData> tables;
 
   @override
   Future<ExcelLiveRange> getColumnRange({
@@ -107,10 +107,16 @@ class ExcelTableMockApi implements ExcelTableApi {
   }) async {
     final values = tables[range.topLeftCell]!;
     return values
-        .getRange(range.relativeTopLeftCell.rowIndex, range.rowsCount)
+        .getRange(
+      range.relativeTopLeftCell.rowIndex,
+      range.relativeTopLeftCell.rowIndex + range.rowsCount,
+    )
         .map((final e) {
       return e
-          .getRange(range.relativeTopLeftCell.columnIndex, range.columnsCount)
+          .getRange(
+            range.relativeTopLeftCell.columnIndex,
+            range.relativeTopLeftCell.columnIndex + range.columnsCount,
+          )
           .toList();
     }).toList();
   }
@@ -121,16 +127,23 @@ class ExcelTableMockApi implements ExcelTableApi {
     required final ExcelTableData values,
   }) async {
     final oldValues = tables[range.topLeftCell]!;
-    oldValues
-        .getRange(range.relativeTopLeftCell.rowIndex, range.rowsCount)
-        .mapIndexed((final rowIndex, final oldColumn) {
+    final List<List<dynamic>> rangeValues = oldValues
+        .getRange(
+          range.relativeTopLeftCell.rowIndex,
+          range.relativeTopLeftCell.rowIndex + range.rowsCount,
+        )
+        .toList();
+
+    for (var rowIndex = 0; rowIndex < rangeValues.length; rowIndex++) {
+      final oldRowValues = rangeValues[rowIndex];
       final rowValues = values[rowIndex];
-      oldColumn.setRange(
+      oldRowValues.setRange(
         range.relativeTopLeftCell.columnIndex,
-        range.columnsCount,
-        List.castFrom(rowValues),
+        range.relativeTopLeftCell.columnIndex + range.columnsCount,
+        rowValues,
       );
-      return oldColumn;
-    }).toList();
+      rangeValues[rowIndex] = oldRowValues;
+    }
+    tables[range.topLeftCell] = rangeValues;
   }
 }

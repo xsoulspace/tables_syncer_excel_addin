@@ -35,7 +35,6 @@ class ExcelRuntimeTable {
   }) async {
     final rowRange = await excelTableApi.getRowRange(
       topLeftCell: params.headerTopLeftCell,
-      keepRangeAlive: false,
     );
     final values = await excelTableApi.loadRangeValues(range: rowRange);
 
@@ -46,7 +45,7 @@ class ExcelRuntimeTable {
     );
     if (indexateHeaders) {
       return headers.copyWith(
-        indexesMap: DataIndexer.getColumnUniqueKeyBasedIndexes(
+        indexesMap: DataIndexer.getRowKeyBasedIndexes(
           data: headers.data,
         ),
       );
@@ -102,7 +101,6 @@ class ExcelRuntimeTable {
       range = await excelTableApi.getColumnRange(
         topLeftCell: params.dataTopLeftCell,
         relativeColumnIndex: columnIndex,
-        keepRangeAlive: false,
       );
     }
     await excelTableApi.updateRangeValues(

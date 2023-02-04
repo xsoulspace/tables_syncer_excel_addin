@@ -103,6 +103,7 @@ _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       workbookOriginName: json['workbookOriginName'] as String,
       userId: json['userId'] as String,
+      keyColumnName: json['keyColumnName'] as String,
       createdAt: fromTimestamp(json['createdAt'] as Timestamp),
       name: json['name'] as String? ?? '',
       headerTopLeftCell: json['headerTopLeftCell'] == null
@@ -111,7 +112,6 @@ _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
       dataTopLeftCell: json['dataTopLeftCell'] == null
           ? CellModel.zero
           : CellModel.fromJson(json['dataTopLeftCell']),
-      keyColumnName: json['keyColumnName'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
@@ -119,11 +119,11 @@ Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
       'id': instance.id,
       'workbookOriginName': instance.workbookOriginName,
       'userId': instance.userId,
+      'keyColumnName': instance.keyColumnName,
       'createdAt': toTimestamp(instance.createdAt),
       'name': instance.name,
       'headerTopLeftCell': instance.headerTopLeftCell.toJson(),
       'dataTopLeftCell': instance.dataTopLeftCell.toJson(),
-      'keyColumnName': instance.keyColumnName,
     };
 
 _$_CellModel _$$_CellModelFromJson(Map<String, dynamic> json) => _$_CellModel(
@@ -181,7 +181,7 @@ _$_TablesSyncParamsRuntimeModel _$$_TablesSyncParamsRuntimeModelFromJson(
     _$_TablesSyncParamsRuntimeModel(
       id: json['id'] as String,
       userId: json['userId'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdAt: fromTimestamp(json['createdAt'] as Timestamp),
       sourceTable: TableParamsModel.fromJson(json['sourceTable']),
       columnNames: (json['columnNames'] as List<dynamic>)
           .map((e) => e as String)
@@ -196,9 +196,7 @@ _$_TablesSyncParamsRuntimeModel _$$_TablesSyncParamsRuntimeModelFromJson(
           const [],
       workbookName: json['workbookName'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      lastSyncAt: json['lastSyncAt'] == null
-          ? null
-          : DateTime.parse(json['lastSyncAt'] as String),
+      lastSyncAt: fromMaybeTimestamp(json['lastSyncAt'] as Timestamp?),
     );
 
 Map<String, dynamic> _$$_TablesSyncParamsRuntimeModelToJson(
@@ -206,7 +204,7 @@ Map<String, dynamic> _$$_TablesSyncParamsRuntimeModelToJson(
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'createdAt': toTimestamp(instance.createdAt),
       'sourceTable': instance.sourceTable.toJson(),
       'columnNames': instance.columnNames,
       'shouldUpdateValues': instance.shouldUpdateValues,
@@ -216,7 +214,7 @@ Map<String, dynamic> _$$_TablesSyncParamsRuntimeModelToJson(
           instance.destinationTables.map((e) => e.toJson()).toList(),
       'workbookName': instance.workbookName,
       'name': instance.name,
-      'lastSyncAt': instance.lastSyncAt?.toIso8601String(),
+      'lastSyncAt': toMaybeTimestamp(instance.lastSyncAt),
     };
 
 _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(

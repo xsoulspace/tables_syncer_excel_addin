@@ -829,12 +829,12 @@ mixin _$TableParamsModel {
   String get id => throw _privateConstructorUsedError;
   String get workbookOriginName => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
+  String get keyColumnName => throw _privateConstructorUsedError;
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   CellModel get headerTopLeftCell => throw _privateConstructorUsedError;
   CellModel get dataTopLeftCell => throw _privateConstructorUsedError;
-  String get keyColumnName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -852,11 +852,11 @@ abstract class $TableParamsModelCopyWith<$Res> {
       {String id,
       String workbookOriginName,
       String userId,
+      String keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
       String name,
       CellModel headerTopLeftCell,
-      CellModel dataTopLeftCell,
-      String keyColumnName});
+      CellModel dataTopLeftCell});
 
   $CellModelCopyWith<$Res> get headerTopLeftCell;
   $CellModelCopyWith<$Res> get dataTopLeftCell;
@@ -878,11 +878,11 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
     Object? id = null,
     Object? workbookOriginName = null,
     Object? userId = null,
+    Object? keyColumnName = null,
     Object? createdAt = null,
     Object? name = null,
     Object? headerTopLeftCell = null,
     Object? dataTopLeftCell = null,
-    Object? keyColumnName = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -896,6 +896,10 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      keyColumnName: null == keyColumnName
+          ? _value.keyColumnName
+          : keyColumnName // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -913,10 +917,6 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
           ? _value.dataTopLeftCell
           : dataTopLeftCell // ignore: cast_nullable_to_non_nullable
               as CellModel,
-      keyColumnName: null == keyColumnName
-          ? _value.keyColumnName
-          : keyColumnName // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 
@@ -949,11 +949,11 @@ abstract class _$$_TableParamsModelCopyWith<$Res>
       {String id,
       String workbookOriginName,
       String userId,
+      String keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
       String name,
       CellModel headerTopLeftCell,
-      CellModel dataTopLeftCell,
-      String keyColumnName});
+      CellModel dataTopLeftCell});
 
   @override
   $CellModelCopyWith<$Res> get headerTopLeftCell;
@@ -975,11 +975,11 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
     Object? id = null,
     Object? workbookOriginName = null,
     Object? userId = null,
+    Object? keyColumnName = null,
     Object? createdAt = null,
     Object? name = null,
     Object? headerTopLeftCell = null,
     Object? dataTopLeftCell = null,
-    Object? keyColumnName = null,
   }) {
     return _then(_$_TableParamsModel(
       id: null == id
@@ -993,6 +993,10 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      keyColumnName: null == keyColumnName
+          ? _value.keyColumnName
+          : keyColumnName // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -1010,10 +1014,6 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
           ? _value.dataTopLeftCell
           : dataTopLeftCell // ignore: cast_nullable_to_non_nullable
               as CellModel,
-      keyColumnName: null == keyColumnName
-          ? _value.keyColumnName
-          : keyColumnName // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -1026,12 +1026,12 @@ class _$_TableParamsModel extends _TableParamsModel {
       {required this.id,
       required this.workbookOriginName,
       required this.userId,
+      required this.keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           required this.createdAt,
       this.name = '',
       this.headerTopLeftCell = CellModel.zero,
-      this.dataTopLeftCell = CellModel.zero,
-      this.keyColumnName = ''})
+      this.dataTopLeftCell = CellModel.zero})
       : super._();
 
   factory _$_TableParamsModel.fromJson(Map<String, dynamic> json) =>
@@ -1044,6 +1044,8 @@ class _$_TableParamsModel extends _TableParamsModel {
   @override
   final String userId;
   @override
+  final String keyColumnName;
+  @override
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   final DateTime createdAt;
   @override
@@ -1055,13 +1057,10 @@ class _$_TableParamsModel extends _TableParamsModel {
   @override
   @JsonKey()
   final CellModel dataTopLeftCell;
-  @override
-  @JsonKey()
-  final String keyColumnName;
 
   @override
   String toString() {
-    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, createdAt: $createdAt, name: $name, headerTopLeftCell: $headerTopLeftCell, dataTopLeftCell: $dataTopLeftCell, keyColumnName: $keyColumnName)';
+    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, keyColumnName: $keyColumnName, createdAt: $createdAt, name: $name, headerTopLeftCell: $headerTopLeftCell, dataTopLeftCell: $dataTopLeftCell)';
   }
 
   @override
@@ -1073,21 +1072,21 @@ class _$_TableParamsModel extends _TableParamsModel {
             (identical(other.workbookOriginName, workbookOriginName) ||
                 other.workbookOriginName == workbookOriginName) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.keyColumnName, keyColumnName) ||
+                other.keyColumnName == keyColumnName) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.headerTopLeftCell, headerTopLeftCell) ||
                 other.headerTopLeftCell == headerTopLeftCell) &&
             (identical(other.dataTopLeftCell, dataTopLeftCell) ||
-                other.dataTopLeftCell == dataTopLeftCell) &&
-            (identical(other.keyColumnName, keyColumnName) ||
-                other.keyColumnName == keyColumnName));
+                other.dataTopLeftCell == dataTopLeftCell));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, workbookOriginName, userId,
-      createdAt, name, headerTopLeftCell, dataTopLeftCell, keyColumnName);
+      keyColumnName, createdAt, name, headerTopLeftCell, dataTopLeftCell);
 
   @JsonKey(ignore: true)
   @override
@@ -1108,12 +1107,12 @@ abstract class _TableParamsModel extends TableParamsModel {
       {required final String id,
       required final String workbookOriginName,
       required final String userId,
+      required final String keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           required final DateTime createdAt,
       final String name,
       final CellModel headerTopLeftCell,
-      final CellModel dataTopLeftCell,
-      final String keyColumnName}) = _$_TableParamsModel;
+      final CellModel dataTopLeftCell}) = _$_TableParamsModel;
   const _TableParamsModel._() : super._();
 
   factory _TableParamsModel.fromJson(Map<String, dynamic> json) =
@@ -1126,6 +1125,8 @@ abstract class _TableParamsModel extends TableParamsModel {
   @override
   String get userId;
   @override
+  String get keyColumnName;
+  @override
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt;
   @override
@@ -1134,8 +1135,6 @@ abstract class _TableParamsModel extends TableParamsModel {
   CellModel get headerTopLeftCell;
   @override
   CellModel get dataTopLeftCell;
-  @override
-  String get keyColumnName;
   @override
   @JsonKey(ignore: true)
   _$$_TableParamsModelCopyWith<_$_TableParamsModel> get copyWith =>
@@ -2254,6 +2253,7 @@ TablesSyncParamsRuntimeModel _$TablesSyncParamsRuntimeModelFromJson(
 mixin _$TablesSyncParamsRuntimeModel {
   String get id => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt => throw _privateConstructorUsedError;
   TableParamsModel get sourceTable => throw _privateConstructorUsedError;
   List<String> get columnNames => throw _privateConstructorUsedError;
@@ -2264,6 +2264,7 @@ mixin _$TablesSyncParamsRuntimeModel {
       throw _privateConstructorUsedError;
   String get workbookName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
   DateTime? get lastSyncAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -2283,7 +2284,8 @@ abstract class $TablesSyncParamsRuntimeModelCopyWith<$Res> {
   $Res call(
       {String id,
       String userId,
-      DateTime createdAt,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+          DateTime createdAt,
       TableParamsModel sourceTable,
       List<String> columnNames,
       bool shouldUpdateValues,
@@ -2292,7 +2294,8 @@ abstract class $TablesSyncParamsRuntimeModelCopyWith<$Res> {
       List<TableParamsModel> destinationTables,
       String workbookName,
       String name,
-      DateTime? lastSyncAt});
+      @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+          DateTime? lastSyncAt});
 
   $TableParamsModelCopyWith<$Res> get sourceTable;
 }
@@ -2397,7 +2400,8 @@ abstract class _$$_TablesSyncParamsRuntimeModelCopyWith<$Res>
   $Res call(
       {String id,
       String userId,
-      DateTime createdAt,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+          DateTime createdAt,
       TableParamsModel sourceTable,
       List<String> columnNames,
       bool shouldUpdateValues,
@@ -2406,7 +2410,8 @@ abstract class _$$_TablesSyncParamsRuntimeModelCopyWith<$Res>
       List<TableParamsModel> destinationTables,
       String workbookName,
       String name,
-      DateTime? lastSyncAt});
+      @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+          DateTime? lastSyncAt});
 
   @override
   $TableParamsModelCopyWith<$Res> get sourceTable;
@@ -2498,7 +2503,8 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
   const _$_TablesSyncParamsRuntimeModel(
       {required this.id,
       required this.userId,
-      required this.createdAt,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+          required this.createdAt,
       required this.sourceTable,
       required final List<String> columnNames,
       required this.shouldUpdateValues,
@@ -2507,7 +2513,8 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
       final List<TableParamsModel> destinationTables = const [],
       this.workbookName = '',
       this.name = '',
-      this.lastSyncAt})
+      @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+          this.lastSyncAt})
       : _columnNames = columnNames,
         _destinationTables = destinationTables,
         super._();
@@ -2520,6 +2527,7 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
   @override
   final String userId;
   @override
+  @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   final DateTime createdAt;
   @override
   final TableParamsModel sourceTable;
@@ -2554,6 +2562,7 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
   @JsonKey()
   final String name;
   @override
+  @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
   final DateTime? lastSyncAt;
 
   @override
@@ -2628,7 +2637,8 @@ abstract class _TablesSyncParamsRuntimeModel
   const factory _TablesSyncParamsRuntimeModel(
       {required final String id,
       required final String userId,
-      required final DateTime createdAt,
+      @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
+          required final DateTime createdAt,
       required final TableParamsModel sourceTable,
       required final List<String> columnNames,
       required final bool shouldUpdateValues,
@@ -2637,7 +2647,8 @@ abstract class _TablesSyncParamsRuntimeModel
       final List<TableParamsModel> destinationTables,
       final String workbookName,
       final String name,
-      final DateTime? lastSyncAt}) = _$_TablesSyncParamsRuntimeModel;
+      @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
+          final DateTime? lastSyncAt}) = _$_TablesSyncParamsRuntimeModel;
   const _TablesSyncParamsRuntimeModel._() : super._();
 
   factory _TablesSyncParamsRuntimeModel.fromJson(Map<String, dynamic> json) =
@@ -2648,6 +2659,7 @@ abstract class _TablesSyncParamsRuntimeModel
   @override
   String get userId;
   @override
+  @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt;
   @override
   TableParamsModel get sourceTable;
@@ -2666,6 +2678,7 @@ abstract class _TablesSyncParamsRuntimeModel
   @override
   String get name;
   @override
+  @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
   DateTime? get lastSyncAt;
   @override
   @JsonKey(ignore: true)
