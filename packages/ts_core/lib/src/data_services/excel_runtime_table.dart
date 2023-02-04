@@ -68,7 +68,7 @@ class ExcelRuntimeTable {
 
   Future<ExcelTableStringData> loadKeysColumnValues() async {
     final values = await loadColumnValues(name: params.keyColumnName);
-    return List.castFrom<List<dynamic>, List<String>>(values);
+    return values.map((final e) => ['${e.first}']).toList();
   }
 
   Future<ExcelTableData> loadColumnValues({
@@ -103,6 +103,23 @@ class ExcelRuntimeTable {
         relativeColumnIndex: columnIndex,
       );
     }
+    await excelTableApi.updateRangeValues(
+      range: range,
+      values: columnValues,
+    );
+  }
+
+  Future<void> addNewKeyColumnValues({
+    required final IndexedKeysWithOriginMap newKeysMap,
+  }) async {
+    final columnIndex = headers.indexesMap[params.keyColumnName]!;
+    final range = await excelTableApi.getColumnRange(
+      topLeftCell: params.dataTopLeftCell,
+      relativeColumnIndex: columnIndex,
+      shouldInsertUnderLastRow: true,
+      rowsCount: newKeysMap.length,
+    );
+    final columnValues = newKeysMap.keys.map((final key) => [key]).toList();
     await excelTableApi.updateRangeValues(
       range: range,
       values: columnValues,

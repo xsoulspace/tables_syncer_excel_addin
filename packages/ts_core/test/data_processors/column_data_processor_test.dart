@@ -23,7 +23,7 @@ void main() {
       ['x'],
       ['red'],
     ];
-    final columnProcessor = ColumnDataProcessor.loadKeys(
+    final columnProcessor = ColumnDataProcessor.fromKeys(
       columnValues: keyData,
       secondaryColumnValues: secondaryKeyData,
     );
@@ -115,7 +115,7 @@ void main() {
       ['v'],
       ['xc'],
     ];
-    final columnProcessor = ColumnDataProcessor.loadKeys(
+    final columnProcessor = ColumnDataProcessor.fromKeys(
       columnValues: keyData,
       secondaryColumnValues: secondaryKeyData,
     );

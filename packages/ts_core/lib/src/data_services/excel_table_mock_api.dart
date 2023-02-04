@@ -47,8 +47,10 @@ abstract class ExcelTableApi {
   });
   Future<ExcelLiveRange> getColumnRange({
     required final CellModel topLeftCell,
-    final bool keepRangeAlive = false,
     final int relativeColumnIndex = 0,
+    final bool shouldInsertUnderLastRow = false,
+    final bool keepRangeAlive = false,
+    final int? rowsCount,
   });
   Future<ExcelTableData> loadRangeValues({
     required final ExcelLiveRange range,
@@ -63,20 +65,28 @@ class ExcelTableMockApi implements ExcelTableApi {
   ExcelTableMockApi({
     required this.tables,
   });
-  final Map<CellModel, ExcelTableData> tables;
+  final Map<CellModel, List<List<dynamic>?>> tables;
 
   @override
   Future<ExcelLiveRange> getColumnRange({
     required final CellModel topLeftCell,
     final int relativeColumnIndex = 0,
+    final bool shouldInsertUnderLastRow = false,
     final bool keepRangeAlive = false,
+    final int? rowsCount,
   }) async {
     final values = tables[topLeftCell]!;
+    final int rowIndex;
+    if (shouldInsertUnderLastRow) {
+      rowIndex = values.length;
+    } else {
+      rowIndex = 0;
+    }
     return ExcelLiveRange.mock(
-      rowsCount: values.length,
+      rowsCount: rowsCount ?? values.length,
       columnsCount: 1,
       relativeTopLeftCell: CellModel(
-        rowIndex: 0,
+        rowIndex: rowIndex,
         columnIndex: relativeColumnIndex,
       ),
       topLeftCell: topLeftCell,
@@ -92,7 +102,7 @@ class ExcelTableMockApi implements ExcelTableApi {
     final values = tables[topLeftCell]!;
     return ExcelLiveRange.mock(
       rowsCount: 1,
-      columnsCount: values.first.length,
+      columnsCount: values.first!.length,
       relativeTopLeftCell: CellModel(
         rowIndex: relativeRowIndex,
         columnIndex: 0,
@@ -112,7 +122,7 @@ class ExcelTableMockApi implements ExcelTableApi {
       range.relativeTopLeftCell.rowIndex + range.rowsCount,
     )
         .map((final e) {
-      return e
+      return e!
           .getRange(
             range.relativeTopLeftCell.columnIndex,
             range.relativeTopLeftCell.columnIndex + range.columnsCount,
@@ -127,22 +137,26 @@ class ExcelTableMockApi implements ExcelTableApi {
     required final ExcelTableData values,
   }) async {
     final oldValues = tables[range.topLeftCell]!;
-    final List<List<dynamic>> rangeValues = oldValues
-        .getRange(
-          range.relativeTopLeftCell.rowIndex,
-          range.relativeTopLeftCell.rowIndex + range.rowsCount,
-        )
-        .toList();
+    final topLeftCell = range.relativeTopLeftCell;
+    final List<List<dynamic>?> rangeValues = [...oldValues];
 
-    for (var rowIndex = 0; rowIndex < rangeValues.length; rowIndex++) {
-      final oldRowValues = rangeValues[rowIndex];
-      final rowValues = values[rowIndex];
-      oldRowValues.setRange(
-        range.relativeTopLeftCell.columnIndex,
-        range.relativeTopLeftCell.columnIndex + range.columnsCount,
+    for (var index = 0; index < values.length; index++) {
+      final rowIndex = range.relativeTopLeftCell.rowIndex + index;
+      final List<dynamic> effectiveRowValues;
+      if (rowIndex < rangeValues.length) {
+        effectiveRowValues = [...?rangeValues[rowIndex]];
+      } else {
+        effectiveRowValues =
+            List.filled(rangeValues.first?.length ?? range.columnsCount, null);
+        rangeValues.length = rowIndex + 1;
+      }
+      final rowValues = values[index];
+      effectiveRowValues.setRange(
+        topLeftCell.columnIndex,
+        topLeftCell.columnIndex + range.columnsCount,
         rowValues,
       );
-      rangeValues[rowIndex] = oldRowValues;
+      rangeValues[rowIndex] = [...effectiveRowValues];
     }
     tables[range.topLeftCell] = rangeValues;
   }

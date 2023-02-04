@@ -41,7 +41,7 @@ class DataIndexer {
   }) {
     final map = <String, List<int>>{};
     for (var rowIndex = 0; rowIndex < data.length; rowIndex++) {
-      final row = data[rowIndex];
+      final List<dynamic> row = [...data[rowIndex]];
       final value = row[columnIndex];
       map.update(
         value,

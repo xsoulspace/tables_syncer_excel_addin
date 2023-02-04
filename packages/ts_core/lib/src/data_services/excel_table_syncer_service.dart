@@ -1,4 +1,5 @@
 import '../data_processors/column_data_processor.dart';
+import '../data_processors/data_indexer.dart';
 import '../data_processors/header_data_processor.dart';
 import '../models/models.dart';
 import 'data_services.dart';
@@ -30,12 +31,26 @@ class ExcelTableSyncerService {
         secondaryHeaders: secondaryRuntimeTable.headers,
       );
 
-      final secondaryColumnIndexedKeys =
+      IndexedKeysMap secondaryColumnIndexedKeys =
           await secondaryRuntimeTable.loadKeysColumnIndexedValues();
-      final columnDataProcessor = ColumnDataProcessor.fromIndexedKeys(
+      ColumnDataProcessor columnDataProcessor =
+          ColumnDataProcessor.fromIndexedKeys(
         columnIndexedKeys: sourceColumnIndexedKeys,
         secondaryColumnIndexedKeys: secondaryColumnIndexedKeys,
       );
+      if (runtimeSyncParams.shouldAddNewValues) {
+        await secondaryRuntimeTable.addNewKeyColumnValues(
+          newKeysMap: columnDataProcessor.newSecondaryIndexedKeys,
+        );
+
+        // TODO: optimize - use last row index to move new to updatable
+        secondaryColumnIndexedKeys =
+            await secondaryRuntimeTable.loadKeysColumnIndexedValues();
+        columnDataProcessor = ColumnDataProcessor.fromIndexedKeys(
+          columnIndexedKeys: sourceColumnIndexedKeys,
+          secondaryColumnIndexedKeys: secondaryColumnIndexedKeys,
+        );
+      }
 
       // in this place can be implemented logic to insert non-existing headers.
       //

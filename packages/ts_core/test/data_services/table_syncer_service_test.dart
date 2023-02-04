@@ -38,7 +38,7 @@ void main() {
         columnNames: const ['size', 'id', 'color'],
         shouldUpdateValues: true,
         shouldAddNewValues: true,
-        shouldClearValueBeforeUpdate: true,
+        shouldClearValueBeforeUpdate: false,
       );
 
       final runtimeSyncParams = SyncParamsNormalizer.normalize(
