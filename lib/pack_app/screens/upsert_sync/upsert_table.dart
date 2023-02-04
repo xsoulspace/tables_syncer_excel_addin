@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
+import 'package:office_addin_helper/office_addin_helper.dart';
 import 'package:provider/provider.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';

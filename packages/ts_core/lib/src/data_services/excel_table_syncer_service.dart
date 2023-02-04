@@ -64,7 +64,7 @@ class ExcelTableSyncerService {
           final secondaryColumnValues =
               await secondaryRuntimeTable.loadColumnValues(
             name: columnName,
-            keepRangeAlive: true,
+            shouldTrackRange: true,
           );
 
           /// test it that it will work with the massive amount of data
@@ -83,7 +83,9 @@ class ExcelTableSyncerService {
             name: columnName,
             columnValues: updatedSecondaryData,
           );
-          await secondaryRuntimeTable.closeLiveRange(name: columnName);
+          await secondaryRuntimeTable.removeTrackingRange(
+            columnName: columnName,
+          );
         }
       }
     }

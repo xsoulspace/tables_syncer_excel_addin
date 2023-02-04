@@ -2,29 +2,33 @@ import 'package:office_addin_helper/office_addin_helper.dart';
 
 import '../data_processors/data_indexer.dart';
 import '../models/models.dart';
-import 'excel_table_mock_api.dart';
 
 class ExcelRuntimeTable {
   ExcelRuntimeTable._({
     required this.params,
     required this.excelTableApi,
     required this.headers,
+    required this.sheet,
   });
   final TableParamsModel params;
   final ExcelTableApi excelTableApi;
   final TableHeadersModel headers;
+  final SheetModel sheet;
   static Future<ExcelRuntimeTable> load({
     required final TableParamsModel params,
     required final ExcelTableApi excelTableApi,
     final bool indexateHeaders = true,
   }) async {
+    final sheet = await excelTableApi.getSheet(params.name);
     final headers = await loadHeaders(
       excelTableApi: excelTableApi,
       params: params,
+      sheet: sheet,
     );
 
     return ExcelRuntimeTable._(
       excelTableApi: excelTableApi,
+      sheet: sheet,
       headers: headers,
       params: params,
     );
@@ -33,10 +37,12 @@ class ExcelRuntimeTable {
   static Future<TableHeadersModel> loadHeaders({
     required final ExcelTableApi excelTableApi,
     required final TableParamsModel params,
+    required final SheetModel sheet,
     final bool indexateHeaders = true,
   }) async {
     final rowRange = await excelTableApi.getRowRange(
       topLeftCell: params.headerTopLeftCell,
+      sheet: sheet,
     );
     final values = await excelTableApi.loadRangeValues(range: rowRange);
 
@@ -57,7 +63,7 @@ class ExcelRuntimeTable {
   }
 
   // key - columnName
-  final _aliveRanges = <String, ExcelLiveRange>{};
+  final _trackingRanges = <String, RangeModel>{};
   Future<UnquieIndexedKeysMap> loadKeysColumnIndexedUniqueValues() async {
     final values = await loadKeysColumnValues();
     return DataIndexer.getColumnUniqueKeyBasedIndexes(data: values);
@@ -75,17 +81,18 @@ class ExcelRuntimeTable {
 
   Future<ExcelTableData> loadColumnValues({
     required final String name,
-    final bool keepRangeAlive = false,
+    final bool shouldTrackRange = false,
   }) async {
     final columnIndex = headers.indexesMap[name]!;
     final liveRange = await excelTableApi.getColumnRange(
+      sheet: sheet,
       topLeftCell: params.dataTopLeftCell,
       relativeColumnIndex: columnIndex,
-      keepRangeAlive: keepRangeAlive,
+      shouldTrackRange: shouldTrackRange,
     );
-    if (keepRangeAlive) {
-      await closeLiveRange(name: name);
-      _aliveRanges[name] = liveRange;
+    if (shouldTrackRange) {
+      await removeTrackingRange(columnName: name);
+      _trackingRanges[name] = liveRange;
     }
 
     return excelTableApi.loadRangeValues(
@@ -97,10 +104,11 @@ class ExcelRuntimeTable {
     required final String name,
     required final ExcelTableData columnValues,
   }) async {
-    ExcelLiveRange? range = _aliveRanges[name];
+    RangeModel? range = _trackingRanges[name];
     if (range == null || range.rowsCount != columnValues.length) {
       final columnIndex = headers.indexesMap[name]!;
       range = await excelTableApi.getColumnRange(
+        sheet: sheet,
         topLeftCell: params.dataTopLeftCell,
         relativeColumnIndex: columnIndex,
       );
@@ -116,6 +124,7 @@ class ExcelRuntimeTable {
   }) async {
     final columnIndex = headers.indexesMap[params.keyColumnName]!;
     final range = await excelTableApi.getColumnRange(
+      sheet: sheet,
       topLeftCell: params.dataTopLeftCell,
       relativeColumnIndex: columnIndex,
       shouldInsertUnderLastRow: true,
@@ -128,12 +137,15 @@ class ExcelRuntimeTable {
     );
   }
 
-  Future<void> closeLiveRange({
-    required final String name,
+  Future<void> removeTrackingRange({
+    required final String columnName,
   }) async {
-    final oldRange = _aliveRanges.remove(name);
+    final oldRange = _trackingRanges.remove(columnName);
     if (oldRange != null) {
-      oldRange.close();
+      excelTableApi.removeTrackingRange(
+        sheet: sheet,
+        range: oldRange,
+      );
     }
   }
 }
