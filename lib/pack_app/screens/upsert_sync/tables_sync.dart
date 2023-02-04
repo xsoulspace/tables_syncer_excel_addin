@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
-import 'package:tables_syncer_excel_addin/pack_app/screens/create_sync/bloc/tables_sync_bloc.dart';
+import 'package:tables_syncer_excel_addin/pack_app/screens/upsert_sync/bloc/tables_sync_bloc.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 

@@ -60,7 +60,8 @@ dependencies:
   intl: ^0.17.0
   life_hooks: ^0.0.18
   logger: ^1.1.0
-  office_addin_helper: ^0.2.0
+  office_addin_helper:
+    path: ../office_addin_helper
   officejs: ^0.3.1
   provider: ^6.0.3
   rxdart: ^0.27.3

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:office_addin_helper/office_addin_helper.dart';
 
 import '../../ts_core.dart';
 import '../data_processors/data_indexer.dart';

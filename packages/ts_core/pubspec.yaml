@@ -48,6 +48,8 @@ dependencies:
     path: ../ts_design_core
   universal_io: ^2.0.4
   uuid: ^3.0.6
+  office_addin_helper:
+    path: ../../../office_addin_helper
 
 dev_dependencies:
   build_runner: ^2.4.0

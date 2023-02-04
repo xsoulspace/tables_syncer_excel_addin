@@ -1,3 +1,5 @@
+import 'package:office_addin_helper/office_addin_helper.dart';
+
 import '../data_processors/data_indexer.dart';
 import '../models/models.dart';
 import 'excel_table_mock_api.dart';

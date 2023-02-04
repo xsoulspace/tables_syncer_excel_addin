@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:office_addin_helper/office_addin_helper.dart';
 import 'package:ts_core/ts_core.dart';
 
 void main() {

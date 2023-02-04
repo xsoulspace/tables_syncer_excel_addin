@@ -810,11 +810,10 @@ packages:
   office_addin_helper:
     dependency: "direct main"
     description:
-      name: office_addin_helper
-      sha256: "226a432103a2df2ce4a64b04d08e4c23c1945f8345f188b5609665a2c0a25ebc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
+      path: "../office_addin_helper"
+      relative: true
+    source: path
+    version: "0.3.0"
   officejs:
     dependency: "direct main"
     description:

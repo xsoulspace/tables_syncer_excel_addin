@@ -126,17 +126,6 @@ Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
       'dataTopLeftCell': instance.dataTopLeftCell.toJson(),
     };
 
-_$_CellModel _$$_CellModelFromJson(Map<String, dynamic> json) => _$_CellModel(
-      rowIndex: json['rowIndex'] as int,
-      columnIndex: json['columnIndex'] as int,
-    );
-
-Map<String, dynamic> _$$_CellModelToJson(_$_CellModel instance) =>
-    <String, dynamic>{
-      'rowIndex': instance.rowIndex,
-      'columnIndex': instance.columnIndex,
-    };
-
 _$_TablesSyncParamsModel _$$_TablesSyncParamsModelFromJson(
         Map<String, dynamic> json) =>
     _$_TablesSyncParamsModel(

@@ -1,3 +1,5 @@
+import 'package:office_addin_helper/office_addin_helper.dart';
+
 import '../data_processors/column_data_processor.dart';
 import '../data_processors/data_indexer.dart';
 import '../data_processors/header_data_processor.dart';
