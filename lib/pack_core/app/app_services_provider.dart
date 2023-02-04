@@ -19,8 +19,8 @@ class AppServicesProvider extends StatelessWidget {
   const AppServicesProvider({
     required this.diDto,
     required this.builder,
-    final Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final WidgetBuilder builder;
   final AppServicesProviderDiDto diDto;
   @override
@@ -40,6 +40,26 @@ class AppServicesProvider extends StatelessWidget {
                 key: const ValueKey('ExcelApi'),
                 create: (final context) => ExcelApiImpl(),
               ),
+            if (useMockData)
+              Provider<ExcelTableApi>(
+                key: const ValueKey('ExcelTableMockApi'),
+                create: (final context) => ExcelTableMockApiImpl(
+                  excelApi: context.read(),
+                  tables: {},
+                ),
+              )
+            else
+              Provider<ExcelTableApi>(
+                key: const ValueKey('ExcelTableExcelApi'),
+                create: (final context) => ExcelTableApiImpl(
+                  excelApi: context.read(),
+                ),
+              ),
+            Provider<ExcelTableSyncerService>(
+              create: (final context) => ExcelTableSyncerService(
+                excelTableApi: context.read(),
+              ),
+            ),
             ChangeNotifierProvider(
               create: (final context) => diDto.analyticsNotifier,
             ),

@@ -817,10 +817,9 @@ packages:
   officejs:
     dependency: "direct main"
     description:
-      name: officejs
-      sha256: "3df0c0a3bd920e9ca4d3548d1006ee7b995cec81baf78af7e7e1af10bb9b3dac"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../officejs_dart"
+      relative: true
+    source: path
     version: "0.3.1"
   package_config:
     dependency: transitive

@@ -94,6 +94,7 @@ void main() {
         tablesMap: tablesMap,
       );
       final excelTableApi = ExcelTableMockApiImpl(
+        excelApi: ExcelApiMockImpl(),
         tables: {...mockTables, ...mockTablesHeaders},
       );
       final excelTableSyncerService = ExcelTableSyncerService(
@@ -127,6 +128,7 @@ void main() {
         tablesMap: tablesMap,
       );
       final excelTableApi = ExcelTableMockApiImpl(
+        excelApi: ExcelApiMockImpl(),
         tables: {...mockTables, ...mockTablesHeaders},
       );
       final excelTableSyncerService = ExcelTableSyncerService(
@@ -162,6 +164,7 @@ void main() {
         tablesMap: tablesMap,
       );
       final excelTableApi = ExcelTableMockApiImpl(
+        excelApi: ExcelApiMockImpl(),
         tables: {...mockTables, ...mockTablesHeaders},
       );
       final excelTableSyncerService = ExcelTableSyncerService(
@@ -195,6 +198,7 @@ void main() {
         tablesMap: tablesMap,
       );
       final excelTableApi = ExcelTableMockApiImpl(
+        excelApi: ExcelApiMockImpl(),
         tables: {...mockTables, ...mockTablesHeaders},
       );
       final excelTableSyncerService = ExcelTableSyncerService(
