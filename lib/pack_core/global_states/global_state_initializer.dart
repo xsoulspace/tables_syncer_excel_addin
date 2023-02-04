@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:office_addin_helper/office_addin_helper.dart';
 import 'package:provider/provider.dart';
-import 'package:tables_syncer_excel_addin/firebase_options.dart';
 import 'package:tables_syncer_excel_addin/pack_core/ads/ads.dart';
 import 'package:tables_syncer_excel_addin/pack_core/pack_core.dart';
 import 'package:ts_core/ts_core.dart';
@@ -29,8 +28,14 @@ class GlobalStateInitializer extends AppStateInitializer {
     final AnalyticsNotifier analyticsNotifier = read();
     final services = read<ApiServices>();
     final appRouterController = AppRouterController.use(read);
-    await FirebaseInitializer()
-        .onDelayedLoad(DefaultFirebaseOptions.currentPlatform);
+    await FirebaseInitializer().onDelayedLoad(firebaseOptions);
+    final guards = appRouterController.routeState.parser.guards;
+
+    if (guards != null) {
+      for (final guard in guards) {
+        await guard.onLoad();
+      }
+    }
     await analyticsNotifier.onDelayedLoad();
     await adManager.onLoad();
     final completer = Completer();

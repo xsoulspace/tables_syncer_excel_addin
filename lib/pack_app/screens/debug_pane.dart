@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:ts_core/ts_core.dart';
 
 class DebugPane extends HookWidget {
-  const DebugPane({final Key? key}) : super(key: key);
+  const DebugPane({super.key});
 
   @override
   Widget build(final BuildContext context) {

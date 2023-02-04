@@ -18,7 +18,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0-151.0.dev <4.0.0"
+  sdk: ">=2.19.0 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -82,9 +82,11 @@ dependency_overrides:
     path: ../officejs_dart
   office_addin_helper:
     path: ../office_addin_helper
+  fluent_ui:
+    path: ../fluent_ui
 
 dev_dependencies:
-  build_runner: ^2.4.0
+  build_runner: ^2.3.0
   # flutter_gen: ^5.1.0+1
   flutter_gen_runner: ^5.1.0+1
   flutter_launcher_icons:

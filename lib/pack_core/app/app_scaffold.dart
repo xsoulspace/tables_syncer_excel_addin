@@ -16,8 +16,7 @@ import 'package:ts_design_core/ts_design_core.dart';
 part 'app_scaffold_state.dart';
 
 class AppScaffold extends StatelessWidget {
-  const AppScaffold({required this.servicesDiDto, final Key? key})
-      : super(key: key);
+  const AppScaffold({required this.servicesDiDto, super.key});
   final AppServicesProviderDiDto servicesDiDto;
   @override
   Widget build(final BuildContext context) {
@@ -41,8 +40,8 @@ class AppScaffold extends StatelessWidget {
 class RouterScaffold extends HookWidget {
   const RouterScaffold({
     required this.builder,
-    final Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final Widget Function(BuildContext context, TemplateRouteParser parser)
       builder;
   @override
@@ -65,8 +64,7 @@ class RouterScaffold extends HookWidget {
 }
 
 class AppScaffoldBuilder extends HookWidget {
-  const AppScaffoldBuilder({required this.routeParser, final Key? key})
-      : super(key: key);
+  const AppScaffoldBuilder({required this.routeParser, super.key});
   final TemplateRouteParser routeParser;
   @override
   Widget build(final BuildContext context) {

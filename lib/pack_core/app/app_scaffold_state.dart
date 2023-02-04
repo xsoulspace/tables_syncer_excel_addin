@@ -22,7 +22,9 @@ class AppScaffoldState extends ContextfulLifeState {
     );
     routeState = RouteState(routeParser);
     routerController = AppRouterController.local(routeState);
-    guard.onLoad();
+
+    /// the late initialization is necessary because the guard
+    /// is dependent from routerController
     routeParser.guards?.add(guard);
     super.initState();
   }
@@ -41,7 +43,8 @@ class AuthRouteGuard implements RouteGuard<ParsedRoute>, Disposable {
   });
   StreamSubscription<User?>? _authSubscription;
   final AppRouterController routerController;
-  void onLoad() {
+  @override
+  Future<void> onLoad() async {
     _authSubscription =
         FirebaseAuth.instance.authStateChanges().listen(_onAuthChange);
   }

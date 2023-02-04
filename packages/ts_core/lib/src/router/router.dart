@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:life_hooks/life_hooks.dart';
 import 'package:path_to_regexp/path_to_regexp.dart';
 import 'package:provider/provider.dart';
 

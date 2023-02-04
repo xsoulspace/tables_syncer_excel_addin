@@ -4,7 +4,7 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ">=3.0.0-151.0.dev <4.0.0"
+  sdk: ">=2.19.0 <4.0.0"
 
 dependencies:
   animate_do: ^3.0.2
@@ -33,6 +33,10 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.1.0+1
   xsoulspace_lints: ^0.0.5
+
+dependency_overrides:
+  fluent_ui:
+    path: ../../../fluent_ui
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

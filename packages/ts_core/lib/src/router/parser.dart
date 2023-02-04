@@ -5,7 +5,7 @@ part of 'router.dart';
 /// Override this class to change the route that is returned by
 /// [TemplateRouteParser.parseRouteInformation] if a condition is not met, for
 /// example, if the user is not signed in.
-abstract class RouteGuard<T> {
+abstract class RouteGuard<T> implements Loadable {
   RouteGuard._();
   Future<T> redirect(final T from);
 }
