@@ -1,29 +1,59 @@
-import '../models/models.dart';
+import '../../ts_core.dart';
 
 abstract class ExcelLiveRange {
   ExcelLiveRange({
     required this.rowsCount,
     required this.columnsCount,
+    required this.topLeftCell,
+    required this.relativeTopLeftCell,
   });
+  const factory ExcelLiveRange.mock({
+    required final int rowsCount,
+    required final int columnsCount,
+    required final CellModel topLeftCell,
+    required final CellModel relativeTopLeftCell,
+  }) = ExcelLiveMockRange;
   final int rowsCount;
   final int columnsCount;
+  final CellModel topLeftCell;
+  final CellModel relativeTopLeftCell;
   void close();
+}
+
+class ExcelLiveMockRange implements ExcelLiveRange {
+  const ExcelLiveMockRange({
+    required this.rowsCount,
+    required this.columnsCount,
+    required this.topLeftCell,
+    required this.relativeTopLeftCell,
+  });
+  @override
+  final int rowsCount;
+  @override
+  final int columnsCount;
+  @override
+  final CellModel topLeftCell;
+  @override
+  final CellModel relativeTopLeftCell;
+  @override
+  void close() {}
 }
 
 abstract class ExcelTableApi {
   Future<ExcelLiveRange> getRowRange({
     required final CellModel topLeftCell,
-    required final bool keepRangeAlive,
+    final bool keepRangeAlive = false,
+    final int relativeRowIndex = 0,
   });
   Future<ExcelLiveRange> getColumnRange({
     required final CellModel topLeftCell,
-    required final int relativeIndex,
-    required final bool keepRangeAlive,
+    final bool keepRangeAlive = false,
+    final int relativeColumnIndex = 0,
   });
   Future<ExcelTableData> loadRangeValues({
     required final ExcelLiveRange range,
   });
-  Future<ExcelTableData> updateRangeValues({
+  Future<void> updateRangeValues({
     required final ExcelLiveRange range,
     required final ExcelTableData values,
   });
@@ -32,44 +62,75 @@ abstract class ExcelTableApi {
 class ExcelTableMockApi implements ExcelTableApi {
   ExcelTableMockApi({
     required this.tables,
-    required this.tablesHeaders,
   });
   final Map<CellModel, ExcelTableStringData> tables;
-  final Map<CellModel, ExcelTableStringData> tablesHeaders;
 
   @override
   Future<ExcelLiveRange> getColumnRange({
     required final CellModel topLeftCell,
-    required final int relativeIndex,
-    required final bool keepRangeAlive,
-  }) {
-    // TODO: implement getColumnRange
-    throw UnimplementedError();
+    final int relativeColumnIndex = 0,
+    final bool keepRangeAlive = false,
+  }) async {
+    final values = tables[topLeftCell]!;
+    return ExcelLiveRange.mock(
+      rowsCount: values.length,
+      columnsCount: 1,
+      relativeTopLeftCell: CellModel(
+        rowIndex: 0,
+        columnIndex: relativeColumnIndex,
+      ),
+      topLeftCell: topLeftCell,
+    );
   }
 
   @override
   Future<ExcelLiveRange> getRowRange({
     required final CellModel topLeftCell,
-    required final bool keepRangeAlive,
-  }) {
-    // TODO: implement getRowRange
-    throw UnimplementedError();
+    final bool keepRangeAlive = false,
+    final int relativeRowIndex = 0,
+  }) async {
+    final values = tables[topLeftCell]!;
+    return ExcelLiveRange.mock(
+      rowsCount: 1,
+      columnsCount: values.first.length,
+      relativeTopLeftCell: CellModel(
+        rowIndex: relativeRowIndex,
+        columnIndex: 0,
+      ),
+      topLeftCell: topLeftCell,
+    );
   }
 
   @override
   Future<ExcelTableData> loadRangeValues({
     required final ExcelLiveRange range,
-  }) {
-    // TODO: implement loadRangeValues
-    throw UnimplementedError();
+  }) async {
+    final values = tables[range.topLeftCell]!;
+    return values
+        .getRange(range.relativeTopLeftCell.rowIndex, range.rowsCount)
+        .map((final e) {
+      return e
+          .getRange(range.relativeTopLeftCell.columnIndex, range.columnsCount)
+          .toList();
+    }).toList();
   }
 
   @override
-  Future<ExcelTableData> updateRangeValues({
+  Future<void> updateRangeValues({
     required final ExcelLiveRange range,
     required final ExcelTableData values,
-  }) {
-    // TODO: implement updateRangeValues
-    throw UnimplementedError();
+  }) async {
+    final oldValues = tables[range.topLeftCell]!;
+    oldValues
+        .getRange(range.relativeTopLeftCell.rowIndex, range.rowsCount)
+        .mapIndexed((final rowIndex, final oldColumn) {
+      final rowValues = values[rowIndex];
+      oldColumn.setRange(
+        range.relativeTopLeftCell.columnIndex,
+        range.columnsCount,
+        List.castFrom(rowValues),
+      );
+      return oldColumn;
+    }).toList();
   }
 }

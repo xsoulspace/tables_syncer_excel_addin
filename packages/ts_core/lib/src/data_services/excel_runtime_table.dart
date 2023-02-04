@@ -79,7 +79,7 @@ class ExcelRuntimeTable {
     final columnIndex = headers.indexesMap[name]!;
     final liveRange = await excelTableApi.getColumnRange(
       topLeftCell: params.dataTopLeftCell,
-      relativeIndex: columnIndex,
+      relativeColumnIndex: columnIndex,
       keepRangeAlive: keepRangeAlive,
     );
     if (keepRangeAlive) {
@@ -101,7 +101,7 @@ class ExcelRuntimeTable {
       final columnIndex = headers.indexesMap[name]!;
       range = await excelTableApi.getColumnRange(
         topLeftCell: params.dataTopLeftCell,
-        relativeIndex: columnIndex,
+        relativeColumnIndex: columnIndex,
         keepRangeAlive: false,
       );
     }
