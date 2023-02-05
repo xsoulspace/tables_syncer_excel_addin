@@ -40,7 +40,9 @@ class _DialogWindow extends HookWidget {
       key: state.formHelper.formKey,
       child: SimpleDialog(
         insetPadding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
-        title: const Text('Create Table'),
+        title: Text(
+          initialTableParams?.id != null ? 'Update Table' : 'Create Table',
+        ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
         children: [
           uiTheme.verticalBoxes.extraLarge,

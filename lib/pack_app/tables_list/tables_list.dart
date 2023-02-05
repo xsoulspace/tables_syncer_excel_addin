@@ -34,7 +34,7 @@ class TablesListScreen extends HookWidget {
             itemBuilder: (final context, final doc) {
               final table = doc.data();
               return TableListTile(
-                key: ValueKey(table),
+                key: ValueKey(table.id),
                 table: table,
               );
             },
@@ -67,14 +67,16 @@ class TableListTile extends HookWidget {
       child: Card(
         margin: const EdgeInsets.only(top: 12, left: 4, right: 4),
         child: ListTile(
-          key: ValueKey(table.id),
+          onTap: () => state.onEditTable(table),
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4.0),
             child: Text(
               '${table.name} | Worksheet: ${table.worksheetName} '
-              '| Key Column: ${table.keyColumnName} '
-              '| Cell: Row ${table.headerTopLeftCell.relativeRowIndex} & '
-              'Column ${table.headerTopLeftCell.relativeColumnIndex}',
+              '\n| Key Column: ${table.keyColumnName} '
+              '\n| Header: Row ${table.headerTopLeftCell.relativeRowIndex} & '
+              'Column ${table.headerTopLeftCell.relativeColumnIndex}'
+              '\n| Data: Row ${table.dataTopLeftCell.relativeRowIndex} & '
+              'Column ${table.dataTopLeftCell.relativeColumnIndex}',
               style: textTheme.bodyMedium,
             ),
           ),
