@@ -26,7 +26,10 @@ class InfoScreen extends HookWidget {
     final textTheme = theme.textTheme;
 
     return Scaffold(
-      appBar: AppBar(title: Text(S.of(context).about)),
+      appBar: AppBar(
+        title: Text(S.of(context).about),
+        automaticallyImplyLeading: false,
+      ),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.zero,

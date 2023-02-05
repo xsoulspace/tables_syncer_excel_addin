@@ -20,20 +20,23 @@ class TablesListScreen extends HookWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
-    return Provider(
-      create: (final context) => state,
-      builder: (final context, final child) {
-        return FirestoreListView(
-          query: apiServices.tables.tableQuery,
-          itemBuilder: (final context, final doc) {
-            final table = doc.data();
-            return TableListTile(
-              key: ValueKey(table),
-              table: table,
-            );
-          },
-        );
-      },
+    return Scaffold(
+      appBar: AppBar(automaticallyImplyLeading: false),
+      body: Provider(
+        create: (final context) => state,
+        builder: (final context, final child) {
+          return FirestoreListView(
+            query: apiServices.tables.tableQuery,
+            itemBuilder: (final context, final doc) {
+              final table = doc.data();
+              return TableListTile(
+                key: ValueKey(table),
+                table: table,
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

@@ -18,6 +18,7 @@ class SettingsScreen extends HookWidget {
     final appThemeData = UiTheme.of(context);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           S.of(context).settings,
         ),

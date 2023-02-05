@@ -39,48 +39,51 @@ class NavigationScreen extends HookWidget {
             children: [
               Row(
                 children: [
+                  Expanded(
+                    child: ValueListenableBuilder(
+                      valueListenable: state.currentScreen,
+                      builder:
+                          (final context, final currentScreen, final child) {
+                        return LazyIndexedStack(
+                          index: currentScreen.index,
+                          children: NavigationScreens.values.map(
+                            (final screen) {
+                              switch (screen) {
+                                case NavigationScreens.home:
+                                  return const HomeScreen();
+                                case NavigationScreens.createSync:
+                                  return const TablesSyncScreen();
+                                case NavigationScreens.info:
+                                  return const InfoScreen();
+                                case NavigationScreens.profile:
+                                  return ProfileScreen(
+                                    actions: [
+                                      SignedOutAction((final context) {
+                                        state.diDto.routerController.toSignIn();
+                                      }),
+                                    ],
+                                    providers: GlobalStateNotifiers
+                                            .getFirebaseIntializer()
+                                        .providers,
+                                  );
+                                case NavigationScreens.settings:
+                                  return const SettingsScreen();
+                                case NavigationScreens.syncs:
+                                  return const TablesSyncsListScreen();
+                                case NavigationScreens.tables:
+                                  return const TablesListScreen();
+                              }
+                            },
+                          ).toList(),
+                        );
+                      },
+                    ),
+                  ),
                   Provider(
                     create: (final context) => state,
                     builder: (final context, final child) {
                       return AppNavigationRail(
                         panePaddingRequired: !isHomeScreen,
-                      );
-                    },
-                  ),
-                  ValueListenableBuilder(
-                    valueListenable: state.currentScreen,
-                    builder: (final context, final currentScreen, final child) {
-                      return LazyIndexedStack(
-                        index: currentScreen.index,
-                        children: NavigationScreens.values.map(
-                          (final screen) {
-                            switch (screen) {
-                              case NavigationScreens.home:
-                                return const HomeScreen();
-                              case NavigationScreens.createSync:
-                                return const TablesSyncScreen();
-                              case NavigationScreens.info:
-                                return const InfoScreen();
-                              case NavigationScreens.profile:
-                                return ProfileScreen(
-                                  actions: [
-                                    SignedOutAction((final context) {
-                                      state.diDto.routerController.toSignIn();
-                                    }),
-                                  ],
-                                  providers: GlobalStateNotifiers
-                                          .getFirebaseIntializer()
-                                      .providers,
-                                );
-                              case NavigationScreens.settings:
-                                return const SettingsScreen();
-                              case NavigationScreens.syncs:
-                                return const TablesSyncsListScreen();
-                              case NavigationScreens.tables:
-                                return const TablesListScreen();
-                            }
-                          },
-                        ).toList(),
                       );
                     },
                   ),
