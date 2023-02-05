@@ -117,7 +117,8 @@ class InfoScreen extends HookWidget {
                   uiTheme.verticalBoxes.medium,
                   ...[
                     _ContributorModel(
-                      title: '@mixev - thank you for testing',
+                      title: 'For testing and active help '
+                          'with development thanks to @mixev',
                       url: 'https://github.com/mixev',
                     )
                   ].map(

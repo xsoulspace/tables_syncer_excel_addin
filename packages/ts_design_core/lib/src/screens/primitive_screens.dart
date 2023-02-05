@@ -19,12 +19,14 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          CircularProgress(),
-        ],
+    return Material(
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            CircularProgress(),
+          ],
+        ),
       ),
     );
   }
