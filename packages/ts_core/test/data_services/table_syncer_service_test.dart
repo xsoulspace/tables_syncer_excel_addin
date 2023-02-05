@@ -7,6 +7,7 @@ void main() {
     final sourceTableParam = TableParamsModel(
       id: '1',
       workbookOriginName: '',
+      worksheetName: '',
       userId: '',
       createdAt: DateTime.now(),
       dataTopLeftCell: const CellModel(columnIndex: 20, rowIndex: 2),
@@ -16,6 +17,7 @@ void main() {
     final destinationTableParam = TableParamsModel(
       id: '2',
       workbookOriginName: '',
+      worksheetName: '',
       userId: '',
       createdAt: DateTime.now(),
       dataTopLeftCell: const CellModel(columnIndex: 1, rowIndex: 1),

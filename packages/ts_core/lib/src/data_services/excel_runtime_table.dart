@@ -19,7 +19,7 @@ class ExcelRuntimeTable {
     required final ExcelTableApi excelTableApi,
     final bool indexateHeaders = true,
   }) async {
-    final sheet = await excelTableApi.getSheet(params.name);
+    final sheet = await excelTableApi.getSheet(params.worksheetName);
     final headers = await loadHeaders(
       excelTableApi: excelTableApi,
       params: params,
@@ -47,7 +47,9 @@ class ExcelRuntimeTable {
     final values = await excelTableApi.loadRangeValues(range: rowRange);
 
     final headers = TableHeadersModel(
-      data: List.castFrom(values),
+      data: values
+          .map((final row) => row.map((final value) => '$value').toList())
+          .toList(),
       indexesMap: const {},
       topLeftCell: params.headerTopLeftCell,
     );
@@ -123,14 +125,14 @@ class ExcelRuntimeTable {
     required final IndexedKeysWithOriginMap newKeysMap,
   }) async {
     final columnIndex = headers.indexesMap[params.keyColumnName]!;
+    final columnValues = newKeysMap.keys.map((final key) => [key]).toList();
     final range = await excelTableApi.getColumnRange(
       sheet: sheet,
       topLeftCell: params.dataTopLeftCell,
       relativeColumnIndex: columnIndex,
       shouldInsertUnderLastRow: true,
-      rowsCount: newKeysMap.length,
+      rowsCount: columnValues.length,
     );
-    final columnValues = newKeysMap.keys.map((final key) => [key]).toList();
     await excelTableApi.updateRangeValues(
       range: range,
       values: columnValues,

@@ -105,6 +105,7 @@ _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String,
       keyColumnName: json['keyColumnName'] as String,
       createdAt: fromTimestamp(json['createdAt'] as Timestamp),
+      worksheetName: json['worksheetName'] as String,
       name: json['name'] as String? ?? '',
       headerTopLeftCell: json['headerTopLeftCell'] == null
           ? CellModel.zero
@@ -121,6 +122,7 @@ Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
       'userId': instance.userId,
       'keyColumnName': instance.keyColumnName,
       'createdAt': toTimestamp(instance.createdAt),
+      'worksheetName': instance.worksheetName,
       'name': instance.name,
       'headerTopLeftCell': instance.headerTopLeftCell.toJson(),
       'dataTopLeftCell': instance.dataTopLeftCell.toJson(),

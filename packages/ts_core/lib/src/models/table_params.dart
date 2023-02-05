@@ -23,6 +23,7 @@ class TableParamsModel with _$TableParamsModel {
     required final String keyColumnName,
     @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
         required final DateTime createdAt,
+    required final String worksheetName,
     @Default('') final String name,
     @Default(CellModel.zero) final CellModel headerTopLeftCell,
     @Default(CellModel.zero) final CellModel dataTopLeftCell,
@@ -54,6 +55,7 @@ class TableParamsModel with _$TableParamsModel {
     userId: '',
     workbookOriginName: '',
     keyColumnName: '',
+    worksheetName: '',
   );
 }
 

@@ -38,8 +38,13 @@ dependencies:
   jwt_decoder: ^2.0.1
   life_hooks: ^0.0.18
   logger: ^1.1.0
-  office_addin_helper: ^0.3.0
-  officejs: ^0.3.1
+  # office_addin_helper: ^0.3.0
+  # officejs: ^0.3.1
+
+  officejs:
+    path: ../../../officejs_dart
+  office_addin_helper:
+    path: ../../../office_addin_helper
   path_to_regexp: ^0.4.0
   provider: ^6.0.4
   quiver: ^3.1.0
@@ -61,11 +66,6 @@ dev_dependencies:
   retrofit_generator: ^4.2.0
   xsoulspace_lints: ^0.0.5
 
-dependency_overrides:
-  officejs:
-    path: ../../../officejs_dart
-  office_addin_helper:
-    path: ../../../office_addin_helper
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.

@@ -832,6 +832,7 @@ mixin _$TableParamsModel {
   String get keyColumnName => throw _privateConstructorUsedError;
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt => throw _privateConstructorUsedError;
+  String get worksheetName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   CellModel get headerTopLeftCell => throw _privateConstructorUsedError;
   CellModel get dataTopLeftCell => throw _privateConstructorUsedError;
@@ -854,6 +855,7 @@ abstract class $TableParamsModelCopyWith<$Res> {
       String userId,
       String keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
+      String worksheetName,
       String name,
       CellModel headerTopLeftCell,
       CellModel dataTopLeftCell});
@@ -880,6 +882,7 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
     Object? userId = null,
     Object? keyColumnName = null,
     Object? createdAt = null,
+    Object? worksheetName = null,
     Object? name = null,
     Object? headerTopLeftCell = null,
     Object? dataTopLeftCell = null,
@@ -905,6 +908,10 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      worksheetName: null == worksheetName
+          ? _value.worksheetName
+          : worksheetName // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -951,6 +958,7 @@ abstract class _$$_TableParamsModelCopyWith<$Res>
       String userId,
       String keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
+      String worksheetName,
       String name,
       CellModel headerTopLeftCell,
       CellModel dataTopLeftCell});
@@ -977,6 +985,7 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
     Object? userId = null,
     Object? keyColumnName = null,
     Object? createdAt = null,
+    Object? worksheetName = null,
     Object? name = null,
     Object? headerTopLeftCell = null,
     Object? dataTopLeftCell = null,
@@ -1002,6 +1011,10 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      worksheetName: null == worksheetName
+          ? _value.worksheetName
+          : worksheetName // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1029,6 +1042,7 @@ class _$_TableParamsModel extends _TableParamsModel {
       required this.keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           required this.createdAt,
+      required this.worksheetName,
       this.name = '',
       this.headerTopLeftCell = CellModel.zero,
       this.dataTopLeftCell = CellModel.zero})
@@ -1049,6 +1063,8 @@ class _$_TableParamsModel extends _TableParamsModel {
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   final DateTime createdAt;
   @override
+  final String worksheetName;
+  @override
   @JsonKey()
   final String name;
   @override
@@ -1060,7 +1076,7 @@ class _$_TableParamsModel extends _TableParamsModel {
 
   @override
   String toString() {
-    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, keyColumnName: $keyColumnName, createdAt: $createdAt, name: $name, headerTopLeftCell: $headerTopLeftCell, dataTopLeftCell: $dataTopLeftCell)';
+    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, keyColumnName: $keyColumnName, createdAt: $createdAt, worksheetName: $worksheetName, name: $name, headerTopLeftCell: $headerTopLeftCell, dataTopLeftCell: $dataTopLeftCell)';
   }
 
   @override
@@ -1076,6 +1092,8 @@ class _$_TableParamsModel extends _TableParamsModel {
                 other.keyColumnName == keyColumnName) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.worksheetName, worksheetName) ||
+                other.worksheetName == worksheetName) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.headerTopLeftCell, headerTopLeftCell) ||
                 other.headerTopLeftCell == headerTopLeftCell) &&
@@ -1085,8 +1103,17 @@ class _$_TableParamsModel extends _TableParamsModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, workbookOriginName, userId,
-      keyColumnName, createdAt, name, headerTopLeftCell, dataTopLeftCell);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      workbookOriginName,
+      userId,
+      keyColumnName,
+      createdAt,
+      worksheetName,
+      name,
+      headerTopLeftCell,
+      dataTopLeftCell);
 
   @JsonKey(ignore: true)
   @override
@@ -1110,6 +1137,7 @@ abstract class _TableParamsModel extends TableParamsModel {
       required final String keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           required final DateTime createdAt,
+      required final String worksheetName,
       final String name,
       final CellModel headerTopLeftCell,
       final CellModel dataTopLeftCell}) = _$_TableParamsModel;
@@ -1129,6 +1157,8 @@ abstract class _TableParamsModel extends TableParamsModel {
   @override
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt;
+  @override
+  String get worksheetName;
   @override
   String get name;
   @override

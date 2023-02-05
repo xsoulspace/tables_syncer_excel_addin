@@ -34,11 +34,13 @@ class UpsertTableState extends ContextfulLifeState {
   final dataTopLeftColumnIndexController = TextEditingController();
   final keysColumnNameController = TextEditingController();
   final nameController = TextEditingController();
+  final worksheetNameController = TextEditingController();
 
   Future<void> onCreate() async {
     await formHelper.submit(
       onValide: () async {
         final table = TableParamsModel(
+          worksheetName: worksheetNameController.text,
           createdAt: DateTime.now(),
           userId: FirebaseAuth.instance.currentUser!.uid,
           id: IdCreator.create(),
@@ -69,6 +71,7 @@ class UpsertTableState extends ContextfulLifeState {
     dataTopLeftColumnIndexController.dispose();
     keysColumnNameController.dispose();
     nameController.dispose();
+    worksheetNameController.dispose();
     formHelper.dispose();
     super.dispose();
   }

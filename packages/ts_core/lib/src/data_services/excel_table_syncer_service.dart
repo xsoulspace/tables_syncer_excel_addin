@@ -23,8 +23,8 @@ class ExcelTableSyncerService {
       );
       final sourceColumnIndexedKeys =
           await sourceRuntimeTable.loadKeysColumnIndexedUniqueValues();
-      analyticsNotifier
-          ?.dynamicLog({'sourceColumnIndexedKeys': sourceColumnIndexedKeys});
+      // analyticsNotifier
+      //     ?.dynamicLog({'sourceColumnIndexedKeys': sourceColumnIndexedKeys});
       final sourceColumnsCache = <String, ExcelTableData>{};
 
       for (final destinationTableParams
@@ -38,17 +38,32 @@ class ExcelTableSyncerService {
           secondaryHeaders: secondaryRuntimeTable.headers,
         );
 
+        // analyticsNotifier?.dynamicLog(
+        //   {
+        //     'headersProcessor headers': headersProcessor.headers,
+        //     'secondaryHeaders': headersProcessor.secondaryHeaders,
+        //   },
+        // );
+
         IndexedKeysMap secondaryColumnIndexedKeys =
             await secondaryRuntimeTable.loadKeysColumnIndexedValues();
-        analyticsNotifier?.dynamicLog(
-          {'secondaryColumnIndexedKeys': secondaryColumnIndexedKeys},
-        );
 
         ColumnDataProcessor columnDataProcessor =
             ColumnDataProcessor.fromIndexedKeys(
           columnIndexedKeys: sourceColumnIndexedKeys,
           secondaryColumnIndexedKeys: secondaryColumnIndexedKeys,
         );
+        // analyticsNotifier?.dynamicLog(
+        //   {
+        //     'columnDataProcessor indexedKeys': columnDataProcessor.indexedKeys,
+        //     'newSecondaryIndexedKeys':
+        //         columnDataProcessor.newSecondaryIndexedKeys,
+        //     'updatableSecondaryIndexedKeys':
+        //         columnDataProcessor.updatableSecondaryIndexedKeys,
+        //     'secondaryColumnIndexedKeys': secondaryColumnIndexedKeys,
+        //   },
+        // );
+
         if (runtimeSyncParams.shouldAddNewValues) {
           await secondaryRuntimeTable.addNewKeyColumnValues(
             newKeysMap: columnDataProcessor.newSecondaryIndexedKeys,

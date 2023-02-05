@@ -799,14 +799,14 @@ packages:
     source: hosted
     version: "1.0.0"
   office_addin_helper:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "../office_addin_helper"
       relative: true
     source: path
     version: "0.3.0"
   officejs:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "../officejs_dart"
       relative: true

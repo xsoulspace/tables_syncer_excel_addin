@@ -99,7 +99,16 @@ class _DialogWindow extends HookWidget {
             decoration: const InputDecoration()
                 .applyDefaults(theme.inputDecorationTheme)
                 .copyWith(
-                  labelText: 'Name (optional)',
+                  labelText: 'Worksheet Name*',
+                ),
+            controller: state.worksheetNameController,
+          ),
+          uiTheme.verticalBoxes.large,
+          TextField(
+            decoration: const InputDecoration()
+                .applyDefaults(theme.inputDecorationTheme)
+                .copyWith(
+                  labelText: 'Table Name (optional)',
                 ),
             controller: state.nameController,
           ),

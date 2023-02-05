@@ -298,6 +298,7 @@ class DestinationTablesSelector extends StatelessWidget {
                   );
                 },
                 onSelected: widgetState.onAddDestinationTable,
+                displayStringForOption: (final option) => option.name,
               ),
             ),
             uiTheme.horizontalBoxes.medium,
