@@ -20,7 +20,7 @@ class NavigationScreen extends HookWidget {
   Widget build(final BuildContext context) {
     final state = useNavigationScreenState(read: context.read);
     final uiTheme = UiTheme.of(context);
-    final themeData = Theme.of(context);
+    final theme = Theme.of(context);
     final screenSize = MediaQuery.of(context).size;
 
     return AppStateLoader(
@@ -118,6 +118,8 @@ class AppNavigationRail extends StatelessWidget {
       valueListenable: state.currentScreen,
       builder: (final context, final currentScreen, final child) {
         return NavigationRail(
+          minWidth: 56,
+          labelType: NavigationRailLabelType.none,
           destinations: NavigationScreens.values.map((final screen) {
             switch (screen) {
               case NavigationScreens.home:

@@ -24,8 +24,7 @@ class NavigationRoutes {
 
 class AppRouterController extends RouterController {
   AppRouterController.use(super.read) : super.use();
-  AppRouterController.local(final RouteState routeState)
-      : super.local(routeState);
+  AppRouterController.local(super.routeState) : super.local();
 
   void toLoader() => to(NavigationRoutes.loader);
   void toHome() => to(NavigationRoutes.home);

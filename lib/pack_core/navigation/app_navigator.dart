@@ -10,8 +10,8 @@ import 'package:ts_design_core/ts_design_core.dart';
 class AppNavigator extends HookWidget {
   const AppNavigator({
     required this.navigatorKey,
-    final Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final GlobalKey<NavigatorState> navigatorKey;
 
   @override
