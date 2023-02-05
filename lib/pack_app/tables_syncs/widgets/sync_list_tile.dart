@@ -1,5 +1,4 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
@@ -7,53 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
-part 'tables_syncs_state.dart';
-
-class TablesSyncsListScreen extends StatelessWidget {
-  const TablesSyncsListScreen({super.key});
-
-  @override
-  Widget build(final BuildContext context) {
-    return const Scaffold(
-      body: TablesSyncsListView(),
-    );
-  }
-}
-
-class TablesSyncsListView extends HookWidget {
-  const TablesSyncsListView({super.key});
-
-  @override
-  Widget build(final BuildContext context) {
-    final apiServices = context.watch<ApiServices>();
-    final state = useTablesSyncsListState(read: context.read);
-    final uiTheme = UiTheme.of(context);
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Syncs'),
-      ),
-      body: Provider(
-        create: (final context) => state,
-        builder: (final context, final child) {
-          return FirestoreListView(
-            query: apiServices.tablesSync.tableSyncQuery,
-            itemBuilder: (final context, final doc) {
-              final tablesSync = doc.data();
-              return TablesSyncListTile(
-                key: ValueKey(tablesSync),
-                tablesSync: tablesSync,
-              );
-            },
-          );
-        },
-      ),
-    );
-  }
-}
+part 'sync_list_tile_state.dart';
 
 class TablesSyncListTile extends HookWidget {
   const TablesSyncListTile({
@@ -63,11 +16,11 @@ class TablesSyncListTile extends HookWidget {
   final TablesSyncParamsModel tablesSync;
   @override
   Widget build(final BuildContext context) {
-    final isHovering = useIsBool();
     final uiTheme = UiTheme.of(context);
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
-    final state = context.read<TablesSyncsListState>();
+    final state = useTableSyncListTileState(read: context.read);
     final syncParamsNotifier = context.read<SyncParamsNotifier>();
     final runtimeSync = SyncParamsNormalizer.normalize(
       syncParams: tablesSync,
@@ -75,12 +28,31 @@ class TablesSyncListTile extends HookWidget {
     );
     return FocusableActionDetector(
       onShowHoverHighlight: (final value) {
-        isHovering.value = value;
+        state.isHovering = value;
       },
       child: Card(
         margin: const EdgeInsets.only(top: 12, left: 4),
         child: ListTile(
           key: ValueKey(tablesSync.id),
+          contentPadding: const EdgeInsets.only(
+            right: 8,
+          ),
+          horizontalTitleGap: 2,
+          leading: IconButton(
+            padding: EdgeInsets.zero,
+            icon: () {
+              if (state.syncing) return const CircularProgress();
+              if (state.isSyncingFailed) return const Icon(Icons.error);
+              if (state.isSyncingCompleted) return const Icon(Icons.done);
+              return const Icon(Icons.sync);
+            }(),
+            color: () {
+              if (state.isSyncingFailed) return colorScheme.error;
+              if (state.isSyncingCompleted) return colorScheme.secondary;
+              return null;
+            }(),
+            onPressed: state.syncing ? null : () => state.onSync(tablesSync),
+          ),
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
@@ -93,22 +65,17 @@ class TablesSyncListTile extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(tablesSync.workbookName),
-              Text(runtimeSync.columnNames.join(',')),
+              Text('Columns: ${runtimeSync.columnNames.join(',')}'),
               uiTheme.horizontalBoxes.medium,
               Text(
                 'Last Synced: '
                 '${tablesSync.lastSyncAt?.toLocal().toIso8601String()}',
               ),
-              if (isHovering.value)
+              if (state.isHovering)
                 FadeIn(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      IconButton(
-                        icon: const Icon(Icons.sync),
-                        onPressed: () => state.onSync(tablesSync),
-                      ),
-                      uiTheme.horizontalBoxes.small,
                       IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () => state.onEditSync(tablesSync),

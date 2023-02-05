@@ -21,15 +21,4 @@ class TablesSyncsListState extends ContextfulLifeState {
     required this.diDto,
   });
   final TablesSyncsListDiDto diDto;
-  void onEditSync(final TablesSyncParamsModel tablesSync) {}
-  Future<void> onSync(final TablesSyncParamsModel syncParams) async {
-    final runtimeSyncParams = SyncParamsNormalizer.normalize(
-      syncParams: syncParams,
-      tablesMap: diDto.syncerParamsNotifier.tablesParamsMap,
-    );
-
-    await diDto.syncerService.syncTables(runtimeSyncParams: runtimeSyncParams);
-  }
-
-  void onDeleteSync(final TablesSyncParamsModel syncParams) {}
 }
