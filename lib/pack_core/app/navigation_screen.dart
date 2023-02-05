@@ -9,6 +9,7 @@ import 'package:tables_syncer_excel_addin/pack_core/app/info_screen.dart';
 import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
 import 'package:tables_syncer_excel_addin/pack_core/pack_core.dart';
 import 'package:tables_syncer_excel_addin/pack_settings/pack_settings.dart';
+import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
 part 'navigation_screen_state.dart';
@@ -22,6 +23,7 @@ class NavigationScreen extends HookWidget {
     final uiTheme = UiTheme.of(context);
     final theme = Theme.of(context);
     final screenSize = MediaQuery.of(context).size;
+    final userNotifier = context.watch<UserNotifier>();
 
     return AppStateLoader(
       initializer: AuthStateInitializer(),
@@ -84,8 +86,17 @@ class NavigationScreen extends HookWidget {
                         Provider(
                           create: (final context) => state,
                           builder: (final context, final child) {
-                            return AppNavigationRail(
-                              panePaddingRequired: !isHomeScreen,
+                            return Material(
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  top: userNotifier.excelAvailable.value
+                                      ? 24
+                                      : 0,
+                                ),
+                                child: AppNavigationRail(
+                                  panePaddingRequired: !isHomeScreen,
+                                ),
+                              ),
                             );
                           },
                         ),
