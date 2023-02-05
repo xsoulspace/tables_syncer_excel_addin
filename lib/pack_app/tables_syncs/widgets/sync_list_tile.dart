@@ -42,8 +42,6 @@ class TablesSyncListTile extends HookWidget {
             padding: EdgeInsets.zero,
             icon: () {
               if (state.syncing) return const CircularProgress();
-              if (state.isSyncingFailed) return const Icon(Icons.error);
-              if (state.isSyncingCompleted) return const Icon(Icons.done);
               return const Icon(Icons.sync);
             }(),
             color: () {

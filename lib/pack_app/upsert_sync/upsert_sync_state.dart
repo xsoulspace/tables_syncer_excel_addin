@@ -1,4 +1,4 @@
-part of 'tables_sync.dart';
+part of 'upsert_sync.dart';
 
 TablesSyncWidgetState useTablesSyncWidgetState({
   required final TablesSyncParamsModelId? syncId,

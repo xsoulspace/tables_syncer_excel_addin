@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
-import 'package:tables_syncer_excel_addin/pack_app/screens/upsert_sync/upsert_table.dart';
+import 'package:tables_syncer_excel_addin/pack_app/upsert_sync/upsert_table.dart';
 import 'package:tables_syncer_excel_addin/pack_core/pack_core.dart';
 import 'package:ts_core/ts_core.dart';
 
