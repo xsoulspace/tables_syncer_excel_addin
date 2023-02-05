@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
@@ -25,6 +24,7 @@ class SettingsScreen extends HookWidget {
       ),
       body: ListView(
         shrinkWrap: true,
+        padding: EdgeInsets.zero,
         children: [
           SettingsTile(
             icon: Icons.language_rounded,
@@ -49,24 +49,31 @@ class SettingsScreen extends HookWidget {
           SettingsTile(
             title: S.of(context).appearance,
             icon: Icons.brightness_4_rounded,
-            trailing: SegmentedButton<ThemeMode>(
-              segments: [
-                ButtonSegment(
-                  value: ThemeMode.system,
-                  label: Text(S.current.appearanceSystem),
-                ),
-                ButtonSegment(
-                  value: ThemeMode.light,
-                  label: Text(S.current.appearanceLight),
-                ),
-                ButtonSegment(
-                  value: ThemeMode.dark,
-                  label: Text(S.current.appearanceDark),
-                ),
-              ],
-              selected: {settingsNotifier.theme},
-              onSelectionChanged: (final value) => settingsNotifier.theme =
-                  value.firstOrNull ?? ThemeMode.system,
+            trailing: DropdownButton<ThemeMode>(
+              items: ThemeMode.values
+                  .map(
+                    (final theme) => DropdownMenuItem<ThemeMode>(
+                      value: theme,
+                      child: SizedBox(
+                        width: 100,
+                        child: Text(() {
+                          switch (theme) {
+                            case ThemeMode.system:
+                              return S.current.appearanceSystem;
+
+                            case ThemeMode.light:
+                              return S.current.appearanceLight;
+                            case ThemeMode.dark:
+                              return S.current.appearanceDark;
+                          }
+                        }()),
+                      ),
+                    ),
+                  )
+                  .toList(),
+              value: settingsNotifier.theme,
+              onChanged: (final value) =>
+                  settingsNotifier.theme = value ?? ThemeMode.system,
             ),
           ),
         ],

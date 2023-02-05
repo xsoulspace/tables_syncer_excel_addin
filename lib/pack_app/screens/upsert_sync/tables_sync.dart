@@ -73,40 +73,50 @@ class _TablesSyncBody extends StatelessWidget {
     final controllers = context.read<TablesSyncBloc>().controllers;
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Create Sync'),
+      ),
       body: Container(
         constraints: BoxConstraints(
           maxWidth: WidthFormFactor.mobile.max * 0.8,
         ),
-        padding: const EdgeInsets.all(24),
         child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            Text(
-              'Create Sync',
-              textAlign: TextAlign.center,
-              style: theme.textTheme.titleMedium,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 14,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  uiTheme.verticalBoxes.extraLarge,
+                  Text(
+                    'Source Table',
+                    style: theme.textTheme.bodyLarge,
+                  ),
+                  uiTheme.verticalBoxes.small,
+                  const SelectSourceTableButton(),
+                  uiTheme.verticalBoxes.large,
+                  Text(
+                    'Source Columns',
+                    style: theme.textTheme.bodyLarge,
+                  ),
+                  uiTheme.verticalBoxes.small,
+                  const SyncColumnsSelector(),
+                  uiTheme.verticalBoxes.large,
+                  Text(
+                    'Destination Tables',
+                    style: theme.textTheme.bodyLarge,
+                  ),
+                  uiTheme.verticalBoxes.small,
+                  const DestinationTablesSelector(),
+                  uiTheme.verticalBoxes.extraLarge,
+                ],
+              ),
             ),
-            uiTheme.verticalBoxes.extraLarge,
-            Text(
-              'Source Table',
-              style: theme.textTheme.bodyLarge,
-            ),
-            uiTheme.verticalBoxes.small,
-            const SelectSourceTableButton(),
-            uiTheme.verticalBoxes.large,
-            Text(
-              'Source Columns',
-              style: theme.textTheme.bodyLarge,
-            ),
-            uiTheme.verticalBoxes.small,
-            const SyncColumnsSelector(),
-            uiTheme.verticalBoxes.large,
-            Text(
-              'Destination Tables',
-              style: theme.textTheme.bodyLarge,
-            ),
-            uiTheme.verticalBoxes.small,
-            const DestinationTablesSelector(),
-            uiTheme.verticalBoxes.extraLarge,
             BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
               selector: (final state) {
                 if (state is LiveTablesSyncParamsState) {
@@ -138,38 +148,44 @@ class _TablesSyncBody extends StatelessWidget {
               },
             ),
             uiTheme.verticalBoxes.extraLarge,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
-                  selector: (final state) {
-                    if (state is LiveTablesSyncParamsState) {
-                      return state.validate();
-                    }
-                    return false;
-                  },
-                  builder: (final context, final isValide) {
-                    return FilledButton(
-                      onPressed: isValide ? widgetState.onSubmit : null,
-                      child: ValueListenableBuilder(
-                        valueListenable: controllers.isSaving,
-                        child:
-                            Text(widgetState.isCreateSync ? 'Create' : 'Save'),
-                        builder: (final context, final isSaving, final child) {
-                          if (isSaving) {
-                            return const SizedBox.square(
-                              dimension: 24,
-                              child: CircularProgress(),
-                            );
-                          }
-                          return child!;
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
+                    selector: (final state) {
+                      if (state is LiveTablesSyncParamsState) {
+                        return state.validate();
+                      }
+                      return false;
+                    },
+                    builder: (final context, final isValide) {
+                      return FilledButton(
+                        onPressed: isValide ? widgetState.onSubmit : null,
+                        child: ValueListenableBuilder(
+                          valueListenable: controllers.isSaving,
+                          child: Text(
+                            widgetState.isCreateSync ? 'Create' : 'Save',
+                          ),
+                          builder:
+                              (final context, final isSaving, final child) {
+                            if (isSaving) {
+                              return const SizedBox.square(
+                                dimension: 24,
+                                child: CircularProgress(),
+                              );
+                            }
+                            return child!;
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
+            uiTheme.verticalBoxes.extraLarge,
           ],
         ),
       ),

@@ -21,7 +21,10 @@ class TablesListScreen extends HookWidget {
     final textTheme = theme.textTheme;
 
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Tables'),
+      ),
       body: Provider(
         create: (final context) => state,
         builder: (final context, final child) {
@@ -65,33 +68,37 @@ class TableListTile extends HookWidget {
         child: ListTile(
           key: ValueKey(table.id),
           title: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
             child: Text(
-              table.id,
+              '${table.name} | Worksheet: ${table.worksheetName} '
+              '| Cell: Row ${table.headerTopLeftCell.rowIndex}, '
+              'Column ${table.headerTopLeftCell.columnIndex}',
               style: textTheme.bodyMedium,
             ),
           ),
-          subtitle: Text(table.workbookOriginName),
-          trailing: Visibility(
-            visible: isHovering.value,
-            child: FadeIn(
-              child: Card(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () => state.onEditTable(table),
-                    ),
-                    uiTheme.horizontalBoxes.small,
-                    IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () => state.onDeleteTable(table),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          subtitle: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(table.workbookOriginName),
+              if (isHovering.value)
+                FadeIn(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () => state.onEditTable(table),
+                      ),
+                      uiTheme.horizontalBoxes.small,
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () => state.onDeleteTable(table),
+                      ),
+                    ],
+                  ),
+                )
+            ],
           ),
         ),
       ),

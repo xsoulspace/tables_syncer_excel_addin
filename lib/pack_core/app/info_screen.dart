@@ -10,14 +10,14 @@ part 'info_screen_state.dart';
 class InfoScreen extends HookWidget {
   const InfoScreen({super.key});
   static const privacyPolicyLink =
-      'https://github.com/xsoulspace/sheets_manager_excel_addin/blob/develop/PRIVACY_POLICY.md';
+      'https://github.com/xsoulspace/tables_syncer_excel_addin/blob/develop/PRIVACY_POLICY.md';
   static const githubLink =
-      'https://github.com/xsoulspace/sheets_manager_excel_addin';
+      'https://github.com/xsoulspace/tables_syncer_excel_addin';
   static const discordLink = 'https://discord.gg/y54DpJwmAn';
   static const boostyLink = 'https://boosty.to/arenukvern';
   static const cloudTipsLink = 'https://pay.cloudtips.ru/p/1629cd27';
   static const termsOfUseLink =
-      'https://github.com/xsoulspace/sheets_manager_excel_addin/blob/develop/TERMS_AND_CONDITIONS.md';
+      'https://github.com/xsoulspace/tables_syncer_excel_addin/blob/develop/TERMS_AND_CONDITIONS.md';
   @override
   Widget build(final BuildContext context) {
     final state = useInfoScreenState();
@@ -35,128 +35,139 @@ class InfoScreen extends HookWidget {
         padding: EdgeInsets.zero,
         children: [
           Card(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  uiTheme.verticalBoxes.large,
+                  Text(
+                    S.current.purpose,
+                    style: textTheme.bodyMedium,
+                  ),
+                  uiTheme.verticalBoxes.extraLarge,
+                  Text(
+                    S.current.contributingTitle,
+                    style: textTheme.titleLarge,
+                  ),
+                  uiTheme.verticalBoxes.medium,
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Text(S.current.oss),
+                      Text(S.current.all),
+                      const UrlButton(
+                        text: 'comments',
+                        url:
+                            'https://github.com/xsoulspace/sheets_manager_excel_addin/issues',
+                      ),
+                      Text(S.current.and),
+                      const UrlButton(
+                        text: 'pull requests',
+                        url:
+                            'https://github.com/xsoulspace/sheets_manager_excel_addin/issues',
+                      ),
+                      Text(S.current.areWelcome),
+                    ],
+                  ),
+                  uiTheme.verticalBoxes.large,
+                  Text(
+                    S.current.gettingHelpTitle,
+                    style: textTheme.titleLarge,
+                  ),
+                  uiTheme.verticalBoxes.medium,
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Text(S.current.gettingHelp),
+                      const UrlButton(
+                        text: 'Discord Community',
+                        url: 'https://discord.gg/y54DpJwmAn',
+                      ),
+                    ],
+                  ),
+                  uiTheme.verticalBoxes.large,
+                  Text(
+                    S.current.donations,
+                    style: textTheme.titleLarge,
+                  ),
+                  uiTheme.verticalBoxes.medium,
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Text(S.current.considerSponsor),
+                      const UrlButton(text: 'Boosty', url: boostyLink),
+                      Text(S.current.or),
+                      const UrlButton(text: 'CloudTips', url: cloudTipsLink),
+                    ],
+                  ),
+                  uiTheme.verticalBoxes.large,
+                  Text(
+                    S.current.thankYouTitle,
+                    style: textTheme.titleLarge,
+                  ),
+                  uiTheme.verticalBoxes.medium,
+                  Text(S.current.thankYou),
+                  uiTheme.verticalBoxes.large,
+                  uiTheme.verticalBoxes.large,
+                  Text(
+                    S.current.contributors,
+                    style: textTheme.titleLarge,
+                  ),
+                  uiTheme.verticalBoxes.medium,
+                  ...[
+                    _ContributorModel(
+                      title: '@mixev - thank you for testing',
+                      url: 'https://github.com/mixev',
+                    )
+                  ].map(
+                    (final e) => _ContributorTile(
+                      contributor: e,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 14,
+            ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 uiTheme.verticalBoxes.large,
-                Text(
-                  S.current.purpose,
-                  style: textTheme.bodyMedium,
-                ),
+                const Divider(),
                 uiTheme.verticalBoxes.extraLarge,
                 Text(
-                  S.current.contributingTitle,
-                  style: textTheme.titleLarge,
+                  'Copyright © 2019-${DateTime.now().year} '
+                  'Anton Malofeev (Arenukvern)',
                 ),
-                uiTheme.verticalBoxes.medium,
+                uiTheme.verticalBoxes.extraLarge,
                 Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
+                  alignment: WrapAlignment.center,
+                  spacing: 8,
                   children: [
-                    Text(S.current.oss),
-                    Text(S.current.all),
-                    const UrlButton(
-                      text: 'comments',
-                      url:
-                          'https://github.com/xsoulspace/sheets_manager_excel_addin/issues',
+                    UrlButton(
+                      text: S.current.privacyPolicy,
+                      url: privacyPolicyLink,
                     ),
-                    Text(S.current.and),
-                    const UrlButton(
-                      text: 'pull requests',
-                      url:
-                          'https://github.com/xsoulspace/sheets_manager_excel_addin/issues',
+                    const _TextDivider(),
+                    UrlButton(
+                      text: S.current.termsOfUse,
+                      url: termsOfUseLink,
                     ),
-                    Text(S.current.areWelcome),
+                    const _TextDivider(),
+                    const Text('Made with Flutter & ❤'),
                   ],
                 ),
-                uiTheme.verticalBoxes.large,
-                Text(
-                  S.current.gettingHelpTitle,
-                  style: textTheme.titleLarge,
-                ),
-                uiTheme.verticalBoxes.medium,
-                Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    Text(S.current.gettingHelp),
-                    const UrlButton(
-                      text: 'Discord Community',
-                      url: 'https://discord.gg/y54DpJwmAn',
-                    ),
-                  ],
-                ),
-                uiTheme.verticalBoxes.large,
-                Text(
-                  S.current.donations,
-                  style: textTheme.titleLarge,
-                ),
-                uiTheme.verticalBoxes.medium,
-                Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    Text(S.current.considerSponsor),
-                    const UrlButton(text: 'Boosty', url: boostyLink),
-                    Text(S.current.or),
-                    const UrlButton(text: 'CloudTips', url: cloudTipsLink),
-                  ],
-                ),
-                uiTheme.verticalBoxes.large,
-                Text(
-                  S.current.thankYouTitle,
-                  style: textTheme.titleLarge,
-                ),
-                uiTheme.verticalBoxes.medium,
-                Text(S.current.thankYou),
-                uiTheme.verticalBoxes.large,
-                uiTheme.verticalBoxes.large,
-                Text(
-                  S.current.contributors,
-                  style: textTheme.titleLarge,
-                ),
-                uiTheme.verticalBoxes.medium,
-                ...[
-                  _ContributorModel(
-                    title: '@mixev - thank you for testing',
-                    url: 'https://github.com/mixev',
-                  )
-                ].map(
-                  (final e) => _ContributorTile(
-                    contributor: e,
-                  ),
-                )
+                uiTheme.verticalBoxes.extraLarge,
               ],
             ),
           ),
-          uiTheme.verticalBoxes.large,
-          const Divider(),
-          uiTheme.verticalBoxes.extraLarge,
-          Padding(
-            padding: const EdgeInsets.only(left: 14.0),
-            child: Text(
-              'Copyright © 2019-${DateTime.now().year} '
-              'Anton Malofeev (Arenukvern)',
-            ),
-          ),
-          uiTheme.verticalBoxes.extraLarge,
-          Padding(
-            padding: const EdgeInsets.only(left: 4.0),
-            child: Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 8,
-              children: [
-                UrlButton(
-                  text: S.current.privacyPolicy,
-                  url: privacyPolicyLink,
-                ),
-                const _TextDivider(),
-                UrlButton(
-                  text: S.current.termsOfUse,
-                  url: termsOfUseLink,
-                ),
-                const _TextDivider(),
-                const Text('Made with Flutter & ❤'),
-              ],
-            ),
-          ),
+          const BottomSafeArea(),
         ],
       ),
     );
@@ -202,7 +213,7 @@ class _ContributorTile extends StatelessWidget {
   Widget build(final BuildContext context) {
     return Row(
       children: [
-        Text(contributor.title),
+        Flexible(child: Text(contributor.title)),
         UrlButton(text: 'GitHub', url: contributor.url),
       ],
     );

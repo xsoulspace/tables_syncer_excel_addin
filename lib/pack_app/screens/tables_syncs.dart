@@ -31,20 +31,26 @@ class TablesSyncsListView extends HookWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
-    return Provider(
-      create: (final context) => state,
-      builder: (final context, final child) {
-        return FirestoreListView(
-          query: apiServices.tablesSync.tableSyncQuery,
-          itemBuilder: (final context, final doc) {
-            final tablesSync = doc.data();
-            return TablesSyncListTile(
-              key: ValueKey(tablesSync),
-              tablesSync: tablesSync,
-            );
-          },
-        );
-      },
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Syncs'),
+      ),
+      body: Provider(
+        create: (final context) => state,
+        builder: (final context, final child) {
+          return FirestoreListView(
+            query: apiServices.tablesSync.tableSyncQuery,
+            itemBuilder: (final context, final doc) {
+              final tablesSync = doc.data();
+              return TablesSyncListTile(
+                key: ValueKey(tablesSync),
+                tablesSync: tablesSync,
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
@@ -72,7 +78,7 @@ class TablesSyncListTile extends HookWidget {
         isHovering.value = value;
       },
       child: Card(
-        margin: const EdgeInsets.only(top: 12, left: 4, right: 4),
+        margin: const EdgeInsets.only(top: 12, left: 4),
         child: ListTile(
           key: ValueKey(tablesSync.id),
           title: Padding(
@@ -83,48 +89,39 @@ class TablesSyncListTile extends HookWidget {
               style: textTheme.bodyMedium,
             ),
           ),
-          subtitle: Row(
+          subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(tablesSync.workbookName),
-                  Text(runtimeSync.columnNames.join(',')),
-                ],
-              ),
+              Text(tablesSync.workbookName),
+              Text(runtimeSync.columnNames.join(',')),
               uiTheme.horizontalBoxes.medium,
               Text(
                 'Last Synced: '
                 '${tablesSync.lastSyncAt?.toLocal().toIso8601String()}',
               ),
+              if (isHovering.value)
+                FadeIn(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.sync),
+                        onPressed: () => state.onSync(tablesSync),
+                      ),
+                      uiTheme.horizontalBoxes.small,
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () => state.onEditSync(tablesSync),
+                      ),
+                      uiTheme.horizontalBoxes.small,
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () => state.onDeleteSync(tablesSync),
+                      ),
+                    ],
+                  ),
+                )
             ],
-          ),
-          trailing: Visibility(
-            visible: isHovering.value,
-            child: FadeIn(
-              child: Card(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.sync),
-                      onPressed: () => state.onSync(tablesSync),
-                    ),
-                    uiTheme.horizontalBoxes.small,
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () => state.onEditSync(tablesSync),
-                    ),
-                    uiTheme.horizontalBoxes.small,
-                    IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () => state.onDeleteSync(tablesSync),
-                    ),
-                  ],
-                ),
-              ),
-            ),
           ),
         ),
       ),

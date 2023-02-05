@@ -40,13 +40,14 @@ class _DialogWindow extends HookWidget {
       key: state.formHelper.formKey,
       child: SimpleDialog(
         title: const Text('Create Table'),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
         children: [
           uiTheme.verticalBoxes.extraLarge,
           const Text('Top Left Cell Index for Headers'),
           uiTheme.verticalBoxes.large,
           Row(
             children: [
-              const Text('Row'),
+              const Text('Row*'),
               uiTheme.horizontalBoxes.medium,
               Expanded(
                 child: TextField(
@@ -54,7 +55,7 @@ class _DialogWindow extends HookWidget {
                 ),
               ),
               const Spacer(),
-              const Text('Column'),
+              const Text('Column*'),
               uiTheme.horizontalBoxes.medium,
               Expanded(
                 child: TextField(
@@ -68,7 +69,7 @@ class _DialogWindow extends HookWidget {
           uiTheme.verticalBoxes.medium,
           Row(
             children: [
-              const Text('Row'),
+              const Text('Row*'),
               uiTheme.horizontalBoxes.medium,
               Expanded(
                 child: TextField(
@@ -76,7 +77,7 @@ class _DialogWindow extends HookWidget {
                 ),
               ),
               const Spacer(),
-              const Text('Column'),
+              const Text('Column*'),
               uiTheme.horizontalBoxes.medium,
               Expanded(
                 child: TextField(
@@ -90,7 +91,7 @@ class _DialogWindow extends HookWidget {
             decoration: const InputDecoration()
                 .applyDefaults(theme.inputDecorationTheme)
                 .copyWith(
-                  labelText: 'Keys Column Name',
+                  labelText: 'Keys Column Name*',
                 ),
             controller: state.keysColumnNameController,
           ),
@@ -114,6 +115,7 @@ class _DialogWindow extends HookWidget {
           ),
           uiTheme.verticalBoxes.extraLarge,
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ValueListenableBuilder(
                 valueListenable: state.formHelper.loading,
@@ -143,7 +145,8 @@ class _DialogWindow extends HookWidget {
                 },
               ),
             ],
-          )
+          ),
+          uiTheme.verticalBoxes.extraLarge,
         ],
       ),
     );
