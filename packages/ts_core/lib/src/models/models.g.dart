@@ -145,6 +145,7 @@ _$_TablesSyncParamsModel _$$_TablesSyncParamsModelFromJson(
       shouldAddNewValues: json['shouldAddNewValues'] as bool,
       shouldClearValueBeforeUpdate:
           json['shouldClearValueBeforeUpdate'] as bool,
+      shouldAddNewHeaders: json['shouldAddNewHeaders'] as bool? ?? false,
       workbookName: json['workbookName'] as String? ?? '',
       name: json['name'] as String? ?? '',
       lastSyncAt: fromMaybeTimestamp(json['lastSyncAt'] as Timestamp?),
@@ -162,6 +163,7 @@ Map<String, dynamic> _$$_TablesSyncParamsModelToJson(
       'shouldUpdateValues': instance.shouldUpdateValues,
       'shouldAddNewValues': instance.shouldAddNewValues,
       'shouldClearValueBeforeUpdate': instance.shouldClearValueBeforeUpdate,
+      'shouldAddNewHeaders': instance.shouldAddNewHeaders,
       'workbookName': instance.workbookName,
       'name': instance.name,
       'lastSyncAt': toMaybeTimestamp(instance.lastSyncAt),
@@ -181,6 +183,7 @@ _$_TablesSyncParamsRuntimeModel _$$_TablesSyncParamsRuntimeModelFromJson(
       shouldAddNewValues: json['shouldAddNewValues'] as bool,
       shouldClearValueBeforeUpdate:
           json['shouldClearValueBeforeUpdate'] as bool,
+      shouldAddNewHeaders: json['shouldAddNewHeaders'] as bool? ?? false,
       destinationTables: (json['destinationTables'] as List<dynamic>?)
               ?.map((e) => TableParamsModel.fromJson(e))
               .toList() ??
@@ -201,6 +204,7 @@ Map<String, dynamic> _$$_TablesSyncParamsRuntimeModelToJson(
       'shouldUpdateValues': instance.shouldUpdateValues,
       'shouldAddNewValues': instance.shouldAddNewValues,
       'shouldClearValueBeforeUpdate': instance.shouldClearValueBeforeUpdate,
+      'shouldAddNewHeaders': instance.shouldAddNewHeaders,
       'destinationTables':
           instance.destinationTables.map((e) => e.toJson()).toList(),
       'workbookName': instance.workbookName,

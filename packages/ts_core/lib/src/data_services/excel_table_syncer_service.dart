@@ -64,7 +64,8 @@ class ExcelTableSyncerService {
         //   },
         // );
 
-        if (runtimeSyncParams.shouldAddNewValues) {
+        if (runtimeSyncParams.shouldAddNewValues &&
+            columnDataProcessor.newSecondaryIndexedKeys.isNotEmpty) {
           await secondaryRuntimeTable.addNewKeyColumnValues(
             newKeysMap: columnDataProcessor.newSecondaryIndexedKeys,
           );

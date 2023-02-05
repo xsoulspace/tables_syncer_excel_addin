@@ -1713,6 +1713,7 @@ mixin _$TablesSyncParamsModel {
   bool get shouldUpdateValues => throw _privateConstructorUsedError;
   bool get shouldAddNewValues => throw _privateConstructorUsedError;
   bool get shouldClearValueBeforeUpdate => throw _privateConstructorUsedError;
+  bool get shouldAddNewHeaders => throw _privateConstructorUsedError;
   String get workbookName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -1741,6 +1742,7 @@ abstract class $TablesSyncParamsModelCopyWith<$Res> {
       bool shouldUpdateValues,
       bool shouldAddNewValues,
       bool shouldClearValueBeforeUpdate,
+      bool shouldAddNewHeaders,
       String workbookName,
       String name,
       @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -1770,6 +1772,7 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
     Object? shouldClearValueBeforeUpdate = null,
+    Object? shouldAddNewHeaders = null,
     Object? workbookName = null,
     Object? name = null,
     Object? lastSyncAt = freezed,
@@ -1811,6 +1814,10 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
           ? _value.shouldClearValueBeforeUpdate
           : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldAddNewHeaders: null == shouldAddNewHeaders
+          ? _value.shouldAddNewHeaders
+          : shouldAddNewHeaders // ignore: cast_nullable_to_non_nullable
+              as bool,
       workbookName: null == workbookName
           ? _value.workbookName
           : workbookName // ignore: cast_nullable_to_non_nullable
@@ -1846,6 +1853,7 @@ abstract class _$$_TablesSyncParamsModelCopyWith<$Res>
       bool shouldUpdateValues,
       bool shouldAddNewValues,
       bool shouldClearValueBeforeUpdate,
+      bool shouldAddNewHeaders,
       String workbookName,
       String name,
       @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -1872,6 +1880,7 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
     Object? shouldClearValueBeforeUpdate = null,
+    Object? shouldAddNewHeaders = null,
     Object? workbookName = null,
     Object? name = null,
     Object? lastSyncAt = freezed,
@@ -1913,6 +1922,10 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
           ? _value.shouldClearValueBeforeUpdate
           : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldAddNewHeaders: null == shouldAddNewHeaders
+          ? _value.shouldAddNewHeaders
+          : shouldAddNewHeaders // ignore: cast_nullable_to_non_nullable
+              as bool,
       workbookName: null == workbookName
           ? _value.workbookName
           : workbookName // ignore: cast_nullable_to_non_nullable
@@ -1944,6 +1957,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
       required this.shouldUpdateValues,
       required this.shouldAddNewValues,
       required this.shouldClearValueBeforeUpdate,
+      this.shouldAddNewHeaders = false,
       this.workbookName = '',
       this.name = '',
       @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -1989,6 +2003,9 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
   final bool shouldClearValueBeforeUpdate;
   @override
   @JsonKey()
+  final bool shouldAddNewHeaders;
+  @override
+  @JsonKey()
   final String workbookName;
   @override
   @JsonKey()
@@ -1999,7 +2016,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
 
   @override
   String toString() {
-    return 'TablesSyncParamsModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValueBeforeUpdate: $shouldClearValueBeforeUpdate, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
+    return 'TablesSyncParamsModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValueBeforeUpdate: $shouldClearValueBeforeUpdate, shouldAddNewHeaders: $shouldAddNewHeaders, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
   }
 
   @override
@@ -2025,6 +2042,8 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
                     shouldClearValueBeforeUpdate) ||
                 other.shouldClearValueBeforeUpdate ==
                     shouldClearValueBeforeUpdate) &&
+            (identical(other.shouldAddNewHeaders, shouldAddNewHeaders) ||
+                other.shouldAddNewHeaders == shouldAddNewHeaders) &&
             (identical(other.workbookName, workbookName) ||
                 other.workbookName == workbookName) &&
             (identical(other.name, name) || other.name == name) &&
@@ -2045,6 +2064,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
       shouldUpdateValues,
       shouldAddNewValues,
       shouldClearValueBeforeUpdate,
+      shouldAddNewHeaders,
       workbookName,
       name,
       lastSyncAt);
@@ -2076,6 +2096,7 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
       required final bool shouldUpdateValues,
       required final bool shouldAddNewValues,
       required final bool shouldClearValueBeforeUpdate,
+      final bool shouldAddNewHeaders,
       final String workbookName,
       final String name,
       @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -2105,6 +2126,8 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
   @override
   bool get shouldClearValueBeforeUpdate;
   @override
+  bool get shouldAddNewHeaders;
+  @override
   String get workbookName;
   @override
   String get name;
@@ -2133,6 +2156,7 @@ mixin _$TablesSyncParamsRuntimeModel {
   bool get shouldUpdateValues => throw _privateConstructorUsedError;
   bool get shouldAddNewValues => throw _privateConstructorUsedError;
   bool get shouldClearValueBeforeUpdate => throw _privateConstructorUsedError;
+  bool get shouldAddNewHeaders => throw _privateConstructorUsedError;
   List<TableParamsModel> get destinationTables =>
       throw _privateConstructorUsedError;
   String get workbookName => throw _privateConstructorUsedError;
@@ -2164,6 +2188,7 @@ abstract class $TablesSyncParamsRuntimeModelCopyWith<$Res> {
       bool shouldUpdateValues,
       bool shouldAddNewValues,
       bool shouldClearValueBeforeUpdate,
+      bool shouldAddNewHeaders,
       List<TableParamsModel> destinationTables,
       String workbookName,
       String name,
@@ -2195,6 +2220,7 @@ class _$TablesSyncParamsRuntimeModelCopyWithImpl<$Res,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
     Object? shouldClearValueBeforeUpdate = null,
+    Object? shouldAddNewHeaders = null,
     Object? destinationTables = null,
     Object? workbookName = null,
     Object? name = null,
@@ -2232,6 +2258,10 @@ class _$TablesSyncParamsRuntimeModelCopyWithImpl<$Res,
       shouldClearValueBeforeUpdate: null == shouldClearValueBeforeUpdate
           ? _value.shouldClearValueBeforeUpdate
           : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shouldAddNewHeaders: null == shouldAddNewHeaders
+          ? _value.shouldAddNewHeaders
+          : shouldAddNewHeaders // ignore: cast_nullable_to_non_nullable
               as bool,
       destinationTables: null == destinationTables
           ? _value.destinationTables
@@ -2280,6 +2310,7 @@ abstract class _$$_TablesSyncParamsRuntimeModelCopyWith<$Res>
       bool shouldUpdateValues,
       bool shouldAddNewValues,
       bool shouldClearValueBeforeUpdate,
+      bool shouldAddNewHeaders,
       List<TableParamsModel> destinationTables,
       String workbookName,
       String name,
@@ -2311,6 +2342,7 @@ class __$$_TablesSyncParamsRuntimeModelCopyWithImpl<$Res>
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
     Object? shouldClearValueBeforeUpdate = null,
+    Object? shouldAddNewHeaders = null,
     Object? destinationTables = null,
     Object? workbookName = null,
     Object? name = null,
@@ -2349,6 +2381,10 @@ class __$$_TablesSyncParamsRuntimeModelCopyWithImpl<$Res>
           ? _value.shouldClearValueBeforeUpdate
           : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldAddNewHeaders: null == shouldAddNewHeaders
+          ? _value.shouldAddNewHeaders
+          : shouldAddNewHeaders // ignore: cast_nullable_to_non_nullable
+              as bool,
       destinationTables: null == destinationTables
           ? _value._destinationTables
           : destinationTables // ignore: cast_nullable_to_non_nullable
@@ -2383,6 +2419,7 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
       required this.shouldUpdateValues,
       required this.shouldAddNewValues,
       required this.shouldClearValueBeforeUpdate,
+      this.shouldAddNewHeaders = false,
       final List<TableParamsModel> destinationTables = const [],
       this.workbookName = '',
       this.name = '',
@@ -2418,6 +2455,9 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
   final bool shouldAddNewValues;
   @override
   final bool shouldClearValueBeforeUpdate;
+  @override
+  @JsonKey()
+  final bool shouldAddNewHeaders;
   final List<TableParamsModel> _destinationTables;
   @override
   @JsonKey()
@@ -2440,7 +2480,7 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
 
   @override
   String toString() {
-    return 'TablesSyncParamsRuntimeModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTable: $sourceTable, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValueBeforeUpdate: $shouldClearValueBeforeUpdate, destinationTables: $destinationTables, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
+    return 'TablesSyncParamsRuntimeModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTable: $sourceTable, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValueBeforeUpdate: $shouldClearValueBeforeUpdate, shouldAddNewHeaders: $shouldAddNewHeaders, destinationTables: $destinationTables, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
   }
 
   @override
@@ -2464,6 +2504,8 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
                     shouldClearValueBeforeUpdate) ||
                 other.shouldClearValueBeforeUpdate ==
                     shouldClearValueBeforeUpdate) &&
+            (identical(other.shouldAddNewHeaders, shouldAddNewHeaders) ||
+                other.shouldAddNewHeaders == shouldAddNewHeaders) &&
             const DeepCollectionEquality()
                 .equals(other._destinationTables, _destinationTables) &&
             (identical(other.workbookName, workbookName) ||
@@ -2485,6 +2527,7 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
       shouldUpdateValues,
       shouldAddNewValues,
       shouldClearValueBeforeUpdate,
+      shouldAddNewHeaders,
       const DeepCollectionEquality().hash(_destinationTables),
       workbookName,
       name,
@@ -2517,6 +2560,7 @@ abstract class _TablesSyncParamsRuntimeModel
       required final bool shouldUpdateValues,
       required final bool shouldAddNewValues,
       required final bool shouldClearValueBeforeUpdate,
+      final bool shouldAddNewHeaders,
       final List<TableParamsModel> destinationTables,
       final String workbookName,
       final String name,
@@ -2544,6 +2588,8 @@ abstract class _TablesSyncParamsRuntimeModel
   bool get shouldAddNewValues;
   @override
   bool get shouldClearValueBeforeUpdate;
+  @override
+  bool get shouldAddNewHeaders;
   @override
   List<TableParamsModel> get destinationTables;
   @override

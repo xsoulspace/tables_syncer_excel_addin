@@ -27,6 +27,7 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
     required final bool shouldUpdateValues,
     required final bool shouldAddNewValues,
     required final bool shouldClearValueBeforeUpdate,
+    @Default(false) final bool shouldAddNewHeaders,
     @Default('') final String workbookName,
     @Default('') final String name,
     @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
@@ -78,6 +79,7 @@ class TablesSyncParamsRuntimeModel with _$TablesSyncParamsRuntimeModel {
     required final bool shouldUpdateValues,
     required final bool shouldAddNewValues,
     required final bool shouldClearValueBeforeUpdate,
+    @Default(false) final bool shouldAddNewHeaders,
     @Default([]) final List<TableParamsModel> destinationTables,
     @Default('') final String workbookName,
     @Default('') final String name,
