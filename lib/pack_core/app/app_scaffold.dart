@@ -122,10 +122,7 @@ class AppScaffoldBuilder extends HookWidget {
                 loader: const LoadingScreen(),
                 child: Directionality(
                   textDirection: TextDirection.ltr,
-                  child: NavigationPaneTheme(
-                    data: const NavigationPaneThemeData(),
-                    child: child!,
-                  ),
+                  child: child!,
                 ),
               ),
             );
