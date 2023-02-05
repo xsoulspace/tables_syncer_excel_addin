@@ -27,16 +27,14 @@ class AuthInterceptor extends InterceptorsWrapper {
       case ApiTokenPolicy.tokenFree:
         break;
       case ApiTokenPolicy.withTokenOnly:
-        final isAuthorized = await _isAuthorized();
-        if (isAuthorized) {
+        if (await _isAuthorized()) {
           await addToken();
         } else {
           handler.reject(DioError(requestOptions: options));
         }
         break;
       case ApiTokenPolicy.withTokenOrWithout:
-        final isAuthorized = await _isAuthorized();
-        if (isAuthorized) await addToken();
+        if (await _isAuthorized()) await addToken();
         break;
     }
 

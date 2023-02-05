@@ -1,4 +1,4 @@
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart';
 
 class UiListTile extends StatelessWidget {
   const UiListTile({
@@ -14,7 +14,7 @@ class UiListTile extends StatelessWidget {
   final Widget? subtitle;
   @override
   Widget build(final BuildContext context) {
-    final theme = FluentTheme.of(context);
+    final theme = Theme.of(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -27,8 +27,7 @@ class UiListTile extends StatelessWidget {
         ),
         Expanded(
           child: DefaultTextStyle(
-            style: (theme.typography.body ?? const TextStyle())
-                .copyWith(fontSize: 16),
+            style: theme.textTheme.bodyMedium!.copyWith(fontSize: 16),
             child: title,
           ),
         ),

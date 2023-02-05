@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:office_addin_helper/office_addin_helper.dart';
@@ -34,99 +34,107 @@ class _DialogWindow extends HookWidget {
       read: context.read,
       initialTableParams: initialTableParams,
     );
+    final theme = Theme.of(context);
     final uiTheme = UiTheme.of(context);
     return Form(
       key: state.formHelper.formKey,
-      child: ContentDialog(
+      child: SimpleDialog(
         title: const Text('Create Table'),
-        content: ListView(
-          shrinkWrap: true,
-          children: [
-            uiTheme.verticalBoxes.extraLarge,
-            const Text('Top Left Cell Index for Headers'),
-            uiTheme.verticalBoxes.large,
-            Row(
-              children: [
-                const Text('Row'),
-                uiTheme.horizontalBoxes.medium,
-                Expanded(
-                  child: TextBox(
-                    controller: state.headerTopLeftRowIndexController,
-                  ),
+        children: [
+          uiTheme.verticalBoxes.extraLarge,
+          const Text('Top Left Cell Index for Headers'),
+          uiTheme.verticalBoxes.large,
+          Row(
+            children: [
+              const Text('Row'),
+              uiTheme.horizontalBoxes.medium,
+              Expanded(
+                child: TextField(
+                  controller: state.headerTopLeftRowIndexController,
                 ),
-                const Spacer(),
-                const Text('Column'),
-                uiTheme.horizontalBoxes.medium,
-                Expanded(
-                  child: TextBox(
-                    controller: state.headerTopLeftColumnIndexController,
-                  ),
+              ),
+              const Spacer(),
+              const Text('Column'),
+              uiTheme.horizontalBoxes.medium,
+              Expanded(
+                child: TextField(
+                  controller: state.headerTopLeftColumnIndexController,
                 ),
-              ],
-            ),
-            uiTheme.verticalBoxes.extraLarge,
-            const Text('Top Left Cell Index for Data'),
-            uiTheme.verticalBoxes.medium,
-            Row(
-              children: [
-                const Text('Row'),
-                uiTheme.horizontalBoxes.medium,
-                Expanded(
-                  child: TextBox(
-                    controller: state.dataTopLeftRowIndexController,
-                  ),
-                ),
-                const Spacer(),
-                const Text('Column'),
-                uiTheme.horizontalBoxes.medium,
-                Expanded(
-                  child: TextBox(
-                    controller: state.dataTopLeftColumnIndexController,
-                  ),
-                ),
-              ],
-            ),
-            uiTheme.verticalBoxes.extraLarge,
-            TextBox(
-              header: 'Keys Column Name',
-              controller: state.keysColumnNameController,
-            ),
-            uiTheme.verticalBoxes.large,
-            TextBox(
-              header: 'Name (optional)',
-              controller: state.nameController,
-            ),
-            uiTheme.verticalBoxes.extraLarge,
-          ],
-        ),
-        actions: [
-          ValueListenableBuilder(
-            valueListenable: state.formHelper.loading,
-            builder: (final context, final loading, final child) {
-              return Button(
-                onPressed: loading
-                    ? null
-                    : () {
-                        Navigator.pop(context);
-                      },
-                child: const Text('Cancel'),
-              );
-            },
+              ),
+            ],
           ),
-          ValueListenableBuilder(
-            valueListenable: state.formHelper.loading,
-            builder: (final context, final loading, final child) {
-              return FilledButton(
-                onPressed: loading ? null : state.onCreate,
-                child: loading
-                    ? const SizedBox.square(
-                        dimension: 24,
-                        child: ProgressRing(),
-                      )
-                    : const Text('Create'),
-              );
-            },
+          uiTheme.verticalBoxes.extraLarge,
+          const Text('Top Left Cell Index for Data'),
+          uiTheme.verticalBoxes.medium,
+          Row(
+            children: [
+              const Text('Row'),
+              uiTheme.horizontalBoxes.medium,
+              Expanded(
+                child: TextField(
+                  controller: state.dataTopLeftRowIndexController,
+                ),
+              ),
+              const Spacer(),
+              const Text('Column'),
+              uiTheme.horizontalBoxes.medium,
+              Expanded(
+                child: TextField(
+                  controller: state.dataTopLeftColumnIndexController,
+                ),
+              ),
+            ],
           ),
+          uiTheme.verticalBoxes.extraLarge,
+          TextField(
+            decoration: const InputDecoration()
+                .applyDefaults(theme.inputDecorationTheme)
+                .copyWith(
+                  labelText: 'Keys Column Name',
+                ),
+            controller: state.keysColumnNameController,
+          ),
+          uiTheme.verticalBoxes.large,
+          TextField(
+            decoration: const InputDecoration()
+                .applyDefaults(theme.inputDecorationTheme)
+                .copyWith(
+                  labelText: 'Name (optional)',
+                ),
+            controller: state.nameController,
+          ),
+          uiTheme.verticalBoxes.extraLarge,
+          Row(
+            children: [
+              ValueListenableBuilder(
+                valueListenable: state.formHelper.loading,
+                builder: (final context, final loading, final child) {
+                  return TextButton(
+                    onPressed: loading
+                        ? null
+                        : () {
+                            Navigator.pop(context);
+                          },
+                    child: const Text('Cancel'),
+                  );
+                },
+              ),
+              ValueListenableBuilder(
+                valueListenable: state.formHelper.loading,
+                builder: (final context, final loading, final child) {
+                  return FilledButton(
+                    onPressed: loading ? null : state.onCreate,
+                    child: loading
+                        ? const SizedBox.square(
+                            dimension: 24,
+                            child: CircularProgress(),
+                          )
+                        : const Text('Create'),
+                  );
+                },
+              ),
+            ],
+          )
         ],
       ),
     );
