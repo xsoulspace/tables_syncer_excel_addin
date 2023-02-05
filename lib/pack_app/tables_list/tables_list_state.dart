@@ -17,6 +17,14 @@ class TablesListState extends ContextfulLifeState {
     required this.diDto,
   });
   final TablesListDiDto diDto;
-  void onEditTable(final TableParamsModel table) {}
-  void onDeleteTable(final TableParamsModel table) {}
+  Future<void> onEditTable(final TableParamsModel table) async {
+    await showUpsertTableDialog(
+      getContext(),
+      initialTableParams: table,
+    );
+  }
+
+  void onDeleteTable(final TableParamsModel table) {
+    showDeleteTableDialog(getContext(), table: table);
+  }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
+import 'package:tables_syncer_excel_addin/pack_app/pack_app.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
@@ -71,8 +72,9 @@ class TableListTile extends HookWidget {
             padding: const EdgeInsets.symmetric(vertical: 4.0),
             child: Text(
               '${table.name} | Worksheet: ${table.worksheetName} '
-              '| Cell: Row ${table.headerTopLeftCell.rowIndex}, '
-              'Column ${table.headerTopLeftCell.columnIndex}',
+              '| Key Column: ${table.keyColumnName} '
+              '| Cell: Row ${table.headerTopLeftCell.relativeRowIndex} & '
+              'Column ${table.headerTopLeftCell.relativeColumnIndex}',
               style: textTheme.bodyMedium,
             ),
           ),

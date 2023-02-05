@@ -38,7 +38,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   life_hooks: ^0.0.18
   logger: ^1.1.0
-  office_addin_helper: ^0.4.0
+  office_addin_helper: ^0.4.1
   officejs: ^0.4.0
   # officejs:
   #   path: ../../../officejs_dart

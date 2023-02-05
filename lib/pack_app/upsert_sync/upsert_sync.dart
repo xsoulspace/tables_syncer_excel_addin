@@ -7,6 +7,9 @@ import 'package:tables_syncer_excel_addin/pack_app/upsert_sync/bloc/tables_sync_
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
+export 'delete_table.dart';
+export 'upsert_table.dart';
+
 part 'upsert_sync_state.dart';
 
 class TablesSyncScreen extends StatelessWidget {

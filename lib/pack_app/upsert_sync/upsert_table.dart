@@ -39,6 +39,7 @@ class _DialogWindow extends HookWidget {
     return Form(
       key: state.formHelper.formKey,
       child: SimpleDialog(
+        insetPadding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
         title: const Text('Create Table'),
         contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
         children: [
@@ -140,7 +141,9 @@ class _DialogWindow extends HookWidget {
                             dimension: 24,
                             child: CircularProgress(),
                           )
-                        : const Text('Create'),
+                        : Text(
+                            initialTableParams?.id != null ? 'Save' : 'Create',
+                          ),
                   );
                 },
               ),
