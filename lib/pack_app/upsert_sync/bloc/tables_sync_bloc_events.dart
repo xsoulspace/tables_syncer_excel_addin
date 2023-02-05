@@ -66,6 +66,14 @@ class TablesSyncShouldUpdateValuesTableEvent extends TablesSyncEvent {
 }
 
 @immutable
+class TablesSyncShouldClearBeforeUpdateTableEvent extends TablesSyncEvent {
+  const TablesSyncShouldClearBeforeUpdateTableEvent({
+    required this.shouldClear,
+  });
+  final bool shouldClear;
+}
+
+@immutable
 class TablesSyncShouldAddNewValuesTableEvent extends TablesSyncEvent {
   const TablesSyncShouldAddNewValuesTableEvent({
     required this.shouldAdd,

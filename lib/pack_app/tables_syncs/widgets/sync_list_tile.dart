@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
+import 'package:tables_syncer_excel_addin/pack_app/upsert_sync/upsert_sync.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
@@ -33,7 +34,7 @@ class TablesSyncListTile extends HookWidget {
       child: Card(
         margin: const EdgeInsets.only(top: 12, left: 4),
         child: ListTile(
-          key: ValueKey(tablesSync.id),
+          onTap: () => state.onEditSync(tablesSync),
           contentPadding: const EdgeInsets.only(
             right: 8,
           ),
@@ -54,8 +55,8 @@ class TablesSyncListTile extends HookWidget {
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
-              '${runtimeSync.sourceTable.name}'
-              ' -> ${runtimeSync.destinationTables.map((final e) => e.name).join(',')}',
+              '${runtimeSync.name} | ${runtimeSync.sourceTable.name}'
+              ' -> ${runtimeSync.destinationTables.map((final e) => e.name).join(' & ')}',
               style: textTheme.bodyMedium,
             ),
           ),

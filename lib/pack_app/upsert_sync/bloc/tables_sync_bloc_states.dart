@@ -31,6 +31,7 @@ class LiveTablesSyncParamsState
     @Default(true) final bool shouldUpdateValues,
     @Default(true) final bool shouldAddNewValues,
     @Default(false) final bool shouldClearValuesBeforeUpdate,
+    @Default(false) final bool shouldAddNewHeaders,
     final TableParamsModel? selectedSourceTable,
     final TablesSyncParamsModel? syncParams,
   }) = _LiveTablesSyncParamsState;
@@ -58,6 +59,8 @@ class LiveTablesSyncParamsState
 
     return LiveTablesSyncParamsState(
       syncParams: syncParams,
+      shouldAddNewHeaders: syncParams.shouldAddNewHeaders,
+      shouldClearValuesBeforeUpdate: syncParams.shouldClearValueBeforeUpdate,
       shouldAddNewValues: syncParams.shouldAddNewValues,
       shouldUpdateValues: syncParams.shouldUpdateValues,
       columnNames: syncParams.columnNames.toSet(),
@@ -69,9 +72,9 @@ class LiveTablesSyncParamsState
 
   TablesSyncParamsModel toTablesSync() {
     return TablesSyncParamsModel(
-      createdAt: DateTime.now(),
+      createdAt: syncParams?.createdAt ?? DateTime.now(),
       userId: FirebaseAuth.instance.currentUser!.uid,
-      id: IdCreator.create(),
+      id: syncParams?.id ?? IdCreator.create(),
       columnNames: columnNames.toList(),
       destinationTablesIds:
           selectedDestinationTables.map((final e) => e.id).toList(),
@@ -79,6 +82,13 @@ class LiveTablesSyncParamsState
       shouldUpdateValues: shouldUpdateValues,
       sourceTableId: selectedSourceTable!.id,
       shouldClearValueBeforeUpdate: shouldClearValuesBeforeUpdate,
+      // TODO(arenukvern):
+      shouldAddNewHeaders: syncParams?.shouldAddNewHeaders ?? false,
+      lastSyncAt: syncParams?.lastSyncAt,
+      // TODO(arenukvern):
+      name: syncParams?.name ?? '',
+      // TODO(arenukvern):
+      workbookName: syncParams?.workbookName ?? '',
     );
   }
 

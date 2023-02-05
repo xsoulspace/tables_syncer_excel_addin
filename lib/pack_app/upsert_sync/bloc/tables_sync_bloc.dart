@@ -37,6 +37,8 @@ class TablesSyncBlocControllers implements Disposable {
 class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
   TablesSyncBloc({
     required this.diDto,
+    required this.shouldPopAfterSubmit,
+    required this.onPopContext,
   }) : super(const EmptyTablesSyncState()) {
     on<TablesSyncInitEvent>(_onInit);
     on<TablesSyncSaveEvent>(_onSave);
@@ -47,9 +49,12 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     on<TablesSyncSelectSourceTableEvent>(_onSelectSourceTable);
     on<TablesSyncShouldUpdateValuesTableEvent>(_onShouldUpdateValues);
     on<TablesSyncShouldAddNewValuesTableEvent>(_onShouldAddNewValues);
+    on<TablesSyncShouldClearBeforeUpdateTableEvent>(_onShouldClearBeforeUpdate);
   }
   final controllers = TablesSyncBlocControllers();
   final TablesSyncBlocDiDto diDto;
+  final bool shouldPopAfterSubmit;
+  final VoidCallback onPopContext;
 
   void _onInit(
     final TablesSyncInitEvent event,
@@ -73,7 +78,11 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
 
     await diDto.apiServices.tablesSync.upsertTableSync(tablesSync);
     controllers.isSaving.value = false;
-    diDto.appRouterController.toTablesSyncs();
+    if (shouldPopAfterSubmit) {
+      onPopContext();
+    } else {
+      diDto.appRouterController.toTablesSyncs();
+    }
   }
 
   @override
@@ -161,6 +170,18 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     final table = await showUpsertTableDialog(context);
     if (table == null) return;
     add(TablesSyncDeleteDestinationTableEvent(table: table));
+  }
+
+  void _onShouldClearBeforeUpdate(
+    final TablesSyncShouldClearBeforeUpdateTableEvent event,
+    final Emitter<TablesSyncState> emit,
+  ) {
+    LiveTablesSyncParamsState liveState = getLiveState();
+
+    liveState = liveState.copyWith(
+      shouldClearValuesBeforeUpdate: event.shouldClear,
+    );
+    emit(liveState);
   }
 
   void _onShouldUpdateValues(

@@ -44,7 +44,7 @@ class TablesSyncsListView extends HookWidget {
             itemBuilder: (final context, final doc) {
               final tablesSync = doc.data();
               return TablesSyncListTile(
-                key: ValueKey(tablesSync),
+                key: ValueKey(tablesSync.id),
                 tablesSync: tablesSync,
               );
             },

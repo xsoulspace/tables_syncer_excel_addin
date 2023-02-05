@@ -28,7 +28,7 @@ class TablesSyncWidgetState extends ContextfulLifeState {
   @override
   void initState() {
     super.initState();
-    bloc.add(const TablesSyncInitEvent());
+    bloc.add(TablesSyncInitEvent(syncId: syncId));
   }
 
   void onAddNewTable() {
@@ -62,6 +62,14 @@ class TablesSyncWidgetState extends ContextfulLifeState {
     if (shouldUpdate == null) return;
     bloc.add(
       TablesSyncShouldUpdateValuesTableEvent(shouldUpdate: shouldUpdate),
+    );
+  }
+
+  // ignore: avoid_positional_boolean_parameters
+  void onChangeShouldClearValuesBeforeUpdate(final bool? shouldClear) {
+    if (shouldClear == null) return;
+    bloc.add(
+      TablesSyncShouldClearBeforeUpdateTableEvent(shouldClear: shouldClear),
     );
   }
 

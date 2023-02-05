@@ -801,17 +801,19 @@ packages:
   office_addin_helper:
     dependency: transitive
     description:
-      path: "../office_addin_helper"
-      relative: true
-    source: path
-    version: "0.3.0"
+      name: office_addin_helper
+      sha256: "0bdb14b0ce63b0461c1b986c706700de3645308f590cabb1c38dc61c40fbfb00"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.1"
   officejs:
     dependency: transitive
     description:
-      path: "../officejs_dart"
-      relative: true
-    source: path
-    version: "0.3.1"
+      name: officejs
+      sha256: "9907742657b425e5359abf6f4693c2b3d62bd3b003e41ed457cddbd3fc8131e3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
   package_config:
     dependency: transitive
     description:

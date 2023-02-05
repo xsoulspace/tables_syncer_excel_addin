@@ -12,13 +12,13 @@ TableSyncListTileState useTableSyncListTileState({
   required final Locator read,
 }) =>
     use(
-      LifeHook(
+      ContextfulLifeHook(
         debugLabel: 'TableSyncListTileState',
         state: TableSyncListTileState(diDto: TableSyncListTileDiDto.use(read)),
       ),
     );
 
-class TableSyncListTileState extends LifeState {
+class TableSyncListTileState extends ContextfulLifeState {
   TableSyncListTileState({
     required this.diDto,
   });
@@ -44,7 +44,10 @@ class TableSyncListTileState extends LifeState {
     setState();
   }
 
-  void onEditSync(final TablesSyncParamsModel tablesSync) {}
+  void onEditSync(final TablesSyncParamsModel tablesSync) {
+    showUpsertTableSyncDialog(getContext(), syncId: tablesSync.id);
+  }
+
   Future<void> onSync(final TablesSyncParamsModel syncParams) async {
     try {
       isSyncingFailed = false;
@@ -68,5 +71,7 @@ class TableSyncListTileState extends LifeState {
     }
   }
 
-  void onDeleteSync(final TablesSyncParamsModel syncParams) {}
+  void onDeleteSync(final TablesSyncParamsModel syncParams) {
+    showDeleteTablesSyncDialog(getContext(), tablesSync: syncParams);
+  }
 }

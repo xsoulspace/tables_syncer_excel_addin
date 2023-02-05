@@ -24,6 +24,7 @@ mixin _$LiveTablesSyncParamsState {
   bool get shouldUpdateValues => throw _privateConstructorUsedError;
   bool get shouldAddNewValues => throw _privateConstructorUsedError;
   bool get shouldClearValuesBeforeUpdate => throw _privateConstructorUsedError;
+  bool get shouldAddNewHeaders => throw _privateConstructorUsedError;
   TableParamsModel? get selectedSourceTable =>
       throw _privateConstructorUsedError;
   TablesSyncParamsModel? get syncParams => throw _privateConstructorUsedError;
@@ -46,6 +47,7 @@ abstract class $LiveTablesSyncParamsStateCopyWith<$Res> {
       bool shouldUpdateValues,
       bool shouldAddNewValues,
       bool shouldClearValuesBeforeUpdate,
+      bool shouldAddNewHeaders,
       TableParamsModel? selectedSourceTable,
       TablesSyncParamsModel? syncParams});
 
@@ -73,6 +75,7 @@ class _$LiveTablesSyncParamsStateCopyWithImpl<$Res,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
     Object? shouldClearValuesBeforeUpdate = null,
+    Object? shouldAddNewHeaders = null,
     Object? selectedSourceTable = freezed,
     Object? syncParams = freezed,
   }) {
@@ -100,6 +103,10 @@ class _$LiveTablesSyncParamsStateCopyWithImpl<$Res,
       shouldClearValuesBeforeUpdate: null == shouldClearValuesBeforeUpdate
           ? _value.shouldClearValuesBeforeUpdate
           : shouldClearValuesBeforeUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shouldAddNewHeaders: null == shouldAddNewHeaders
+          ? _value.shouldAddNewHeaders
+          : shouldAddNewHeaders // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedSourceTable: freezed == selectedSourceTable
           ? _value.selectedSourceTable
@@ -154,6 +161,7 @@ abstract class _$$_LiveTablesSyncParamsStateCopyWith<$Res>
       bool shouldUpdateValues,
       bool shouldAddNewValues,
       bool shouldClearValuesBeforeUpdate,
+      bool shouldAddNewHeaders,
       TableParamsModel? selectedSourceTable,
       TablesSyncParamsModel? syncParams});
 
@@ -182,6 +190,7 @@ class __$$_LiveTablesSyncParamsStateCopyWithImpl<$Res>
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
     Object? shouldClearValuesBeforeUpdate = null,
+    Object? shouldAddNewHeaders = null,
     Object? selectedSourceTable = freezed,
     Object? syncParams = freezed,
   }) {
@@ -210,6 +219,10 @@ class __$$_LiveTablesSyncParamsStateCopyWithImpl<$Res>
           ? _value.shouldClearValuesBeforeUpdate
           : shouldClearValuesBeforeUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
+      shouldAddNewHeaders: null == shouldAddNewHeaders
+          ? _value.shouldAddNewHeaders
+          : shouldAddNewHeaders // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectedSourceTable: freezed == selectedSourceTable
           ? _value.selectedSourceTable
           : selectedSourceTable // ignore: cast_nullable_to_non_nullable
@@ -232,6 +245,7 @@ class _$_LiveTablesSyncParamsState extends _LiveTablesSyncParamsState {
       this.shouldUpdateValues = true,
       this.shouldAddNewValues = true,
       this.shouldClearValuesBeforeUpdate = false,
+      this.shouldAddNewHeaders = false,
       this.selectedSourceTable,
       this.syncParams})
       : _columnNames = columnNames,
@@ -278,13 +292,16 @@ class _$_LiveTablesSyncParamsState extends _LiveTablesSyncParamsState {
   @JsonKey()
   final bool shouldClearValuesBeforeUpdate;
   @override
+  @JsonKey()
+  final bool shouldAddNewHeaders;
+  @override
   final TableParamsModel? selectedSourceTable;
   @override
   final TablesSyncParamsModel? syncParams;
 
   @override
   String toString() {
-    return 'LiveTablesSyncParamsState(columnNames: $columnNames, unselectedDestinationTables: $unselectedDestinationTables, selectedDestinationTables: $selectedDestinationTables, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValuesBeforeUpdate: $shouldClearValuesBeforeUpdate, selectedSourceTable: $selectedSourceTable, syncParams: $syncParams)';
+    return 'LiveTablesSyncParamsState(columnNames: $columnNames, unselectedDestinationTables: $unselectedDestinationTables, selectedDestinationTables: $selectedDestinationTables, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValuesBeforeUpdate: $shouldClearValuesBeforeUpdate, shouldAddNewHeaders: $shouldAddNewHeaders, selectedSourceTable: $selectedSourceTable, syncParams: $syncParams)';
   }
 
   @override
@@ -307,6 +324,8 @@ class _$_LiveTablesSyncParamsState extends _LiveTablesSyncParamsState {
                     shouldClearValuesBeforeUpdate) ||
                 other.shouldClearValuesBeforeUpdate ==
                     shouldClearValuesBeforeUpdate) &&
+            (identical(other.shouldAddNewHeaders, shouldAddNewHeaders) ||
+                other.shouldAddNewHeaders == shouldAddNewHeaders) &&
             (identical(other.selectedSourceTable, selectedSourceTable) ||
                 other.selectedSourceTable == selectedSourceTable) &&
             (identical(other.syncParams, syncParams) ||
@@ -322,6 +341,7 @@ class _$_LiveTablesSyncParamsState extends _LiveTablesSyncParamsState {
       shouldUpdateValues,
       shouldAddNewValues,
       shouldClearValuesBeforeUpdate,
+      shouldAddNewHeaders,
       selectedSourceTable,
       syncParams);
 
@@ -342,6 +362,7 @@ abstract class _LiveTablesSyncParamsState extends LiveTablesSyncParamsState
       final bool shouldUpdateValues,
       final bool shouldAddNewValues,
       final bool shouldClearValuesBeforeUpdate,
+      final bool shouldAddNewHeaders,
       final TableParamsModel? selectedSourceTable,
       final TablesSyncParamsModel? syncParams}) = _$_LiveTablesSyncParamsState;
   const _LiveTablesSyncParamsState._() : super._();
@@ -358,6 +379,8 @@ abstract class _LiveTablesSyncParamsState extends LiveTablesSyncParamsState
   bool get shouldAddNewValues;
   @override
   bool get shouldClearValuesBeforeUpdate;
+  @override
+  bool get shouldAddNewHeaders;
   @override
   TableParamsModel? get selectedSourceTable;
   @override

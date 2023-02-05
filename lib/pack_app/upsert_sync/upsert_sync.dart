@@ -4,13 +4,46 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
 import 'package:tables_syncer_excel_addin/pack_app/upsert_sync/bloc/tables_sync_bloc.dart';
+import 'package:tables_syncer_excel_addin/pack_app/upsert_sync/widgets/widgets.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
+export 'delete_sync.dart';
 export 'delete_table.dart';
 export 'upsert_table.dart';
 
 part 'upsert_sync_state.dart';
+
+Future<void> showUpsertTableSyncDialog(
+  final BuildContext context, {
+  final TablesSyncParamsModelId? syncId,
+}) {
+  return showDialog<TablesSyncParamsModelId>(
+    context: context,
+    builder: (final context) {
+      return SimpleDialog(
+        insetPadding: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 24,
+        ),
+        title: Text(
+          syncId == null || syncId.isEmpty ? 'Create Sync' : 'Update Sync',
+        ),
+        children: [
+          TablesSyncView(
+            builder: (final context) {
+              return const _TablesSyncBody(
+                isCancelButtonEnabled: true,
+              );
+            },
+            syncId: syncId,
+            shouldPopAfterSubmit: true,
+          ),
+        ],
+      );
+    },
+  );
+}
 
 class TablesSyncScreen extends StatelessWidget {
   const TablesSyncScreen({
@@ -20,13 +53,49 @@ class TablesSyncScreen extends StatelessWidget {
   final TablesSyncParamsModelId? syncId;
   @override
   Widget build(final BuildContext context) {
+    return TablesSyncView(
+      builder: (final context) {
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: const Text('Create Sync'),
+          ),
+          body: Container(
+            constraints: BoxConstraints(
+              maxWidth: WidthFormFactor.mobile.max * 0.8,
+            ),
+            child: const SingleChildScrollView(child: _TablesSyncBody()),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class TablesSyncView extends StatelessWidget {
+  const TablesSyncView({
+    required this.builder,
+    this.shouldPopAfterSubmit = false,
+    this.syncId,
+    super.key,
+  });
+  final TablesSyncParamsModelId? syncId;
+  final WidgetBuilder builder;
+  final bool shouldPopAfterSubmit;
+  @override
+  Widget build(final BuildContext context) {
     return BlocProvider(
       create: (final context) => TablesSyncBloc(
         diDto: TablesSyncBlocDiDto.use(context.read),
+        shouldPopAfterSubmit: shouldPopAfterSubmit,
+        onPopContext: () => Navigator.pop(context),
       ),
       child: Builder(
         builder: (final context) {
-          return _TablesSyncWidgetStateProvider(syncId: syncId);
+          return _TablesSyncWidgetStateProvider(
+            syncId: syncId,
+            builder: builder,
+          );
         },
       ),
     );
@@ -36,8 +105,10 @@ class TablesSyncScreen extends StatelessWidget {
 class _TablesSyncWidgetStateProvider extends HookWidget {
   const _TablesSyncWidgetStateProvider({
     required this.syncId,
+    required this.builder,
   });
   final TablesSyncParamsModelId? syncId;
+  final WidgetBuilder builder;
 
   @override
   Widget build(final BuildContext context) {
@@ -55,7 +126,7 @@ class _TablesSyncWidgetStateProvider extends HookWidget {
                 ),
               );
             } else if (state is LiveTablesSyncParamsState) {
-              return const _TablesSyncBody();
+              return builder(context);
             }
             throw ArgumentError.value(state);
           },
@@ -66,8 +137,10 @@ class _TablesSyncWidgetStateProvider extends HookWidget {
 }
 
 class _TablesSyncBody extends StatelessWidget {
-  const _TablesSyncBody();
-
+  const _TablesSyncBody({
+    this.isCancelButtonEnabled = false,
+  });
+  final bool isCancelButtonEnabled;
   @override
   Widget build(final BuildContext context) {
     final uiTheme = UiTheme.of(context);
@@ -75,270 +148,140 @@ class _TablesSyncBody extends StatelessWidget {
     final widgetState = context.read<TablesSyncWidgetState>();
     final controllers = context.read<TablesSyncBloc>().controllers;
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Create Sync'),
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: WidthFormFactor.mobile.max * 0.8,
       ),
-      body: Container(
-        constraints: BoxConstraints(
-          maxWidth: WidthFormFactor.mobile.max * 0.8,
-        ),
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 14,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  uiTheme.verticalBoxes.extraLarge,
-                  Text(
-                    'Source Table',
-                    style: theme.textTheme.bodyLarge,
-                  ),
-                  uiTheme.verticalBoxes.small,
-                  const SelectSourceTableButton(),
-                  uiTheme.verticalBoxes.large,
-                  Text(
-                    'Source Columns',
-                    style: theme.textTheme.bodyLarge,
-                  ),
-                  uiTheme.verticalBoxes.small,
-                  const SyncColumnsSelector(),
-                  uiTheme.verticalBoxes.large,
-                  Text(
-                    'Destination Tables',
-                    style: theme.textTheme.bodyLarge,
-                  ),
-                  uiTheme.verticalBoxes.small,
-                  const DestinationTablesSelector(),
-                  uiTheme.verticalBoxes.extraLarge,
-                ],
-              ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 14,
             ),
-            BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
-              selector: (final state) {
-                if (state is LiveTablesSyncParamsState) {
-                  return state.shouldAddNewValues;
-                }
-                return false;
-              },
-              builder: (final context, final shouldAddNewValues) {
-                return CheckboxListTile(
-                  title: const Text('Should add new values'),
-                  value: shouldAddNewValues,
-                  onChanged: widgetState.onChangeShouldAddNewValues,
-                );
-              },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                uiTheme.verticalBoxes.extraLarge,
+                Text(
+                  'Source Table',
+                  style: theme.textTheme.bodyLarge,
+                ),
+                uiTheme.verticalBoxes.small,
+                const SelectSourceTableButton(),
+                uiTheme.verticalBoxes.large,
+                Text(
+                  'Source Columns',
+                  style: theme.textTheme.bodyLarge,
+                ),
+                uiTheme.verticalBoxes.small,
+                const SyncColumnsSelector(),
+                uiTheme.verticalBoxes.large,
+                Text(
+                  'Destination Tables',
+                  style: theme.textTheme.bodyLarge,
+                ),
+                uiTheme.verticalBoxes.small,
+                const DestinationTablesSelector(),
+                uiTheme.verticalBoxes.extraLarge,
+              ],
             ),
-            BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
-              selector: (final state) {
-                if (state is LiveTablesSyncParamsState) {
-                  return state.shouldUpdateValues;
-                }
-                return false;
-              },
-              builder: (final context, final shouldUpdateValues) {
-                return CheckboxListTile(
-                  title: const Text('Should update values'),
-                  onChanged: widgetState.onChangeShouldUpdateValues,
-                  value: shouldUpdateValues,
-                );
-              },
-            ),
-            uiTheme.verticalBoxes.extraLarge,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
-                    selector: (final state) {
-                      if (state is LiveTablesSyncParamsState) {
-                        return state.validate();
-                      }
-                      return false;
-                    },
-                    builder: (final context, final isValide) {
-                      return FilledButton(
-                        onPressed: isValide ? widgetState.onSubmit : null,
-                        child: ValueListenableBuilder(
-                          valueListenable: controllers.isSaving,
-                          child: Text(
-                            widgetState.isCreateSync ? 'Create' : 'Save',
-                          ),
-                          builder:
-                              (final context, final isSaving, final child) {
-                            if (isSaving) {
-                              return const SizedBox.square(
-                                dimension: 24,
-                                child: CircularProgress(),
-                              );
-                            }
-                            return child!;
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-            uiTheme.verticalBoxes.extraLarge,
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SelectSourceTableButton extends StatelessWidget {
-  const SelectSourceTableButton({super.key});
-
-  @override
-  Widget build(final BuildContext context) {
-    final widgetState = context.read<TablesSyncWidgetState>();
-    final uiTheme = UiTheme.of(context);
-    final blocState = context.watch<TablesSyncBloc>().getLiveState();
-    final allTables = blocState.getAllTables();
-
-    return Row(
-      children: [
-        Expanded(
-          child: BlocBuilder<TablesSyncBloc, TablesSyncState>(
-            builder: (final context, final state) {
-              return Autocomplete(
-                optionsBuilder: (final textEditingValue) {
-                  if (textEditingValue.text.isEmpty) return allTables;
-                  return allTables.where(
-                    (final e) => e.name.contains(textEditingValue.text),
-                  );
-                },
-                onSelected: widgetState.onSelectSourceTable,
-                displayStringForOption: (final option) => option.name,
+          ),
+          BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
+            selector: (final state) {
+              if (state is LiveTablesSyncParamsState) {
+                return state.shouldAddNewValues;
+              }
+              return false;
+            },
+            builder: (final context, final shouldAddNewValues) {
+              return CheckboxListTile(
+                title: const Text('Should add new values'),
+                value: shouldAddNewValues,
+                onChanged: widgetState.onChangeShouldAddNewValues,
               );
             },
           ),
-        ),
-        uiTheme.horizontalBoxes.medium,
-        const AddNewTableIconButton(),
-      ],
-    );
-  }
-}
-
-class SyncColumnsSelector extends StatelessWidget {
-  const SyncColumnsSelector({super.key});
-
-  @override
-  Widget build(final BuildContext context) {
-    final uiTheme = UiTheme.of(context);
-    final widgetState = context.read<TablesSyncWidgetState>();
-    final controllers = context.read<TablesSyncBloc>().controllers;
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: TextField(
-                onEditingComplete: widgetState.onAddColumn,
-                controller: controllers.newColumn,
-                onSubmitted: widgetState.onAddColumn,
-              ),
-            ),
-            uiTheme.horizontalBoxes.medium,
-            IconButton(
-              icon: const Icon(Icons.add),
-              onPressed: widgetState.onAddColumn,
-            ),
-          ],
-        ),
-        uiTheme.verticalBoxes.medium,
-        BlocSelector<TablesSyncBloc, TablesSyncState, Set<String>>(
-          selector: (final state) {
-            if (state is LiveTablesSyncParamsState) {
-              return state.columnNames;
-            }
-            return {};
-          },
-          builder: (final context, final syncColumnsSet) {
-            return Wrap(
-              spacing: 12,
-              runSpacing: 6,
-              children: syncColumnsSet
-                  .map(
-                    (final columnName) => InputChip(
-                      key: ValueKey(columnName),
-                      label: Text(columnName),
-                      onDeleted: () => widgetState.onDeleteColumn(columnName),
-                    ),
-                  )
-                  .toList(),
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class DestinationTablesSelector extends StatelessWidget {
-  const DestinationTablesSelector({super.key});
-
-  @override
-  Widget build(final BuildContext context) {
-    final widgetState = context.read<TablesSyncWidgetState>();
-    final blocState = context.select<TablesSyncBloc, LiveTablesSyncParamsState>(
-      (final state) => state.getLiveState(),
-    );
-    final uiTheme = UiTheme.of(context);
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Autocomplete(
-                optionsBuilder: (final textEditingValue) {
-                  if (textEditingValue.text.isEmpty) {
-                    return blocState.unselectedDestinationTables;
-                  }
-                  return blocState.unselectedDestinationTables.where(
-                    (final e) => e.name.contains(textEditingValue.text),
-                  );
-                },
-                onSelected: widgetState.onAddDestinationTable,
-                displayStringForOption: (final option) => option.name,
-              ),
-            ),
-            uiTheme.horizontalBoxes.medium,
-            const AddNewTableIconButton()
-          ],
-        ),
-        uiTheme.verticalBoxes.medium,
-        Wrap(
-          spacing: 12,
-          runSpacing: 6,
-          children: blocState.selectedDestinationTables
-              .map(
-                (final table) => InputChip(
-                  key: ValueKey(table),
-                  label: Text(table.name),
-                  onDeleted: () => widgetState.onDeleteDestinationTable(table),
+          BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
+            selector: (final state) {
+              if (state is LiveTablesSyncParamsState) {
+                return state.shouldUpdateValues;
+              }
+              return false;
+            },
+            builder: (final context, final shouldUpdateValues) {
+              return CheckboxListTile(
+                title: const Text('Should update values'),
+                onChanged: widgetState.onChangeShouldUpdateValues,
+                value: shouldUpdateValues,
+              );
+            },
+          ),
+          BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
+            selector: (final state) {
+              if (state is LiveTablesSyncParamsState) {
+                return state.shouldClearValuesBeforeUpdate;
+              }
+              return false;
+            },
+            builder: (final context, final shouldUpdateValues) {
+              return CheckboxListTile(
+                title: const Text('Should clear values before update'),
+                onChanged: widgetState.onChangeShouldClearValuesBeforeUpdate,
+                value: shouldUpdateValues,
+              );
+            },
+          ),
+          uiTheme.verticalBoxes.extraLarge,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              mainAxisAlignment: isCancelButtonEnabled
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.end,
+              children: [
+                if (isCancelButtonEnabled)
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                BlocSelector<TablesSyncBloc, TablesSyncState, bool>(
+                  selector: (final state) {
+                    if (state is LiveTablesSyncParamsState) {
+                      return state.validate();
+                    }
+                    return false;
+                  },
+                  builder: (final context, final isValide) {
+                    return FilledButton(
+                      onPressed: isValide ? widgetState.onSubmit : null,
+                      child: ValueListenableBuilder(
+                        valueListenable: controllers.isSaving,
+                        child: Text(
+                          widgetState.isCreateSync ? 'Create' : 'Save',
+                        ),
+                        builder: (final context, final isSaving, final child) {
+                          if (isSaving) {
+                            return const SizedBox.square(
+                              dimension: 24,
+                              child: CircularProgress(),
+                            );
+                          }
+                          return child!;
+                        },
+                      ),
+                    );
+                  },
                 ),
-              )
-              .toList(),
-        ),
-      ],
+              ],
+            ),
+          ),
+          uiTheme.verticalBoxes.extraLarge,
+        ],
+      ),
     );
   }
 }
