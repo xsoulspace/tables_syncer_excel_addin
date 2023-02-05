@@ -53,10 +53,11 @@ class AnalyticsNotifier extends ChangeNotifier implements AbstractAnalytics {
   List<String> get logs => logsNotifier.value;
   void log(final String value) {
     if (!kDebugMode) return;
-    if (logs.length == 15) {
+    if (logs.length == 25) {
       logs.removeLast();
     }
     logs.insert(0, value);
+    notifyListeners();
   }
 
   void dynamicLog(final dynamic value) {
@@ -76,6 +77,7 @@ class AnalyticsNotifier extends ChangeNotifier implements AbstractAnalytics {
 
   void clearLogs() {
     logs.clear();
+    notifyListeners();
   }
 
   @override

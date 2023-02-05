@@ -13,7 +13,7 @@ class UserNotifier extends ChangeNotifier implements Loadable, Disposable {
   final LocalUserService userLocalService;
   final excelAvailable = ValueNotifier<bool>(false);
   final devinfo = ValueNotifier<String>('');
-  final debugPaneEnabled = ValueNotifier(false);
+  final debugPaneEnabled = ValueNotifier(true);
   final useMockData = ValueNotifier<bool>(true);
 
   UserModel _user = UserModel.empty;

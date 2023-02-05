@@ -30,6 +30,9 @@ class AppServicesProvider extends StatelessWidget {
       builder: (final context, final useMockData, final child) {
         return MultiProvider(
           providers: [
+            ChangeNotifierProvider(
+              create: (final context) => diDto.analyticsNotifier,
+            ),
             if (useMockData)
               Provider<ExcelApiI>(
                 key: const ValueKey('ExcelApiMock'),
@@ -58,10 +61,8 @@ class AppServicesProvider extends StatelessWidget {
             Provider<ExcelTableSyncerService>(
               create: (final context) => ExcelTableSyncerService(
                 excelTableApi: context.read(),
+                analyticsNotifier: context.read(),
               ),
-            ),
-            ChangeNotifierProvider(
-              create: (final context) => diDto.analyticsNotifier,
             ),
             ChangeNotifierProvider<ApiServiceInitializer>(
               create: (final context) => ApiServiceInitializer(baseUrl: ''),
@@ -73,7 +74,10 @@ class AppServicesProvider extends StatelessWidget {
             ChangeNotifierProvider(
               create: (final context) => GlobalStateNotifiers.getUser(),
             ),
-            ChangeNotifierProvider(create: SyncParamsNotifier.create)
+            ChangeNotifierProvider(create: SyncParamsNotifier.create),
+            ChangeNotifierProvider(
+              create: (final context) => diDto.userNotifier,
+            ),
           ],
           builder: (final context, final child) => builder(context),
         );

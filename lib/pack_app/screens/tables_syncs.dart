@@ -62,7 +62,11 @@ class TablesSyncListTile extends HookWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final state = context.read<TablesSyncsListState>();
-
+    final syncParamsNotifier = context.read<SyncParamsNotifier>();
+    final runtimeSync = SyncParamsNormalizer.normalize(
+      syncParams: tablesSync,
+      tablesMap: syncParamsNotifier.tablesParamsMap,
+    );
     return FocusableActionDetector(
       onShowHoverHighlight: (final value) {
         isHovering.value = value;
@@ -74,13 +78,21 @@ class TablesSyncListTile extends HookWidget {
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
-              tablesSync.id,
+              '${runtimeSync.sourceTable.name}'
+              ' -> ${runtimeSync.destinationTables.map((final e) => e.name).join(',')}',
               style: textTheme.bodyMedium,
             ),
           ),
           subtitle: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(tablesSync.workbookName),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(tablesSync.workbookName),
+                  Text(runtimeSync.columnNames.join(',')),
+                ],
+              ),
               uiTheme.horizontalBoxes.medium,
               Text(
                 'Last Synced: '

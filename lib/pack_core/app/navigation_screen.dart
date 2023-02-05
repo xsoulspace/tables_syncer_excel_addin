@@ -1,14 +1,12 @@
 import 'dart:math' as math;
 
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
-import 'package:tables_syncer_excel_addin/pack_app/screens/home.dart';
-import 'package:tables_syncer_excel_addin/pack_app/screens/tables_list.dart';
-import 'package:tables_syncer_excel_addin/pack_app/screens/tables_syncs.dart';
-import 'package:tables_syncer_excel_addin/pack_app/screens/upsert_sync/tables_sync.dart';
+import 'package:tables_syncer_excel_addin/pack_app/pack_app.dart';
 import 'package:tables_syncer_excel_addin/pack_app/widgets/widgets.dart';
 import 'package:tables_syncer_excel_addin/pack_core/app/info_screen.dart';
 import 'package:tables_syncer_excel_addin/pack_core/global_states/global_states.dart';
@@ -35,82 +33,95 @@ class NavigationScreen extends HookWidget {
         valueListenable: state.currentScreen,
         builder: (final context, final currentScreen, final child) {
           final isHomeScreen = currentScreen == NavigationScreens.home;
-          return Stack(
+          return Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: ValueListenableBuilder(
-                      valueListenable: state.currentScreen,
-                      builder:
-                          (final context, final currentScreen, final child) {
-                        return LazyIndexedStack(
-                          index: currentScreen.index,
-                          children: NavigationScreens.values.map(
-                            (final screen) {
-                              switch (screen) {
-                                case NavigationScreens.home:
-                                  return const HomeScreen();
-                                case NavigationScreens.createSync:
-                                  return const TablesSyncScreen();
-                                case NavigationScreens.info:
-                                  return const InfoScreen();
-                                case NavigationScreens.profile:
-                                  return ProfileScreen(
-                                    actions: [
-                                      SignedOutAction((final context) {
-                                        state.diDto.routerController.toSignIn();
-                                      }),
-                                    ],
-                                    providers: GlobalStateNotifiers
-                                            .getFirebaseIntializer()
-                                        .providers,
-                                  );
-                                case NavigationScreens.settings:
-                                  return const SettingsScreen();
-                                case NavigationScreens.syncs:
-                                  return const TablesSyncsListScreen();
-                                case NavigationScreens.tables:
-                                  return const TablesListScreen();
-                              }
+              Expanded(
+                child: Stack(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ValueListenableBuilder(
+                            valueListenable: state.currentScreen,
+                            builder: (
+                              final context,
+                              final currentScreen,
+                              final child,
+                            ) {
+                              return LazyIndexedStack(
+                                index: currentScreen.index,
+                                children: NavigationScreens.values.map(
+                                  (final screen) {
+                                    switch (screen) {
+                                      case NavigationScreens.home:
+                                        return const HomeScreen();
+                                      case NavigationScreens.createSync:
+                                        return const TablesSyncScreen();
+                                      case NavigationScreens.info:
+                                        return const InfoScreen();
+                                      case NavigationScreens.profile:
+                                        return ProfileScreen(
+                                          actions: [
+                                            SignedOutAction((final context) {
+                                              state.diDto.routerController
+                                                  .toSignIn();
+                                            }),
+                                          ],
+                                          providers: GlobalStateNotifiers
+                                                  .getFirebaseIntializer()
+                                              .providers,
+                                        );
+                                      case NavigationScreens.settings:
+                                        return const SettingsScreen();
+                                      case NavigationScreens.syncs:
+                                        return const TablesSyncsListScreen();
+                                      case NavigationScreens.tables:
+                                        return const TablesListScreen();
+                                    }
+                                  },
+                                ).toList(),
+                              );
                             },
-                          ).toList(),
-                        );
-                      },
+                          ),
+                        ),
+                        Provider(
+                          create: (final context) => state,
+                          builder: (final context, final child) {
+                            return AppNavigationRail(
+                              panePaddingRequired: !isHomeScreen,
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                  ),
-                  Provider(
-                    create: (final context) => state,
-                    builder: (final context, final child) {
-                      return AppNavigationRail(
-                        panePaddingRequired: !isHomeScreen,
-                      );
-                    },
-                  ),
-                ],
-              ),
-              if (isHomeScreen)
-                Positioned(
-                  top: 10,
-                  left: 0,
-                  child: Row(
-                    children: [
-                      uiTheme.horizontalBoxes.small,
-                      Builder(
-                        builder: (final context) {
-                          final screenWidth = screenSize.width;
+                    if (isHomeScreen)
+                      Positioned(
+                        top: 10,
+                        left: 0,
+                        child: Row(
+                          children: [
+                            uiTheme.horizontalBoxes.small,
+                            Builder(
+                              builder: (final context) {
+                                final screenWidth = screenSize.width;
 
-                          final width = math.min(screenWidth - 58, 328 + 58.0);
-                          return ConstrainedBox(
-                            constraints: BoxConstraints(maxWidth: width),
-                            child: const AppTopBar(),
-                          );
-                        },
+                                final width =
+                                    math.min(screenWidth - 58, 328 + 58.0);
+                                return ConstrainedBox(
+                                  constraints: BoxConstraints(maxWidth: width),
+                                  child: const AppTopBar(),
+                                );
+                              },
+                            ),
+                            const SizedBox(width: 58),
+                          ],
+                        ),
                       ),
-                      const SizedBox(width: 58),
-                    ],
-                  ),
+                  ],
                 ),
+              ),
+              if (kDebugMode) const DebugPane(),
+              // const AdsBanner(),
             ],
           );
         },
