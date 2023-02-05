@@ -67,14 +67,29 @@ class NavigationScreenState extends LifeState {
   // ignore: use_setters_to_change_properties
   void onNavigationChanged(final NavigationScreens screen) {
     currentScreen.value = screen;
-    // switch (screen) {
-    //   case NavigationRoutes.home:
-    //   case NavigationRoutes.createSync:
-    //   case NavigationRoutes.profile:
-    //   case NavigationRoutes.tables:
-    //   case NavigationRoutes.tablesSyncs:
-    //     break;
-    //   default:
-    // }
+    switch (screen) {
+      case NavigationScreens.home:
+        diDto.routerController.toHome();
+        break;
+
+      case NavigationScreens.createSync:
+        diDto.routerController.toCreateSync();
+        break;
+
+      case NavigationScreens.profile:
+        diDto.routerController.toProfile();
+        break;
+
+      case NavigationScreens.tables:
+        diDto.routerController.toTables();
+        break;
+
+      case NavigationScreens.syncs:
+        diDto.routerController.toTablesSyncs();
+        break;
+
+      default:
+        break;
+    }
   }
 }

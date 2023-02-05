@@ -3,25 +3,35 @@ part of 'sync_list_tile.dart';
 class TableSyncListTileDiDto {
   TableSyncListTileDiDto.use(final Locator read)
       : syncerService = read(),
-        syncerParamsNotifier = read();
+        syncParamsNotifier = read();
   final ExcelTableSyncerService syncerService;
-  final SyncParamsNotifier syncerParamsNotifier;
+  final SyncParamsNotifier syncParamsNotifier;
 }
 
 TableSyncListTileState useTableSyncListTileState({
   required final Locator read,
+  required final TablesSyncParamsModel tablesSync,
 }) =>
     use(
       ContextfulLifeHook(
         debugLabel: 'TableSyncListTileState',
-        state: TableSyncListTileState(diDto: TableSyncListTileDiDto.use(read)),
+        state: TableSyncListTileState(
+          diDto: TableSyncListTileDiDto.use(read),
+          tablesSync: tablesSync,
+        ),
       ),
     );
 
 class TableSyncListTileState extends ContextfulLifeState {
   TableSyncListTileState({
     required this.diDto,
+    required this.tablesSync,
   });
+  final TablesSyncParamsModel tablesSync;
+  late final runtimeSync = SyncParamsNormalizer.normalize(
+    syncParams: tablesSync,
+    tablesMap: diDto.syncParamsNotifier.tablesParamsMap,
+  );
 
   final TableSyncListTileDiDto diDto;
   bool _isHovering = false;
@@ -55,7 +65,7 @@ class TableSyncListTileState extends ContextfulLifeState {
       syncing = true;
       final runtimeSyncParams = SyncParamsNormalizer.normalize(
         syncParams: syncParams,
-        tablesMap: diDto.syncerParamsNotifier.tablesParamsMap,
+        tablesMap: diDto.syncParamsNotifier.tablesParamsMap,
       );
 
       await diDto.syncerService

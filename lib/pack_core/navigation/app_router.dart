@@ -15,6 +15,9 @@ class NavigationRoutes {
   static const routes = [
     loader,
     signIn,
+    tablesSyncs,
+    tables,
+    createSync,
     forgotPasswordWithEmail,
     forgotPassword,
     home,
@@ -35,4 +38,6 @@ class AppRouterController extends RouterController {
           ? to('${NavigationRoutes.forgotPassword}/$email')
           : to(NavigationRoutes.forgotPassword);
   void toProfile() => to(NavigationRoutes.profile);
+  void toTables() => to(NavigationRoutes.tables);
+  void toCreateSync() => to(NavigationRoutes.createSync);
 }
