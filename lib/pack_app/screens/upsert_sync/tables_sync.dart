@@ -1,5 +1,4 @@
-import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' as material;
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
@@ -49,7 +48,7 @@ class _TablesSyncWidgetStateProvider extends HookWidget {
               return const Center(
                 child: SizedBox.square(
                   dimension: 24,
-                  child: ProgressRing(),
+                  child: CircularProgress(),
                 ),
               );
             } else if (state is LiveTablesSyncParamsState) {
@@ -69,12 +68,12 @@ class _TablesSyncBody extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     final uiTheme = UiTheme.of(context);
-    final theme = FluentTheme.of(context);
+    final theme = Theme.of(context);
     final widgetState = context.read<TablesSyncWidgetState>();
     final controllers = context.read<TablesSyncBloc>().controllers;
 
-    return ScaffoldPage(
-      content: Container(
+    return Scaffold(
+      body: Container(
         constraints: BoxConstraints(
           maxWidth: WidthFormFactor.mobile.max * 0.8,
         ),
@@ -84,26 +83,26 @@ class _TablesSyncBody extends StatelessWidget {
             Text(
               'Create Sync',
               textAlign: TextAlign.center,
-              style: theme.typography.title,
+              style: theme.textTheme.titleMedium,
             ),
             uiTheme.verticalBoxes.extraLarge,
             Text(
               'Source Table',
-              style: theme.typography.bodyLarge,
+              style: theme.textTheme.bodyLarge,
             ),
             uiTheme.verticalBoxes.small,
             const SelectSourceTableButton(),
             uiTheme.verticalBoxes.large,
             Text(
               'Source Columns',
-              style: theme.typography.bodyLarge,
+              style: theme.textTheme.bodyLarge,
             ),
             uiTheme.verticalBoxes.small,
             const SyncColumnsSelector(),
             uiTheme.verticalBoxes.large,
             Text(
               'Destination Tables',
-              style: theme.typography.bodyLarge,
+              style: theme.textTheme.bodyLarge,
             ),
             uiTheme.verticalBoxes.small,
             const DestinationTablesSelector(),
@@ -116,11 +115,10 @@ class _TablesSyncBody extends StatelessWidget {
                 return false;
               },
               builder: (final context, final shouldAddNewValues) {
-                return ListTile.selectable(
+                return CheckboxListTile(
                   title: const Text('Should add new values'),
-                  selectionMode: ListTileSelectionMode.multiple,
-                  onSelectionChange: widgetState.onChangeShouldAddNewValues,
-                  selected: shouldAddNewValues,
+                  value: shouldAddNewValues,
+                  onChanged: widgetState.onChangeShouldAddNewValues,
                 );
               },
             ),
@@ -132,11 +130,10 @@ class _TablesSyncBody extends StatelessWidget {
                 return false;
               },
               builder: (final context, final shouldUpdateValues) {
-                return ListTile.selectable(
+                return CheckboxListTile(
                   title: const Text('Should update values'),
-                  selectionMode: ListTileSelectionMode.multiple,
-                  onSelectionChange: widgetState.onChangeShouldUpdateValues,
-                  selected: shouldUpdateValues,
+                  onChanged: widgetState.onChangeShouldUpdateValues,
+                  value: shouldUpdateValues,
                 );
               },
             ),
@@ -162,7 +159,7 @@ class _TablesSyncBody extends StatelessWidget {
                           if (isSaving) {
                             return const SizedBox.square(
                               dimension: 24,
-                              child: ProgressRing(),
+                              child: CircularProgress(),
                             );
                           }
                           return child!;
@@ -187,32 +184,23 @@ class SelectSourceTableButton extends StatelessWidget {
   Widget build(final BuildContext context) {
     final widgetState = context.read<TablesSyncWidgetState>();
     final uiTheme = UiTheme.of(context);
+    final blocState = context.watch<TablesSyncBloc>().getLiveState();
+    final allTables = blocState.getAllTables();
 
     return Row(
       children: [
         Expanded(
-          child: BlocSelector<TablesSyncBloc, TablesSyncState,
-              Set<TableParamsModel>>(
-            selector: (final state) {
-              if (state is LiveTablesSyncParamsState) {
-                return state.getAllTables();
-              }
-              return {};
-            },
-            builder: (final context, final selectedTables) {
-              return AutoSuggestBox<TableParamsModel>(
-                sorter: (final text, final items) {
-                  return items
-                      .where((final item) => item.label.contains(text))
-                      .toList();
-                },
-                items: selectedTables.map((final item) {
-                  return AutoSuggestBoxItem<TableParamsModel>(
-                    value: item,
-                    label: item.name,
+          child: BlocBuilder<TablesSyncBloc, TablesSyncState>(
+            builder: (final context, final state) {
+              return Autocomplete(
+                optionsBuilder: (final textEditingValue) {
+                  if (textEditingValue.text.isEmpty) return allTables;
+                  return allTables.where(
+                    (final e) => e.name.contains(textEditingValue.text),
                   );
-                }).toList(),
+                },
                 onSelected: widgetState.onSelectSourceTable,
+                displayStringForOption: (final option) => option.name,
               );
             },
           ),
@@ -240,7 +228,7 @@ class SyncColumnsSelector extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: TextBox(
+              child: TextField(
                 onEditingComplete: widgetState.onAddColumn,
                 controller: controllers.newColumn,
                 onSubmitted: widgetState.onAddColumn,
@@ -248,37 +236,34 @@ class SyncColumnsSelector extends StatelessWidget {
             ),
             uiTheme.horizontalBoxes.medium,
             IconButton(
-              icon: const Icon(FluentIcons.add),
+              icon: const Icon(Icons.add),
               onPressed: widgetState.onAddColumn,
             ),
           ],
         ),
         uiTheme.verticalBoxes.medium,
-        material.Material(
-          color: Colors.transparent,
-          child: BlocSelector<TablesSyncBloc, TablesSyncState, Set<String>>(
-            selector: (final state) {
-              if (state is LiveTablesSyncParamsState) {
-                return state.columnNames;
-              }
-              return {};
-            },
-            builder: (final context, final syncColumnsSet) {
-              return Wrap(
-                spacing: 12,
-                runSpacing: 6,
-                children: syncColumnsSet
-                    .map(
-                      (final columnName) => material.InputChip(
-                        key: ValueKey(columnName),
-                        label: Text(columnName),
-                        onDeleted: () => widgetState.onDeleteColumn(columnName),
-                      ),
-                    )
-                    .toList(),
-              );
-            },
-          ),
+        BlocSelector<TablesSyncBloc, TablesSyncState, Set<String>>(
+          selector: (final state) {
+            if (state is LiveTablesSyncParamsState) {
+              return state.columnNames;
+            }
+            return {};
+          },
+          builder: (final context, final syncColumnsSet) {
+            return Wrap(
+              spacing: 12,
+              runSpacing: 6,
+              children: syncColumnsSet
+                  .map(
+                    (final columnName) => InputChip(
+                      key: ValueKey(columnName),
+                      label: Text(columnName),
+                      onDeleted: () => widgetState.onDeleteColumn(columnName),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
         ),
       ],
     );
@@ -303,23 +288,16 @@ class DestinationTablesSelector extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: AutoSuggestBox<TableParamsModel>(
-                sorter: (final text, final items) {
-                  return items
-                      .where((final item) => item.label.contains(text))
-                      .toList();
-                },
-                items: blocState.unselectedDestinationTables.map((final item) {
-                  return AutoSuggestBoxItem<TableParamsModel>(
-                    value: item,
-                    label: item.name,
+              child: Autocomplete(
+                optionsBuilder: (final textEditingValue) {
+                  if (textEditingValue.text.isEmpty) {
+                    return blocState.unselectedDestinationTables;
+                  }
+                  return blocState.unselectedDestinationTables.where(
+                    (final e) => e.name.contains(textEditingValue.text),
                   );
-                }).toList(),
-                onSelected: (final tableCheckox) {
-                  final table = tableCheckox.value;
-                  if (table == null) return;
-                  widgetState.onAddDestinationTable(table);
                 },
+                onSelected: widgetState.onAddDestinationTable,
               ),
             ),
             uiTheme.horizontalBoxes.medium,
@@ -327,22 +305,18 @@ class DestinationTablesSelector extends StatelessWidget {
           ],
         ),
         uiTheme.verticalBoxes.medium,
-        material.Material(
-          color: Colors.transparent,
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 6,
-            children: blocState.selectedDestinationTables
-                .map(
-                  (final table) => material.InputChip(
-                    key: ValueKey(table),
-                    label: Text(table.name),
-                    onDeleted: () =>
-                        widgetState.onDeleteDestinationTable(table),
-                  ),
-                )
-                .toList(),
-          ),
+        Wrap(
+          spacing: 12,
+          runSpacing: 6,
+          children: blocState.selectedDestinationTables
+              .map(
+                (final table) => InputChip(
+                  key: ValueKey(table),
+                  label: Text(table.name),
+                  onDeleted: () => widgetState.onDeleteDestinationTable(table),
+                ),
+              )
+              .toList(),
         ),
       ],
     );
@@ -356,7 +330,7 @@ class AddNewTableIconButton extends StatelessWidget {
   Widget build(final BuildContext context) {
     final state = context.read<TablesSyncWidgetState>();
     return IconButton(
-      icon: const Icon(FluentIcons.add),
+      icon: const Icon(Icons.add),
       onPressed: state.onAddNewTable,
     );
   }

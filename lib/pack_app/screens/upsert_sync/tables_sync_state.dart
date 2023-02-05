@@ -17,8 +17,12 @@ class TablesSyncWidgetState extends ContextfulLifeState {
   TablesSyncBloc get bloc => getContext().read<TablesSyncBloc>();
   final TablesSyncParamsModelId? syncId;
   bool get isCreateSync => syncId == null || syncId?.isEmpty == true;
-  void onSelectSourceTable(final AutoSuggestBoxItem<TableParamsModel> item) {
-    bloc.add(TablesSyncSelectSourceTableEvent(table: item.value));
+  void onSelectSourceTable(final TableParamsModel? table) {
+    bloc.add(TablesSyncSelectSourceTableEvent(table: table));
+  }
+
+  void onUnselectSourceTable() {
+    bloc.add(const TablesSyncSelectSourceTableEvent(table: null));
   }
 
   @override
@@ -48,12 +52,14 @@ class TablesSyncWidgetState extends ContextfulLifeState {
   }
 
   // ignore: avoid_positional_boolean_parameters
-  void onChangeShouldAddNewValues(final bool shouldAdd) {
+  void onChangeShouldAddNewValues(final bool? shouldAdd) {
+    if (shouldAdd == null) return;
     bloc.add(TablesSyncShouldAddNewValuesTableEvent(shouldAdd: shouldAdd));
   }
 
   // ignore: avoid_positional_boolean_parameters
-  void onChangeShouldUpdateValues(final bool shouldUpdate) {
+  void onChangeShouldUpdateValues(final bool? shouldUpdate) {
+    if (shouldUpdate == null) return;
     bloc.add(
       TablesSyncShouldUpdateValuesTableEvent(shouldUpdate: shouldUpdate),
     );

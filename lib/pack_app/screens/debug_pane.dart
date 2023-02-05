@@ -1,5 +1,4 @@
-import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' as material;
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
 import 'package:ts_core/ts_core.dart';
@@ -25,7 +24,7 @@ class DebugPane extends HookWidget {
               children: [
                 ListTile(
                   title: const Text('Use mock data'),
-                  trailing: material.Switch.adaptive(
+                  trailing: Switch.adaptive(
                     value: settingsNotifier.useMockData.value,
                     onChanged: (final newValue) {
                       settingsNotifier.useMockData.value = newValue;
@@ -34,24 +33,12 @@ class DebugPane extends HookWidget {
                 ),
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 100),
-                  child: CommandBar(
-                    overflowBehavior: CommandBarOverflowBehavior.clip,
-                    isCompact: true,
-                    primaryItems: [
-                      CommandBarBuilderItem(
-                        builder: (final context, final mode, final child) {
-                          return Tooltip(
-                            message: 'Clear log messages',
-                            child: child,
-                          );
-                        },
-                        wrappedItem: CommandBarButton(
-                          icon: const Icon(FluentIcons.clear, size: 10),
-                          label: const Text('Clear'),
-                          onPressed: analytics.clearLogs,
-                        ),
+                  child: Row(
+                    children: [
+                      TextButton(
+                        onPressed: analytics.clearLogs,
+                        child: const Text('Clear log messages'),
                       ),
-                      // const CommandBarSeparator(),
                     ],
                   ),
                 ),

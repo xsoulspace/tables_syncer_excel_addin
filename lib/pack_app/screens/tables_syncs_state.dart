@@ -1,8 +1,11 @@
 part of './tables_syncs.dart';
 
 class TablesSyncsListDiDto {
-  // ignore: avoid_unused_constructor_parameters
-  TablesSyncsListDiDto.use(final Locator read);
+  TablesSyncsListDiDto.use(final Locator read)
+      : syncerService = read(),
+        syncerParamsNotifier = read();
+  final ExcelTableSyncerService syncerService;
+  final SyncParamsNotifier syncerParamsNotifier;
 }
 
 TablesSyncsListState useTablesSyncsListState({required final Locator read}) =>
@@ -19,4 +22,14 @@ class TablesSyncsListState extends ContextfulLifeState {
   });
   final TablesSyncsListDiDto diDto;
   void onEditSync(final TablesSyncParamsModel tablesSync) {}
+  Future<void> onSync(final TablesSyncParamsModel syncParams) async {
+    final runtimeSyncParams = SyncParamsNormalizer.normalize(
+      syncParams: syncParams,
+      tablesMap: diDto.syncerParamsNotifier.tablesParamsMap,
+    );
+
+    await diDto.syncerService.syncTables(runtimeSyncParams: runtimeSyncParams);
+  }
+
+  void onDeleteSync(final TablesSyncParamsModel syncParams) {}
 }

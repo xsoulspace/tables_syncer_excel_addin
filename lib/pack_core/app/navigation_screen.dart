@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,7 @@ import 'package:ts_design_core/ts_design_core.dart';
 part 'navigation_screen_state.dart';
 
 class NavigationScreen extends HookWidget {
-  const NavigationScreen({final Key? key}) : super(key: key);
+  const NavigationScreen({super.key});
 
   @override
   Widget build(final BuildContext context) {

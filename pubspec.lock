@@ -449,13 +449,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
-  fluent_ui:
-    dependency: "direct main"
-    description:
-      path: "../fluent_ui"
-      relative: true
-    source: path
-    version: "4.2.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -995,14 +988,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
-  recase:
-    dependency: transitive
-    description:
-      name: recase
-      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.0"
   retrofit:
     dependency: transitive
     description:
@@ -1027,14 +1012,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
-  scroll_pos:
-    dependency: transitive
-    description:
-      name: scroll_pos
-      sha256: cfca311b6b8d51538ff90e206fbe6ce3b36e7125ea6da4a40eb626c7f9f083b1
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0"
   shared_preferences:
     dependency: "direct main"
     description:

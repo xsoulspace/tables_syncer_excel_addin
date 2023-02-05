@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
 
@@ -16,14 +16,14 @@ class AppStateLoader extends HookWidget {
     required this.child,
     required this.initializer,
     required this.loader,
-    final Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final Widget child;
   final AppStateInitializer initializer;
   final Widget loader;
   @override
   Widget build(final BuildContext context) {
-    final theme = FluentTheme.of(context);
+    final theme = Theme.of(context);
     final loaded = useIsBool();
     final loading = useIsBool();
 
@@ -55,7 +55,7 @@ class AppStateLoader extends HookWidget {
               if (loading.value)
                 Positioned.fill(
                   child: ColoredBox(
-                    color: theme.micaBackgroundColor.withOpacity(0.5),
+                    color: theme.colorScheme.background.withOpacity(0.5),
                     child: loader,
                   ),
                 ),
