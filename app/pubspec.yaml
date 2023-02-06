@@ -60,9 +60,9 @@ dependencies:
   rxdart: ^0.27.3
   shared_preferences: ^2.0.15
   ts_core:
-    path: packages/ts_core
+    path: ../packages/ts_core
   ts_design_core:
-    path: packages/ts_design_core
+    path: ../packages/ts_design_core
   universal_io: ^2.0.4
   url_launcher: ^6.1.7
   yandex_ads_sdk:
