@@ -6,15 +6,13 @@ on:
 jobs:
   build:
     name: Deploy Web
-    env:
-      my_secret: ${{secrets.COMMIT_SECRET}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.COMMIT_SECRET }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./release/web
       # - uses: subosito/flutter-action@v2
       # - run: flutter pub get
