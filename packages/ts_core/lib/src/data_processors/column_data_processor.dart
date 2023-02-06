@@ -57,11 +57,8 @@ class ColumnDataProcessor {
   }) {
     ExcelTableData resultData;
     if (shouldClearAllValuesBefore) {
-      resultData = List.filled(
-        secondaryColumnValues.length,
-        [null],
-        growable: true,
-      );
+      resultData =
+          List.generate(secondaryColumnValues.length, (final index) => ['']);
     } else {
       resultData = List.from(secondaryColumnValues);
     }
@@ -83,7 +80,10 @@ class ColumnDataProcessor {
         }
       }
     }
-
+    print({
+      'shouldClearAllValuesBefore': shouldClearAllValuesBefore,
+      'resultData': resultData,
+    });
     return resultData;
   }
 }

@@ -64,9 +64,9 @@ void main() {
     ];
     final expectedWithUpdatedClearTable = [
       ['earth', 'solar', 'medium', 'grey', '3'],
-      ['venus', 'alpha centauri', null, null, '5'],
+      ['venus', 'alpha centauri', '', '', '5'],
       ['mars', 'persei', 'large', 'black', '6'],
-      ['sun', 'Zeta Reticuli', null, null, '4'],
+      ['sun', 'Zeta Reticuli', '', '', '4'],
     ];
     final expectedWithInsertTable = [
       ...mockTables[destinationTableParam.dataTopLeftCell]!,
