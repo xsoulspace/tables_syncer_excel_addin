@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.1+2
+version: 1.0.2+3
 
 environment:
   sdk: ">=2.19.0 <4.0.0"
@@ -60,9 +60,9 @@ dependencies:
   rxdart: ^0.27.3
   shared_preferences: ^2.0.15
   ts_core:
-    path: packages/ts_core
+    path: ../packages/ts_core
   ts_design_core:
-    path: packages/ts_design_core
+    path: ../packages/ts_design_core
   universal_io: ^2.0.4
   url_launcher: ^6.1.7
   yandex_ads_sdk:

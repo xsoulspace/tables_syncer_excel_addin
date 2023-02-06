@@ -1198,14 +1198,14 @@ packages:
   ts_core:
     dependency: "direct main"
     description:
-      path: "packages/ts_core"
+      path: "../packages/ts_core"
       relative: true
     source: path
     version: "0.0.1"
   ts_design_core:
     dependency: "direct main"
     description:
-      path: "packages/ts_design_core"
+      path: "../packages/ts_design_core"
       relative: true
     source: path
     version: "0.0.1"

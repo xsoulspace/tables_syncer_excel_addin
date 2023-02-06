@@ -1,0 +1,6 @@
+# melos_managed_dependency_overrides: ts_core,ts_design_core
+dependency_overrides:
+  ts_core:
+    path: ../packages/ts_core
+  ts_design_core:
+    path: ../packages/ts_design_core

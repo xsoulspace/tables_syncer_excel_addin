@@ -7,25 +7,25 @@ part of 'models.dart';
 // **************************************************************************
 
 MixedResponse<T> _$MixedResponseFromJson<T>(
-  Map<String, dynamic> json,
-  T Function(Object? json) fromJsonT,
+  final Map<String, dynamic> json,
+  final T Function(Object? json) fromJsonT,
 ) =>
     MixedResponse<T>(
       data: _$nullableGenericFromJson(json['data'], fromJsonT),
       errors: (json['errors'] as List<dynamic>?)
-          ?.map((e) => ResponseErrorDescription.fromJson(e))
+          ?.map(ResponseErrorDescription.fromJson)
           .toList(),
     );
 
 T? _$nullableGenericFromJson<T>(
-  Object? input,
-  T Function(Object? json) fromJson,
+  final Object? input,
+  final T Function(Object? json) fromJson,
 ) =>
     input == null ? null : fromJson(input);
 
 _$SuccessfulDataResponse<T> _$$SuccessfulDataResponseFromJson<T>(
-  Map<String, dynamic> json,
-  T Function(Object? json) fromJsonT,
+  final Map<String, dynamic> json,
+  final T Function(Object? json) fromJsonT,
 ) =>
     _$SuccessfulDataResponse<T>(
       data: fromJsonT(json['data']),
@@ -33,8 +33,8 @@ _$SuccessfulDataResponse<T> _$$SuccessfulDataResponseFromJson<T>(
     );
 
 Map<String, dynamic> _$$SuccessfulDataResponseToJson<T>(
-  _$SuccessfulDataResponse<T> instance,
-  Object? Function(T value) toJsonT,
+  final _$SuccessfulDataResponse<T> instance,
+  final Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
       'data': toJsonT(instance.data),
@@ -42,44 +42,45 @@ Map<String, dynamic> _$$SuccessfulDataResponseToJson<T>(
     };
 
 _$SuccessfulVoidResponse<T> _$$SuccessfulVoidResponseFromJson<T>(
-  Map<String, dynamic> json,
-  T Function(Object? json) fromJsonT,
+  final Map<String, dynamic> json,
+  final T Function(Object? json) fromJsonT,
 ) =>
     _$SuccessfulVoidResponse<T>(
       $type: json['runtime_type'] as String?,
     );
 
 Map<String, dynamic> _$$SuccessfulVoidResponseToJson<T>(
-  _$SuccessfulVoidResponse<T> instance,
-  Object? Function(T value) toJsonT,
+  final _$SuccessfulVoidResponse<T> instance,
+  final Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
       'runtime_type': instance.$type,
     };
 
 _$BadResponse<T> _$$BadResponseFromJson<T>(
-  Map<String, dynamic> json,
-  T Function(Object? json) fromJsonT,
+  final Map<String, dynamic> json,
+  final T Function(Object? json) fromJsonT,
 ) =>
     _$BadResponse<T>(
       errors: (json['errors'] as List<dynamic>?)
-              ?.map((e) => ResponseErrorDescription.fromJson(e))
+              ?.map(ResponseErrorDescription.fromJson)
               .toList() ??
           const [],
       $type: json['runtime_type'] as String?,
     );
 
 Map<String, dynamic> _$$BadResponseToJson<T>(
-  _$BadResponse<T> instance,
-  Object? Function(T value) toJsonT,
+  final _$BadResponse<T> instance,
+  final Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
-      'errors': instance.errors.map((e) => e.toJson()).toList(),
+      'errors': instance.errors.map((final e) => e.toJson()).toList(),
       'runtime_type': instance.$type,
     };
 
 _$_ResponseErrorDescription _$$_ResponseErrorDescriptionFromJson(
-        Map<String, dynamic> json) =>
+  final Map<String, dynamic> json,
+) =>
     _$_ResponseErrorDescription(
       code: json['code'] as String,
       id: json['id'] as String,
@@ -89,7 +90,8 @@ _$_ResponseErrorDescription _$$_ResponseErrorDescriptionFromJson(
     );
 
 Map<String, dynamic> _$$_ResponseErrorDescriptionToJson(
-        _$_ResponseErrorDescription instance) =>
+  final _$_ResponseErrorDescription instance,
+) =>
     <String, dynamic>{
       'code': instance.code,
       'id': instance.id,
@@ -98,7 +100,8 @@ Map<String, dynamic> _$$_ResponseErrorDescriptionToJson(
       'status': instance.status,
     };
 
-_$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
+_$_TableParamsModel _$$_TableParamsModelFromJson(
+        final Map<String, dynamic> json) =>
     _$_TableParamsModel(
       id: json['id'] as String,
       workbookOriginName: json['workbookOriginName'] as String,
@@ -115,7 +118,8 @@ _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
           : CellModel.fromJson(json['dataTopLeftCell']),
     );
 
-Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
+Map<String, dynamic> _$$_TableParamsModelToJson(
+        final _$_TableParamsModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'workbookOriginName': instance.workbookOriginName,
@@ -129,17 +133,18 @@ Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
     };
 
 _$_TablesSyncParamsModel _$$_TablesSyncParamsModelFromJson(
-        Map<String, dynamic> json) =>
+  final Map<String, dynamic> json,
+) =>
     _$_TablesSyncParamsModel(
       id: json['id'] as String,
       userId: json['userId'] as String,
       createdAt: fromTimestamp(json['createdAt'] as Timestamp),
       sourceTableId: json['sourceTableId'] as String,
       destinationTablesIds: (json['destinationTablesIds'] as List<dynamic>)
-          .map((e) => e as String)
+          .map((final e) => e as String)
           .toList(),
       columnNames: (json['columnNames'] as List<dynamic>)
-          .map((e) => e as String)
+          .map((final e) => e as String)
           .toList(),
       shouldUpdateValues: json['shouldUpdateValues'] as bool,
       shouldAddNewValues: json['shouldAddNewValues'] as bool,
@@ -152,7 +157,8 @@ _$_TablesSyncParamsModel _$$_TablesSyncParamsModelFromJson(
     );
 
 Map<String, dynamic> _$$_TablesSyncParamsModelToJson(
-        _$_TablesSyncParamsModel instance) =>
+  final _$_TablesSyncParamsModel instance,
+) =>
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
@@ -170,14 +176,15 @@ Map<String, dynamic> _$$_TablesSyncParamsModelToJson(
     };
 
 _$_TablesSyncParamsRuntimeModel _$$_TablesSyncParamsRuntimeModelFromJson(
-        Map<String, dynamic> json) =>
+  final Map<String, dynamic> json,
+) =>
     _$_TablesSyncParamsRuntimeModel(
       id: json['id'] as String,
       userId: json['userId'] as String,
       createdAt: fromTimestamp(json['createdAt'] as Timestamp),
       sourceTable: TableParamsModel.fromJson(json['sourceTable']),
       columnNames: (json['columnNames'] as List<dynamic>)
-          .map((e) => e as String)
+          .map((final e) => e as String)
           .toList(),
       shouldUpdateValues: json['shouldUpdateValues'] as bool,
       shouldAddNewValues: json['shouldAddNewValues'] as bool,
@@ -185,7 +192,7 @@ _$_TablesSyncParamsRuntimeModel _$$_TablesSyncParamsRuntimeModelFromJson(
           json['shouldClearValueBeforeUpdate'] as bool,
       shouldAddNewHeaders: json['shouldAddNewHeaders'] as bool? ?? false,
       destinationTables: (json['destinationTables'] as List<dynamic>?)
-              ?.map((e) => TableParamsModel.fromJson(e))
+              ?.map(TableParamsModel.fromJson)
               .toList() ??
           const [],
       workbookName: json['workbookName'] as String? ?? '',
@@ -194,7 +201,8 @@ _$_TablesSyncParamsRuntimeModel _$$_TablesSyncParamsRuntimeModelFromJson(
     );
 
 Map<String, dynamic> _$$_TablesSyncParamsRuntimeModelToJson(
-        _$_TablesSyncParamsRuntimeModel instance) =>
+  final _$_TablesSyncParamsRuntimeModel instance,
+) =>
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
@@ -206,20 +214,21 @@ Map<String, dynamic> _$$_TablesSyncParamsRuntimeModelToJson(
       'shouldClearValueBeforeUpdate': instance.shouldClearValueBeforeUpdate,
       'shouldAddNewHeaders': instance.shouldAddNewHeaders,
       'destinationTables':
-          instance.destinationTables.map((e) => e.toJson()).toList(),
+          instance.destinationTables.map((final e) => e.toJson()).toList(),
       'workbookName': instance.workbookName,
       'name': instance.name,
       'lastSyncAt': toMaybeTimestamp(instance.lastSyncAt),
     };
 
-_$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
+_$_UserModel _$$_UserModelFromJson(final Map<String, dynamic> json) =>
+    _$_UserModel(
       id: json['id'] as String? ?? '',
       locale: localeFromString(json['locale'] as String?),
       themeMode: $enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']) ??
           ThemeMode.system,
     );
 
-Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
+Map<String, dynamic> _$$_UserModelToJson(final _$_UserModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'locale': localeToString(instance.locale),

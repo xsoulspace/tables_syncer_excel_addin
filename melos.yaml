@@ -1,0 +1,8 @@
+name: tables_syncer_excel_addin
+
+packages:
+  - packages/**
+  - app/**
+command:
+  bootstrap:
+    usePubspecOverrides: true
