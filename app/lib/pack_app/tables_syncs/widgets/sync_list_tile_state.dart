@@ -28,10 +28,6 @@ class TableSyncListTileState extends ContextfulLifeState {
     required this.tablesSync,
   });
   final TablesSyncParamsModel tablesSync;
-  late final runtimeSync = SyncParamsNormalizer.normalize(
-    syncParams: tablesSync,
-    tablesMap: diDto.syncParamsNotifier.tablesParamsMap,
-  );
 
   final TableSyncListTileDiDto diDto;
   bool _isHovering = false;
@@ -67,6 +63,9 @@ class TableSyncListTileState extends ContextfulLifeState {
         syncParams: syncParams,
         tablesMap: diDto.syncParamsNotifier.tablesParamsMap,
       );
+      if (runtimeSyncParams == null) {
+        throw Error();
+      }
 
       await diDto.syncerService
           .syncTables(runtimeSyncParams: runtimeSyncParams);

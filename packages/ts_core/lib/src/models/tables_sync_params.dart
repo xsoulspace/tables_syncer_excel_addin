@@ -91,15 +91,20 @@ class TablesSyncParamsRuntimeModel with _$TablesSyncParamsRuntimeModel {
   factory TablesSyncParamsRuntimeModel.fromJson(final dynamic json) =>
       _$TablesSyncParamsRuntimeModelFromJson(json as Map<String, dynamic>);
 
-  factory TablesSyncParamsRuntimeModel.fromModel({
+  static TablesSyncParamsRuntimeModel? fromModel({
     required final TablesSyncParamsModel syncParams,
     required final Map<TableParamsModelId, TableParamsModel> tablesParams,
   }) {
-    final json = syncParams.toJson()
-      ..['sourceTable'] = tablesParams[syncParams.sourceTableId]?.toJson();
+    final sourceTable = tablesParams[syncParams.sourceTableId];
+    if (sourceTable == null) return null;
+    final json = syncParams.toJson()..['sourceTable'] = sourceTable.toJson();
+
     return TablesSyncParamsRuntimeModel.fromJson(json).copyWith(
       destinationTables: syncParams.destinationTablesIds
-          .map((final tableId) => tablesParams[tableId]!)
+          .map((final tableId) {
+            return tablesParams[tableId];
+          })
+          .whereNotNull()
           .toList(),
     );
   }

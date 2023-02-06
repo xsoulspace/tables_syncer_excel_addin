@@ -23,7 +23,11 @@ class TablesSyncListTile extends HookWidget {
     final textTheme = theme.textTheme;
     final state =
         useTableSyncListTileState(read: context.read, tablesSync: tablesSync);
-    final runtimeSync = state.runtimeSync;
+    final runtimeSync = SyncParamsNormalizer.normalize(
+      syncParams: tablesSync,
+      tablesMap: state.diDto.syncParamsNotifier.tablesParamsMap,
+    );
+    if (runtimeSync == null) return const SizedBox();
     return FocusableActionDetector(
       onShowHoverHighlight: (final value) {
         state.isHovering = value;
