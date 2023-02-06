@@ -77,9 +77,9 @@ void main() {
       );
 
       final expectedSecondaryValues = [
-        [null],
-        [null],
-        [null],
+        [''],
+        [''],
+        [''],
       ];
 
       expect(
@@ -122,7 +122,7 @@ void main() {
 
     test('can update, insert, clear with duplicate keys', () {
       final expectedSecondaryValues = [
-        [null],
+        [''],
         ['2'],
         ['1'],
         ['2'],
