@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tables_syncer_excel_addin/pack_app/upsert_sync/bloc/tables_sync_bloc.dart';
 import 'package:tables_syncer_excel_addin/pack_app/upsert_sync/upsert_sync.dart';
+import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
 class DestinationTablesSelector extends StatelessWidget {
@@ -10,6 +11,7 @@ class DestinationTablesSelector extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     final widgetState = context.read<TablesSyncWidgetState>();
+    context.watch<SyncParamsNotifier>();
     final blocState = context.select<TablesSyncBloc, LiveTablesSyncParamsState>(
       (final state) => state.getLiveState(),
     );

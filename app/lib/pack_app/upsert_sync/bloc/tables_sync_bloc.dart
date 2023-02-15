@@ -41,6 +41,7 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     required this.onPopContext,
   }) : super(const EmptyTablesSyncState()) {
     on<TablesSyncInitEvent>(_onInit);
+    on<TablesSyncResetEvent>(_onReset);
     on<TablesSyncSaveEvent>(_onSave);
     on<TablesSyncAddColumnNameEvent>(_onAddColumnName);
     on<TablesSyncDeleteColumnNameEvent>(_onDeleteColumnName);
@@ -68,6 +69,17 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     emit(newState);
   }
 
+  void _onReset(
+    final TablesSyncResetEvent event,
+    final Emitter<TablesSyncState> emit,
+  ) {
+    final newState = LiveTablesSyncParamsState.fromSyncParams(
+      syncParams: null,
+      syncNotifier: diDto.syncParamsNotifier,
+    );
+    emit(newState);
+  }
+
   Future<void> _onSave(
     final TablesSyncSaveEvent event,
     final Emitter<TablesSyncState> emit,
@@ -78,6 +90,7 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
 
     await diDto.apiServices.tablesSync.upsertTableSync(tablesSync);
     controllers.isSaving.value = false;
+    add(const TablesSyncResetEvent());
     if (shouldPopAfterSubmit) {
       onPopContext();
     } else {
