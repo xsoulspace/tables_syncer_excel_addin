@@ -9,14 +9,22 @@ class ExcelRuntimeTable {
     required this.excelTableApi,
     required this.headers,
     required this.sheet,
+    required this.syncKeyColumnName,
   });
   final TableParamsModel params;
   final ExcelTableApi excelTableApi;
   final TableHeadersModel headers;
   final SheetModel sheet;
+  final String syncKeyColumnName;
+  String get keyColumnName {
+    if (params.keyColumnName.isEmpty) return syncKeyColumnName;
+    return params.keyColumnName;
+  }
+
   static Future<ExcelRuntimeTable> load({
     required final TableParamsModel params,
     required final ExcelTableApi excelTableApi,
+    required final String syncKeyColumnName,
     final bool indexateHeaders = true,
   }) async {
     final sheet = await excelTableApi.getSheet(params.worksheetName);
@@ -27,6 +35,7 @@ class ExcelRuntimeTable {
     );
 
     return ExcelRuntimeTable._(
+      syncKeyColumnName: syncKeyColumnName,
       excelTableApi: excelTableApi,
       sheet: sheet,
       headers: headers,
@@ -77,7 +86,7 @@ class ExcelRuntimeTable {
   }
 
   Future<ExcelTableStringData> loadKeysColumnValues() async {
-    final values = await loadColumnValues(name: params.keyColumnName);
+    final values = await loadColumnValues(name: keyColumnName);
     return values.map((final e) => ['${e.first}']).toList();
   }
 
@@ -124,7 +133,7 @@ class ExcelRuntimeTable {
   Future<void> addNewKeyColumnValues({
     required final IndexedKeysWithOriginMap newKeysMap,
   }) async {
-    final columnIndex = headers.indexesMap[params.keyColumnName]!;
+    final columnIndex = headers.indexesMap[keyColumnName]!;
     final columnValues = newKeysMap.keys.map((final key) => [key]).toList();
     final range = await excelTableApi.getColumnRange(
       sheet: sheet,

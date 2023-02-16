@@ -64,47 +64,52 @@ class TableListTile extends HookWidget {
       onShowHoverHighlight: (final value) {
         isHovering.value = value;
       },
-      child: Card(
-        margin: const EdgeInsets.only(top: 12, left: 4, right: 4),
-        child: ListTile(
-          onTap: () => state.onEditTable(table),
-          title: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
-            child: Text(
-              '${table.name} | Worksheet: ${table.worksheetName} '
-              '\n| Key Column: ${table.keyColumnName} '
-              '\n| Header: Row ${table.headerTopLeftCell.relativeRowIndex} & '
-              'Column ${table.headerTopLeftCell.relativeColumnIndex}'
-              '\n| Data: Row ${table.dataTopLeftCell.relativeRowIndex} & '
-              'Column ${table.dataTopLeftCell.relativeColumnIndex}',
-              style: textTheme.bodyMedium,
+      child: Stack(
+        children: [
+          Card(
+            margin: const EdgeInsets.only(top: 12, left: 4, right: 4),
+            child: ListTile(
+              onTap: () => state.onEditTable(table),
+              dense: true,
+              title: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Text(
+                  '${table.name} | ${table.worksheetName} '
+                  '\n| Header: R${table.headerTopLeftCell.relativeRowIndex}'
+                  'C${table.headerTopLeftCell.relativeColumnIndex} '
+                  '| Data: R${table.dataTopLeftCell.relativeRowIndex}'
+                  'C${table.dataTopLeftCell.relativeColumnIndex}',
+                  style: textTheme.bodyMedium,
+                ),
+              ),
+              subtitle: Text(table.workbookOriginName),
+              trailing: const SizedBox(),
             ),
           ),
-          subtitle: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(table.workbookOriginName),
-              if (isHovering.value)
-                FadeIn(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.edit),
-                        onPressed: () => state.onEditTable(table),
-                      ),
-                      uiTheme.horizontalBoxes.small,
-                      IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () => state.onDeleteTable(table),
-                      ),
-                    ],
-                  ),
-                )
-            ],
+          Positioned(
+            top: 4,
+            right: 0,
+            bottom: 0,
+            child: isHovering.value
+                ? FadeIn(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () => state.onEditTable(table),
+                        ),
+                        uiTheme.horizontalBoxes.small,
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () => state.onDeleteTable(table),
+                        ),
+                      ],
+                    ),
+                  )
+                : const SizedBox(),
           ),
-        ),
+        ],
       ),
     );
   }

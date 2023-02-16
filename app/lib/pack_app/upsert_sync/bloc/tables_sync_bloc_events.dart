@@ -8,6 +8,11 @@ abstract class TablesSyncEvent extends Equatable {
 }
 
 @immutable
+class TablesSyncResetEvent extends TablesSyncEvent {
+  const TablesSyncResetEvent();
+}
+
+@immutable
 class TablesSyncInitEvent extends TablesSyncEvent {
   const TablesSyncInitEvent({
     this.syncId,

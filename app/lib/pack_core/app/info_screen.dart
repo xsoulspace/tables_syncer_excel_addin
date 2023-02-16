@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
@@ -18,6 +19,8 @@ class InfoScreen extends HookWidget {
   static const cloudTipsLink = 'https://pay.cloudtips.ru/p/1629cd27';
   static const termsOfUseLink =
       'https://github.com/xsoulspace/tables_syncer_excel_addin/blob/develop/TERMS_AND_CONDITIONS.md';
+  static final applicationLegalese = '\u{a9} 2020-${DateTime.now().year} '
+      'App by Anton Malofeev (@Arenukvern) and @mixev';
   @override
   Widget build(final BuildContext context) {
     final state = useInfoScreenState();
@@ -161,7 +164,23 @@ class InfoScreen extends HookWidget {
                       url: termsOfUseLink,
                     ),
                     const _TextDivider(),
-                    const Text('Made with Flutter & ❤'),
+                    TextButton(
+                      child: const Text('Made with Flutter & ❤'),
+                      onPressed: () async {
+                        final packageInfo = await PackageInfo.fromPlatform();
+
+                        final applicationVersion =
+                            '${packageInfo.version}+${packageInfo.buildNumber}';
+
+                        // ignore: use_build_context_synchronously
+                        showAboutDialog(
+                          context: context,
+                          applicationVersion: applicationVersion,
+                          applicationLegalese: applicationLegalese,
+                          applicationName: 'Tables Syncer Excel Addin',
+                        );
+                      },
+                    ),
                   ],
                 ),
                 uiTheme.verticalBoxes.extraLarge,

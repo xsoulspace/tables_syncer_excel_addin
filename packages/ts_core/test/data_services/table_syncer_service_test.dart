@@ -94,7 +94,7 @@ void main() {
       final runtimeSyncParams = SyncParamsNormalizer.normalize(
         syncParams: syncParams,
         tablesMap: tablesMap,
-      )!;
+      );
       final excelTableApi = ExcelTableMockApiImpl(
         excelApi: ExcelApiMockImpl(),
         tables: {...mockTables, ...mockTablesHeaders},
@@ -128,7 +128,7 @@ void main() {
       final runtimeSyncParams = SyncParamsNormalizer.normalize(
         syncParams: syncParams,
         tablesMap: tablesMap,
-      )!;
+      );
       final excelTableApi = ExcelTableMockApiImpl(
         excelApi: ExcelApiMockImpl(),
         tables: {...mockTables, ...mockTablesHeaders},
@@ -164,7 +164,7 @@ void main() {
       final runtimeSyncParams = SyncParamsNormalizer.normalize(
         syncParams: syncParams,
         tablesMap: tablesMap,
-      )!;
+      );
       final excelTableApi = ExcelTableMockApiImpl(
         excelApi: ExcelApiMockImpl(),
         tables: {...mockTables, ...mockTablesHeaders},
@@ -198,7 +198,7 @@ void main() {
       final runtimeSyncParams = SyncParamsNormalizer.normalize(
         syncParams: syncParams,
         tablesMap: tablesMap,
-      )!;
+      );
       final excelTableApi = ExcelTableMockApiImpl(
         excelApi: ExcelApiMockImpl(),
         tables: {...mockTables, ...mockTablesHeaders},

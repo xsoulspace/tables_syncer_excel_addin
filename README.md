@@ -69,7 +69,7 @@ All [comments](https://github.com/xsoulspace/tables_syncer_excel_addin/issues) a
 
 ## Getting Help
 
-If you need help getting started with Sheet Manager or have any questions, check out our [Discord Community](https://discord.gg/y54DpJwmAn).
+If you need help getting started with Tables Syncer or have any questions, check out our [Discord Community](https://discord.gg/y54DpJwmAn).
 
 ## Build
 
