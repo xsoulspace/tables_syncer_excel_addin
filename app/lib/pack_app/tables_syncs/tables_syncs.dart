@@ -1,4 +1,4 @@
-import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_hooks/life_hooks.dart';
@@ -39,8 +39,9 @@ class TablesSyncsListView extends HookWidget {
       body: Provider(
         create: (final context) => state,
         builder: (final context, final child) {
-          return FirestoreListView(
+          return FirestoreReorderableListView(
             query: apiServices.tablesSync.tableSyncQuery,
+            onReorder: state.onReorderSync,
             itemBuilder: (final context, final doc) {
               final tablesSync = doc.data();
               return TablesSyncListTile(

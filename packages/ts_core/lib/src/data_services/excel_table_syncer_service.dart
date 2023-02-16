@@ -17,8 +17,13 @@ class ExcelTableSyncerService {
   }) async {
     try {
       analyticsNotifier?.dynamicLog({'sync started': runtimeSyncParams});
+      final sourceTable = runtimeSyncParams.sourceTable;
+      if (sourceTable == null) {
+        // TODO(arenukvern): add error
+        return;
+      }
       final sourceRuntimeTable = await ExcelRuntimeTable.load(
-        params: runtimeSyncParams.sourceTable,
+        params: sourceTable,
         excelTableApi: excelTableApi,
       );
       final sourceColumnIndexedKeys =

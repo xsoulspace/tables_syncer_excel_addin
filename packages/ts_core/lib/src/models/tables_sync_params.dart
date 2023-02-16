@@ -27,6 +27,7 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
     required final bool shouldUpdateValues,
     required final bool shouldAddNewValues,
     required final bool shouldClearValueBeforeUpdate,
+    @Default(0) final int index,
     @Default(false) final bool shouldAddNewHeaders,
     @Default('') final String workbookName,
     @Default('') final String name,
@@ -48,10 +49,16 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
   }
 
   static Map<String, Object?> toFirestore(
-    final TablesSyncParamsModel value,
+    final Object value,
     final SetOptions? options,
   ) {
-    return value.toJson();
+    if (value is TablesSyncParamsModel) {
+      return value.toJson();
+    } else if (value is Map && options?.merge == true) {
+      return value as Map<String, Object?>;
+    } else {
+      throw ArgumentError.value(value);
+    }
   }
 }
 
@@ -74,11 +81,11 @@ class TablesSyncParamsRuntimeModel with _$TablesSyncParamsRuntimeModel {
     required final String userId,
     @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
         required final DateTime createdAt,
-    required final TableParamsModel sourceTable,
     required final List<String> columnNames,
     required final bool shouldUpdateValues,
     required final bool shouldAddNewValues,
     required final bool shouldClearValueBeforeUpdate,
+    final TableParamsModel? sourceTable,
     @Default(false) final bool shouldAddNewHeaders,
     @Default([]) final List<TableParamsModel> destinationTables,
     @Default('') final String workbookName,
@@ -96,8 +103,7 @@ class TablesSyncParamsRuntimeModel with _$TablesSyncParamsRuntimeModel {
     required final Map<TableParamsModelId, TableParamsModel> tablesParams,
   }) {
     final sourceTable = tablesParams[syncParams.sourceTableId];
-    if (sourceTable == null) return null;
-    final json = syncParams.toJson()..['sourceTable'] = sourceTable.toJson();
+    final json = syncParams.toJson()..['sourceTable'] = sourceTable?.toJson();
 
     return TablesSyncParamsRuntimeModel.fromJson(json).copyWith(
       destinationTables: syncParams.destinationTablesIds

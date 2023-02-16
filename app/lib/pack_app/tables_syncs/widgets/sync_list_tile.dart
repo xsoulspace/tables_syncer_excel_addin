@@ -56,7 +56,7 @@ class TablesSyncListTile extends HookWidget {
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
-              '${runtimeSync.name} | ${runtimeSync.sourceTable.name}'
+              '${runtimeSync.name} | ${runtimeSync.sourceTable?.name ?? "Source not set!"}'
               ' -> ${runtimeSync.destinationTables.map((final e) => e.name).join(' & ')}',
               style: textTheme.bodyMedium,
             ),
@@ -67,27 +67,37 @@ class TablesSyncListTile extends HookWidget {
               Text(tablesSync.workbookName),
               Text('Columns: ${runtimeSync.columnNames.join(',')}'),
               uiTheme.horizontalBoxes.medium,
-              Text(
-                'Last Synced: '
-                '${tablesSync.lastSyncAt?.toLocal().toIso8601String()}',
+              SizedBox(
+                height: 32,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (state.isHovering)
+                      FadeIn(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () => state.onEditSync(tablesSync),
+                            ),
+                            uiTheme.horizontalBoxes.small,
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () => state.onDeleteSync(tablesSync),
+                            ),
+                          ],
+                        ),
+                      )
+                    else
+                      const Spacer(),
+                    Text(
+                      'Last Synced: '
+                      '${tablesSync.lastSyncAt?.toLocal().toIso8601String()}',
+                    ),
+                  ],
+                ),
               ),
-              if (state.isHovering)
-                FadeIn(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.edit),
-                        onPressed: () => state.onEditSync(tablesSync),
-                      ),
-                      uiTheme.horizontalBoxes.small,
-                      IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () => state.onDeleteSync(tablesSync),
-                      ),
-                    ],
-                  ),
-                )
             ],
           ),
         ),
