@@ -20,7 +20,7 @@ class InfoScreen extends HookWidget {
   static const termsOfUseLink =
       'https://github.com/xsoulspace/tables_syncer_excel_addin/blob/develop/TERMS_AND_CONDITIONS.md';
   static final applicationLegalese = '\u{a9} 2020-${DateTime.now().year} '
-      'App by Anton Malofeev (@Arenukvern) and @mixev';
+      'App by Anton Malofeev (@Arenukvern)';
   @override
   Widget build(final BuildContext context) {
     final state = useInfoScreenState();
