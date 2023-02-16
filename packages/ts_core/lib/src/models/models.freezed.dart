@@ -829,10 +829,10 @@ mixin _$TableParamsModel {
   String get id => throw _privateConstructorUsedError;
   String get workbookOriginName => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
-  String get keyColumnName => throw _privateConstructorUsedError;
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt => throw _privateConstructorUsedError;
   String get worksheetName => throw _privateConstructorUsedError;
+  String get keyColumnName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   CellModel get headerTopLeftCell => throw _privateConstructorUsedError;
   CellModel get dataTopLeftCell => throw _privateConstructorUsedError;
@@ -853,9 +853,9 @@ abstract class $TableParamsModelCopyWith<$Res> {
       {String id,
       String workbookOriginName,
       String userId,
-      String keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
       String worksheetName,
+      String keyColumnName,
       String name,
       CellModel headerTopLeftCell,
       CellModel dataTopLeftCell});
@@ -880,9 +880,9 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
     Object? id = null,
     Object? workbookOriginName = null,
     Object? userId = null,
-    Object? keyColumnName = null,
     Object? createdAt = null,
     Object? worksheetName = null,
+    Object? keyColumnName = null,
     Object? name = null,
     Object? headerTopLeftCell = null,
     Object? dataTopLeftCell = null,
@@ -900,10 +900,6 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      keyColumnName: null == keyColumnName
-          ? _value.keyColumnName
-          : keyColumnName // ignore: cast_nullable_to_non_nullable
-              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -911,6 +907,10 @@ class _$TableParamsModelCopyWithImpl<$Res, $Val extends TableParamsModel>
       worksheetName: null == worksheetName
           ? _value.worksheetName
           : worksheetName // ignore: cast_nullable_to_non_nullable
+              as String,
+      keyColumnName: null == keyColumnName
+          ? _value.keyColumnName
+          : keyColumnName // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -956,9 +956,9 @@ abstract class _$$_TableParamsModelCopyWith<$Res>
       {String id,
       String workbookOriginName,
       String userId,
-      String keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp) DateTime createdAt,
       String worksheetName,
+      String keyColumnName,
       String name,
       CellModel headerTopLeftCell,
       CellModel dataTopLeftCell});
@@ -983,9 +983,9 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
     Object? id = null,
     Object? workbookOriginName = null,
     Object? userId = null,
-    Object? keyColumnName = null,
     Object? createdAt = null,
     Object? worksheetName = null,
+    Object? keyColumnName = null,
     Object? name = null,
     Object? headerTopLeftCell = null,
     Object? dataTopLeftCell = null,
@@ -1003,10 +1003,6 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      keyColumnName: null == keyColumnName
-          ? _value.keyColumnName
-          : keyColumnName // ignore: cast_nullable_to_non_nullable
-              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -1014,6 +1010,10 @@ class __$$_TableParamsModelCopyWithImpl<$Res>
       worksheetName: null == worksheetName
           ? _value.worksheetName
           : worksheetName // ignore: cast_nullable_to_non_nullable
+              as String,
+      keyColumnName: null == keyColumnName
+          ? _value.keyColumnName
+          : keyColumnName // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -1039,10 +1039,10 @@ class _$_TableParamsModel extends _TableParamsModel {
       {required this.id,
       required this.workbookOriginName,
       required this.userId,
-      required this.keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           required this.createdAt,
       required this.worksheetName,
+      this.keyColumnName = '',
       this.name = '',
       this.headerTopLeftCell = CellModel.zero,
       this.dataTopLeftCell = CellModel.zero})
@@ -1058,12 +1058,13 @@ class _$_TableParamsModel extends _TableParamsModel {
   @override
   final String userId;
   @override
-  final String keyColumnName;
-  @override
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   final DateTime createdAt;
   @override
   final String worksheetName;
+  @override
+  @JsonKey()
+  final String keyColumnName;
   @override
   @JsonKey()
   final String name;
@@ -1076,7 +1077,7 @@ class _$_TableParamsModel extends _TableParamsModel {
 
   @override
   String toString() {
-    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, keyColumnName: $keyColumnName, createdAt: $createdAt, worksheetName: $worksheetName, name: $name, headerTopLeftCell: $headerTopLeftCell, dataTopLeftCell: $dataTopLeftCell)';
+    return 'TableParamsModel(id: $id, workbookOriginName: $workbookOriginName, userId: $userId, createdAt: $createdAt, worksheetName: $worksheetName, keyColumnName: $keyColumnName, name: $name, headerTopLeftCell: $headerTopLeftCell, dataTopLeftCell: $dataTopLeftCell)';
   }
 
   @override
@@ -1088,12 +1089,12 @@ class _$_TableParamsModel extends _TableParamsModel {
             (identical(other.workbookOriginName, workbookOriginName) ||
                 other.workbookOriginName == workbookOriginName) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.keyColumnName, keyColumnName) ||
-                other.keyColumnName == keyColumnName) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.worksheetName, worksheetName) ||
                 other.worksheetName == worksheetName) &&
+            (identical(other.keyColumnName, keyColumnName) ||
+                other.keyColumnName == keyColumnName) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.headerTopLeftCell, headerTopLeftCell) ||
                 other.headerTopLeftCell == headerTopLeftCell) &&
@@ -1108,9 +1109,9 @@ class _$_TableParamsModel extends _TableParamsModel {
       id,
       workbookOriginName,
       userId,
-      keyColumnName,
       createdAt,
       worksheetName,
+      keyColumnName,
       name,
       headerTopLeftCell,
       dataTopLeftCell);
@@ -1134,10 +1135,10 @@ abstract class _TableParamsModel extends TableParamsModel {
       {required final String id,
       required final String workbookOriginName,
       required final String userId,
-      required final String keyColumnName,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           required final DateTime createdAt,
       required final String worksheetName,
+      final String keyColumnName,
       final String name,
       final CellModel headerTopLeftCell,
       final CellModel dataTopLeftCell}) = _$_TableParamsModel;
@@ -1153,12 +1154,12 @@ abstract class _TableParamsModel extends TableParamsModel {
   @override
   String get userId;
   @override
-  String get keyColumnName;
-  @override
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt;
   @override
   String get worksheetName;
+  @override
+  String get keyColumnName;
   @override
   String get name;
   @override
@@ -1713,6 +1714,8 @@ mixin _$TablesSyncParamsModel {
   bool get shouldUpdateValues => throw _privateConstructorUsedError;
   bool get shouldAddNewValues => throw _privateConstructorUsedError;
   bool get shouldClearValueBeforeUpdate => throw _privateConstructorUsedError;
+  String get keyColumnName => throw _privateConstructorUsedError;
+  int get index => throw _privateConstructorUsedError;
   bool get shouldAddNewHeaders => throw _privateConstructorUsedError;
   String get workbookName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
@@ -1742,6 +1745,8 @@ abstract class $TablesSyncParamsModelCopyWith<$Res> {
       bool shouldUpdateValues,
       bool shouldAddNewValues,
       bool shouldClearValueBeforeUpdate,
+      String keyColumnName,
+      int index,
       bool shouldAddNewHeaders,
       String workbookName,
       String name,
@@ -1772,6 +1777,8 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
     Object? shouldClearValueBeforeUpdate = null,
+    Object? keyColumnName = null,
+    Object? index = null,
     Object? shouldAddNewHeaders = null,
     Object? workbookName = null,
     Object? name = null,
@@ -1814,6 +1821,14 @@ class _$TablesSyncParamsModelCopyWithImpl<$Res,
           ? _value.shouldClearValueBeforeUpdate
           : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
+      keyColumnName: null == keyColumnName
+          ? _value.keyColumnName
+          : keyColumnName // ignore: cast_nullable_to_non_nullable
+              as String,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       shouldAddNewHeaders: null == shouldAddNewHeaders
           ? _value.shouldAddNewHeaders
           : shouldAddNewHeaders // ignore: cast_nullable_to_non_nullable
@@ -1853,6 +1868,8 @@ abstract class _$$_TablesSyncParamsModelCopyWith<$Res>
       bool shouldUpdateValues,
       bool shouldAddNewValues,
       bool shouldClearValueBeforeUpdate,
+      String keyColumnName,
+      int index,
       bool shouldAddNewHeaders,
       String workbookName,
       String name,
@@ -1880,6 +1897,8 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
     Object? shouldClearValueBeforeUpdate = null,
+    Object? keyColumnName = null,
+    Object? index = null,
     Object? shouldAddNewHeaders = null,
     Object? workbookName = null,
     Object? name = null,
@@ -1922,6 +1941,14 @@ class __$$_TablesSyncParamsModelCopyWithImpl<$Res>
           ? _value.shouldClearValueBeforeUpdate
           : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
+      keyColumnName: null == keyColumnName
+          ? _value.keyColumnName
+          : keyColumnName // ignore: cast_nullable_to_non_nullable
+              as String,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       shouldAddNewHeaders: null == shouldAddNewHeaders
           ? _value.shouldAddNewHeaders
           : shouldAddNewHeaders // ignore: cast_nullable_to_non_nullable
@@ -1957,6 +1984,8 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
       required this.shouldUpdateValues,
       required this.shouldAddNewValues,
       required this.shouldClearValueBeforeUpdate,
+      this.keyColumnName = '',
+      this.index = 0,
       this.shouldAddNewHeaders = false,
       this.workbookName = '',
       this.name = '',
@@ -2003,6 +2032,12 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
   final bool shouldClearValueBeforeUpdate;
   @override
   @JsonKey()
+  final String keyColumnName;
+  @override
+  @JsonKey()
+  final int index;
+  @override
+  @JsonKey()
   final bool shouldAddNewHeaders;
   @override
   @JsonKey()
@@ -2016,7 +2051,7 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
 
   @override
   String toString() {
-    return 'TablesSyncParamsModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValueBeforeUpdate: $shouldClearValueBeforeUpdate, shouldAddNewHeaders: $shouldAddNewHeaders, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
+    return 'TablesSyncParamsModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTableId: $sourceTableId, destinationTablesIds: $destinationTablesIds, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValueBeforeUpdate: $shouldClearValueBeforeUpdate, keyColumnName: $keyColumnName, index: $index, shouldAddNewHeaders: $shouldAddNewHeaders, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
   }
 
   @override
@@ -2042,6 +2077,9 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
                     shouldClearValueBeforeUpdate) ||
                 other.shouldClearValueBeforeUpdate ==
                     shouldClearValueBeforeUpdate) &&
+            (identical(other.keyColumnName, keyColumnName) ||
+                other.keyColumnName == keyColumnName) &&
+            (identical(other.index, index) || other.index == index) &&
             (identical(other.shouldAddNewHeaders, shouldAddNewHeaders) ||
                 other.shouldAddNewHeaders == shouldAddNewHeaders) &&
             (identical(other.workbookName, workbookName) ||
@@ -2064,6 +2102,8 @@ class _$_TablesSyncParamsModel extends _TablesSyncParamsModel {
       shouldUpdateValues,
       shouldAddNewValues,
       shouldClearValueBeforeUpdate,
+      keyColumnName,
+      index,
       shouldAddNewHeaders,
       workbookName,
       name,
@@ -2096,6 +2136,8 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
       required final bool shouldUpdateValues,
       required final bool shouldAddNewValues,
       required final bool shouldClearValueBeforeUpdate,
+      final String keyColumnName,
+      final int index,
       final bool shouldAddNewHeaders,
       final String workbookName,
       final String name,
@@ -2126,6 +2168,10 @@ abstract class _TablesSyncParamsModel extends TablesSyncParamsModel {
   @override
   bool get shouldClearValueBeforeUpdate;
   @override
+  String get keyColumnName;
+  @override
+  int get index;
+  @override
   bool get shouldAddNewHeaders;
   @override
   String get workbookName;
@@ -2151,11 +2197,12 @@ mixin _$TablesSyncParamsRuntimeModel {
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt => throw _privateConstructorUsedError;
-  TableParamsModel get sourceTable => throw _privateConstructorUsedError;
   List<String> get columnNames => throw _privateConstructorUsedError;
   bool get shouldUpdateValues => throw _privateConstructorUsedError;
   bool get shouldAddNewValues => throw _privateConstructorUsedError;
   bool get shouldClearValueBeforeUpdate => throw _privateConstructorUsedError;
+  String get keyColumnName => throw _privateConstructorUsedError;
+  TableParamsModel? get sourceTable => throw _privateConstructorUsedError;
   bool get shouldAddNewHeaders => throw _privateConstructorUsedError;
   List<TableParamsModel> get destinationTables =>
       throw _privateConstructorUsedError;
@@ -2183,11 +2230,12 @@ abstract class $TablesSyncParamsRuntimeModelCopyWith<$Res> {
       String userId,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           DateTime createdAt,
-      TableParamsModel sourceTable,
       List<String> columnNames,
       bool shouldUpdateValues,
       bool shouldAddNewValues,
       bool shouldClearValueBeforeUpdate,
+      String keyColumnName,
+      TableParamsModel? sourceTable,
       bool shouldAddNewHeaders,
       List<TableParamsModel> destinationTables,
       String workbookName,
@@ -2195,7 +2243,7 @@ abstract class $TablesSyncParamsRuntimeModelCopyWith<$Res> {
       @JsonKey(fromJson: fromMaybeTimestamp, toJson: toMaybeTimestamp)
           DateTime? lastSyncAt});
 
-  $TableParamsModelCopyWith<$Res> get sourceTable;
+  $TableParamsModelCopyWith<$Res>? get sourceTable;
 }
 
 /// @nodoc
@@ -2215,11 +2263,12 @@ class _$TablesSyncParamsRuntimeModelCopyWithImpl<$Res,
     Object? id = null,
     Object? userId = null,
     Object? createdAt = null,
-    Object? sourceTable = null,
     Object? columnNames = null,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
     Object? shouldClearValueBeforeUpdate = null,
+    Object? keyColumnName = null,
+    Object? sourceTable = freezed,
     Object? shouldAddNewHeaders = null,
     Object? destinationTables = null,
     Object? workbookName = null,
@@ -2239,10 +2288,6 @@ class _$TablesSyncParamsRuntimeModelCopyWithImpl<$Res,
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      sourceTable: null == sourceTable
-          ? _value.sourceTable
-          : sourceTable // ignore: cast_nullable_to_non_nullable
-              as TableParamsModel,
       columnNames: null == columnNames
           ? _value.columnNames
           : columnNames // ignore: cast_nullable_to_non_nullable
@@ -2259,6 +2304,14 @@ class _$TablesSyncParamsRuntimeModelCopyWithImpl<$Res,
           ? _value.shouldClearValueBeforeUpdate
           : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
+      keyColumnName: null == keyColumnName
+          ? _value.keyColumnName
+          : keyColumnName // ignore: cast_nullable_to_non_nullable
+              as String,
+      sourceTable: freezed == sourceTable
+          ? _value.sourceTable
+          : sourceTable // ignore: cast_nullable_to_non_nullable
+              as TableParamsModel?,
       shouldAddNewHeaders: null == shouldAddNewHeaders
           ? _value.shouldAddNewHeaders
           : shouldAddNewHeaders // ignore: cast_nullable_to_non_nullable
@@ -2284,8 +2337,12 @@ class _$TablesSyncParamsRuntimeModelCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $TableParamsModelCopyWith<$Res> get sourceTable {
-    return $TableParamsModelCopyWith<$Res>(_value.sourceTable, (value) {
+  $TableParamsModelCopyWith<$Res>? get sourceTable {
+    if (_value.sourceTable == null) {
+      return null;
+    }
+
+    return $TableParamsModelCopyWith<$Res>(_value.sourceTable!, (value) {
       return _then(_value.copyWith(sourceTable: value) as $Val);
     });
   }
@@ -2305,11 +2362,12 @@ abstract class _$$_TablesSyncParamsRuntimeModelCopyWith<$Res>
       String userId,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           DateTime createdAt,
-      TableParamsModel sourceTable,
       List<String> columnNames,
       bool shouldUpdateValues,
       bool shouldAddNewValues,
       bool shouldClearValueBeforeUpdate,
+      String keyColumnName,
+      TableParamsModel? sourceTable,
       bool shouldAddNewHeaders,
       List<TableParamsModel> destinationTables,
       String workbookName,
@@ -2318,7 +2376,7 @@ abstract class _$$_TablesSyncParamsRuntimeModelCopyWith<$Res>
           DateTime? lastSyncAt});
 
   @override
-  $TableParamsModelCopyWith<$Res> get sourceTable;
+  $TableParamsModelCopyWith<$Res>? get sourceTable;
 }
 
 /// @nodoc
@@ -2337,11 +2395,12 @@ class __$$_TablesSyncParamsRuntimeModelCopyWithImpl<$Res>
     Object? id = null,
     Object? userId = null,
     Object? createdAt = null,
-    Object? sourceTable = null,
     Object? columnNames = null,
     Object? shouldUpdateValues = null,
     Object? shouldAddNewValues = null,
     Object? shouldClearValueBeforeUpdate = null,
+    Object? keyColumnName = null,
+    Object? sourceTable = freezed,
     Object? shouldAddNewHeaders = null,
     Object? destinationTables = null,
     Object? workbookName = null,
@@ -2361,10 +2420,6 @@ class __$$_TablesSyncParamsRuntimeModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      sourceTable: null == sourceTable
-          ? _value.sourceTable
-          : sourceTable // ignore: cast_nullable_to_non_nullable
-              as TableParamsModel,
       columnNames: null == columnNames
           ? _value._columnNames
           : columnNames // ignore: cast_nullable_to_non_nullable
@@ -2381,6 +2436,14 @@ class __$$_TablesSyncParamsRuntimeModelCopyWithImpl<$Res>
           ? _value.shouldClearValueBeforeUpdate
           : shouldClearValueBeforeUpdate // ignore: cast_nullable_to_non_nullable
               as bool,
+      keyColumnName: null == keyColumnName
+          ? _value.keyColumnName
+          : keyColumnName // ignore: cast_nullable_to_non_nullable
+              as String,
+      sourceTable: freezed == sourceTable
+          ? _value.sourceTable
+          : sourceTable // ignore: cast_nullable_to_non_nullable
+              as TableParamsModel?,
       shouldAddNewHeaders: null == shouldAddNewHeaders
           ? _value.shouldAddNewHeaders
           : shouldAddNewHeaders // ignore: cast_nullable_to_non_nullable
@@ -2414,11 +2477,12 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
       required this.userId,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           required this.createdAt,
-      required this.sourceTable,
       required final List<String> columnNames,
       required this.shouldUpdateValues,
       required this.shouldAddNewValues,
       required this.shouldClearValueBeforeUpdate,
+      required this.keyColumnName,
+      this.sourceTable,
       this.shouldAddNewHeaders = false,
       final List<TableParamsModel> destinationTables = const [],
       this.workbookName = '',
@@ -2439,8 +2503,6 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
   @override
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   final DateTime createdAt;
-  @override
-  final TableParamsModel sourceTable;
   final List<String> _columnNames;
   @override
   List<String> get columnNames {
@@ -2455,6 +2517,10 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
   final bool shouldAddNewValues;
   @override
   final bool shouldClearValueBeforeUpdate;
+  @override
+  final String keyColumnName;
+  @override
+  final TableParamsModel? sourceTable;
   @override
   @JsonKey()
   final bool shouldAddNewHeaders;
@@ -2480,7 +2546,7 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
 
   @override
   String toString() {
-    return 'TablesSyncParamsRuntimeModel(id: $id, userId: $userId, createdAt: $createdAt, sourceTable: $sourceTable, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValueBeforeUpdate: $shouldClearValueBeforeUpdate, shouldAddNewHeaders: $shouldAddNewHeaders, destinationTables: $destinationTables, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
+    return 'TablesSyncParamsRuntimeModel(id: $id, userId: $userId, createdAt: $createdAt, columnNames: $columnNames, shouldUpdateValues: $shouldUpdateValues, shouldAddNewValues: $shouldAddNewValues, shouldClearValueBeforeUpdate: $shouldClearValueBeforeUpdate, keyColumnName: $keyColumnName, sourceTable: $sourceTable, shouldAddNewHeaders: $shouldAddNewHeaders, destinationTables: $destinationTables, workbookName: $workbookName, name: $name, lastSyncAt: $lastSyncAt)';
   }
 
   @override
@@ -2492,8 +2558,6 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.sourceTable, sourceTable) ||
-                other.sourceTable == sourceTable) &&
             const DeepCollectionEquality()
                 .equals(other._columnNames, _columnNames) &&
             (identical(other.shouldUpdateValues, shouldUpdateValues) ||
@@ -2504,6 +2568,10 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
                     shouldClearValueBeforeUpdate) ||
                 other.shouldClearValueBeforeUpdate ==
                     shouldClearValueBeforeUpdate) &&
+            (identical(other.keyColumnName, keyColumnName) ||
+                other.keyColumnName == keyColumnName) &&
+            (identical(other.sourceTable, sourceTable) ||
+                other.sourceTable == sourceTable) &&
             (identical(other.shouldAddNewHeaders, shouldAddNewHeaders) ||
                 other.shouldAddNewHeaders == shouldAddNewHeaders) &&
             const DeepCollectionEquality()
@@ -2522,11 +2590,12 @@ class _$_TablesSyncParamsRuntimeModel extends _TablesSyncParamsRuntimeModel {
       id,
       userId,
       createdAt,
-      sourceTable,
       const DeepCollectionEquality().hash(_columnNames),
       shouldUpdateValues,
       shouldAddNewValues,
       shouldClearValueBeforeUpdate,
+      keyColumnName,
+      sourceTable,
       shouldAddNewHeaders,
       const DeepCollectionEquality().hash(_destinationTables),
       workbookName,
@@ -2555,11 +2624,12 @@ abstract class _TablesSyncParamsRuntimeModel
       required final String userId,
       @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
           required final DateTime createdAt,
-      required final TableParamsModel sourceTable,
       required final List<String> columnNames,
       required final bool shouldUpdateValues,
       required final bool shouldAddNewValues,
       required final bool shouldClearValueBeforeUpdate,
+      required final String keyColumnName,
+      final TableParamsModel? sourceTable,
       final bool shouldAddNewHeaders,
       final List<TableParamsModel> destinationTables,
       final String workbookName,
@@ -2579,8 +2649,6 @@ abstract class _TablesSyncParamsRuntimeModel
   @JsonKey(fromJson: fromTimestamp, toJson: toTimestamp)
   DateTime get createdAt;
   @override
-  TableParamsModel get sourceTable;
-  @override
   List<String> get columnNames;
   @override
   bool get shouldUpdateValues;
@@ -2588,6 +2656,10 @@ abstract class _TablesSyncParamsRuntimeModel
   bool get shouldAddNewValues;
   @override
   bool get shouldClearValueBeforeUpdate;
+  @override
+  String get keyColumnName;
+  @override
+  TableParamsModel? get sourceTable;
   @override
   bool get shouldAddNewHeaders;
   @override

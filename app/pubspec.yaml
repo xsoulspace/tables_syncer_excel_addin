@@ -27,23 +27,23 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animate_do: ^3.0.2
   bloc: ^8.1.0
-  cloud_firestore: ^4.3.1
-  cloud_firestore_platform_interface: ^5.10.1
-  cloud_firestore_web: ^3.2.1
+  cloud_firestore: ^4.4.0
+  cloud_firestore_platform_interface: ^5.11.0
+  cloud_firestore_web: ^3.3.0
   collection: ^1.17.0
   cupertino_icons: ^1.0.2
   equatable: ^2.0.3
-  firebase_analytics: ^10.0.6
-  firebase_analytics_web: ^0.5.1+5
-  firebase_auth: ^4.2.5
-  firebase_auth_platform_interface: ^6.11.7
-  firebase_auth_web: ^5.2.4
-  firebase_crashlytics: ^3.0.6
-  firebase_dynamic_links: ^5.0.11
-  firebase_ui_auth: ^1.1.9
-  firebase_ui_firestore: ^1.1.1
-  animate_do: ^3.0.2
+  firebase_analytics: ^10.1.1
+  firebase_analytics_web: ^0.5.1+9
+  firebase_auth: ^4.2.6
+  firebase_auth_platform_interface: ^6.11.8
+  firebase_auth_web: ^5.2.5
+  firebase_core: ^2.5.0
+  firebase_core_web: ^2.1.1
+  firebase_ui_auth: ^1.1.11
+  firebase_ui_firestore: ^1.2.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
@@ -56,6 +56,7 @@ dependencies:
   intl: ^0.17.0
   life_hooks: ^0.0.18
   logger: ^1.1.0
+  package_info_plus: ^3.0.3
   provider: ^6.0.3
   rxdart: ^0.27.3
   shared_preferences: ^2.0.15
@@ -108,7 +109,6 @@ flutter_icons:
 # integrations:
 #   flutter_svg: true
 #   flare_flutter: true
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.

@@ -25,10 +25,12 @@ class TablesSyncBlocDiDto {
 
 class TablesSyncBlocControllers implements Disposable {
   final newColumn = TextEditingController();
+  final keyColumnName = TextEditingController();
   final isSaving = ValueNotifier(false);
 
   @override
   void dispose() {
+    keyColumnName.dispose();
     isSaving.dispose();
     newColumn.dispose();
   }
@@ -41,6 +43,7 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     required this.onPopContext,
   }) : super(const EmptyTablesSyncState()) {
     on<TablesSyncInitEvent>(_onInit);
+    on<TablesSyncResetEvent>(_onReset);
     on<TablesSyncSaveEvent>(_onSave);
     on<TablesSyncAddColumnNameEvent>(_onAddColumnName);
     on<TablesSyncDeleteColumnNameEvent>(_onDeleteColumnName);
@@ -64,6 +67,19 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     final newState = LiveTablesSyncParamsState.fromSyncParams(
       syncParams: syncParams,
       syncNotifier: diDto.syncParamsNotifier,
+      controllers: controllers,
+    );
+    emit(newState);
+  }
+
+  void _onReset(
+    final TablesSyncResetEvent event,
+    final Emitter<TablesSyncState> emit,
+  ) {
+    final newState = LiveTablesSyncParamsState.fromSyncParams(
+      syncParams: null,
+      syncNotifier: diDto.syncParamsNotifier,
+      controllers: controllers,
     );
     emit(newState);
   }
@@ -74,10 +90,11 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
   ) async {
     controllers.isSaving.value = true;
     final liveState = getLiveState();
-    final tablesSync = liveState.toTablesSync();
+    final tablesSync = liveState.toTablesSync(controllers: controllers);
 
     await diDto.apiServices.tablesSync.upsertTableSync(tablesSync);
     controllers.isSaving.value = false;
+    add(const TablesSyncResetEvent());
     if (shouldPopAfterSubmit) {
       onPopContext();
     } else {

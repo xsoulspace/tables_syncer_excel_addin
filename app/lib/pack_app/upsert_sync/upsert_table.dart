@@ -90,11 +90,14 @@ class _DialogWindow extends HookWidget {
             ],
           ),
           uiTheme.verticalBoxes.extraLarge,
-          TextField(
+          TextFormField(
             decoration: const InputDecoration()
                 .applyDefaults(theme.inputDecorationTheme)
                 .copyWith(
-                  labelText: 'Keys Column Name*',
+                  labelText: 'Keys Column Name (Optional)',
+                  helperMaxLines: 5,
+                  helperText:
+                      'Is the name of a column, responsible for identificating a row as unqiue item. It can be ID or SKU number.\nIf not specified, then Sync Key Column Name will be used.',
                 ),
             controller: state.keysColumnNameController,
           ),

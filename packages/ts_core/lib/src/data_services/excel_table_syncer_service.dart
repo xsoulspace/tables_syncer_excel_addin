@@ -17,9 +17,15 @@ class ExcelTableSyncerService {
   }) async {
     try {
       analyticsNotifier?.dynamicLog({'sync started': runtimeSyncParams});
+      final sourceTable = runtimeSyncParams.sourceTable;
+      if (sourceTable == null) {
+        // TODO(arenukvern): add error
+        return;
+      }
       final sourceRuntimeTable = await ExcelRuntimeTable.load(
-        params: runtimeSyncParams.sourceTable,
+        params: sourceTable,
         excelTableApi: excelTableApi,
+        syncKeyColumnName: runtimeSyncParams.keyColumnName,
       );
       final sourceColumnIndexedKeys =
           await sourceRuntimeTable.loadKeysColumnIndexedUniqueValues();
@@ -32,6 +38,7 @@ class ExcelTableSyncerService {
         final secondaryRuntimeTable = await ExcelRuntimeTable.load(
           params: destinationTableParams,
           excelTableApi: excelTableApi,
+          syncKeyColumnName: runtimeSyncParams.keyColumnName,
         );
         final headersProcessor = HeaderDataProcessor.loadWithIndexedHeaders(
           headers: sourceRuntimeTable.headers,

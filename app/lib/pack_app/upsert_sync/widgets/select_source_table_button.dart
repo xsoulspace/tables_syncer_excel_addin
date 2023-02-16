@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tables_syncer_excel_addin/pack_app/upsert_sync/bloc/tables_sync_bloc.dart';
 import 'package:tables_syncer_excel_addin/pack_app/upsert_sync/upsert_sync.dart';
+import 'package:ts_core/ts_core.dart';
 import 'package:ts_design_core/ts_design_core.dart';
 
 class SelectSourceTableButton extends StatelessWidget {
@@ -13,6 +14,7 @@ class SelectSourceTableButton extends StatelessWidget {
     final uiTheme = UiTheme.of(context);
     final blocState = context.watch<TablesSyncBloc>().getLiveState();
     final allTables = blocState.getAllTables();
+    context.watch<SyncParamsNotifier>();
 
     return Row(
       children: [

@@ -178,6 +178,18 @@ class _TablesSyncBody extends StatelessWidget {
                 uiTheme.verticalBoxes.small,
                 const SyncColumnsSelector(),
                 uiTheme.verticalBoxes.large,
+                TextFormField(
+                  decoration: const InputDecoration()
+                      .applyDefaults(theme.inputDecorationTheme)
+                      .copyWith(
+                        labelText: 'Keys Column Name*',
+                        helperMaxLines: 5,
+                        helperText:
+                            'Is the name of a column, responsible for identificating a row as unqiue item. It can be ID or SKU number.',
+                      ),
+                  controller: controllers.keyColumnName,
+                ),
+                uiTheme.verticalBoxes.large,
                 Text(
                   'Destination Tables',
                   style: theme.textTheme.bodyLarge,

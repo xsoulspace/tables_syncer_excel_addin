@@ -4,12 +4,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/models.dart';
 import '../abstract/abstract.dart';
 
-class FirebaseTableSyncApiService implements ITableSyncApiService {
-  FirebaseTableSyncApiService();
+class _FirebaseTableSyncApiCoreService {
+  _FirebaseTableSyncApiCoreService();
   FirebaseFirestore get _store => FirebaseFirestore.instance;
   User get _user => FirebaseAuth.instance.currentUser!;
   CollectionReference<Map<String, dynamic>> get _collection =>
       _store.collection('table_syncs').doc(_user.uid).collection('root');
+}
+
+class FirebaseTableSyncApiBatchService
+    extends _FirebaseTableSyncApiCoreService {
+  FirebaseTableSyncApiBatchService();
+  WriteBatch getBatch() => _store.batch();
+}
+
+class FirebaseTableSyncApiService extends _FirebaseTableSyncApiCoreService
+    implements ITableSyncApiService {
+  FirebaseTableSyncApiService();
 
   CollectionReference<TablesSyncParamsModel> get _docCollection =>
       _collection.withConverter(
@@ -28,7 +39,7 @@ class FirebaseTableSyncApiService implements ITableSyncApiService {
 
   @override
   Query<TablesSyncParamsModel> get tableSyncQuery {
-    return _docCollection.orderBy('createdAt', descending: true);
+    return _docCollection.orderBy('index');
   }
 
   @override
