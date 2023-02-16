@@ -381,18 +381,18 @@ packages:
     dependency: transitive
     description:
       name: firebase_crashlytics
-      sha256: "9a73325afa984d2f6599a96b4b076f27a4e571172eb0056151522e3daace43ce"
+      sha256: "6f1dc5321aa7d8bb84e8eec2ed517b0a7e7bc99a2708549c55c78359a323ecd0"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.11"
+    version: "3.0.12"
   firebase_crashlytics_platform_interface:
     dependency: transitive
     description:
       name: firebase_crashlytics_platform_interface
-      sha256: bccde26b6d63447c4f1f3d0ae5d78c958eb7bcef48239eb3aa8844675684c055
+      sha256: "3728ad632a5209499cdfed6a1f7154982a524a076566f5a1d02af623bf46f947"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.11"
+    version: "3.3.12"
   firebase_dynamic_links:
     dependency: transitive
     description:
