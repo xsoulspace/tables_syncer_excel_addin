@@ -25,10 +25,12 @@ class TablesSyncBlocDiDto {
 
 class TablesSyncBlocControllers implements Disposable {
   final newColumn = TextEditingController();
+  final keyColumn = TextEditingController();
   final isSaving = ValueNotifier(false);
 
   @override
   void dispose() {
+    keyColumn.dispose();
     isSaving.dispose();
     newColumn.dispose();
   }
@@ -65,6 +67,7 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     final newState = LiveTablesSyncParamsState.fromSyncParams(
       syncParams: syncParams,
       syncNotifier: diDto.syncParamsNotifier,
+      controllers: controllers,
     );
     emit(newState);
   }
@@ -76,6 +79,7 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
     final newState = LiveTablesSyncParamsState.fromSyncParams(
       syncParams: null,
       syncNotifier: diDto.syncParamsNotifier,
+      controllers: controllers,
     );
     emit(newState);
   }

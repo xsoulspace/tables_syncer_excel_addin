@@ -66,18 +66,28 @@ class ExcelRuntimeTable {
 
   // key - columnName
   final _trackingRanges = <String, RangeModel>{};
-  Future<UnquieIndexedKeysMap> loadKeysColumnIndexedUniqueValues() async {
-    final values = await loadKeysColumnValues();
+  Future<UnquieIndexedKeysMap> loadKeysColumnIndexedUniqueValues({
+    required final String syncKeyColumnName,
+  }) async {
+    final values =
+        await loadKeysColumnValues(syncKeyColumnName: syncKeyColumnName);
     return DataIndexer.getColumnUniqueKeyBasedIndexes(data: values);
   }
 
-  Future<IndexedKeysMap> loadKeysColumnIndexedValues() async {
-    final values = await loadKeysColumnValues();
+  Future<IndexedKeysMap> loadKeysColumnIndexedValues({
+    required final String syncKeyColumnName,
+  }) async {
+    final values =
+        await loadKeysColumnValues(syncKeyColumnName: syncKeyColumnName);
     return DataIndexer.getColumnKeyBasedIndexes(data: values);
   }
 
-  Future<ExcelTableStringData> loadKeysColumnValues() async {
-    final values = await loadColumnValues(name: params.keyColumnName);
+  Future<ExcelTableStringData> loadKeysColumnValues({
+    required final String syncKeyColumnName,
+  }) async {
+    final keyColumnName =
+        params.keyColumnName.isEmpty ? syncKeyColumnName : params.keyColumnName;
+    final values = await loadColumnValues(name: keyColumnName);
     return values.map((final e) => ['${e.first}']).toList();
   }
 

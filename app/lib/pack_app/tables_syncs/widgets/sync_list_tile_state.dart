@@ -63,9 +63,6 @@ class TableSyncListTileState extends ContextfulLifeState {
         syncParams: syncParams,
         tablesMap: diDto.syncParamsNotifier.tablesParamsMap,
       );
-      if (runtimeSyncParams == null) {
-        throw Error();
-      }
 
       await diDto.syncerService
           .syncTables(runtimeSyncParams: runtimeSyncParams);

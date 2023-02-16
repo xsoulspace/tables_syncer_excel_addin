@@ -27,6 +27,7 @@ class TablesSyncParamsModel with _$TablesSyncParamsModel {
     required final bool shouldUpdateValues,
     required final bool shouldAddNewValues,
     required final bool shouldClearValueBeforeUpdate,
+    @Default('') final String keyColumnName,
     @Default(0) final int index,
     @Default(false) final bool shouldAddNewHeaders,
     @Default('') final String workbookName,
@@ -85,6 +86,7 @@ class TablesSyncParamsRuntimeModel with _$TablesSyncParamsRuntimeModel {
     required final bool shouldUpdateValues,
     required final bool shouldAddNewValues,
     required final bool shouldClearValueBeforeUpdate,
+    required final String keyColumnName,
     final TableParamsModel? sourceTable,
     @Default(false) final bool shouldAddNewHeaders,
     @Default([]) final List<TableParamsModel> destinationTables,
@@ -98,7 +100,7 @@ class TablesSyncParamsRuntimeModel with _$TablesSyncParamsRuntimeModel {
   factory TablesSyncParamsRuntimeModel.fromJson(final dynamic json) =>
       _$TablesSyncParamsRuntimeModelFromJson(json as Map<String, dynamic>);
 
-  static TablesSyncParamsRuntimeModel? fromModel({
+  factory TablesSyncParamsRuntimeModel.fromModel({
     required final TablesSyncParamsModel syncParams,
     required final Map<TableParamsModelId, TableParamsModel> tablesParams,
   }) {

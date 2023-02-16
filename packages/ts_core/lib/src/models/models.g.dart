@@ -103,9 +103,9 @@ _$_TableParamsModel _$$_TableParamsModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       workbookOriginName: json['workbookOriginName'] as String,
       userId: json['userId'] as String,
-      keyColumnName: json['keyColumnName'] as String,
       createdAt: fromTimestamp(json['createdAt'] as Timestamp),
       worksheetName: json['worksheetName'] as String,
+      keyColumnName: json['keyColumnName'] as String? ?? '',
       name: json['name'] as String? ?? '',
       headerTopLeftCell: json['headerTopLeftCell'] == null
           ? CellModel.zero
@@ -120,9 +120,9 @@ Map<String, dynamic> _$$_TableParamsModelToJson(_$_TableParamsModel instance) =>
       'id': instance.id,
       'workbookOriginName': instance.workbookOriginName,
       'userId': instance.userId,
-      'keyColumnName': instance.keyColumnName,
       'createdAt': toTimestamp(instance.createdAt),
       'worksheetName': instance.worksheetName,
+      'keyColumnName': instance.keyColumnName,
       'name': instance.name,
       'headerTopLeftCell': instance.headerTopLeftCell.toJson(),
       'dataTopLeftCell': instance.dataTopLeftCell.toJson(),
@@ -145,6 +145,7 @@ _$_TablesSyncParamsModel _$$_TablesSyncParamsModelFromJson(
       shouldAddNewValues: json['shouldAddNewValues'] as bool,
       shouldClearValueBeforeUpdate:
           json['shouldClearValueBeforeUpdate'] as bool,
+      keyColumnName: json['keyColumnName'] as String? ?? '',
       index: json['index'] as int? ?? 0,
       shouldAddNewHeaders: json['shouldAddNewHeaders'] as bool? ?? false,
       workbookName: json['workbookName'] as String? ?? '',
@@ -164,6 +165,7 @@ Map<String, dynamic> _$$_TablesSyncParamsModelToJson(
       'shouldUpdateValues': instance.shouldUpdateValues,
       'shouldAddNewValues': instance.shouldAddNewValues,
       'shouldClearValueBeforeUpdate': instance.shouldClearValueBeforeUpdate,
+      'keyColumnName': instance.keyColumnName,
       'index': instance.index,
       'shouldAddNewHeaders': instance.shouldAddNewHeaders,
       'workbookName': instance.workbookName,
@@ -184,6 +186,7 @@ _$_TablesSyncParamsRuntimeModel _$$_TablesSyncParamsRuntimeModelFromJson(
       shouldAddNewValues: json['shouldAddNewValues'] as bool,
       shouldClearValueBeforeUpdate:
           json['shouldClearValueBeforeUpdate'] as bool,
+      keyColumnName: json['keyColumnName'] as String,
       sourceTable: json['sourceTable'] == null
           ? null
           : TableParamsModel.fromJson(json['sourceTable']),
@@ -207,6 +210,7 @@ Map<String, dynamic> _$$_TablesSyncParamsRuntimeModelToJson(
       'shouldUpdateValues': instance.shouldUpdateValues,
       'shouldAddNewValues': instance.shouldAddNewValues,
       'shouldClearValueBeforeUpdate': instance.shouldClearValueBeforeUpdate,
+      'keyColumnName': instance.keyColumnName,
       'sourceTable': instance.sourceTable?.toJson(),
       'shouldAddNewHeaders': instance.shouldAddNewHeaders,
       'destinationTables':

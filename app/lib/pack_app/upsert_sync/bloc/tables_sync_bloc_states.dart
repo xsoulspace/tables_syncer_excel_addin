@@ -41,12 +41,15 @@ class LiveTablesSyncParamsState
   factory LiveTablesSyncParamsState.fromSyncParams({
     required final TablesSyncParamsModel? syncParams,
     required final SyncParamsNotifier syncNotifier,
+    required final TablesSyncBlocControllers controllers,
   }) {
     if (syncParams == null) {
+      controllers.keyColumn.text = '';
       return LiveTablesSyncParamsState(
         unselectedDestinationTables: syncNotifier.tableParams.toSet(),
       );
     }
+    controllers.keyColumn.text = syncParams.keyColumnName;
     final tablesMap = syncNotifier.tablesParamsMap;
     final destinationTables = {...tablesMap};
     final selectedDestinationTables = <TableParamsModel>{};

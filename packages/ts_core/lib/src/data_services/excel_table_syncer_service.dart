@@ -27,7 +27,9 @@ class ExcelTableSyncerService {
         excelTableApi: excelTableApi,
       );
       final sourceColumnIndexedKeys =
-          await sourceRuntimeTable.loadKeysColumnIndexedUniqueValues();
+          await sourceRuntimeTable.loadKeysColumnIndexedUniqueValues(
+        syncKeyColumnName: runtimeSyncParams.keyColumnName,
+      );
       // analyticsNotifier
       //     ?.dynamicLog({'sourceColumnIndexedKeys': sourceColumnIndexedKeys});
       final sourceColumnsCache = <String, ExcelTableData>{};
@@ -51,7 +53,9 @@ class ExcelTableSyncerService {
         // );
 
         IndexedKeysMap secondaryColumnIndexedKeys =
-            await secondaryRuntimeTable.loadKeysColumnIndexedValues();
+            await secondaryRuntimeTable.loadKeysColumnIndexedValues(
+          syncKeyColumnName: runtimeSyncParams.keyColumnName,
+        );
 
         ColumnDataProcessor columnDataProcessor =
             ColumnDataProcessor.fromIndexedKeys(
@@ -77,7 +81,9 @@ class ExcelTableSyncerService {
 
           // TODO: optimize - use last row index to move new to updatable
           secondaryColumnIndexedKeys =
-              await secondaryRuntimeTable.loadKeysColumnIndexedValues();
+              await secondaryRuntimeTable.loadKeysColumnIndexedValues(
+            syncKeyColumnName: runtimeSyncParams.keyColumnName,
+          );
           columnDataProcessor = ColumnDataProcessor.fromIndexedKeys(
             columnIndexedKeys: sourceColumnIndexedKeys,
             secondaryColumnIndexedKeys: secondaryColumnIndexedKeys,
