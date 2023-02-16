@@ -25,12 +25,12 @@ class TablesSyncBlocDiDto {
 
 class TablesSyncBlocControllers implements Disposable {
   final newColumn = TextEditingController();
-  final keyColumn = TextEditingController();
+  final keyColumnName = TextEditingController();
   final isSaving = ValueNotifier(false);
 
   @override
   void dispose() {
-    keyColumn.dispose();
+    keyColumnName.dispose();
     isSaving.dispose();
     newColumn.dispose();
   }
@@ -90,7 +90,7 @@ class TablesSyncBloc extends Bloc<TablesSyncEvent, TablesSyncState> {
   ) async {
     controllers.isSaving.value = true;
     final liveState = getLiveState();
-    final tablesSync = liveState.toTablesSync();
+    final tablesSync = liveState.toTablesSync(controllers: controllers);
 
     await diDto.apiServices.tablesSync.upsertTableSync(tablesSync);
     controllers.isSaving.value = false;

@@ -44,12 +44,12 @@ class LiveTablesSyncParamsState
     required final TablesSyncBlocControllers controllers,
   }) {
     if (syncParams == null) {
-      controllers.keyColumn.text = '';
+      controllers.keyColumnName.text = '';
       return LiveTablesSyncParamsState(
         unselectedDestinationTables: syncNotifier.tableParams.toSet(),
       );
     }
-    controllers.keyColumn.text = syncParams.keyColumnName;
+    controllers.keyColumnName.text = syncParams.keyColumnName;
     final tablesMap = syncNotifier.tablesParamsMap;
     final destinationTables = {...tablesMap};
     final selectedDestinationTables = <TableParamsModel>{};
@@ -73,7 +73,9 @@ class LiveTablesSyncParamsState
     );
   }
 
-  TablesSyncParamsModel toTablesSync() {
+  TablesSyncParamsModel toTablesSync({
+    required final TablesSyncBlocControllers controllers,
+  }) {
     return TablesSyncParamsModel(
       createdAt: syncParams?.createdAt ?? DateTime.now(),
       userId: FirebaseAuth.instance.currentUser!.uid,
@@ -84,6 +86,7 @@ class LiveTablesSyncParamsState
       shouldAddNewValues: shouldAddNewValues,
       shouldUpdateValues: shouldUpdateValues,
       sourceTableId: selectedSourceTable!.id,
+      keyColumnName: controllers.keyColumnName.text,
       shouldClearValueBeforeUpdate: shouldClearValuesBeforeUpdate,
       // TODO(arenukvern):
       shouldAddNewHeaders: syncParams?.shouldAddNewHeaders ?? false,

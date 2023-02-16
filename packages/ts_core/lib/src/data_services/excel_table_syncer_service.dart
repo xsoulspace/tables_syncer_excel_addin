@@ -25,11 +25,10 @@ class ExcelTableSyncerService {
       final sourceRuntimeTable = await ExcelRuntimeTable.load(
         params: sourceTable,
         excelTableApi: excelTableApi,
-      );
-      final sourceColumnIndexedKeys =
-          await sourceRuntimeTable.loadKeysColumnIndexedUniqueValues(
         syncKeyColumnName: runtimeSyncParams.keyColumnName,
       );
+      final sourceColumnIndexedKeys =
+          await sourceRuntimeTable.loadKeysColumnIndexedUniqueValues();
       // analyticsNotifier
       //     ?.dynamicLog({'sourceColumnIndexedKeys': sourceColumnIndexedKeys});
       final sourceColumnsCache = <String, ExcelTableData>{};
@@ -39,6 +38,7 @@ class ExcelTableSyncerService {
         final secondaryRuntimeTable = await ExcelRuntimeTable.load(
           params: destinationTableParams,
           excelTableApi: excelTableApi,
+          syncKeyColumnName: runtimeSyncParams.keyColumnName,
         );
         final headersProcessor = HeaderDataProcessor.loadWithIndexedHeaders(
           headers: sourceRuntimeTable.headers,
@@ -53,9 +53,7 @@ class ExcelTableSyncerService {
         // );
 
         IndexedKeysMap secondaryColumnIndexedKeys =
-            await secondaryRuntimeTable.loadKeysColumnIndexedValues(
-          syncKeyColumnName: runtimeSyncParams.keyColumnName,
-        );
+            await secondaryRuntimeTable.loadKeysColumnIndexedValues();
 
         ColumnDataProcessor columnDataProcessor =
             ColumnDataProcessor.fromIndexedKeys(
@@ -81,9 +79,7 @@ class ExcelTableSyncerService {
 
           // TODO: optimize - use last row index to move new to updatable
           secondaryColumnIndexedKeys =
-              await secondaryRuntimeTable.loadKeysColumnIndexedValues(
-            syncKeyColumnName: runtimeSyncParams.keyColumnName,
-          );
+              await secondaryRuntimeTable.loadKeysColumnIndexedValues();
           columnDataProcessor = ColumnDataProcessor.fromIndexedKeys(
             columnIndexedKeys: sourceColumnIndexedKeys,
             secondaryColumnIndexedKeys: secondaryColumnIndexedKeys,

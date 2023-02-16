@@ -187,7 +187,7 @@ class _TablesSyncBody extends StatelessWidget {
                         helperText:
                             'Is the name of a column, responsible for identificating a row as unqiue item. It can be ID or SKU number.',
                       ),
-                  controller: controllers.keyColumn,
+                  controller: controllers.keyColumnName,
                 ),
                 uiTheme.verticalBoxes.large,
                 Text(
